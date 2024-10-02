@@ -1,0 +1,136 @@
+.book-table {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+}
+
+.form-book {
+  width: 30%;
+  position: relative;
+  top: -75px;
+  z-index: 9;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 30px;
+  box-shadow: rgb(0 0 0 / 5%) 0px 10px 30px 0px;
+}
+
+.icon-cook {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -40px;
+}
+
+.form-book h2 {
+  float: left;
+  margin-left: 1.2rem;
+  margin-top: 0px;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.form-book .icon-cook {
+  font-size: 3rem;
+  color: #826a45;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+
+
+.form-book input,
+.form-book select,
+.form-book button {
+  width: 85%;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-book input[type="date"],
+.form-book input[type="time"] {
+  padding: 0.8rem 1rem;
+}
+
+.form-book button {
+  background-color: #826a45;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  float: left;
+  width: 40%;
+  margin-left: 1.4rem;
+}
+
+.form-book button:hover {
+  background-color: #533a3a;
+}
+
+.popular-category {
+  width: 50%;
+  position: relative;
+  top: 2rem;
+  padding-left: 2rem;
+}
+.popular-swiper {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 2rem;
+  right: 0;
+}
+.swiper {
+  width: 30px;
+  height: 30px;
+  background-color: #6b4f4f;
+  border-radius: 50%;
+}
+#swiper-left {
+  margin-right: 1rem;
+}
+.popular-category h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.popular-category h2 img {
+  width: 35px;
+  height: 35px;
+  margin-right: 8px;
+}
+
+.category-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.category-item {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 1rem;
+}
+
+.category-item span {
+  display: block;
+  font-size: 1rem;
+  color: #6b4f4f;
+}
+
+.category-item h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #333;
+}

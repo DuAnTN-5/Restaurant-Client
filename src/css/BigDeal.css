@@ -1,0 +1,9 @@
+.bgr-big-deal {
+  background-image: url(../assets/img-deal.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+.header-deal {
+    display: flex;
+}
