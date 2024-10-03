@@ -16,10 +16,10 @@ function App() {
 
       {/* <HomePage/> */}
       {/* <Contact/> */}
-      <CartProduct/>
+      {/* <CartProduct/> */}
       {/* <ProductDetail/> */}
       {/* <Blog/> */}
-      {/* <FavoritePage/> */}
+      <FavoritePage/>
       <Footer/>
 
     </>
