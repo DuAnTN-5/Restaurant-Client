@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import App from './App.jsx'
 import './index.css'
-import HomePage from './pages/HomePage.jsx';
+import HomePage from './pages/Home.jsx';
 
 createRoot(document.getElementById('root')).render(
   // <StrictMode>

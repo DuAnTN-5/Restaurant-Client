@@ -1,7 +1,7 @@
 import './App.css'
 import Footer from './component/Footer'
 import Header from './component/Header'
-import HomePage from './pages/HomePage'
+import Home from './pages/Home'
 import Blog from './pages/Blog'
 import FavoritePage from './pages/FavoritePage'
 import ProductDetail from './pages/Product-detail'
@@ -14,7 +14,7 @@ function App() {
     <>
       <Header />
 
-      {/* <HomePage/> */}
+      <Home/>
       {/* <Contact/> */}
       {/* <CartProduct/> */}
       {/* <ProductDetail/> */}
