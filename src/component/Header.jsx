@@ -1,6 +1,7 @@
 import '../css/Header.css';
 import logo from '../assets/logo-hi-5.png';
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
@@ -11,26 +12,24 @@ function Header() {
     setIsNavbarVisible(!isNavbarVisible);
   };
 
-  // Thêm lớp "no-scroll" vào body khi navbar mở, và loại bỏ khi đóng
   useEffect(() => {
     if (isNavbarVisible) {
-      document.body.classList.add('no-scroll'); // Vô hiệu hóa cuộn khi navbar mở
+      document.body.classList.add('no-scroll');
     } else {
-      document.body.classList.remove('no-scroll'); // Kích hoạt lại cuộn khi navbar đóng
+      document.body.classList.remove('no-scroll');
     }
 
-    // Dọn dẹp sự kiện khi component bị unmount
     return () => {
       document.body.classList.remove('no-scroll');
     };
   }, [isNavbarVisible]);
 
   const handleOverlayClick = () => {
-    setIsNavbarVisible(false); // Tắt navbar khi click vào overlay
+    setIsNavbarVisible(false);
   };
 
   const handleExitClick = () => {
-    setIsNavbarVisible(false); // Tắt navbar khi nhấn nút exit
+    setIsNavbarVisible(false);
   };
 
   return (
@@ -49,8 +48,8 @@ function Header() {
         <div className="location">
           <i className="fas fa-envelope icon-user"></i>
           <div className="login">
-            <a className="location-text" href="/Login">Login</a>
-            <a className="location-link" href="/Signup">You need to create an account?</a>
+            <Link className="location-text" to="/login">Login</Link>
+            <Link className="location-link" to="/signup">You need to create an account?</Link>
           </div>
         </div>
       </div>
@@ -65,12 +64,12 @@ function Header() {
 
         <div>
           <ul className="navbar-list">
-            <li className="navbar-item"><a className="navbar-link" href="#">Home</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Pages</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Menu</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Blog</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Shop</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Contact</a></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/">Home</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/pages">Pages</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/menu">Menu</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/blog">Blog</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/shop">Shop</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/contact">Contact</Link></li>
           </ul>
         </div>
 
@@ -89,16 +88,14 @@ function Header() {
                 <i id="button-exit" className="fa-regular fa-circle-xmark"></i>
               </button>
             </div>
-            <li className="navbar-item"><a className="navbar-link" href="#">Home</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Pages</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Menu</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Blog</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Shop</a></li>
-            <li className="navbar-item"><a className="navbar-link" href="#">Contact</a></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/">Home</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/pages">Pages</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/menu">Menu</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/blog">Blog</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/shop">Shop</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/contact">Contact</Link></li>
           </ul>
         </div>
-
-
 
         <div className="navbar-right">
           <i className="fas fa-search navbar-icon"></i>

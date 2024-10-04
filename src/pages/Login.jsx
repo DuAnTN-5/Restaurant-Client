@@ -1,5 +1,6 @@
 import "./css/Login.css";
 import logohi5 from '../assets/logo-hi-5.png'
+import { Link } from 'react-router-dom';
 
 function Login() {
     return (
@@ -24,7 +25,7 @@ function Login() {
                         </div>
                         <button type="submit" className="btn">Login</button>
                     </form>
-                    <p className="account">Do not have an account? <a className="redirect-link" href="./Signup">Create an account</a></p>
+                    <p className="account">Do not have an account? <Link className="redirect-link" to="/signup">Create an account</Link></p>
                     <div className="social-buttons">
                         <button className="facebook icon-social-network">
                         <i className="fa-brands fa-facebook-f"></i>
