@@ -42,9 +42,11 @@ function Header() {
             <a className="reservation-link" href="tel:+4733378901">+4733378901</a>
           </div>
         </div>
-        <div className="logo">
-          <img className="logo-image" src={logo} alt="Hi-5 Logo" />
-        </div>
+       <Link to="/">
+          <div className="logo">
+            <img className="logo-image" src={logo} alt="Hi-5 Logo" />
+          </div>
+       </Link>
         <div className="location">
           <i className="fas fa-envelope icon-user"></i>
           <div className="login">

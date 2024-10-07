@@ -1,4 +1,4 @@
-import './css/Signup.css';
+import '../style/Signup.css';
 import logohi5 from '../assets/logo-hi-5.png'
 import { Link } from 'react-router-dom';
 

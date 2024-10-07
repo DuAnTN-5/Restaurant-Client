@@ -1,7 +1,7 @@
 import '../css/BookingForm-2.css';
 import imgBoking2 from '../assets/img-booking2.jpg'
 
-function App() {
+function BookingForm() {
   return (
     <div className="bgr-booking">
       <div className="booking-container">
@@ -86,4 +86,4 @@ function App() {
   );
 }
 
-export default App;
+export default BookingForm;
