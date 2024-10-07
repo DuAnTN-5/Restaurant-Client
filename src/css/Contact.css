@@ -1,6 +1,8 @@
 .contact{
     width: 85%;
     margin: 0 auto;
+    /* display: flex;
+    flex-direction: column-reverse; */
     /* display: flex; */
 }
 .contact-item{
@@ -8,15 +10,14 @@
     width: 100%;
 }
 .contact-map{
-    width: 60%;
-    float: left;
+    /* width: 60%; */
 }
 #map {
     width: 100%; /* Đặt bản đồ chiếm toàn bộ chiều rộng */
     margin-top: 20px;
     height: 400px; /* Chiều cao của bản đồ */
-    border: 2px solid #000; /* Đường viền của bản đồ */
-    border-radius: 10px; /* Bo tròn các góc bản đồ */
+    /* border: 2px solid #000; Đường viền của bản đồ */
+    /* border-radius: 10px; Bo tròn các góc bản đồ */
     transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt */
     
 }
@@ -27,8 +28,8 @@
 .contact__header{
     float: right;
     vertical-align: top;
-    margin-top: 10px;
-    padding-right: 189px;
+    margin-top: 125px;
+    padding-right: 88px;
 
 }
 .contact-info{
@@ -52,29 +53,32 @@
     padding-left: 50px;
 }
 .form-container{
-    width: 100%;
+    width: 60%;
     margin-top: 20px;
+    display: inline-block;
 
 }
 .form-title{
-    width: 250px;
-    text-align: center;
-    margin: 0 auto;
-    justify-items: center;
-    color: white;
-    background-color: rgb(196, 33, 60);
+    font-size: 26px;
+    font-weight: bold;
+    width: 275px;
+    /* text-align: center; */
+    /* margin: 0 auto; */
+    /* justify-items: center; */
+    /* color: white; */
+    /* background-color: rgb(196, 33, 60); */
     padding: 8px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    /* border-radius: 10px; */
+    margin-bottom: 17px;
 }
 .form-description strong{
-    font-size: 20px;
+    font-size: 17px;
     /* color: gray; */
 }
 
 .contact-form{
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+    /* margin: 0 auto; */
     margin-top: 20px;
     background-color: pink;
     padding: 10px;
@@ -145,4 +149,12 @@
 
 .send:active {
     transform: translateY(0); /* Đưa nút trở lại khi nhấn */
+}
+.contact-icon-website{
+    display: flex;
+    font-size: 35px;
+    margin-top: 30px;
+}
+.contact-icon-website i{
+    padding:  0 8px;
 }

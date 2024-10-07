@@ -15,8 +15,8 @@ function App() {
       <Header />
 
       {/* <HomePage/> */}
-      {/* <Contact/> */}
-      <CartProduct/>
+      <Contact/>
+      {/* <CartProduct/> */}
       {/* <ProductDetail/> */}
       {/* <Blog/> */}
       {/* <FavoritePage/> */}
