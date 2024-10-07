@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect,  useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { FaFacebook, FaYoutube } from "react-icons/fa";
-import videoFile from "../assets/review nha hang 2.mp4";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import CSS của AOS
 import { api } from "../api";
@@ -39,97 +38,12 @@ function Content() {
 
   
 
-  // video
-  const videoRef = useRef(null);
+
 
 
   // ******************************************************************************************
   return (
     <div className="container mx-auto py-12">
-      {/* Phần thông tin giới thiệu dịch vụ hiệu ứng trượt */}
-      <div className="flex items-center justify-center space-x-8 mb-12 md:w-[1296px] mx-auto">
-        <div className="flex justify-around">
-          <div
-            data-aos="fade-up"
-            className="p-8 border border-gray-300 rounded-lg overflow-hidden text-center"
-          >
-            <img
-              src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/13.png"
-              alt="Quality Foods"
-              className="w-16 h-16 mb-4 mx-auto"
-            />
-            <h3 className="text-xl font-semibold mb-2">Quality Foods</h3>
-            <p className="text-gray-600">
-              Belonging sir curiosity discovery extremity yet forfeited
-              prevailed own off. Travelling by introduced of mr terminated.
-            </p>
-          </div>
-          <div
-            data-aos="fade-up"
-            className="p-8 border border-gray-300 rounded-lg overflow-hidden text-center"
-          >
-            <img
-              src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/14.png"
-              alt="Fast Delivery"
-              className="w-16 h-16 mb-4 mx-auto"
-            />
-            <h3 className="text-xl font-semibold mb-2">Fast Delivery</h3>
-            <p className="text-gray-600">
-              Belonging sir curiosity discovery extremity yet forfeited
-              prevailed own off. Travelling by introduced of mr terminated.
-            </p>
-          </div>
-          <div
-            data-aos="fade-up"
-            className="p-8 border border-gray-300 rounded-lg overflow-hidden text-center"
-          >
-            <img
-              src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/15.png"
-              alt="Delicious Recipes"
-              className="w-16 h-16 mb-4 mx-auto"
-            />
-            <h3 className="text-xl font-semibold mb-2">Delicious Recipes</h3>
-            <p className="text-gray-600">
-              Belonging sir curiosity discovery extremity yet forfeited
-              prevailed own off. Travelling by introduced of mr terminated.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Phần quảng cáo Sale 55% */}
-      <div className="relative bg-yellow-100 p-12 rounded-lg shadow-lg mb-12 md:w-[1296px] flex items-center justify-center mx-auto">
-        <div className="flex justify-between">
-          <div className="flex-shrink-0">
-            <img
-              src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/4.jpg"
-              alt="Main Dish"
-              className="rounded-full w-40 h-40 mb-4"
-            />
-          </div>
-          <div className="ml-6">
-            <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">
-              Today Special Offer
-            </h4>
-            <h2 className="text-3xl font-bold mb-4">
-              Explore Irresistible Promotions!
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Contrasted dissimilar get joy instrument out reasonably. Again
-              keeps at on meant stuff. To perpetual do existence northwards at
-              difficult preserved daughters. Continued at up to zealously
-              necessary.
-            </p>
-            <button className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg">
-              Order Today
-            </button>
-          </div>
-        </div>
-        <div className="absolute top-2 left-2 bg-gray-500 text-white font-bold px-3 py-1 rounded-full">
-          Save 55%
-        </div>
-      </div>
-
       {/* Phần thực đơn Food Menu */}
       <div className="text-center">
         <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">
@@ -377,53 +291,6 @@ function Content() {
               >
                 Play Store
               </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* video + Opening Hours */}
-      <div className="flex flex-col md:flex-row items-center justify-center bg-white p-8 rounded-lg md:w-[1296px] mx-auto">
-        <div className="">
-          <video
-            ref={videoRef}
-            src={videoFile}
-            autoPlay
-            loop
-            muted
-            className="w-[759px] h-[506px] rounded-lg shadow-lg"
-            // onMouseOver={handleMouseOver} // phát video khi di chuột qua
-            // onMouseOut={handleMouseOut} // dừng video khi di chuột ra
-          />
-        </div>
-
-        <div className="ml-[90px] md:w-[664px]  shadow-lg p-6 rounded-lg md:ml-8 mt-8 md:mt-0">
-          <h2 className="text-2xl font-bold mb-4">Opening Hours</h2>
-          <p className="text-gray-600 mb-4">
-            A relaxing and pleasant atmosphere, good jazz, dinner, and
-            cocktails. The Patio Time Bar opens in the center.
-          </p>
-          <ul className="mb-4">
-            <li className="flex justify-between text-gray-500">
-              <span>Sunday To Tuesday:</span>
-              <span>10:00 - 09:00</span>
-            </li>
-            <li className="flex justify-between text-gray-500">
-              <span>Wednesday To Thursday:</span>
-              <span>11:30 - 10:30</span>
-            </li>
-            <li className="flex justify-between text-gray-500">
-              <span>Friday & Saturday:</span>
-              <span>10:30 - 12:00</span>
-            </li>
-          </ul>
-          <div className="flex items-center text-gray-500">
-            <div className="flex items-center justify-center w-12 h-12 bg-[#b89f76] rounded-full text-white mr-4">
-              <i className="fas fa-phone"></i>
-            </div>
-            <div>
-              <span>Call Anytime</span>
-              <p className="font-bold text-lg">+964733-3789OI</p>
             </div>
           </div>
         </div>
