@@ -1,6 +1,6 @@
 import './App.css';
 import Footer from './component/Footer';
-import Header from './component/Header';
+import Header from './component/Header2';
 import { Outlet, useLocation } from 'react-router-dom';
 function App() {
   // const location = useLocation(); // Lấy thông tin đường dẫn hiện tại

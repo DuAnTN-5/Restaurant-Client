@@ -1,6 +1,7 @@
-import Content from "../component/Content";
+// import Content from "../component/Content";
 import HomeSection from "../component/HomeSection";
-import BookingForm from "../component/BookingForm-2";
+import BookingForm from "../component/BookingForm-3";
+import OurPartner from "../component/OurPartner"
 import FavoriteFood from "../component/FavoriteFood";
 import AboutUs from "../component/AboutUs";
 function HomePage() {
@@ -8,9 +9,10 @@ function HomePage() {
     <>
       <HomeSection />
       <BookingForm />
+      <OurPartner />
       <FavoriteFood />
       <AboutUs />
-      <Content />
+      {/* <Content /> */}
     </>
   );
 }
