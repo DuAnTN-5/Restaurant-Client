@@ -1,6 +1,6 @@
 import { useEffect,  useState } from "react";
 import { CiStar } from "react-icons/ci";
-import { FaFacebook, FaYoutube } from "react-icons/fa";
+// import { FaFacebook, FaYoutube } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import CSS của AOS
 import { api } from "../api";
@@ -251,7 +251,7 @@ function Content() {
       </div>
 
       {/* Phần quảng cáo Appstore */}
-      <div className="relative flex flex-col md:flex-row h-screen bg-black mx-auto rounded-[20px] w-[733px] md:w-[1296px]">
+      {/* <div className="relative flex flex-col md:flex-row h-screen bg-black mx-auto rounded-[20px] w-[733px] md:w-[1296px]">
         <div className="flex-1 flex items-center justify-center relative">
           <div className="relative z-10 flex justify-center">
             <img
@@ -294,10 +294,10 @@ function Content() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Photo of 5 chef */}
-      <div className="py-10 bg-[#EBE9E6]">
+      {/* <div className="py-10 bg-[#EBE9E6]">
         <div className="flex items-center justify-center space-x-4">
           <img
             className="w-[100px] h-auto"
@@ -326,7 +326,7 @@ function Content() {
                 alt="Mendia Juxef"
               />
               <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100  transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                {/* <Link to="/"> <FaFacebook className="text-white" /> </Link> */}
+             
                 <FaFacebook className="text-white" />
                 <FaYoutube className="text-white" />
               </div>
@@ -431,7 +431,7 @@ function Content() {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* 2 post tin tức */}
       <div className="text-center py-12">

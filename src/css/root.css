@@ -4,3 +4,49 @@
     --color-black: #000000;
     --color-black-overlay-bgr: #000000bd;
 }
+
+:root {
+    --screen-max: 1133px;
+    --screen-1200px: 1140px;
+    --screen-1024px: 1000px;
+    --screen-992px: 960px;
+    --screen-768px: 720px;
+    --screen-576px: 540px;
+    --screen-480px: 480px;
+
+}
+
+.container-vphu {
+    max-width: var(--screen-max);
+    margin: 0 auto;
+}
+@media (max-width:1200px) {
+    .container-vphu {
+        max-width: var(--screen-1200px);
+    }
+}
+@media (max-width:1024px) {
+    .container-vphu {
+        max-width: var(--screen-1024px);
+    }
+}
+@media (max-width:992px) {
+    .container-vphu {
+        max-width: var(--screen-992px);
+    }
+}
+@media (max-width:768px) {
+    .container-vphu {
+        max-width: var(--screen-768px);
+    }
+}
+@media (max-width:576px) {
+    .container-vphu {
+        max-width: var(--screen-576px);
+    }
+}
+@media (max-width:480px) {
+    .container-vphu {
+        max-width: var(--screen-480px);
+    }
+}

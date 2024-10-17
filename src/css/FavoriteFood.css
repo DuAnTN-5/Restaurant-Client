@@ -1,3 +1,4 @@
+@import url(../css/root.css);
 .food-category {
     text-align: center;
     padding: 120px 0;
@@ -15,6 +16,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+    padding: 0 40px;
   }
   
   .food-card {
@@ -93,6 +95,7 @@
     font-weight: bold;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 5px;
   }
   
