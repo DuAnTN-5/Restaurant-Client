@@ -86,13 +86,14 @@ const FavouritePage = () => {
 
   return (
     <div className="container mx-auto max-w-7xl p-4">
-      <table className="min-w-full bg-white border border-gray-200">
+      <h1 className="text-2xl font-bold mb-6 text-center">Sản phẩm yêu thích</h1>
+      <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
         <thead className="bg-black text-white">
           <tr>
-            <th className="px-4 py-2">
+            <th className="px-2 py-2 text-left">
               <input
                 type="checkbox"
-                style={{ transform: "scale(1.5)" }}
+                className="transform scale-150"
                 onChange={() => {
                   const allSelected = selectedProducts.every(Boolean);
                   setSelectedProducts(
@@ -101,36 +102,36 @@ const FavouritePage = () => {
                 }}
               />
             </th>
-            <th className="px-4 py-2">Tên sản phẩm</th>
-            <th className="px-4 py-2">Đơn giá</th>
-            <th className="px-4 py-2">Tình trạng kho</th>
-            <th className="px-4 py-2"></th>
+            <th className="px-2 py-2">Tên sản phẩm</th>
+            <th className="px-2 py-2">Đơn giá</th>
+            <th className="px-2 py-2">Tình trạng kho</th>
+            <th className="px-2 py-2 text-center">Hành động</th>
           </tr>
         </thead>
         <tbody>
           {productsData.map((product, index) => (
-            <tr key={product.id} className="border-b">
-              <td className="px-4 py-2">
+            <tr key={product.id} className="border-b hover:bg-gray-100">
+              <td className="px-2 py-2">
                 <input
                   type="checkbox"
                   checked={selectedProducts[index]}
                   onChange={() => toggleSelect(index)}
-                  style={{ transform: "scale(1.5)" }}
+                  className="transform scale-150"
                 />
               </td>
-              <td className="px-4 py-2">
+              <td className="px-2 py-2">
                 <div className="flex items-center">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-16 h-16 object-cover"
+                    className="w-16 h-16 object-cover rounded-full"
                   />
                   <span className="ml-4">{product.name}</span>
                 </div>
               </td>
-              <td className="px-4 py-2">{product.price}</td>
+              <td className="px-2 py-2">{product.price}</td>
               <td
-                className={`px-4 py-2 ${
+                className={`px-2 py-2 ${
                   product.stockStatus === "In stock"
                     ? "text-green-600"
                     : "text-red-600"
@@ -138,12 +139,12 @@ const FavouritePage = () => {
               >
                 {product.stockStatus}
               </td>
-              <td className="px-4 py-2 flex items-center">
+              <td className="px-2 py-2 text-center flex justify-center items-center">
                 <button
                   className={`${
                     product.stockStatus === "Out of stock"
                       ? "opacity-50 cursor-not-allowed"
-                      : ""
+                      : "text-green-500"
                   }`}
                   onClick={() =>
                     isInCart(product)
@@ -152,46 +153,40 @@ const FavouritePage = () => {
                   }
                   disabled={product.stockStatus === "Out of stock"}
                 >
-                  <FaCheck
-                  size={20} //tăng kích thước icon 
-                    className={`mr-2 ${
-                      isInCart(product) ? "text-green-500" : "text-gray-500"
-                    }`}
-                  />
+                  <FaCheck size={20} />
                 </button>
-                <span className="mx-2" /> {/* Thêm khoảng cách giữa dấu V và dấu X */}
+                <span className="mx-2" />
                 <button
                   className={`${
-                    isInCart(product) ? "" : "opacity-50 cursor-not-allowed"
+                    isInCart(product) ? "text-red-600" : "opacity-50 cursor-not-allowed"
                   }`}
                   onClick={() => handleRemoveFromCart(product)}
                   disabled={!isInCart(product)}
                 >
-                  <FaTimes  size={20} //tăng kích thước icon 
-                   className="text-red-600" />
+                  <FaTimes size={20} />
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="flex justify-between mt-4">
-        <div className="flex items-center">
+      <div className="flex flex-col md:flex-row justify-between mt-6">
+        <div className="flex items-center flex-wrap mb-4 md:mb-0">
           <button
             onClick={handleAddSelectedToCart}
-            className="bg-[#000000] text-white px-4 py-2 mr-2 rounded-md"
+            className="bg-black text-white px-4 py-2 mr-2 rounded-md hover:bg-gray-800 transition duration-200 w-full md:w-auto"
           >
             Thêm mục đã chọn
           </button>
           <button
             onClick={handleAddAllToCart}
-            className="bg-red-600 text-white px-4 py-2 mr-2 rounded-md"
+            className="bg-red-600 text-white px-4 py-2 mr-2 rounded-md hover:bg-red-700 transition duration-200 w-full md:w-auto"
           >
             Thêm tất cả
           </button>
           <button
             onClick={handleRemoveAllFromCart}
-            className="bg-red-600 text-white px-4 py-2 rounded-md"
+            className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 w-full md:w-auto"
           >
             Xóa tất cả
           </button>
@@ -199,7 +194,7 @@ const FavouritePage = () => {
         <div>
           <button
             onClick={handleViewCart}
-            className="bg-[#000000] text-white px-4 py-2 rounded-md"
+            className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition duration-200 w-full md:w-auto"
           >
             Xem giỏ hàng
           </button>

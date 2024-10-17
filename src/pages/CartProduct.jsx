@@ -1,8 +1,5 @@
-import { Logo2 } from "../assets";
-import { FaCartShopping } from "react-icons/fa6";
-import { CiHeart } from "react-icons/ci";
-
 import "../css/CartProduct.css";
+import { Logo2 } from "../assets";
 function CartProduct() {
   return (
     <>
