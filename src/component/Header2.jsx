@@ -91,7 +91,7 @@ function Header2() {
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/pages">
-                    Pages
+                    About
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -105,8 +105,8 @@ function Header2() {
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link className="navbar-link" to="/shop">
-                    Shop
+                  <Link className="navbar-link" to="/profile-user">
+                    Account
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -178,12 +178,21 @@ function Header2() {
               </ul>
             </div>
             <div className="cart-interaction">
-              <div className="cart-interaction-item">
-                <i className=" fa-regular fa-heart navbar-icon"></i>
-              </div>
-              <div className="cart-interaction-item icon-end">
-                <i className="fa-solid fa-cart-shopping navbar-icon"></i>
-              </div>
+              <Link to="/login">
+                <div className="cart-interaction-item">
+                  <i className="fa-regular fa-user navbar-icon"></i>
+                </div>
+              </Link>
+              <Link to="/favourite-page">
+                <div className="cart-interaction-item">
+                  <i className=" fa-regular fa-heart navbar-icon"></i>
+                </div>
+              </Link>
+              <Link to="/cart">
+                <div className="cart-interaction-item icon-end">
+                  <i className="fa-solid fa-cart-shopping navbar-icon"></i>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
