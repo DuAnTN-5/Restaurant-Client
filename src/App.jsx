@@ -1,7 +1,10 @@
-import './App.css';
-import Footer from './component/Footer';
-import Header from './component/Header';
-import { Outlet, useLocation } from 'react-router-dom';
+import "./App.css";
+import Footer from "./component/Footer";
+import Header from "./component/Header";
+import { Outlet } from "react-router-dom";
+import ProfileUser from "./pages/ProfileUser";
+import FavouritePage from './pages/FavouritePage.jsx';
+
 function App() {
   // const location = useLocation(); // Lấy thông tin đường dẫn hiện tại
 
@@ -10,9 +13,12 @@ function App() {
 
   return (
     <>
-      <Header />
-     <Outlet/>  {/* Đây sẽ là nơi hiển thị các trang con */}
-      <Footer/>
+      {/* <Header /> */}
+      <ProfileUser />
+      {/* <FavouritePage/> */}
+      {/* <Outlet/>   */}
+      {/* Đây sẽ là nơi hiển thị các trang con */}
+      {/* <Footer /> */}
 
       {/* {!isAuthPage && <Footer />} Chỉ hiển thị Footer nếu không phải là trang đăng nhập hoặc đăng ký */}
     </>

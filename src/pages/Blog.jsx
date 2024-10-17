@@ -1,10 +1,10 @@
 function Blog() {
   return (
-    <div className="container mx-auto max-w-7xl p-2">
+    <div className="container mx-auto max-w-7xl p-4">
       {/* Mục tin tức chính */}
-      <div className="grid grid-cols-12 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
         {/* Main Article */}
-        <div className="col-span-8">
+        <div className="md:col-span-8">
           <div className="relative">
             <img
               src="https://madamelan.vn/storage/tin-tuc/20211121-mdl-suon-heo-nuong-mac-khen.jpg"
@@ -19,7 +19,7 @@ function Blog() {
           </div>
 
           {/* Bài viết phụ */}
-          <div className="grid grid-cols-3 gap-4 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             {Array(3).fill("").map((_, i) => (
               <div key={i} className="flex flex-col items-center text-center">
                 <img
@@ -59,25 +59,30 @@ function Blog() {
         </div>
 
         {/* Thanh bên (Phần Slide) */}
-        <div className="col-span-4 space-y-4">
-          <div className="bg-gray-100 p-4 rounded-lg">
+        <div className="md:col-span-4 space-y-4">
+          {/* Tin nổi bật */}
+          <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
             <h3 className="font-semibold text-lg text-center">Tin nổi bật</h3>
             <ul className="mt-2 space-y-2 text-center">
-              <li className="border-b pb-2">Hoàng Đức sẽ khoác áo CLB Thanh Niên TP.HCM...</li>
-              <li className="border-b pb-2">Jeff Dean - nhà khoa học AI của Google...</li>
-              <li className="border-b pb-2">Bí kíp tiết kiệm nhưng thương hiệu Mỹ tự tổ chức...</li>
-              <li className="border-b pb-2">iPhone 17 Slim sẽ là chiếc iPhone kỳ lạ...</li>
+              {["Hoàng Đức sẽ khoác áo CLB Thanh Niên TP.HCM...", 
+                "Jeff Dean - nhà khoa học AI của Google...", 
+                "Bí kíp tiết kiệm nhưng thương hiệu Mỹ tự tổ chức...", 
+                "iPhone 17 Slim sẽ là chiếc iPhone kỳ lạ..."].map((item, index) => (
+                <li key={index} className="border-b pb-2 text-gray-700 hover:text-red-500 transition-colors duration-200 cursor-pointer">
+                  {item}
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Quảng cáo */}
-          <div className="bg-gray-100 p-4 rounded-lg text-center">
+          <div className="bg-gray-100 p-4 rounded-lg shadow-lg text-center">
             <img
               src="https://halotravel.vn/wp-content/uploads/2021/02/nha-hang-sang-trong-o-sai-gon-Parkview-Buffet-1-1024x600.jpg"
               alt="Small image"
               className="w-20 h-20 object-cover mx-auto rounded-lg"
             />
-            <p className="text-sm mt-2">
+            <p className="text-sm mt-2 text-gray-800 font-semibold">
               iPhone 17 Slim sẽ là chiếc iPhone kỳ lạ nhất của Apple
             </p>
           </div>
@@ -87,7 +92,7 @@ function Blog() {
       {/* Tin tức hàng tuần */}
       <div className="mt-8">
         <h2 className="text-2xl mb-4 text-gray-700 text-center">Tin tức hàng tuần</h2>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {Array(3).fill("").map((_, i) => (
             <div key={i} className="flex flex-col items-center">
               <img
@@ -102,7 +107,7 @@ function Blog() {
       </div>
 
       {/* Mục Tin Tức Mới */}
-      <div className="container mx-auto max-w-7xl p-2">
+      <div className="mt-8">
         {/* Navigation Tabs */}
         <div className="flex justify-center border-b mb-6">
           {["Mục Tin Tức Mới", "Khoa Học", "Phim Ảnh", "Bóng Đá", "Giải Trí", "Nước Ngoài"].map(
@@ -119,9 +124,9 @@ function Blog() {
           )}
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex flex-col md:flex-row justify-between">
           {/* Left Column: News Cards */}
-          <div className="w-3/4 grid grid-cols-2 gap-6">
+          <div className="w-full md:w-3/4 grid grid-cols-1 md:grid-cols-2 gap-6">
             {Array(2).fill("").map((_, i) => (
               <div key={i} className="bg-white shadow-md rounded-md overflow-hidden">
                 <img
@@ -142,8 +147,8 @@ function Blog() {
           </div>
 
           {/* Right Column: Social Media & Events */}
-          <div className="w-1/4 space-y-6">
-            <div className="bg-white shadow-md rounded-md p-4 text-center">
+          <div className="w-full md:w-1/4 space-y-6 mt-4 md:mt-0">
+            <div className="bg-white shadow-md rounded-md p-4 text-center ml-[10px]">
               <h4 className="font-bold text-lg mb-4">Follow Us</h4>
               <div className="space-y-4">
                 {["Facebook", "Twitter", "Instagram", "YouTube"].map((social, i) => (
@@ -155,7 +160,7 @@ function Blog() {
               </div>
             </div>
 
-            <div className="bg-white shadow-md rounded-md p-4 text-center">
+            <div className="bg-white shadow-md rounded-md p-4 text-center ml-[10px]">
               <h4 className="font-bold text-lg">Music Events</h4>
               <p className="text-gray-500">Live in Concert</p>
             </div>
