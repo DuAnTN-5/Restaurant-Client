@@ -1,5 +1,5 @@
 import '../css/BookingForm-2.css';
-import imgBoking2 from '../assets/img-booking2.jpg'
+import imgBoking2 from '../assets/img-booking2.jpg';
 
 function BookingForm() {
   return (
@@ -31,7 +31,7 @@ function BookingForm() {
 
               <div className="form-group">
                 <label htmlFor="time" className="label-booking">Time</label>
-                <input type="time" id="time" className="input-booking" value="10:00 AM" />
+                <input type="time" id="time" className="input-booking" defaultValue="10:00 AM" />
               </div>
 
               <button type="submit" className="button-booking">Book A Table</button>
