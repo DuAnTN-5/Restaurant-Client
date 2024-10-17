@@ -1,11 +1,10 @@
 .contact{
-    width: 85%;
+    width: 100%;
+    max-width: 1140px;
     margin: 0 auto;
-    /* display: flex;
-    flex-direction: column-reverse; */
-    /* display: flex; */
 }
 .contact-item{
+    margin-top: 30px;
     display: inline-block;
     width: 100%;
 }
@@ -61,7 +60,7 @@
 .form-title{
     font-size: 26px;
     font-weight: bold;
-    width: 275px;
+    width: 280px;
     /* text-align: center; */
     /* margin: 0 auto; */
     /* justify-items: center; */
@@ -73,6 +72,7 @@
 }
 .form-description strong{
     font-size: 17px;
+    font-weight: bold;
     /* color: gray; */
 }
 
@@ -80,8 +80,11 @@
     width: 100%;
     /* margin: 0 auto; */
     margin-top: 20px;
-    background-color: pink;
-    padding: 10px;
+    background-color: rgb(251, 251, 251);
+    padding: 20px;
+    border-radius:10px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+
 }
 .form-input {
     display: flex;
@@ -158,3 +161,256 @@
 .contact-icon-website i{
     padding:  0 8px;
 }
+/* @media only screen and (max-width: 1140px){
+    .contact{
+        width: 100%;
+        max-width: 1023px;
+        margin: 0 auto;
+    }
+   
+} */
+@media only screen and (max-width: 1200px){
+    
+    .contact{
+        width: 95%;
+        /* max-width: 932px; */
+        margin: 0 auto;
+    }
+    .form-container {
+        width: 60%;
+        margin-top: 20px;
+        display: inline-block;
+    }
+    .contact__header {
+        width: 37%;
+        float: right;
+        vertical-align: top;
+        margin-top: 125px;
+        padding-right: 88px;
+    }
+    .form-title {
+        font-size: 22px;
+        font-weight: bold;
+        width: 275px;
+        /* text-align: center; */
+        /* margin: 0 auto; */
+        /* justify-items: center; */
+        /* color: white; */
+        /* background-color: rgb(196, 33, 60); */
+        padding: 8px;
+        /* border-radius: 10px; */
+        margin-bottom: 17px;
+    }
+    #map {
+        width: 100%; /* Đặt bản đồ chiếm toàn bộ chiều rộng */
+        margin-top: 20px;
+        height: 250px; /* Chiều cao của bản đồ */
+        /* border: 2px solid #000; Đường viền của bản đồ */
+        /* border-radius: 10px; Bo tròn các góc bản đồ */
+        transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt */
+        
+    }
+}
+@media only screen and (min-width: 874px) and (max-width: 990px) {
+    .contact-text {
+        font-size: 15px;
+        padding-top: 27px;
+        /* padding-bottom: 22px; */
+    }
+    .contact-text-item {
+        font-size: 13px;
+        font-weight: 20px;
+        color: gray;
+        padding-left: 50px;
+    }
+    .form-title {
+        font-size: 20px;
+        font-weight: bold;
+        width: 275px;
+        /* text-align: center; */
+        /* margin: 0 auto; */
+        /* justify-items: center; */
+        /* color: white; */
+        /* background-color: rgb(196, 33, 60); */
+        padding: 8px;
+        /* border-radius: 10px; */
+        margin-bottom: 10px;
+    }
+    .contact-icon-website {
+        display: flex;
+        font-size: 26px;
+        margin-top: 30px;
+    }
+    
+    
+    
+  }
+  @media only screen and (min-width: 769px) and (max-width: 873px) {
+    .form-description{
+        font-size: 15px;
+    }
+    .contact-form {
+        padding: 7px;
+    }
+
+    .contact__header {
+       
+        padding-right:0;
+    }
+    .contact-text {
+        font-size: 17px;
+        padding-top: 27px;
+        /* padding-bottom: 22px; */
+    }
+    .contact-text-item {
+        font-size: 15px;
+        font-weight: 20px;
+        color: gray;
+        padding-left: 50px;
+    }
+    .form-title {
+        font-size: 20px;
+        font-weight: bold;
+        width: 275px;
+        /* text-align: center; */
+        /* margin: 0 auto; */
+        /* justify-items: center; */
+        /* color: white; */
+        /* background-color: rgb(196, 33, 60); */
+        padding: 8px;
+        /* border-radius: 10px; */
+        margin-bottom: 10px;
+    }
+    .contact-icon-website {
+        display: flex;
+        font-size: 26px;
+        margin-top: 30px;
+    }
+    #map {
+        width: 100%;
+        margin-top: 20px;
+        height: 230px;
+        transition: all 0.3s ease-in-out;
+    }
+  }
+
+  @media only screen and (min-width: 426px) and (max-width: 768px){
+    .contact {
+        width: 100%;
+     
+    }
+    .form-container {
+        width: 100%;
+    }
+    .contact__header {
+        width: 100%;
+        margin: 0;
+        /* float: right; */
+        /* vertical-align: top; */
+        /* margin-top: 125px; */
+        /* padding-right: 88px; */
+    }
+    
+}
+@media only screen and (max-width: 425px){
+    .contact {
+        width: 100%;
+     
+    }
+    .form-container {
+        width: 100%;
+    }
+    .contact__header {
+        width: 100%;
+        margin: 0;
+        /* float: right; */
+        /* vertical-align: top; */
+        /* margin-top: 125px; */
+        /* padding-right: 88px; */
+    }
+    .form-title {
+        font-size: 17px;
+        font-weight: bold;
+        width: 275px;
+        padding: 5px;
+        margin-bottom: 8px;
+    }
+    .form-description strong {
+        font-size: 14px;
+        font-weight: bold;
+        /* color: gray; */
+    }
+    .form-description{
+        font-size: 12px;
+    }
+    .form-input {
+        display: block;
+        gap: 0;
+    }
+    .form-input>div{
+        /* padding: 4px 0;         */
+    }
+    .form-input>div>label{
+        font-size: 12px;
+    }
+    #name{
+        margin-bottom: 15px;
+    }
+    .form-input input {
+        padding: 4px;
+    }
+    .form-textarea>div>label{
+        font-size: 12px;
+        
+    }
+    .form-textarea textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height: 80px;
+    }
+    .send {
+        padding: 7px 12px;
+        background-color: rgb(196, 33, 60);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin: 0 auto;
+    }
+    .contact-text {
+        font-size: 15px;
+        padding-top: 25px;
+        /* padding-bottom: 22px; */
+    }
+    .contact-text-item {
+        font-size: 13px;
+        font-weight: 20px;
+        color: gray;
+        padding-left: 50px;
+    }
+    .contact-icon {
+        font-size: 17px;
+        padding-top: 25px;
+        padding-right: 25px;
+        padding-left: 3px;
+    }
+    .contact-icon-website {
+        display: flex;
+        font-size: 20px;
+        margin-top: 20px;
+    }
+    #map {
+        width: 100%;
+        margin-top: 20px;
+        height: 250px;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+
+  

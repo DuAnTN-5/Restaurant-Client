@@ -10,9 +10,12 @@ function App() {
 
   return (
     <>
-      <Header />
-     <Outlet/>  {/* Đây sẽ là nơi hiển thị các trang con */}
-      <Footer/>
+    {/* <Contact/> */}
+      {/* <Header /> */}
+     <Outlet/> 
+      {/* Đây sẽ là nơi hiển thị các trang con */}
+
+      {/* <Footer/> */}
 
       {/* {!isAuthPage && <Footer />} Chỉ hiển thị Footer nếu không phải là trang đăng nhập hoặc đăng ký */}
     </>

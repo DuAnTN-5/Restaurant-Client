@@ -1,14 +1,8 @@
 import "../css/Product-Detail.css";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
-import { useState } from "react";
-
 function ProductDetail() {
-  const [activeTab, setActiveTab] = useState("description"); // State lưu trữ tab nào đang được chọn
-
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
+ 
   return (
     <>
       <div className="navbar-detail">
@@ -19,7 +13,7 @@ function ProductDetail() {
           />
         </div>
         <div className="navbar-right">
-          <h3>Bbg Fish</h3>
+          <h3 className="product-title">Bbg Fish</h3>
           <h2>SHUSHI</h2>
           <p>Giá tiền:$56</p>
           <p>Nguyên liệu chính: Tôm, Thịt, Trứng </p>
@@ -45,7 +39,7 @@ function ProductDetail() {
           </div>
         </div>
       </div>
-      <div className="content">
+      {/* <div className="content">
         <div className="tab-menu">
           <div
             className={`tab-item ${
@@ -147,7 +141,7 @@ function ProductDetail() {
            
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
