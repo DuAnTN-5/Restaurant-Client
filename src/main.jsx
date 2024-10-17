@@ -25,7 +25,6 @@ createRoot(document.getElementById('root')).render(
       <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} /> 
-        {/* index chỉ định trang nào chạy trước */}
         <Route path="/contact" element={<Contact/>} /> 
         <Route path="/login" element={<Login/>} /> 
         <Route path="/signup" element={<SignUp/>} /> 

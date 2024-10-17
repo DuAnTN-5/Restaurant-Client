@@ -54,6 +54,8 @@
   
   .form-section {
     background-color: white;
+    max-width: 500px;
+    margin: 0 auto;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -133,7 +135,7 @@
     font-weight: bolder;
   }
   .text-social-network {
-    padding-left: 5px;
+    padding: 0 0 0 5px;
   }
   
   .facebook {
