@@ -1,4 +1,4 @@
-import "./css/Login.css";
+import "../style/Login.css";
 import logohi5 from '../assets/logo-hi-5.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
