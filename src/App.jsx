@@ -1,7 +1,7 @@
 import "./App.css";
 import Footer from "./component/Footer";
 
-import Header from "./component/Header";
+import Header from "./component/Header2";
 import { Outlet } from "react-router-dom";
 import ProfileUser from "./pages/ProfileUser";
 import FavouritePage from "./pages/FavouritePage.jsx";
@@ -13,12 +13,12 @@ function App() {
 
   return (
     <>
-      {/* <Header /> */}
-      <ProfileUser />
+      <Header />
+      {/* <ProfileUser /> */}
       {/* <FavouritePage/> */}
-      {/* <Outlet/>   */}
+      <Outlet/>  
       {/* Đây sẽ là nơi hiển thị các trang con */}
-      {/* <Footer /> */}
+      <Footer />
 
       {/* {!isAuthPage && <Footer />} Chỉ hiển thị Footer nếu không phải là trang đăng nhập hoặc đăng ký */}
 
