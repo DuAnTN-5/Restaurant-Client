@@ -1,4 +1,4 @@
-// import Content from "../component/Content";
+import Content from "../component/Content";
 import HomeSection from "../component/HomeSection";
 import BookingForm from "../component/BookingForm-3";
 import OurPartner from "../component/OurPartner"
@@ -12,7 +12,7 @@ function HomePage() {
       <OurPartner />
       <FavoriteFood />
       <AboutUs />
-      {/* <Content /> */}
+      <Content />
     </>
   );
 }
