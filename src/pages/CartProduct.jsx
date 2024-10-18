@@ -5,10 +5,10 @@ function CartProduct() {
     <>
       <div className="cart-header">
         <ul className="cart-page-header">
-          <li className="cart-page-logo">
+          {/* <li className="cart-page-logo">
             <img src={Logo2} alt="" />
             <h3>HightFive</h3>
-          </li>
+          </li> */}
           <li className="cart-page-cart">Shopping Cart</li>
         </ul>
       </div>
@@ -127,6 +127,7 @@ function CartProduct() {
           <div className="cart-summary">
             <p className="total-title"> Cart totals</p>
             <ul className="cart-sub-total">
+            
               <li>
                 <p>Subtotal:</p>
                 <h5>300.000 VND</h5>
@@ -163,7 +164,15 @@ function CartProduct() {
             </div>
             <div className="cart-abate">
               <input type="radio" className="radio" />
-              <p>Chuyển khoảng ngân hàng</p>
+              <p>Thanh toán ngân hàng</p>
+            </div>
+            <div className="cart-abate">
+              <input type="radio" className="radio" />
+              <p>Thanh toán momo</p>
+            </div>
+            <div className="cart-abate">
+              <input type="radio" className="radio" />
+              <p>Thanh toán VNPay</p>
             </div>
             <div className="button-container">
               <button className="send">Proceed to checkout</button>
