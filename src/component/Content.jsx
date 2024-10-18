@@ -1,6 +1,6 @@
 import { useEffect,  useState } from "react";
 import { CiStar } from "react-icons/ci";
-// import { FaFacebook, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaYoutube } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import CSS của AOS
 import { api } from "../api";
@@ -297,7 +297,7 @@ function Content() {
       </div> */}
 
       {/* Photo of 5 chef */}
-      {/* <div className="py-10 bg-[#EBE9E6]">
+      <div className="py-10 bg-[#EBE9E6]">
         <div className="flex items-center justify-center space-x-4">
           <img
             className="w-[100px] h-auto"
@@ -431,7 +431,7 @@ function Content() {
             </p>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* 2 post tin tức */}
       <div className="text-center py-12">

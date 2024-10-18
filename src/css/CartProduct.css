@@ -9,11 +9,12 @@
 }
 
 .cart-header {
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-  background-color: #ffffff;
+  /* border-top: 1px solid gray; */
+  /* border-bottom: 1px solid gray; */
+  background-color: rgb(201, 201, 201);
   border-radius: 10px;
   width: 100%;
+  padding: 10px;
   padding-left: 100px;
 }
 
