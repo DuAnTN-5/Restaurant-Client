@@ -1,12 +1,11 @@
 .navbar-detail {
-  width: 90%;
+  width: 85%;
   margin: 40px auto;
   display: flex;
-  padding: 10px 20px;
+  padding: 10px 0;
 }
 .navbar-left {
-  display: flex;
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(216, 215, 215);
   /* width: 50%; */
   margin-left: 37px;
   margin-right: 50px;
@@ -14,15 +13,15 @@
   border-radius: 20px;
 }
 .navbar-left img {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   padding: 40px;
 }
 .navbar-right {
   display: block;
   padding: 20px 0;
 }
-h3 {
+.product-title {
   font-size: 20px;
   /* padding: 20px 0; */
 }
@@ -31,8 +30,16 @@ h2 {
   padding: 20px 0;
   font-weight: bold;
 }
-p {
+.product-children{
   font-size: 20px;
+  padding: 20px 0;
+}
+/* p {
+  font-size: 20px;
+  padding: 20px 0;
+} */
+.productQuantity {
+  display: flex;
   padding: 20px 0;
 }
 .counter {
@@ -41,10 +48,6 @@ p {
   margin-right: 50px;
 }
 
-.productQuantity {
-  display: flex;
-  padding: 20px 0;
-}
 .counter > :is(.minus, .plus) {
   background: transparent;
   padding: 25px;
@@ -108,47 +111,11 @@ p {
   border: 1px solid;
   border-radius: 25px;
 }
-/* tab-menu container */
-.tab-menu {
-  padding-left: 40%;
-  display: flex;
-  justify-content: flex-start;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 10px;
-}
-.tab-item {
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 18px;
-  color: #555;
-  position: relative;
-  transition: color 0.3s ease;
-}
-.tab-item:hover {
-  color: #000000;
-}
 
-/* Active tab */
-.tab-item.active {
-  color: #000;
-}
 
-/* Underline effect */
-.tab-item.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 2px;
-  background-color: #000;
-}
+/*  */
 .tab-content {
   margin-top: 10px;
-}
-/* Hiển thị nội dung của tab đang được active */
-.tab-pane.active {
-  display: block;
 }
 .vt-product {
   display: flex;

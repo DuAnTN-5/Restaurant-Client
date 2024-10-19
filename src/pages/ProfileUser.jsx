@@ -40,9 +40,9 @@ function UserProfile() {
     <div className="min-h-screen flex justify-center items-center bg-gray-100">
       {/* Container chính */}
       <div className="bg-white shadow-lg p-6 rounded-lg w-full max-w-6xl">
-        <div className="grid grid-cols-2 gap-6">
-          {/* Sidebar tài khoản */}
-          <div className="bg-gray-100 p-6 flex flex-col items-center">
+        <div className="grid grid-cols-10 gap-6">
+          {/* Sidebar tài khoản (bên trái 3 phần) */}
+          <div className="col-span-3 bg-gray-100 p-6 flex flex-col items-center">
             <button
               className="self-start mb-4 text-blue-500 hover:underline"
               onClick={() => window.history.back()}
@@ -76,8 +76,8 @@ function UserProfile() {
             </button>
           </div>
 
-          {/* Biểu mẫu cập nhật người dùng */}
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          {/* Biểu mẫu cập nhật người dùng (bên phải 7 phần) */}
+          <div className="col-span-7 bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-6">Cập nhật người dùng</h2>
             <div className="grid grid-cols-2 gap-4">
               {/* Phần 1 bên trái */}
@@ -170,7 +170,7 @@ function UserProfile() {
                   />
                   <span className="absolute right-2 top-1/2 transform -translate-y-1/2">
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                      src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
                       alt="Google logo"
                       className="w-5 h-5"
                     />
