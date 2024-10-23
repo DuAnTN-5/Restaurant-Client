@@ -14,7 +14,9 @@ import SignUp from './pages/Signup.jsx';
 import CartProduct from './pages/CartProduct.jsx';
 import ProductDetail from './pages/Product-detail.jsx';
 import Blog from './pages/Blog.jsx';
+import ProfileUser from './pages/ProfileUser.jsx';
 import FavouritePage from './pages/FavouritePage.jsx';
+
 
 
 createRoot(document.getElementById('root')).render(
@@ -30,6 +32,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/product-detail" element={<ProductDetail/>} /> 
         <Route path="/blog" element={<Blog/>} /> 
         <Route path="/favourite-page" element={<FavouritePage/>} /> 
+        <Route path="/profile-user" element={<ProfileUser/>} /> 
+        
 
        
       </Route>

@@ -178,12 +178,21 @@ function Header2() {
               </ul>
             </div>
             <div className="cart-interaction">
-              <div className="cart-interaction-item">
-                <i className=" fa-regular fa-heart navbar-icon"></i>
-              </div>
-              <div className="cart-interaction-item icon-end">
-                <i className="fa-solid fa-cart-shopping navbar-icon"></i>
-              </div>
+              <Link to="/login">
+                <div className="cart-interaction-item">
+                  <i className="fa-regular fa-user navbar-icon"></i>
+                </div>
+              </Link>
+              <Link to="/favourite-page">
+                <div className="cart-interaction-item">
+                  <i className=" fa-regular fa-heart navbar-icon"></i>
+                </div>
+              </Link>
+              <Link to="/cart">
+                <div className="cart-interaction-item icon-end">
+                  <i className="fa-solid fa-cart-shopping navbar-icon"></i>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
