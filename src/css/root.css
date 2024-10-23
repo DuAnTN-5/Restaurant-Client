@@ -6,12 +6,12 @@
 }
 
 :root {
-    --screen-max: 1133px;
-    --screen-1200px: 1140px;
-    --screen-1024px: 1000px;
-    --screen-992px: 960px;
-    --screen-768px: 720px;
-    --screen-576px: 540px;
+    --screen-max: 1100px;
+    --screen-1200px: 1050px;
+    --screen-1024px: 900px;
+    --screen-992px: 768px;
+    --screen-768px: 576px;
+    --screen-576px: 433px;
     --screen-480px: 480px;
 
 }

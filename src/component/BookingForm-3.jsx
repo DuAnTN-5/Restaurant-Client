@@ -53,36 +53,36 @@ function BookingForm3() {
     <div className="bgr-booking3">
       <div className="booking-container container-vphu">
         <div className="hours-section">
-          <h2 className="hours-title">Opening Hours</h2>
+          <h2 className="hours-title">Giờ Mở Cửa</h2>
           <ul className="hours-list">
           <li className="hours-item">
-              <span className="day">Saturday:</span>
+              <span className="day">Thứ 2</span>
               <span className="time">6:00 am - 12:00 pm</span>
             </li>
             <li className="hours-item">
-              <span className="day">Sunday:</span>
+              <span className="day">Thứ 3:</span>
               <span className="time">8:30 am - 11:00 pm</span>
             </li>
             <li className="hours-item">
-              <span className="day">Monday:</span>
+              <span className="day">Thứ 4:</span>
               <span className="time">9:00 am - 10:30 pm</span>
             </li>
             <li className="hours-item">
-              <span className="day">Tuesday:</span>
+              <span className="day">Thứ 5:</span>
               <span className="time">8:00 am - 12:00 pm</span>
             </li>
             <li className="hours-item">
-              <span className="day">Wednesday:</span>
+              <span className="day">Thứ 6:</span>
               <span className="time">9:45 am - 10:00 pm</span>
             </li>
             <li className="hours-item">
-              <span className="day">Thursday:</span>
+              <span className="day">Thứ 7:</span>
               <span className="time">8:15 am - 12:00 pm</span>
             </li>
             <li className="hours-item-closed">
-              <span className="day">Friday:</span>
+              <span className="day">Chủ Nhật:</span>
               <div className="closed-day">
-                <span className="time">Closed</span>
+                <span className="time">Đóng cửa</span>
               </div>
             </li>
           </ul>
@@ -97,7 +97,7 @@ function BookingForm3() {
               <form onSubmit={handleSubmit} className="booking-form">
                 <div className="form-group">
                   <label htmlFor="phone" className="label-booking">
-                    Phone
+                    SĐT :
                   </label>
                   <input
                     type="text"
@@ -105,34 +105,34 @@ function BookingForm3() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="input-booking"
-                    placeholder="+4733378901"
+                    placeholder="+84 346 732311"
                   />
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="person" className="label-booking">
-                    Person
+                    Số Người :
                   </label>
                   <select id="person" value={person}
                     onChange={(e) => setPerson(e.target.value)}
                     className="select-booking">
-                    <option value="1">1 Person</option>
-                    <option value="2">2 People</option>
-                    <option value="3">3 People</option>
-                    <option value="4">4 People</option>
-                    <option value="5">5 People</option>
-                    <option value="6">6 People</option>
-                    <option value="7">7 People</option>
-                    <option value="8">8 People</option>
-                    <option value="9">9 People</option>
-                    <option value="10">10 People</option>
-                    <option value="Larger Quantity">Larger Quantity</option>
+                    <option value="1">1 Người</option>
+                    <option value="2">2 Người</option>
+                    <option value="3">3 Người</option>
+                    <option value="4">4 Người</option>
+                    <option value="5">5 Người</option>
+                    <option value="6">6 Người</option>
+                    <option value="7">7 Người</option>
+                    <option value="8">8 Người</option>
+                    <option value="9">9 Người</option>
+                    <option value="10">10 Người</option>
+                    <option value="Larger Quantity">Số Lượng Lớn Hơn</option>
                   </select>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="date" className="label-booking">
-                    Date
+                    Ngày Đặt :
                   </label>
                   <input type="date" id="date" value={date}
                     onChange={(e) => setDate(e.target.value)}
@@ -141,7 +141,7 @@ function BookingForm3() {
 
                 <div className="form-group">
                   <label htmlFor="time" className="label-booking">
-                    Time
+                    Giờ Đặt :
                   </label>
                   <input
                     type="time"
@@ -153,7 +153,7 @@ function BookingForm3() {
                 </div>
 
                 <button type="submit" className="button-booking">
-                  Book A Table
+                  Đặt Bàn
                 </button>
               </form>
             </div>
