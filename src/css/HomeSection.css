@@ -1,22 +1,80 @@
 .hero-section {
-  background-image: url("../assets/banner.jpg");
+  /* background-image: url("../assets/banner.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center; */
+  width: 100%;
   height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  color: white;
+}
+.hero-content::after {
+  background: #000000;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    -webkit-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+.hero-content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  animation: animate 25s infinite;
+  opacity: 0;
+  background-size: cover;
+  background-position: center center;
+
   display: flex;
+  height: 100%;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
   text-align: center;
+}
+.hero-content-text {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 15%;
+}
+
+.img-hero1 {
+  background-image: url('../assets/banner.jpg');
+}
+.img-hero2 {
+  background-image: url('../assets/banner2.jpg');
+  animation-delay: 5s;
+}
+.img-hero3 {
+  background-image: url('../assets/banner3.jpg');
+  animation-delay: 10s;
+}
+.img-hero4 {
+  background-image: url('../assets/banner4.jpg');
+  animation-delay: 15s;
+}
+.img-hero5 {
+  background-image: url('../assets/banner5.jpg');
+  animation-delay: 20s;
 }
 
 .hero-section h1 {
-  font-size: 3rem;
+  font-size: 70px;
   font-weight: bold;
 }
 
 .hero-section p {
-  font-size: 1.5rem;
+  font-size: 24px;
 }
 
 .hero-section .btn {
@@ -32,4 +90,34 @@
 
 .hero-section .btn:hover {
   background-color: #a6754a;
+}
+
+@media (max-width: 1024px) {
+  .hero-section h1 {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 40px;
+  }
+  .hero-section p {
+    font-size: 16px;
+  }
+}
+
+@keyframes animate {
+  10%{
+    opacity: 1;
+  }
+  20%{
+    opacity: 1;
+  }
+  30%{
+    opacity: 0;
+  }
+  40%{
+    transform: scale(1.2);
+  }
 }

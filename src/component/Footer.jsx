@@ -7,9 +7,9 @@ export default function Footer() {
         <div className="header-footer-img"></div>
         <div className="footer-container">
           <div className="about-us-footer">
-            <h4 className='title-footer'>About Us</h4>
+            <h4 className='title-footer'>Về Chúng Tôi</h4>
             <p className='passage-footer'>
-              Continued at zealously necessary is Surrounded sir motionless she end literature. Gay direction neglected.
+            Luôn vươn tới sự hoàn hảo, vì trải nghiệm của bạn là sứ mệnh của chúng tôi !
             </p>
             <div className="social-media-icons-about-us-footer">
               <div className='icon-ab-footer icon-fb-footer'>
@@ -28,26 +28,26 @@ export default function Footer() {
           </div>
 
           <div className="explore-footer">
-            <h4 className='title-footer'>Explore</h4>
+            <h4 className='title-footer'>Khám Phá</h4>
             <div className="text-explore-footer">
-              About
+              Về Chúng Tôi
             </div>
             <div className="text-explore-footer">
-              Contact
+              Liên Hệ
             </div>
             <div className="text-explore-footer">
-              Career
+              Sự Nghiệp
             </div>
             <div className="text-explore-footer">
-              Company Profile
+              Hồ sơ công ty
             </div>
             <div className="text-explore-footer">
-              Help Center
+              Cần Trợ Giúp
             </div>
           </div>
 
           <div className="contact-info-footer">
-            <h4 className='title-footer'>Contact Info</h4>
+            <h4 className='title-footer'>Liên Hệ</h4>
             <div className="contact-info-footer-item">
               <div className="icon-contact-info-footer-item icon-location-footer">
                 <i className="fa-solid fa-location-dot"></i>
@@ -75,12 +75,12 @@ export default function Footer() {
           </div>
 
           <div className="newsletter-footer">
-            <h4 className='title-footer'>Newsletter</h4>
+            <h4 className='title-footer'>Bản Tin</h4>
             <p className="passage-footer">
-              Join our subscribers list to get the latest news and special offers.
+              Tham gia danh sách người đăng ký của chúng tôi để nhận tin tức mới nhất và ưu đãi đặc biệt.
             </p>
             <div className="form-newsletter-footer">
-              <input type="email" placeholder='Your Email' className='form-email-footer' name='email' />
+              <input type="email" placeholder='Nhập Email' className='form-email-footer' name='email' />
               <button type='submit' className='button-newsletter-footer'>
                 <i className="fa-solid fa-arrow-right icon-arrow-footer"></i>
               </button>

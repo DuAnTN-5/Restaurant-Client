@@ -1,5 +1,6 @@
 import { useEffect,  useState } from "react";
 import { CiStar } from "react-icons/ci";
+import '../css/Content.css';
 // import { FaFacebook, FaYoutube } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import CSS của AOS
@@ -51,17 +52,17 @@ function Content() {
         </h4>
         <h1 className="text-4xl font-bold mb-8">Our Specials Menu</h1>
         <div className="inline-block border-[1px] border-gray-300 rounded-lg overflow-hidden">
-          <div className="flex">
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200">
+          <div className="flex menu-our-special">
+            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Món ăn chính
             </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200">
+            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Món ăn phụ
             </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200">
+            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Món ăn nhẹ
             </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200">
+            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Thức uống
             </button>
           </div>

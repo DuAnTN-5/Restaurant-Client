@@ -39,7 +39,7 @@ function Header2() {
           <div className="header-contact">
             <div className="header-contact-phone">
               <i className="fas fa-phone icon-contact"></i>
-              <span>Phone: +4733378901</span>
+              <span>SĐT: +84 346 732311</span>
             </div>
             <div className="header-contact-email">
               <i className="fas fa-envelope icon-contact"></i>
@@ -86,12 +86,12 @@ function Header2() {
               <ul className="navbar-list">
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/">
-                    Home
+                    Trang chủ
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/pages">
-                    Pages
+                    Trang
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -106,12 +106,12 @@ function Header2() {
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/shop">
-                    Shop
+                    Giỏ Hàng
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/contact">
-                    Contact
+                    Liên Hệ
                   </Link>
                 </li>
               </ul>
