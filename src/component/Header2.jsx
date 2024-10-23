@@ -77,9 +77,11 @@ function Header2() {
             <img className="logo-image-toggle" src={logo} alt="Hi-5 Logo" />
           </div>
 
-          <div className="header-navbar-left">
-            <img className="logo-hi5" src={logo} alt="Logo Hight Five" />
-          </div>
+          <Link to="/">
+            <div className="header-navbar-left">
+              <img className="logo-hi5" src={logo} alt="Logo Hight Five" />
+            </div>
+          </Link>
 
           <div className="header-navbar-right">
             <div className="change-page">
