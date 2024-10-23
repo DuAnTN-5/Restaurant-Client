@@ -1,5 +1,8 @@
 import "../css/CartProduct.css";
-import { Logo2 } from "../assets";
+import { BiSolidBank } from "react-icons/bi";
+import { BsFillPiggyBankFill } from "react-icons/bs";
+import { MdPayment } from "react-icons/md";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
 function CartProduct() {
   return (
     <>
@@ -127,14 +130,19 @@ function CartProduct() {
           <div className="cart-summary">
             <p className="total-title"> Cart totals</p>
             <ul className="cart-sub-total">
-            
+              <li className="">
+                <p> Số bàn:</p>
+                <h5>10</h5>
+                {/* <div className="custom-borders"></div> */}
+              </li>
               <li>
                 <p>Subtotal:</p>
                 <h5>300.000 VND</h5>
               </li>
-              <li>
+              <li className="coupon-item">
                 <p>
-                  Coupon: <span>abcxyz</span>
+                  Coupon: 
+                  {/* <span>abcxyz</span> */}
                 </p>
                 <h5>-20.000 VND</h5>
                 <div>
@@ -145,13 +153,16 @@ function CartProduct() {
                     id=""
                     placeholder="Coupon code"
                   />
+                  <p>Chọn mã giảm giá:</p>
+                  <select name="" id="" className="discount-code">
+                    <option value="">Voucher</option>
+                    <option value="">Giảm giá -25.000 VND</option>
+                    <option value="">Giảm giá -20.000 VND </option>
+                  </select>
                 </div>
                 <div className="custom-border"></div>
               </li>
-              <li>
-                <p>Fees :</p>
-                <h5>0%</h5>
-              </li>
+
               <li>
                 <p className="total">Total:</p>
                 <h5 className="total">300.000 VND</h5>
@@ -160,18 +171,30 @@ function CartProduct() {
 
             <div className="cart-abate">
               <input type="radio" className="radio" />
+              <i className="cart-icon">
+                <RiMoneyDollarCircleFill className=""/>
+              </i>
               <p>Trả tiền mặt khi vào bàn</p>
             </div>
             <div className="cart-abate">
               <input type="radio" className="radio" />
+              <i className="cart-icon">
+                <BiSolidBank />
+              </i>
               <p>Thanh toán ngân hàng</p>
             </div>
             <div className="cart-abate">
               <input type="radio" className="radio" />
+              <i className="cart-icon">
+                <BsFillPiggyBankFill />
+              </i>
               <p>Thanh toán momo</p>
             </div>
             <div className="cart-abate">
               <input type="radio" className="radio" />
+              <i className="cart-icon">
+                <MdPayment />
+              </i>
               <p>Thanh toán VNPay</p>
             </div>
             <div className="button-container">
