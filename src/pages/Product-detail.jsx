@@ -137,10 +137,7 @@ function ProductDetail() {
                 </ul>
               </div>
               <p className="comment-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Món ăn ngon quá!!
               </p>
               <div className="comment-replay">
                 <i className="replay-icon">
@@ -371,6 +368,13 @@ function ProductDetail() {
             </div>
           </li>
         </ul>
+        <div className="comment-input">
+    <textarea
+      className="comment-textarea"
+      placeholder="Viết bình luận của bạn..."
+    ></textarea>
+    <button className="comment-submit">Gửi bình luận</button>
+  </div>
       </div>
 
       <div className="content">
