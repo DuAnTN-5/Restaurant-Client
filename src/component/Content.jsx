@@ -47,7 +47,7 @@ function Content() {
     <div className="container-vphu mx-auto py-12">
       {/* Phần thực đơn Food Menu */}
       <div className="text-center text-white">
-        <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+        <h4 className="text-white uppercase tracking-wider text-gray-500 mb-2">
           Food Menu
         </h4>
         <h1 className="text-4xl font-bold mb-8">Our Specials Menu</h1>
@@ -89,9 +89,9 @@ function Content() {
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ {item.price}</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">{item.title}</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -116,9 +116,9 @@ function Content() {
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -140,9 +140,9 @@ function Content() {
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -164,9 +164,9 @@ function Content() {
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -188,9 +188,9 @@ function Content() {
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -212,9 +212,9 @@ function Content() {
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -236,9 +236,9 @@ function Content() {
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -448,7 +448,7 @@ function Content() {
               alt="Blog post 1"
               className="w-full h-48 object-cover"
             />
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <div className="text-sm text-gray-500 mb-2">
                 BY VALIDTHEME • BURGER, FOOD
               </div>
@@ -473,7 +473,7 @@ function Content() {
               alt="Blog post 2"
               className="w-full h-48 object-cover"
             />
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <div className="text-sm text-gray-500 mb-2">
                 BY VALIDTHEME • BURGER, FOOD
               </div>
