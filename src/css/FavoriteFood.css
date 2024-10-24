@@ -4,7 +4,44 @@
     padding: 120px 0;
     margin: 0 20px;
   }
-  
+  .category-subtitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e7272d;
+    margin-bottom: 20px;
+    position: relative;
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  .category-subtitle::before {
+    background-image: url('../assets/arrow-red.png');
+    position: absolute;
+    top: 60%;
+    left: 93%;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: left center;
+    margin-top: -13px;
+}
+.category-subtitle::after {
+    background-image: url('../assets/arrow-red.png');
+    position: absolute;
+    top: 60%;
+    right: 60%;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: right center;
+    margin-top: -13px; 
+    transform: rotate(180deg);
+}
+
   .category-title {
     font-size: 36px;
     font-weight: bold;
@@ -90,7 +127,7 @@
     color: #ffffff;
   }
   
-  .food-description {
+  .favorite-food-description {
     font-size: 14px;
     color: #cccccc;
     padding: 15px 0;
@@ -156,6 +193,9 @@
     }
     .order-link {
       justify-content: left;
+    }
+    .category-subtitle::before, ::after {
+      display: none;
     }
   }
 
