@@ -6,6 +6,7 @@
 .cart {
   width: 1200px;
   margin: 0 auto;
+  margin-bottom: 50px;
 }
 
 .cart-header {
@@ -43,7 +44,7 @@
 
 .cart-page-cart {
   font-size: 20px;
-  margin-left: 20px;
+  margin-left: 60px;
 }
 
 .cart-container {
@@ -51,7 +52,8 @@
 }
 
 .cart-items {
-  width: 65%;
+  width: 66%;
+  margin-top: 30px;
   /* display: flex; */
 }
 
@@ -96,7 +98,7 @@
 
 /*  */
 .cart-contents {
-  background-color: #e2e2e2;
+  background-color: #e4e4e4;
   border-radius: 10px;
 }
 
@@ -164,13 +166,15 @@
 }
 
 .cart-summary {
-  width: 30%;
-  border: 1px solid gray;
+  width: 32%;
+  border: 1px solid rgb(212, 211, 211);
   margin-top:50px;
   margin-left: 30px;
   padding: 20px; /* Thêm khoảng cách bên trong để không dính sát viền */
   border-radius: 10px; /* Bo góc phần tóm tắt */
   height: fit-content; /* Để chiều cao tự động điều chỉnh theo nội dung */
+  background-color: #e4e4e4;
+
 }
 .total-title{
   text-transform: uppercase;
@@ -192,33 +196,45 @@
  float: left;
 }
 .cart-sub-total li {
-  padding: 5%;
+  padding: 20px 0;
 }
+
+
 .coupon{
   margin-top: 10px;
+  margin-bottom: 10px;
   padding: 5px;
   border-radius: 10px;
   width: 100%;
   border: 1px solid gray;
 }
-.cart-sub-total li:nth-child(3) {
-  padding-top: 30px;
+.discount-code{
+  width: 100%;
+  margin-top:13px ;
+  border-radius: 10px;
+  /* margin-left: 10px; */
+  height: 30px;
 }
-.cart-sub-total li:nth-child(2) {
-  padding-bottom: 10px;
-  position: relative; /* Để sử dụng position cho viền */
+.cart-sub-total li:last-child {
+  padding: 0;
 }
 
-.custom-border {
-  width: 80%; /* Độ dài của border bạn muốn */
-  border-bottom: 1px solid gray; /* Kiểu viền */
-  margin: 0 auto; /* Căn giữa viền */
-  position: absolute;
-  bottom: -12px; /* Đặt viền ở cuối phần tử */
-  top: 38px;
-  left: 10%; /* Điều chỉnh khoảng cách từ trái */
-  padding-bottom: 5px;
+
+
+.custom-borders {
+  width: 80%; /* Độ dài của đường gạch ngang */
+  margin: 10px auto; /* Căn giữa bằng cách thêm 'auto' cho hai bên */
+  border-bottom: 1px solid gray; /* Tạo đường gạch ngang */
+  padding-top: 20px;
 }
+.custom-border {
+  width: 80%; /* Độ dài của đường gạch ngang */
+  margin: 10px auto; /* Căn giữa bằng cách thêm 'auto' cho hai bên */
+  border-bottom: 1px solid gray; /* Tạo đường gạch ngang */
+  padding-top: 10px;
+}
+
+
 .total{
   color: red;
   font-weight: bold;
@@ -238,6 +254,10 @@
 }
 .radio{
   margin-right: 10px;
+}
+.cart-icon{
+  font-size: 18px;
+  padding-right: 10px;
 }
 
 
