@@ -1,4 +1,5 @@
 import "../css/AboutUs.css";
+import "../css/root.css";
 import myChef from '../assets/mychef.png';
 import signature from '../assets/signeture-ceo.png';
 
@@ -7,11 +8,11 @@ const AboutUs = () => {
     <div className="container-vphu">
       <div className="about-us">
         <div className="about-content">
-          <h3 className="about-title">GIỚI THIỆU</h3>
-          <h1 className="main-heading">
-            Hãy đến để thưởng thức những món ăn tươi ngon của chúng tôi mà bạn sẽ không thể nào quên.
+          <h3 className="about-title subtitle-vphu">GIỚI THIỆU</h3>
+          <h1 className="main-heading title-vphu">
+          Thưởng thức ẩm thực tuyệt hảo tại Hight Five.
           </h1>
-          <p className="description-about">
+          <p className="description-about text-vphu">
           Nhà hàng mang đến không gian hoài niệm năm 1960, âm nhạc du dương cùng những món ăn tinh tế và cocktail sáng tạo,
            hứa hẹn mang lại trải nghiệm ẩm thực độc đáo, đầy cảm xúc và khó quên cho thực khách.
           </p>  

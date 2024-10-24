@@ -70,8 +70,9 @@ const FoodCategory = () => {
   }, []);
 
   return (
-    <div className="food-category container-vphu">
-      <h2 className="category-title">Top Thực Phẩm Nổi Bật</h2>
+    <div className="food-category container-vphu text-vphu">
+      <h4 className="category-subtitle subtitle-vphu">MÓN ĂN</h4>
+      <h2 className="category-title title-vphu">Top Thực Phẩm Nổi Bật</h2>
       <div className="food-items">
         {foodItems.map((item) => (
           <div className="food-card" key={item.id}>
@@ -89,7 +90,7 @@ const FoodCategory = () => {
             </div>
             <div className="food-info">
               <h3 className="food-name">{item.name}</h3>
-              <p className="food-description">{item.description}</p>
+              <p className="favorite-food-description">{item.description}</p>
               <div className="btn-oder">
                 <a href={item.orderLink} className="order-link">
                   <p className="order-now">Đặt Ngay</p>

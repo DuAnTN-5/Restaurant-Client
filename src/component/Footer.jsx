@@ -5,9 +5,9 @@ export default function Footer() {
     <div className="footer">
       <div className="header-footer">
         <div className="header-footer-img"></div>
-        <div className="footer-container">
+        <div className="footer-container text-vphu">
           <div className="about-us-footer">
-            <h4 className='title-footer'>Về Chúng Tôi</h4>
+            <h4 className='title-footer subtitle-vphu'>Về Chúng Tôi</h4>
             <p className='passage-footer'>
             Luôn vươn tới sự hoàn hảo, vì trải nghiệm của bạn là sứ mệnh của chúng tôi !
             </p>
@@ -28,7 +28,7 @@ export default function Footer() {
           </div>
 
           <div className="explore-footer">
-            <h4 className='title-footer'>Khám Phá</h4>
+            <h4 className='title-footer subtitle-vphu'>Khám Phá</h4>
             <div className="text-explore-footer">
               Về Chúng Tôi
             </div>
@@ -47,7 +47,7 @@ export default function Footer() {
           </div>
 
           <div className="contact-info-footer">
-            <h4 className='title-footer'>Liên Hệ</h4>
+            <h4 className='title-footer subtitle-vphu'>Liên Hệ</h4>
             <div className="contact-info-footer-item">
               <div className="icon-contact-info-footer-item icon-location-footer">
                 <i className="fa-solid fa-location-dot"></i>
@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
 
           <div className="newsletter-footer">
-            <h4 className='title-footer'>Bản Tin</h4>
+            <h4 className='title-footer subtitle-vphu'>Bản Tin</h4>
             <p className="passage-footer">
               Tham gia danh sách người đăng ký của chúng tôi để nhận tin tức mới nhất và ưu đãi đặc biệt.
             </p>

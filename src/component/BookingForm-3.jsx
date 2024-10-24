@@ -50,10 +50,10 @@ function BookingForm3() {
   };
 
   return (
-    <div className="bgr-booking3">
+    <div className="bgr-booking3 text-vphu">
       <div className="booking-container container-vphu">
         <div className="hours-section">
-          <h2 className="hours-title">Giờ Mở Cửa</h2>
+          <h2 className="hours-title title-vphu">Giờ Mở Cửa</h2>
           <ul className="hours-list">
           <li className="hours-item">
               <span className="day">Thứ 2</span>
