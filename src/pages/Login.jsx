@@ -44,7 +44,7 @@ function Login() {
                 <div className="container-login">
                     <div className="welcome-section">
                         <h2 className="welcome-title">Welcome to <span className="highlight">HIGHTFIVE Restaurant+</span></h2>
-                        <img src={logohi5} alt="Logo" className="logo" />
+                       <Link to="/"> <img src={logohi5} alt="Logo" className="logo" /></Link>
                         <p className="description">
                             It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                         </p>

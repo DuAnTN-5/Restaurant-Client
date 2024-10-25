@@ -1,8 +1,10 @@
+@import url('../css/root.css');
 .our-partner {
     background-image: url("../assets/bgr-our-partner.png");
     position: relative;
     text-align: center;
-    padding: 120px 0;
+    padding: 50px 0;
+    background-color: #262525;
 }
 
 .our-partner-container {
@@ -23,10 +25,41 @@
 }
 
 .our-partner-title {
+    position: relative;
+    width: 350px;
     text-transform: uppercase;
     font-size: 20px;
     color: #826a45;
     font-weight: 600;
+    margin: 0 auto;
+    line-height: 1.2;
+}
+.our-partner-title::before {
+    background-image: url('../assets/arrow-deal.png');
+    position: absolute;
+    top: 50%;
+    left: 105%;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: left center;
+    margin-top: -13px;
+}
+.our-partner-title::after {
+    background-image: url('../assets/arrow-deal.png');
+    position: absolute;
+    top: 50%;
+    right: 35%;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: right center;
+    margin-top: -13px; 
+    transform: rotate(180deg);
 }
 
 .slideshow-container {

@@ -1,5 +1,6 @@
 import { useEffect,  useState } from "react";
 import { CiStar } from "react-icons/ci";
+import '../css/Content.css';
 // import { FaFacebook, FaYoutube } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import CSS của AOS
@@ -43,25 +44,25 @@ function Content() {
 
   // ******************************************************************************************
   return (
-    <div className="container mx-auto py-12">
+    <div className="container-vphu mx-auto py-12">
       {/* Phần thực đơn Food Menu */}
-      <div className="text-center">
-        <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+      <div className="text-center text-white">
+        <h4 className="text-white uppercase tracking-wider text-gray-500 mb-2">
           Food Menu
         </h4>
         <h1 className="text-4xl font-bold mb-8">Our Specials Menu</h1>
         <div className="inline-block border-[1px] border-gray-300 rounded-lg overflow-hidden">
-          <div className="flex">
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200">
+          <div className="flex menu-our-special">
+            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Món ăn chính
             </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200">
+            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Món ăn phụ
             </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200">
+            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Món ăn nhẹ
             </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200">
+            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Thức uống
             </button>
           </div>
@@ -82,15 +83,15 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ {item.price}</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">{item.title}</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -109,15 +110,15 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -133,15 +134,15 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -157,15 +158,15 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -181,15 +182,15 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -205,15 +206,15 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -229,15 +230,15 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -297,145 +298,148 @@ function Content() {
       </div> */}
 
       {/* Photo of 5 chef */}
-      {/* <div className="py-10 bg-[#EBE9E6]">
-        <div className="flex items-center justify-center space-x-4">
-          <img
-            className="w-[100px] h-auto"
-            src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/Subtittle-shape-1.png"
-            alt=""
-          />
-          <h1 className="text-[20px] text-[#826a45] font-semibold text-primary-foreground dark:text-primary">
-            MASTER CHEFS
-          </h1>
-          <img
-            className="w-[100px] h-auto"
-            src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/18.png"
-            alt=""
-          />
-        </div>
+      <div className="py-10 bg-neutral-800 text-white bg-[#EBE9E6]">
+  <div className="flex items-center justify-center space-x-4">
+    <img
+      className="w-[100px] h-auto"
+      src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/Subtittle-shape-1.png"
+      alt=""
+    />
+    <h1 className="text-[20px] text-[#826a45] font-semibold text-primary-foreground dark:text-primary">
+      MASTER CHEFS
+    </h1>
+    <img
+      className="w-[100px] h-auto"
+      src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/18.png"
+      alt=""
+    />
+  </div>
 
-        <h2 className="text-center text-5xl font-bold mb-6 text-primary-foreground dark:text-primary">
-          Meet Our Special Chefs
-        </h2>
-        <div className="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-8">
-          <div className="text-center group relative">
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/1-1.jpg"
-                alt="Mendia Juxef"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100  transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-             
-                <FaFacebook className="text-white" />
-                <FaYoutube className="text-white" />
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Mendia Juxef
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              BURGER KING
-            </p>
-          </div>
-          <div className="text-center group relative">
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/3-2.jpg"
-                alt="Mendia Juxef"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                <a href="#" className="text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-white">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Mendia Juxef
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              BURGER KING
-            </p>
-          </div>
-          <div className="text-center group relative">
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/2-2.jpg"
-                alt="Petro William"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                <a href="#" className="text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-white">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Petro William
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              MAIN CHEF
-            </p>
-          </div>
-          <div className="text-center group relative">
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/3-2.jpg"
-                alt="Petro William"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                <a href="#" className="text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-white">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Petro William
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              MAIN CHEF
-            </p>
-          </div>
-          <div className="text-center group relative">
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/1-1.jpg"
-                alt="Petro William"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                <a href="#" className="text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-white">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Petro William
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              MAIN CHEF
-            </p>
-          </div>
+  <h2 className="text-center text-5xl font-bold mb-6 text-primary-foreground dark:text-primary">
+    Meet Our Special Chefs
+  </h2>
+  <div className="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-8 flex-wrap">
+    <div className="text-center group relative mb-5"> {/* Thêm mb-5 ở đây */}
+      <div className="relative">
+        <img
+          className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
+          src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/1-1.jpg"
+          alt="Mendia Juxef"
+        />
+        <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
+          {/* Các icon mạng xã hội */}
         </div>
-      </div> */}
+      </div>
+      <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
+        Mendia Juxef
+      </h3>
+      <p className="text-muted-foreground dark:text-muted-foreground">
+        BURGER KING
+      </p>
+    </div>
+
+    <div className="text-center group relative mb-5"> {/* Thêm mb-5 ở đây */}
+      <div className="relative">
+        <img
+          className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
+          src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/3-2.jpg"
+          alt="Mendia Juxef"
+        />
+        <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
+          <a href="#" className="text-white">
+            <i className="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" className="text-white">
+            <i className="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
+        Mendia Juxef
+      </h3>
+      <p className="text-muted-foreground dark:text-muted-foreground">
+        BURGER KING
+      </p>
+    </div>
+
+    <div className="text-center group relative mb-5"> {/* Thêm mb-5 ở đây */}
+      <div className="relative">
+        <img
+          className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
+          src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/2-2.jpg"
+          alt="Petro William"
+        />
+        <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
+          <a href="#" className="text-white">
+            <i className="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" className="text-white">
+            <i className="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
+        Petro William
+      </h3>
+      <p className="text-muted-foreground dark:text-muted-foreground">
+        MAIN CHEF
+      </p>
+    </div>
+
+    <div className="text-center group relative mb-5"> {/* Thêm mb-5 ở đây */}
+      <div className="relative">
+        <img
+          className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
+          src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/3-2.jpg"
+          alt="Petro William"
+        />
+        <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
+          <a href="#" className="text-white">
+            <i className="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" className="text-white">
+            <i className="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
+        Petro William
+      </h3>
+      <p className="text-muted-foreground dark:text-muted-foreground">
+        MAIN CHEF
+      </p>
+    </div>
+
+    <div className="text-center group relative mb-5"> {/* Thêm mb-5 ở đây */}
+      <div className="relative">
+        <img
+          className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
+          src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/1-1.jpg"
+          alt="Petro William"
+        />
+        <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
+          <a href="#" className="text-white">
+            <i className="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" className="text-white">
+            <i className="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
+        Petro William
+      </h3>
+      <p className="text-muted-foreground dark:text-muted-foreground">
+        MAIN CHEF
+      </p>
+    </div>
+  </div>
+</div>
+
 
       {/* 2 post tin tức */}
       <div className="text-center py-12">
-        <h2 className="text-4xl font-semibold mb-8">Our Latest News & Blog</h2>
+        <h2 className="text-4xl font-semibold text-white mb-8">Our Latest News & Blog</h2>
         <div className="flex justify-center gap-8">
           {/* Post 1 */}
           <div className="max-w-md shadow-lg overflow-hidden">
@@ -444,7 +448,7 @@ function Content() {
               alt="Blog post 1"
               className="w-full h-48 object-cover"
             />
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <div className="text-sm text-gray-500 mb-2">
                 BY VALIDTHEME • BURGER, FOOD
               </div>
@@ -469,7 +473,7 @@ function Content() {
               alt="Blog post 2"
               className="w-full h-48 object-cover"
             />
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <div className="text-sm text-gray-500 mb-2">
                 BY VALIDTHEME • BURGER, FOOD
               </div>

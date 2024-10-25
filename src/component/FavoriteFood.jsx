@@ -2,7 +2,6 @@ import "../css/FavoriteFood.css";
 import { useEffect, useState } from "react";
 import { api } from "../api";
 import imgFavoriteFood from "../assets/favorite-food.jpg";
-import user from "../assets/user.png";
 
 const FoodCategory = () => {
   // Khai báo state để lưu danh sách món ăn
@@ -12,24 +11,24 @@ const FoodCategory = () => {
   const sampleFoodItems = [
     {
       id: 1,
-      name: "Pizza Slice",
-      description: "Cheese, Ham & Pineapple",
+      name: "Pizza",
+      description: "Phô mai, giăm bông & dứa",
       rating: 5.0,
       image: imgFavoriteFood,
       orderLink: "#",
     },
     {
       id: 2,
-      name: "Cheese Burger",
-      description: "Juicy beef patty with cheese and fresh veggies",
+      name: "HamBurger",
+      description: "Thịt bò, phô mai & rau củ",
       rating: 4.8,
       image: imgFavoriteFood,
       orderLink: "#",
     },
     {
       id: 3,
-      name: "Chicken Paradise",
-      description: "Grilled chicken with special sauce",
+      name: "Gà Nướng",
+      description: "Gà & sốt đặc biệt",
       rating: 4.5,
       image: imgFavoriteFood,
       orderLink: "#",
@@ -37,7 +36,7 @@ const FoodCategory = () => {
     {
       id: 4,
       name: "Shawarma",
-      description: "Delicious lamb with garlic sauce",
+      description: "Thịt cừu & sốt bơ tỏi",
       rating: 5.0,
       image: imgFavoriteFood,
       orderLink: "#",
@@ -71,8 +70,9 @@ const FoodCategory = () => {
   }, []);
 
   return (
-    <div className="food-category container-vphu">
-      <h2 className="category-title">The Best Foods</h2>
+    <div className="food-category container-vphu text-vphu">
+      <h4 className="category-subtitle subtitle-vphu">MÓN ĂN</h4>
+      <h2 className="category-title title-vphu">Top Thực Phẩm Nổi Bật</h2>
       <div className="food-items">
         {foodItems.map((item) => (
           <div className="food-card" key={item.id}>
@@ -80,21 +80,25 @@ const FoodCategory = () => {
             <div className="rating-section">
               <span className="rating">
                 <i className="fa-solid fa-star icon-star"> </i>
+                <p className="number-stars">
                 {item.rating}
+                </p>
               </span>
               <div className="reviewers">
-                <img src={user} alt="reviewer" />
-                <img src={user} alt="reviewer" />
-                <img src={user} alt="reviewer" />
+              <i className="fa-regular fa-heart"></i>
               </div>
             </div>
             <div className="food-info">
               <h3 className="food-name">{item.name}</h3>
-              <p className="food-description">{item.description}</p>
-              <a href={item.orderLink} className="order-link">
-                <p className="order-now">ORDER NOW</p>
-                <i className="fa-solid fa-arrow-right fa-rotate-by icon-arrow"></i>
-              </a>
+              <p className="favorite-food-description">{item.description}</p>
+              <div className="btn-oder">
+                <a href={item.orderLink} className="order-link">
+                  <p className="order-now">Đặt Ngay</p>
+                  <div className="icon-arrow">
+                    <i className="fa-solid fa-arrow-right fa-rotate-by"></i>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         ))}

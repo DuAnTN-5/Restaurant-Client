@@ -1,4 +1,5 @@
 import "../css/AboutUs.css";
+import "../css/root.css";
 import myChef from '../assets/mychef.png';
 import signature from '../assets/signeture-ceo.png';
 
@@ -7,20 +8,19 @@ const AboutUs = () => {
     <div className="container-vphu">
       <div className="about-us">
         <div className="about-content">
-          <h3 className="about-title">ABOUT US</h3>
-          <h1 className="main-heading">
-            Come for our fresh, delicious food you won’t forget.
+          <h3 className="about-title subtitle-vphu">GIỚI THIỆU</h3>
+          <h1 className="main-heading title-vphu">
+          Thưởng thức ẩm thực tuyệt hảo tại Hight Five.
           </h1>
-          <p className="description">
-            A relaxing and pleasant atmosphere, good jazz, dinner, and cocktails. 
-            The Patio Time Bar opens in the center of Florence. The only bar inspired by the 1960s, 
-            it will give you an experience that you’ll have a hard time forgetting.
-          </p>
+          <p className="description-about text-vphu">
+          Nhà hàng mang đến không gian hoài niệm năm 1960, âm nhạc du dương cùng những món ăn tinh tế và cocktail sáng tạo,
+           hứa hẹn mang lại trải nghiệm ẩm thực độc đáo, đầy cảm xúc và khó quên cho thực khách.
+          </p>  
           <div className="ceo">
-            <button className="discover-more-btn">Discover More</button>
+            <button className="discover-more-btn">Xem Thêm</button>
             <div className="ceo-signature">
               <img src={signature} alt="CEO Signature" />
-              <p className="ceo-signature-text">CEO, of Restan Restaurant</p>
+              <p className="ceo-signature-text">CEO, HightFive Restaurant</p>
             </div>
           </div>
         </div>
