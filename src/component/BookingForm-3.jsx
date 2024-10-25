@@ -14,7 +14,7 @@ function BookingForm3() {
 
     // Kiểm tra dữ liệu
     if (!phone || !time) {
-      setErrorMessage("Phone and time are required.");
+      setErrorMessage("Số điện thoại và giờ là bắt buộc.");
       return;
     }
 
@@ -31,7 +31,7 @@ function BookingForm3() {
       
       // Kiểm tra phản hồi từ API
       if (response.status === 201) {
-        console.log("Booking successful:", response.data);
+        console.log("Đặt bàn thành công:", response.data);
         // Reset form
         setPhone("");
         setPerson("");
@@ -42,9 +42,9 @@ function BookingForm3() {
     } catch (error) {
       // Xử lý lỗi từ API
       if (error.response) {
-        setErrorMessage(error.response.data.message || "An error occurred. Please try again.");
+        setErrorMessage(error.response.data.message || "Có lỗi xảy ra. Vui lòng thử lại.");
       } else {
-        setErrorMessage("An error occurred. Please try again.");
+        setErrorMessage("Có lỗi xảy ra. Vui lòng thử lại.");
       }
     }
   };
@@ -53,36 +53,36 @@ function BookingForm3() {
     <div className="bgr-booking3">
       <div className="booking-container container-vphu">
         <div className="hours-section">
-          <h2 className="hours-title">Opening Hours</h2>
+          <h2 className="hours-title">Giờ Mở Cửa</h2>
           <ul className="hours-list">
-          <li className="hours-item">
-              <span className="day">Saturday:</span>
-              <span className="time">6:00 am - 12:00 pm</span>
+            <li className="hours-item">
+              <span className="day">Thứ Bảy:</span>
+              <span className="time">6:00 sáng - 12:00 trưa</span>
             </li>
             <li className="hours-item">
-              <span className="day">Sunday:</span>
-              <span className="time">8:30 am - 11:00 pm</span>
+              <span className="day">Chủ Nhật:</span>
+              <span className="time">8:30 sáng - 11:00 tối</span>
             </li>
             <li className="hours-item">
-              <span className="day">Monday:</span>
-              <span className="time">9:00 am - 10:30 pm</span>
+              <span className="day">Thứ Hai:</span>
+              <span className="time">9:00 sáng - 10:30 tối</span>
             </li>
             <li className="hours-item">
-              <span className="day">Tuesday:</span>
-              <span className="time">8:00 am - 12:00 pm</span>
+              <span className="day">Thứ Ba:</span>
+              <span className="time">8:00 sáng - 12:00 trưa</span>
             </li>
             <li className="hours-item">
-              <span className="day">Wednesday:</span>
-              <span className="time">9:45 am - 10:00 pm</span>
+              <span className="day">Thứ Tư:</span>
+              <span className="time">9:45 sáng - 10:00 tối</span>
             </li>
             <li className="hours-item">
-              <span className="day">Thursday:</span>
-              <span className="time">8:15 am - 12:00 pm</span>
+              <span className="day">Thứ Năm:</span>
+              <span className="time">8:15 sáng - 12:00 trưa</span>
             </li>
             <li className="hours-item-closed">
-              <span className="day">Friday:</span>
+              <span className="day">Thứ Sáu:</span>
               <div className="closed-day">
-                <span className="time">Closed</span>
+                <span className="time">Đóng cửa</span>
               </div>
             </li>
           </ul>
@@ -97,7 +97,7 @@ function BookingForm3() {
               <form onSubmit={handleSubmit} className="booking-form">
                 <div className="form-group">
                   <label htmlFor="phone" className="label-booking">
-                    Phone
+                    Số Điện Thoại
                   </label>
                   <input
                     type="text"
@@ -111,28 +111,28 @@ function BookingForm3() {
 
                 <div className="form-group">
                   <label htmlFor="person" className="label-booking">
-                    Person
+                    Số Người
                   </label>
                   <select id="person" value={person}
                     onChange={(e) => setPerson(e.target.value)}
                     className="select-booking">
-                    <option value="1">1 Person</option>
-                    <option value="2">2 People</option>
-                    <option value="3">3 People</option>
-                    <option value="4">4 People</option>
-                    <option value="5">5 People</option>
-                    <option value="6">6 People</option>
-                    <option value="7">7 People</option>
-                    <option value="8">8 People</option>
-                    <option value="9">9 People</option>
-                    <option value="10">10 People</option>
-                    <option value="Larger Quantity">Larger Quantity</option>
+                    <option value="1">1 Người</option>
+                    <option value="2">2 Người</option>
+                    <option value="3">3 Người</option>
+                    <option value="4">4 Người</option>
+                    <option value="5">5 Người</option>
+                    <option value="6">6 Người</option>
+                    <option value="7">7 Người</option>
+                    <option value="8">8 Người</option>
+                    <option value="9">9 Người</option>
+                    <option value="10">10 Người</option>
+                    <option value="Larger Quantity">Số Lượng Lớn Hơn</option>
                   </select>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="date" className="label-booking">
-                    Date
+                    Ngày
                   </label>
                   <input type="date" id="date" value={date}
                     onChange={(e) => setDate(e.target.value)}
@@ -141,7 +141,7 @@ function BookingForm3() {
 
                 <div className="form-group">
                   <label htmlFor="time" className="label-booking">
-                    Time
+                    Giờ
                   </label>
                   <input
                     type="time"
@@ -153,7 +153,7 @@ function BookingForm3() {
                 </div>
 
                 <button type="submit" className="button-booking">
-                  Book A Table
+                  Đặt Bàn
                 </button>
               </form>
             </div>

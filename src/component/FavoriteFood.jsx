@@ -12,24 +12,24 @@ const FoodCategory = () => {
   const sampleFoodItems = [
     {
       id: 1,
-      name: "Pizza Slice",
-      description: "Cheese, Ham & Pineapple",
+      name: "Miếng Pizza",
+      description: "Phô mai, Thịt nguội & Dứa",
       rating: 5.0,
       image: imgFavoriteFood,
       orderLink: "#",
     },
     {
       id: 2,
-      name: "Cheese Burger",
-      description: "Juicy beef patty with cheese and fresh veggies",
+      name: "Burger Phô Mai",
+      description: "Bánh mì kẹp thịt bò tươi với phô mai và rau tươi",
       rating: 4.8,
       image: imgFavoriteFood,
       orderLink: "#",
     },
     {
       id: 3,
-      name: "Chicken Paradise",
-      description: "Grilled chicken with special sauce",
+      name: "Thiên Đường Gà",
+      description: "Gà nướng với sốt đặc biệt",
       rating: 4.5,
       image: imgFavoriteFood,
       orderLink: "#",
@@ -37,7 +37,7 @@ const FoodCategory = () => {
     {
       id: 4,
       name: "Shawarma",
-      description: "Delicious lamb with garlic sauce",
+      description: "Thịt cừu ngon với sốt tỏi",
       rating: 5.0,
       image: imgFavoriteFood,
       orderLink: "#",
@@ -51,7 +51,7 @@ const FoodCategory = () => {
       .then((res) => {
         console.log(res);
         if (res && res.data && res.data.products) {
-          const items = res.data.products.map(item => ({
+          const items = res.data.products.map((item) => ({
             id: item.id,
             name: item.name,
             description: item.description,
@@ -72,7 +72,7 @@ const FoodCategory = () => {
 
   return (
     <div className="food-category container-vphu">
-      <h2 className="category-title">The Best Foods</h2>
+      <h2 className="category-title">Món Ăn Ngon Nhất</h2>
       <div className="food-items">
         {foodItems.map((item) => (
           <div className="food-card" key={item.id}>
@@ -83,16 +83,16 @@ const FoodCategory = () => {
                 {item.rating}
               </span>
               <div className="reviewers">
-                <img src={user} alt="reviewer" />
-                <img src={user} alt="reviewer" />
-                <img src={user} alt="reviewer" />
+                <img src={user} alt="người đánh giá" />
+                <img src={user} alt="người đánh giá" />
+                <img src={user} alt="người đánh giá" />
               </div>
             </div>
             <div className="food-info">
               <h3 className="food-name">{item.name}</h3>
               <p className="food-description">{item.description}</p>
               <a href={item.orderLink} className="order-link">
-                <p className="order-now">ORDER NOW</p>
+                <p className="order-now">ĐẶT NGAY</p>
                 <i className="fa-solid fa-arrow-right fa-rotate-by icon-arrow"></i>
               </a>
             </div>

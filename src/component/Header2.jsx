@@ -39,7 +39,7 @@ function Header2() {
           <div className="header-contact">
             <div className="header-contact-phone">
               <i className="fas fa-phone icon-contact"></i>
-              <span>Phone: +4733378901</span>
+              <span>Điện thoại: +4733378901</span>
             </div>
             <div className="header-contact-email">
               <i className="fas fa-envelope icon-contact"></i>
@@ -86,17 +86,17 @@ function Header2() {
               <ul className="navbar-list">
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/">
-                    Home
+                    Trang chủ
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/pages">
-                    About
+                    Giới thiệu
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/menu">
-                    Menu
+                    Thực đơn
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -106,12 +106,12 @@ function Header2() {
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/profile-user">
-                    Account
+                    Tài khoản
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/contact">
-                    Contact
+                    Liên hệ
                   </Link>
                 </li>
               </ul>
@@ -147,17 +147,17 @@ function Header2() {
                 </div>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/">
-                    Home
+                    Trang chủ
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/pages">
-                    Pages
+                    Trang
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/menu">
-                    Menu
+                    Thực đơn
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -167,12 +167,12 @@ function Header2() {
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/shop">
-                    Shop
+                    Cửa hàng
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/contact">
-                    Contact
+                    Liên hệ
                   </Link>
                 </li>
               </ul>
@@ -185,7 +185,7 @@ function Header2() {
               </Link>
               <Link to="/favourite-page">
                 <div className="cart-interaction-item">
-                  <i className=" fa-regular fa-heart navbar-icon"></i>
+                  <i className="fa-regular fa-heart navbar-icon"></i>
                 </div>
               </Link>
               <Link to="/cart">

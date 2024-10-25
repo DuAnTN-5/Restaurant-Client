@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaCheck, FaTimes } from "react-icons/fa"; // Import icons from react-icons
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 const productsData = [
   {
@@ -7,28 +7,25 @@ const productsData = [
     name: "Beef Burger",
     price: "$12.00",
     stockStatus: "In stock",
-    image:
-      "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
+    image: "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
   },
   {
     id: 2,
     name: "Chicken Burger",
     price: "$10.00",
     stockStatus: "In stock",
-    image:
-      "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
+    image: "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
   },
   {
     id: 3,
     name: "Veggie Burger",
     price: "$8.00",
     stockStatus: "Out of stock",
-    image:
-      "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
+    image: "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
   },
 ];
 
-const FavouritePage = () => {
+function FavouritePage() {
   const [selectedProducts, setSelectedProducts] = useState(
     new Array(productsData.length).fill(false)
   );
@@ -202,6 +199,6 @@ const FavouritePage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default FavouritePage;

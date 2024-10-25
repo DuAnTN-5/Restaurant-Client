@@ -15,7 +15,7 @@ function Login() {
 
         try {
             // Gửi yêu cầu đăng nhập tới API
-            const response = await axios.post('API/login(Thay)', {
+            const response = await axios.post('https://your-api-url.com/login', {
                 email,
                 password
             });
@@ -33,7 +33,7 @@ function Login() {
                 setErrorMessage(error.response.data.message);
             } else {
                 // Lỗi mạng
-                setErrorMessage('An error occurred. Please try again.');
+                setErrorMessage('Có lỗi xảy ra. Vui lòng thử lại.');
             }
         }
     };
@@ -43,15 +43,15 @@ function Login() {
             <div className="container">
                 <div className="container-login">
                     <div className="welcome-section">
-                        <h2 className="welcome-title">Welcome to <span className="highlight">HIGHTFIVE Restaurant+</span></h2>
-                       <Link to="/"> <img src={logohi5} alt="Logo" className="logo" /></Link>
+                        <h2 className="welcome-title">Chào mừng đến <span className="highlight">Nhà hàng HIGHTFIVE+</span></h2>
+                        <Link to="/"><img src={logohi5} alt="Logo" className="logo" /></Link>
                         <p className="description">
-                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                            Đã tồn tại không chỉ qua năm thế kỷ, mà còn bước vào điện tử, vẫn giữ nguyên bản chất.
                         </p>
-                        <p className="copyright">Copyright Hight Five Group</p>
+                        <p className="copyright">Bản quyền thuộc về Hight Five Group</p>
                     </div>
                     <div className="form-section">
-                        <h3>Login</h3>
+                        <h3>Đăng nhập</h3>
                         {errorMessage && <p className="error">{errorMessage}</p>}
                         <form onSubmit={handleLogin}>
                             <input
@@ -63,17 +63,17 @@ function Login() {
                             />
                             <input
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Mật khẩu"
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)} 
                             />
                             <div className="forgot-password">
-                                <a href="#">Forgot password?</a>
+                                <Link to="#">Quên mật khẩu?</Link>
                             </div>
-                            <button type="submit" className="btn">Login</button>
+                            <button type="submit" className="btn">Đăng nhập</button>
                         </form>
-                        <p className="account">Do not have an account? <Link className="redirect-link" to="/signup">Create an account</Link></p>
+                        <p className="account">Chưa có tài khoản? <Link className="redirect-link" to="/signup">Tạo tài khoản</Link></p>
                         <div className="social-buttons">
                             <button className="facebook icon-social-network">
                                 <i className="fa-brands fa-facebook-f"></i>
@@ -84,7 +84,7 @@ function Login() {
                                 <p className="text-social-network">Google</p>
                             </button>
                         </div>
-                        <p className="team-info">HightFive Team © 2024</p>
+                        <p className="team-info">Nhóm HightFive © 2024</p>
                     </div>
                 </div>
             </div>

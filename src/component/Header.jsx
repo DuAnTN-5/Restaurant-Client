@@ -38,20 +38,20 @@ function Header() {
         <div className="reservation">
           <i className="fas fa-phone icon-phone"></i>
           <div className="information">
-            <span className="reservation-text">Call for Reservation</span>
+            <span className="reservation-text">Gọi để đặt chỗ</span>
             <a className="reservation-link" href="tel:+4733378901">+4733378901</a>
           </div>
         </div>
        <Link to="/">
           <div className="logo">
-            <img className="logo-image" src={logo} alt="Hi-5 Logo" />
+            <img className="logo-image" src={logo} alt="Logo Hi-5" />
           </div>
        </Link>
         <div className="location">
           <i className="fas fa-envelope icon-user"></i>
           <div className="login">
-            <Link className="location-text" to="/login">Login</Link>
-            <Link className="location-link" to="/signup">You need to create an account?</Link>
+            <Link className="location-text" to="/login">Đăng nhập</Link>
+            <Link className="location-link" to="/signup">Bạn cần tạo tài khoản?</Link>
           </div>
         </div>
       </div>
@@ -61,17 +61,17 @@ function Header() {
         </button>
 
         <div className="logo-toggle">
-          <img className="logo-image-toggle" src={logo} alt="Hi-5 Logo" />
+          <img className="logo-image-toggle" src={logo} alt="Logo Hi-5" />
         </div>
 
         <div>
           <ul className="navbar-list">
-            <li className="navbar-item"><Link className="navbar-link" to="/">Home</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/pages">Pages</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/menu">Menu</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/">Trang Chủ</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/pages">Trang</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/menu">Thực Đơn</Link></li>
             <li className="navbar-item"><Link className="navbar-link" to="/blog">Blog</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/shop">Shop</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/contact">Contact</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/shop">Cửa Hàng</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/contact">Liên Hệ</Link></li>
           </ul>
         </div>
 
@@ -83,19 +83,19 @@ function Header() {
           <ul className={`navbar-list ${isNavbarVisible ? 'active' : ''}`}>
             <div className='header-navbar-list'>
               <div className="logo-header-navbar-list">
-                <img className="logo-image-header-navbar-list" src={logo} alt="Hi-5 Logo" />
+                <img className="logo-image-header-navbar-list" src={logo} alt="Logo Hi-5" />
               </div>
 
               <button type="button" className="button-exit" onClick={handleExitClick}>
                 <i id="button-exit" className="fa-regular fa-circle-xmark"></i>
               </button>
             </div>
-            <li className="navbar-item"><Link className="navbar-link" to="/">Home</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/pages">Pages</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/menu">Menu</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/">Trang Chủ</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/pages">Trang</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/menu">Thực Đơn</Link></li>
             <li className="navbar-item"><Link className="navbar-link" to="/blog">Blog</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/shop">Shop</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/contact">Contact</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/shop">Cửa Hàng</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/contact">Liên Hệ</Link></li>
           </ul>
         </div>
 

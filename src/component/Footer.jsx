@@ -7,9 +7,9 @@ export default function Footer() {
         <div className="header-footer-img"></div>
         <div className="footer-container">
           <div className="about-us-footer">
-            <h4 className='title-footer'>About Us</h4>
+            <h4 className='title-footer'>Về Chúng Tôi</h4>
             <p className='passage-footer'>
-              Continued at zealously necessary is Surrounded sir motionless she end literature. Gay direction neglected.
+              Đam mê nhiệt huyết là cần thiết. Bao quanh là sự yên tĩnh, cô ấy kết thúc bằng văn học. Hướng dẫn vui vẻ bị bỏ qua.
             </p>
             <div className="social-media-icons-about-us-footer">
               <div className='icon-ab-footer icon-fb-footer'>
@@ -28,32 +28,32 @@ export default function Footer() {
           </div>
 
           <div className="explore-footer">
-            <h4 className='title-footer'>Explore</h4>
+            <h4 className='title-footer'>Khám Phá</h4>
             <div className="text-explore-footer">
-              About
+              Về Chúng Tôi
             </div>
             <div className="text-explore-footer">
-              Contact
+              Liên Hệ
             </div>
             <div className="text-explore-footer">
-              Career
+              Nghề Nghiệp
             </div>
             <div className="text-explore-footer">
-              Company Profile
+              Hồ Sơ Công Ty
             </div>
             <div className="text-explore-footer">
-              Help Center
+              Trung Tâm Hỗ Trợ
             </div>
           </div>
 
           <div className="contact-info-footer">
-            <h4 className='title-footer'>Contact Info</h4>
+            <h4 className='title-footer'>Thông Tin Liên Hệ</h4>
             <div className="contact-info-footer-item">
               <div className="icon-contact-info-footer-item icon-location-footer">
                 <i className="fa-solid fa-location-dot"></i>
               </div>
               <div className="text-footer">
-                175 10h Street, Office 375 Berlin, De 21562
+                175 Phố 10h, Văn Phòng 375, Berlin, De 21562
               </div>
             </div>
             <div className="contact-info-footer-item">
@@ -75,12 +75,12 @@ export default function Footer() {
           </div>
 
           <div className="newsletter-footer">
-            <h4 className='title-footer'>Newsletter</h4>
+            <h4 className='title-footer'>Bản Tin</h4>
             <p className="passage-footer">
-              Join our subscribers list to get the latest news and special offers.
+              Tham gia danh sách đăng ký của chúng tôi để nhận tin tức mới nhất và các ưu đãi đặc biệt.
             </p>
             <div className="form-newsletter-footer">
-              <input type="email" placeholder='Your Email' className='form-email-footer' name='email' />
+              <input type="email" placeholder='Email của bạn' className='form-email-footer' name='email' />
               <button type='submit' className='button-newsletter-footer'>
                 <i className="fa-solid fa-arrow-right icon-arrow-footer"></i>
               </button>
@@ -95,7 +95,7 @@ export default function Footer() {
             <img src={logoHi5} alt="Logo HightFive Group" />
           </div>
           <div className="footer-copyright">
-            <p className='text-footer-copyright'>Copyright © 2022 Hight Five Group. All Rights Reserved.</p>
+            <p className='text-footer-copyright'>Bản quyền © 2022 Hight Five Group. Đã đăng ký bản quyền.</p>
           </div>
         </div>
         <div className="end-footer-bgr-animation"></div>

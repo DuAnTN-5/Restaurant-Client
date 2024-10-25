@@ -16,13 +16,13 @@ function SignUp() {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            setErrorMessage('Passwords do not match.'); // Kiểm tra mật khẩu
+            setErrorMessage('Mật khẩu không khớp.'); // Kiểm tra mật khẩu
             return;
         }
 
         try {
             // Gửi yêu cầu đăng ký tới API
-            const response = await axios.post('API/signup', {
+            const response = await axios.post('https://your-api-url.com/signup', {
                 name,
                 email,
                 password
@@ -37,7 +37,7 @@ function SignUp() {
             if (error.response) {
                 setErrorMessage(error.response.data.message);
             } else {
-                setErrorMessage('An error occurred. Please try again.');
+                setErrorMessage('Có lỗi xảy ra. Vui lòng thử lại.');
             }
         }
     };
@@ -46,20 +46,20 @@ function SignUp() {
         <div className="container">
             <div className="container-signup">
                 <div className="welcome-section">
-                    <h2 className="welcome-title">Welcome to <span className="highlight">HIGHTFIVE Restaurant+</span></h2>
+                    <h2 className="welcome-title">Chào mừng đến <span className="highlight">Nhà hàng HIGHTFIVE+</span></h2>
                     <Link to="/"><img src={logohi5} alt="Logo" className="logo" /></Link>
                     <p className="description">
-                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        Đã tồn tại không chỉ qua năm thế kỷ, mà còn bước vào điện tử, vẫn giữ nguyên bản chất.
                     </p>
-                    <p className="copyright">Copyright Hight Five Group</p>
+                    <p className="copyright">Bản quyền thuộc về Hight Five Group</p>
                 </div>
                 <div className="form-section">
-                    <h3>Register</h3>
+                    <h3>Đăng ký</h3>
                     {errorMessage && <p className="error">{errorMessage}</p>}
                     <form onSubmit={handleRegister}>
                         <input
                             type="text"
-                            placeholder="Name"
+                            placeholder="Họ tên"
                             required
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -73,25 +73,25 @@ function SignUp() {
                         />
                         <input
                             type="password"
-                            placeholder="Password"
+                            placeholder="Mật khẩu"
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <input
                             type="password"
-                            placeholder="Confirm Password"
+                            placeholder="Xác nhận mật khẩu"
                             required
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                         <div className="checkbox">
                             <input type="checkbox" id="terms" required />
-                            <label htmlFor="terms">Agree to the terms and policy</label>
+                            <label htmlFor="terms">Đồng ý với các điều khoản và chính sách</label>
                         </div>
-                        <button type="submit" className="btn">Register</button>
+                        <button type="submit" className="btn">Đăng ký</button>
                     </form>
-                    <p className='account'>Already have an account? <Link className='redirect-link' to="/login">Login</Link></p>
+                    <p className='account'>Bạn đã có tài khoản? <Link className='redirect-link' to="/login">Đăng nhập</Link></p>
                     <div className="social-buttons">
                         <button className="facebook icon-social-network">
                             <i className="fa-brands fa-facebook-f"></i>
@@ -102,7 +102,7 @@ function SignUp() {
                             <p className="text-social-network">Google</p>
                         </button>
                     </div>
-                    <p className="team-info">HightFive Team © 2024</p>
+                    <p className="team-info">Nhóm HightFive © 2024</p>
                 </div>
             </div>
         </div>

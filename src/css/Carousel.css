@@ -1,0 +1,9 @@
+.mySwiper .swiper-pagination-bullet {
+    background-color: red; /* Đổi màu bullet */
+  }
+  
+  .mySwiper .swiper-button-next,
+  .mySwiper .swiper-button-prev {
+    color: white; /* Đổi màu nút điều hướng */
+  }
+  

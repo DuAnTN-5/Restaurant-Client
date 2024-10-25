@@ -7,73 +7,73 @@ function BookingForm() {
       <div className="booking-container">
         <div className="wrapper-booking">
           <div className="booking-section">
-            <h1 className="title-booking">Book a table</h1>
+            <h1 className="title-booking">Đặt bàn</h1>
             <form className="booking-form">
               <div className="form-group">
-                <label htmlFor="phone" className="label-booking">Phone</label>
+                <label htmlFor="phone" className="label-booking">Số điện thoại</label>
                 <input type="text" id="phone" className="input-booking" placeholder="+4733378901" />
               </div>
 
               <div className="form-group">
-                <label htmlFor="person" className="label-booking">Person</label>
+                <label htmlFor="person" className="label-booking">Số người</label>
                 <select id="person" className="select-booking">
-                  <option>1 Person</option>
-                  <option>2 People</option>
-                  <option>3 People</option>
-                  <option>4 People</option>
+                  <option>1 Người</option>
+                  <option>2 Người</option>
+                  <option>3 Người</option>
+                  <option>4 Người</option>
                 </select>
               </div>
 
               <div className="form-group">
-                <label htmlFor="date" className="label-booking">Date</label>
+                <label htmlFor="date" className="label-booking">Ngày</label>
                 <input type="date" id="date" className="input-booking" />
               </div>
 
               <div className="form-group">
-                <label htmlFor="time" className="label-booking">Time</label>
+                <label htmlFor="time" className="label-booking">Giờ</label>
                 <input type="time" id="time" className="input-booking" defaultValue="10:00 AM" />
               </div>
 
-              <button type="submit" className="button-booking">Book A Table</button>
+              <button type="submit" className="button-booking">Đặt Bàn</button>
             </form>
           </div>
 
           <div className="image-section">
-            <img src={imgBoking2} alt="Waiter serving food" className="image-booking2" />
+            <img src={imgBoking2} alt="Phục vụ thức ăn" className="image-booking2" />
           </div>
         </div>
 
         <div className="hours-section">
-          <h2 className="hours-title">Opening Hours</h2>
+          <h2 className="hours-title">Giờ Mở Cửa</h2>
           <ul className="hours-list">
             <li className="hours-item">
-              <span className="day">Saturday:</span>
-              <span className="time">6:00 am - 12:00 pm</span>
+              <span className="day">Thứ Bảy:</span>
+              <span className="time">6:00 sáng - 12:00 trưa</span>
             </li>
             <li className="hours-item">
-              <span className="day">Sunday:</span>
-              <span className="time">8:30 am - 11:00 pm</span>
+              <span className="day">Chủ Nhật:</span>
+              <span className="time">8:30 sáng - 11:00 tối</span>
             </li>
             <li className="hours-item">
-              <span className="day">Monday:</span>
-              <span className="time">9:00 am - 10:30 pm</span>
+              <span className="day">Thứ Hai:</span>
+              <span className="time">9:00 sáng - 10:30 tối</span>
             </li>
             <li className="hours-item">
-              <span className="day">Tuesday:</span>
-              <span className="time">8:00 am - 12:00 pm</span>
+              <span className="day">Thứ Ba:</span>
+              <span className="time">8:00 sáng - 12:00 trưa</span>
             </li>
             <li className="hours-item">
-              <span className="day">Wednesday:</span>
-              <span className="time">9:45 am - 10:00 pm</span>
+              <span className="day">Thứ Tư:</span>
+              <span className="time">9:45 sáng - 10:00 tối</span>
             </li>
             <li className="hours-item">
-              <span className="day">Thursday:</span>
-              <span className="time">8:15 am - 12:00 pm</span>
+              <span className="day">Thứ Năm:</span>
+              <span className="time">8:15 sáng - 12:00 trưa</span>
             </li>
             <li className="hours-item-closed">
-              <span className="day">Friday:</span>
+              <span className="day">Thứ Sáu:</span>
               <div className="closed-day">
-                <span className="time">Closed</span>
+                <span className="time">Đóng cửa</span>
               </div>
             </li>
           </ul>
