@@ -20,7 +20,7 @@ function App() {
     <>
       {!isAuthPage && <Header />}
       <Outlet />
-      {/* {!isAuthPage && <Footer />} */}
+      {!isAuthPage && <Footer />}
     </>
   );
 }
