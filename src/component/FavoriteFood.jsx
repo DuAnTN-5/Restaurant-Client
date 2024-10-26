@@ -1,6 +1,6 @@
 import "../css/FavoriteFood.css";
 import { useEffect, useState } from "react";
-import { api } from "../api";
+// import { api } from "../api";
 import imgFavoriteFood from "../assets/favorite-food.jpg";
 
 const FoodCategory = () => {
@@ -45,33 +45,34 @@ const FoodCategory = () => {
 
   useEffect(() => {
     // Gọi API để lấy danh sách món ăn
-    api
-      .get("/products") // Đường dẫn đến API
-      .then((res) => {
-        console.log(res);
-        if (res && res.data && res.data.products) {
-          const items = res.data.products.map(item => ({
-            id: item.id,
-            name: item.name,
-            description: item.description,
-            rating: item.rating,
-            image: item.image || imgFavoriteFood,
-            orderLink: item.orderLink || "#",
-          }));
-          setFoodItems(items); // Cập nhật danh sách món ăn từ API
-          console.log("Đã lấy được danh sách món ăn thành công");
-        }
-      })
-      .catch((error) => {
-        console.error("Có lỗi xảy ra khi lấy danh sách món ăn:", error);
-        // Sử dụng dữ liệu mẫu nếu có lỗi
-        setFoodItems(sampleFoodItems); 
-      });
+    // api
+    //   .get("/products") // Đường dẫn đến API
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res && res.data && res.data.products) {
+    //       const items = res.data.products.map(item => ({
+    //         id: item.id,
+    //         name: item.name,
+    //         description: item.description,
+    //         rating: item.rating,
+    //         image: item.image || imgFavoriteFood,
+    //         orderLink: item.orderLink || "#",
+    //       }));
+          setFoodItems(sampleFoodItems); // Cập nhật danh sách món ăn từ API
+    //     //   console.log("Đã lấy được danh sách món ăn thành công");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Có lỗi xảy ra khi lấy danh sách món ăn:", error);
+    //     // Sử dụng dữ liệu mẫu nếu có lỗi
+    //     // setFoodItems(sampleFoodItems); 
+    //   });
   }, []);
 
   return (
-    <div className="food-category container-vphu">
-      <h2 className="category-title">Top Thực Phẩm Nổi Bật</h2>
+    <div className="food-category container-vphu text-vphu">
+      <h4 className="category-subtitle subtitle-vphu">MÓN ĂN</h4>
+      <h2 className="category-title title-vphu">Top Thực Phẩm Nổi Bật</h2>
       <div className="food-items">
         {foodItems.map((item) => (
           <div className="food-card" key={item.id}>
@@ -89,7 +90,7 @@ const FoodCategory = () => {
             </div>
             <div className="food-info">
               <h3 className="food-name">{item.name}</h3>
-              <p className="food-description">{item.description}</p>
+              <p className="favorite-food-description">{item.description}</p>
               <div className="btn-oder">
                 <a href={item.orderLink} className="order-link">
                   <p className="order-now">Đặt Ngay</p>
