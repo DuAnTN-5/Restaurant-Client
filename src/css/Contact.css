@@ -1,3 +1,7 @@
+.contact-page{
+    background-color: #1b1b1b;
+    color: white;
+}
 .contact{
     width: 100%;
     max-width: 1140px;
@@ -80,7 +84,7 @@
     width: 100%;
     /* margin: 0 auto; */
     margin-top: 20px;
-    background-color: rgb(251, 251, 251);
+    background-color:black;
     padding: 20px;
     border-radius:10px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */

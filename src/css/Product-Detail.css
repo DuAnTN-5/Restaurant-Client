@@ -1,5 +1,11 @@
+@import url("../css/root.css");
+
+.product-detail-page{
+  /* background-color: black; */
+  padding: 40px 0;
+}
 .navbar-detail {
-  width: 85%;
+  width: 80%;
   margin: 40px auto;
   display: flex;
   padding: 10px 0;
@@ -110,17 +116,214 @@ h2 {
   padding: 12px;
   border: 1px solid;
   border-radius: 25px;
+  cursor: pointer;
+}
+/* mô tả món ăn */
+.food-description h3 {
+  color: black;
+}
+.food-description {
+  width: 75%;
+  margin: 40px auto;
+  /* margin-top: 20px; */
+  padding: 15px;
+  background-color: #f9f9f9; /* Màu nền nhẹ */
+  border-radius: 8px; /* Bo tròn góc */
 }
 
+.food-description p {
+  font-size: 16px;
+  color: black;
+  line-height: 1.5;
+}
+
+/*  phần bình luân */
+.comment-section {
+  width: 75%;
+  margin: 40px auto;
+  background-color: #f9f9f9; /* Màu nền nhẹ */
+  border-top: 1px solid #ededed;
+  padding: 20px;
+}
+
+.comment-section h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.media-list {
+  width: 100%;
+  height: 700px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  scrollbar-width: thin; /* Dành cho Firefox */
+  scrollbar-color: #888 #e0e0e0; /* Màu của thanh trượt và nền thanh trượt */
+}
+
+/* Tùy chỉnh thanh cuộn dành cho các trình duyệt Webkit (Chrome, Safari, Edge) */
+.media-list::-webkit-scrollbar {
+  width: 10px; /* Độ rộng của thanh cuộn */
+}
+
+/* Nền của thanh cuộn */
+.media-list::-webkit-scrollbar-track {
+  background: #e0e0e0; /* Màu nền của thanh cuộn */
+  border-radius: 5px; /* Làm bo góc */
+}
+
+/* Thanh trượt (scroll thumb) */
+.media-list::-webkit-scrollbar-thumb {
+  background-color: #888; /* Màu của thanh trượt */
+  border-radius: 10px; /* Làm bo góc */
+  border: 2px solid #e0e0e0; /* Tạo đường viền cho thanh trượt */
+}
+
+/* Thanh trượt khi hover */
+.media-list::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Thay đổi màu khi hover */
+}
+.media {
+  width: 90%;
+  box-shadow: rgba(17, 17, 26, 0.1) 5px 5px 5px;
+  /* border: 1px solid gray; */
+  display: flex;
+  margin: 2% 2%;
+}
+
+.second-media {
+  width: 85%;
+  margin-left: 7%;
+}
+
+.avatar {
+  padding: 10px;
+  margin-right: 30px;
+}
+.avatar img {
+  margin-left: 15px;
+  width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  border: 1px solid #ddd;
+  object-fit: cover; /* Giữ tỷ lệ của ảnh mà không làm vỡ */
+  object-position: center; /* Đảm bảo hình ảnh được căn giữa */
+}
+.comment-details {
+  width: 78%;
+}
+.comment-meta-list {
+  display: flex;
+  align-items: center; /* Căn các phần tử theo trục dọc nếu chiều cao không bằng nhau */
+  list-style: none;
+}
+
+.comment-meta-item {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Khoảng cách giữa các mục */
+}
+.comment-icon {
+  font-size: 16px;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    background-color: rgb(191, 191, 191);
+}
+
+.comment-meta-item p {
+  font-size: 13px;
+    background-color: rgb(233, 233, 233);
+    padding: 7px;
+}
+.comment-content {
+  font-size: 15px;
+  line-height: 1.2;
+  padding-top: 12px;
+  color: #333;
+}
+/* trả lời bình luận */
+.comment-replay {
+  color: white;
+  width: 85px;
+  padding: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: black;
+}
+
+.replay-icon {
+  margin-right: 5px; /* Khoảng cách giữa icon và chữ */
+  font-size: 16px; /* Kích thước của icon */
+}
+
+.replay-text {
+  font-size: 16px; /* Kích thước chữ */
+  font-weight: 500;
+}
+
+/* Tùy chỉnh phần nhập bình luận */
+.comment-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.comment-textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.comment-textarea:focus {
+  outline: none;
+  border-color: #030303;
+}
+
+.comment-submit {
+  align-self: center;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  border: none;
+  border-radius: 5px;
+  /* cursor: pointer; */
+  transition: background-color 0.3s ease;
+}
+
+.comment-submit:hover {
+  background-color: #e90000;
+}
+/*  */
 
 /*  */
 .tab-content {
-  margin-top: 10px;
+} 
+.other-dishes{
+  margin-left: 100px;
+  font-size: 22px;
+  padding-bottom: 10px;
+  font-weight: 700;
 }
 .vt-product {
   display: flex;
   width: 100%;
   padding: 0 35px;
+  margin-top: 15px;
 }
 .product-content {
   width: 280px;

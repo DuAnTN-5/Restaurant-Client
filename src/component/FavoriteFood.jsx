@@ -1,8 +1,9 @@
 import "../css/FavoriteFood.css";
 import { useEffect, useState } from "react";
-import { api } from "../api";
+// import { api } from "../api";
 import imgFavoriteFood from "../assets/favorite-food.jpg";
 import user from "../assets/user.png";
+import { api } from "../api";
 
 const FoodCategory = () => {
   // Khai báo state để lưu danh sách món ăn
@@ -51,7 +52,7 @@ const FoodCategory = () => {
       .then((res) => {
         console.log(res);
         if (res && res.data && res.data.products) {
-          const items = res.data.products.map((item) => ({
+          const items = res.data.products.map(item => ({
             id: item.id,
             name: item.name,
             description: item.description,

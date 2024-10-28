@@ -9,9 +9,38 @@
   color: white;
   text-align: center;
 }
+.hero-content-text {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 10%;
+}
 
-.hero-section h1 {
-  font-size: 3rem;
+.img-hero1 {
+  background-image: url('../assets/banner.jpg');
+}
+.img-hero2 {
+  background-image: url('../assets/banner2.jpg');
+  animation-delay: 5s;
+}
+.img-hero3 {
+  background-image: url('../assets/banner3.jpg');
+  animation-delay: 10s;
+}
+.img-hero4 {
+  background-image: url('../assets/banner4.jpg');
+  animation-delay: 15s;
+}
+.img-hero5 {
+  background-image: url('../assets/banner5.jpg');
+  animation-delay: 20s;
+}
+
+.hero-title {
+  font-size: 70px;
   font-weight: bold;
 }
 
