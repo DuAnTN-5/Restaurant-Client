@@ -82,12 +82,12 @@ function FavouritePage() {
   const isInCart = (product) => cart.some((item) => item.id === product.id);
 
   return (
-    <div className="container mx-auto max-w-7xl p-4">
+    <div className="container mx-auto max-w-7xl p-[70px]">
       <h1 className="text-2xl font-bold mb-6 text-center">Sản phẩm yêu thích</h1>
       <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
         <thead className="bg-black text-white">
           <tr>
-            <th className="px-2 py-2 text-left">
+            <th className="px-3 py-3 text-left">
               <input
                 type="checkbox"
                 className="transform scale-150"
@@ -99,10 +99,10 @@ function FavouritePage() {
                 }}
               />
             </th>
-            <th className="px-2 py-2">Tên sản phẩm</th>
-            <th className="px-2 py-2">Đơn giá</th>
-            <th className="px-2 py-2">Tình trạng kho</th>
-            <th className="px-2 py-2 text-center">Hành động</th>
+            <th className="px-2 py-3">Tên sản phẩm</th>
+            <th className="px-2 py-3">Đơn giá</th>
+            <th className="px-2 py-3">Tình trạng kho</th>
+            <th className="px-2 py-3 text-center">Hành động</th>
           </tr>
         </thead>
         <tbody>
