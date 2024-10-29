@@ -95,7 +95,7 @@ export default function Footer() {
             <img src={logoHi5} alt="Logo HightFive Group" />
           </div>
           <div className="footer-copyright">
-            <p className='text-footer-copyright'>Copyright © 2022 Hight Five Group. All Rights Reserved.</p>
+            <p className='text-footer-copyright text-vphu'>Copyright © 2022 Hight Five Group. All Rights Reserved.</p>
           </div>
         </div>
         <div className="end-footer-bgr-animation"></div>
