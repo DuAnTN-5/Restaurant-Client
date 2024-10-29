@@ -61,7 +61,7 @@ function MenuPage() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center space-x-4">
             <img
-              className="w-[100px] h-auto"
+              className="w-[80px] sm:w-[100px] h-auto"
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/Subtittle-shape-1.png"
               alt="Subtitle shape"
             />
@@ -69,7 +69,7 @@ function MenuPage() {
               MASTER CHEFS
             </h1>
             <img
-              className="w-[100px] h-auto"
+              className="w-[80px] sm:w-[100px] h-auto"
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/18.png"
               alt="Subtitle shape"
             />
@@ -80,7 +80,7 @@ function MenuPage() {
         </div>
 
         {/* Các danh mục món ăn với biểu tượng */}
-        <div className="flex justify-center mb-12 space-x-12">
+        <div className="grid grid-cols-1 sm::grid-cols-4  justify-items-center mb-12">
           {[
             {
               src: "https://cdn-icons-png.flaticon.com/512/557/557809.png",
@@ -112,9 +112,9 @@ function MenuPage() {
           ))}
         </div>
 
-        {/* Menu hiện ra khi hover */}
+        {/* Menu  */}
         <div className="flex justify-center">
-          <div className="bg-gray-800 text-white px-8 py-6 rounded-lg shadow-lg w-[1000px] grid grid-cols-2 gap-6">
+          <div className="bg-gray-800 text-white px-4 sm:px-8 py-6 rounded-lg shadow-lg w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
                 name: "Salmon Fry",
@@ -191,7 +191,7 @@ function MenuPage() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center space-x-4">
             <img
-              className="w-[100px] h-auto"
+              className="w-[60px] sm:w-[100px] h-auto"
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/Subtittle-shape-1.png"
               alt="Subtitle shape"
             />
@@ -210,7 +210,7 @@ function MenuPage() {
           <div className="border-t-2 border-red-500 w-24 mx-auto"></div>
         </div>
 
-        <div className="relative w-full max-w-2xl mx-auto mt-16 mb-20">
+        <div className="relative w-full max-w-2xl mx-auto mt-8 sm:mt-16 mb-10 sm:mb-20">
           <div className="flex">
             <img
               className="w-1/2 object-cover" // Chiều rộng của ảnh là 50% và giữ tỷ lệ
