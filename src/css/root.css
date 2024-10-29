@@ -10,7 +10,7 @@
 }
 
 :root {
-    --screen-max: 1390px;
+    --screen-max: 1320px;
     --screen-1400px: 1215px;
     --screen-1200px: 1050px;
     --screen-1024px: 900px;
@@ -22,7 +22,7 @@
 }
 :root {
     --font-family-title: 'Merienda', sans-serif;
-    --font-family-text: 'Merriweather', serif;
+    --font-family-text: "Roboto", sans-serif;
 }
 
 .container-vphu {
@@ -36,6 +36,7 @@
 }
 .subtitle-vphu {
     font-family: var(--font-family-title);
+    margin-bottom: 35px;
     font-size: 20px;
 }
 .text-vphu {

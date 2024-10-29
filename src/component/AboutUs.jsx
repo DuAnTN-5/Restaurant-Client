@@ -9,9 +9,9 @@ const AboutUs = () => {
       <div className="about-us">
         <div className="about-content">
           <h3 className="about-title subtitle-vphu">GIỚI THIỆU</h3>
-          <h1 className="main-heading title-vphu">
+          <h2 className="main-heading title-vphu">
           Thưởng thức ẩm thực tuyệt hảo tại Hight Five.
-          </h1>
+          </h2>
           <p className="description-about text-vphu">
           Nhà hàng mang đến không gian hoài niệm năm 1960, âm nhạc du dương cùng những món ăn tinh tế và cocktail sáng tạo,
            hứa hẹn mang lại trải nghiệm ẩm thực độc đáo, đầy cảm xúc và khó quên cho thực khách.
@@ -27,7 +27,7 @@ const AboutUs = () => {
 
         <div className="chef-image-container">
           <div className="bgr-chef-image"></div>
-          <img src={myChef} alt="Chef" className="chef-image" />
+          <img src={myChef} alt="Chef" className="chef-image-about" />
           <div className="award-badge">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" version="1.1">
               <path id="textPath" d="M 0,75 a 75,75 0 1,1 0,1 z"></path>

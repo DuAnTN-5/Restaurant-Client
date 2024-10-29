@@ -1,6 +1,6 @@
 import "../css/FavoriteFood.css";
 import { useEffect, useState } from "react";
-import { api } from "../api";
+// import { api } from "../api";
 import imgFavoriteFood from "../assets/favorite-food.jpg";
 
 const FoodCategory = () => {
@@ -45,28 +45,28 @@ const FoodCategory = () => {
 
   useEffect(() => {
     // Gọi API để lấy danh sách món ăn
-    api
-      .get("/products") // Đường dẫn đến API
-      .then((res) => {
-        console.log(res);
-        if (res && res.data && res.data.products) {
-          const items = res.data.products.map(item => ({
-            id: item.id,
-            name: item.name,
-            description: item.description,
-            rating: item.rating,
-            image: item.image || imgFavoriteFood,
-            orderLink: item.orderLink || "#",
-          }));
-          setFoodItems(items); // Cập nhật danh sách món ăn từ API
-          console.log("Đã lấy được danh sách món ăn thành công");
-        }
-      })
-      .catch((error) => {
-        console.error("Có lỗi xảy ra khi lấy danh sách món ăn:", error);
-        // Sử dụng dữ liệu mẫu nếu có lỗi
-        setFoodItems(sampleFoodItems); 
-      });
+    // api
+    //   .get("/products") // Đường dẫn đến API
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res && res.data && res.data.products) {
+    //       const items = res.data.products.map(item => ({
+    //         id: item.id,
+    //         name: item.name,
+    //         description: item.description,
+    //         rating: item.rating,
+    //         image: item.image || imgFavoriteFood,
+    //         orderLink: item.orderLink || "#",
+    //       }));
+          setFoodItems(sampleFoodItems); // Cập nhật danh sách món ăn từ API
+    //     //   console.log("Đã lấy được danh sách món ăn thành công");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Có lỗi xảy ra khi lấy danh sách món ăn:", error);
+    //     // Sử dụng dữ liệu mẫu nếu có lỗi
+    //     // setFoodItems(sampleFoodItems); 
+    //   });
   }, []);
 
   return (

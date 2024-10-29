@@ -21,7 +21,7 @@
     left: 93%;
     content: "";
     height: 100%;
-    width: 100%;
+    width: 100px;
     background-repeat: no-repeat;
     background-size: 100px;
     background-position: left center;
@@ -31,10 +31,10 @@
     background-image: url('../assets/arrow-red.png');
     position: absolute;
     top: 60%;
-    right: 60%;
+    right: 95%;
     content: "";
     height: 100%;
-    width: 100%;
+    width: 100px;
     background-repeat: no-repeat;
     background-size: 100px;
     background-position: right center;
