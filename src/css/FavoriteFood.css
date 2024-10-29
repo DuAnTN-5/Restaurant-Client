@@ -4,7 +4,48 @@
     padding: 120px 0;
     margin: 0 20px;
   }
+<<<<<<< HEAD
   
+=======
+  .category-subtitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e7272d;
+    margin-bottom: 20px;
+    position: relative;
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  .category-subtitle::before {
+    background-image: url('../assets/arrow-red.png');
+    position: absolute;
+    top: 60%;
+    left: 93%;
+    content: "";
+    height: 100%;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: left center;
+    margin-top: -13px;
+}
+.category-subtitle::after {
+    background-image: url('../assets/arrow-red.png');
+    position: absolute;
+    top: 60%;
+    right: 95%;
+    content: "";
+    height: 100%;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: right center;
+    margin-top: -13px; 
+    transform: rotate(180deg);
+}
+
+>>>>>>> master
   .category-title {
     font-size: 50px;
     font-weight: bold;

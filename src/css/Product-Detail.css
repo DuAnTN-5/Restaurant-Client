@@ -6,7 +6,7 @@
 }
 .navbar-detail {
   width: 80%;
-  margin: 40px auto;
+  margin: 0 auto;
   display: flex;
   padding: 10px 0;
 }
@@ -195,6 +195,34 @@ h2 {
   width: 85%;
   margin-left: 7%;
 }
+.second-media .avatar img {
+  width: 50px; /* Giảm kích thước hình ảnh */
+  height: 50px;
+  border-radius: 50%; /* Giữ bo tròn cho ảnh */
+}
+
+.second-media .comment-content {
+  font-size: 13px; /* Giảm kích thước nội dung bình luận con */
+  line-height: 1.2;
+}
+
+.second-media .comment-meta-item p {
+  font-size: 12px; /* Giảm kích thước chữ trong meta thông tin */
+}
+
+.second-media .comment-replay {
+  width: 70px; /* Giảm kích thước nút trả lời */
+  font-size: 14px; /* Giảm kích thước chữ trên nút */
+}
+.second-media .replay-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+.second-media .replay-icon {
+  margin-right: 5px;
+  font-size: 14px;
+}
+
 
 .avatar {
   padding: 10px;

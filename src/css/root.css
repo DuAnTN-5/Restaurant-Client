@@ -6,19 +6,43 @@
 }
 
 :root {
-    --screen-max: 1133px;
-    --screen-1200px: 1140px;
-    --screen-1024px: 1000px;
-    --screen-992px: 960px;
-    --screen-768px: 720px;
-    --screen-576px: 540px;
+    --screen-max: 1320px;
+    --screen-1400px: 1215px;
+    --screen-1200px: 1050px;
+    --screen-1024px: 900px;
+    --screen-992px: 768px;
+    --screen-768px: 576px;
+    --screen-576px: 433px;
     --screen-480px: 480px;
 
+}
+:root {
+    --font-family-title: 'Merienda', sans-serif;
+    --font-family-text: "Roboto", sans-serif;
 }
 
 .container-vphu {
     max-width: var(--screen-max);
     margin: 0 auto;
+    font-family: var(--font-family-text);
+}
+.title-vphu {
+    font-family: var(--font-family-title);
+    font-size: 50px;
+}
+.subtitle-vphu {
+    font-family: var(--font-family-title);
+    margin-bottom: 35px;
+    font-size: 20px;
+}
+.text-vphu {
+    font-family: var(--font-family-text);
+    font-size: 16px;
+}
+@media (max-width: 1400px) {
+    .container-vphu {
+        max-width: var(--screen-1400px);
+    }
 }
 @media (max-width:1200px) {
     .container-vphu {

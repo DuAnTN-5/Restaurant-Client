@@ -9,6 +9,7 @@ import { api } from "../api";
 
 function Content() {
   const [product, setProduct] = useState([]);
+  const [category, setCategory] = useState([]);
 
   // hiệu ứng trượt
   useEffect(() => {
@@ -18,19 +19,15 @@ function Content() {
     // });
 
     api
-      .get("/products")
+      .get("/product-categories")
       .then((res) => {
-        console.log(res);
-        if (res) {
-          console.log("Đã get được danh sách món ăn thành công");
-        }
-        setProduct(res.data.product);
+        console.log("Đã get api danh mục thành công", res);
+        setCategory(res.data.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []); // Thêm mảng phụ thuộc rỗng để chạy effect chỉ một lần khi component mount
-  console.log(product);
+      .catch((error) => console.log(error));
+  }, []);
+   // Thêm mảng phụ thuộc rỗng để chạy effect chỉ một lần khi component mount
+  console.log(category);
 
   // ******************************************************************************************
   return (
@@ -43,18 +40,28 @@ function Content() {
         <h1 className="text-4xl font-bold mb-8">Our Specials Menu</h1>
         <div className="inline-block border-[1px] border-gray-300 rounded-lg overflow-hidden">
           <div className="flex menu-our-special">
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
-              Món ăn chính
-            </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
-              Món ăn phụ
-            </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
-              Món ăn nhẹ
-            </button>
-            <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
+            {Object.keys(category).map((key) => {
+              {
+                console.log(category[key].name);
+              }
+              {
+                console.log(category[key].id);
+              }
+              return (
+                <>
+                  <button
+                    key={category[key].id}
+                    className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special"
+                  >
+                    {category[key].name}
+                  </button>
+                </>
+              );
+            })}
+
+            {/* <button className="px-6 py-2 text-gray-700 hover:text-white hover:bg-[#9d7e5a] transition duration-200 item-our-special">
               Thức uống
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -103,7 +110,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -127,7 +134,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -151,7 +158,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -175,7 +182,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -199,7 +206,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -207,7 +214,7 @@ function Content() {
             </div>
             <div className="p-4">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -223,15 +230,15 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-white rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
               <span className="font-bold ml-2">$ 56</span>
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-neutral-800 text-white">
               <h1 className="text-xl font-bold mb-2">Món ăn đa dạng</h1>
-              <ul className="flex space-x-2 text-gray-600">
+              <ul className="flex space-x-2 text-gray-600 text-white">
                 <li>4 Chicken Legs</li>
                 <li>Chili Sauce</li>
                 <li>Soft Drinks</li>
@@ -440,12 +447,11 @@ function Content() {
       </div>
 
       {/* 2 post tin tức */}
-
-      <div className="text-center py-12 px-4 sm:px-6 md:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-black mb-8">
+      <div className="text-center py-12">
+        <h2 className="text-4xl font-semibold text-white mb-8">
           Our Latest News & Blog
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+        <div className="flex justify-center gap-8">
           {/* Post 1 */}
           <div className="max-w-xs sm:max-w-sm md:max-w-md shadow-lg overflow-hidden">
             <img

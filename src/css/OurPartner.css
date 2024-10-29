@@ -27,6 +27,35 @@
     font-size: 20px;
     color: #826a45;
     font-weight: 600;
+    margin: 0 auto;
+    line-height: 1.2;
+}
+.our-partner-title::before {
+    background-image: url('../assets/arrow-deal.png');
+    position: absolute;
+    top: 50%;
+    left: 105%;
+    content: "";
+    height: 100%;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: left center;
+    margin-top: -13px;
+}
+.our-partner-title::after {
+    background-image: url('../assets/arrow-deal.png');
+    position: absolute;
+    top: 50%;
+    right: 105%;
+    content: "";
+    height: 100%;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: right center;
+    margin-top: -13px; 
+    transform: rotate(180deg);
 }
 
 .slideshow-container {
@@ -55,6 +84,11 @@
 @media (max-width: 1024px) {
     .slide-our-partner {
         flex: 0 0 50%;
+    }
+}
+@media (max-width: 768px) {
+    .our-partner-title::after, .our-partner-title::before {
+        display: none;
     }
 }
 
