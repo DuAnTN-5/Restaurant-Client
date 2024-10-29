@@ -16,6 +16,7 @@ import ProductDetail from './pages/Product-detail.jsx';
 import Blog from './pages/Blog.jsx';
 import ProfileUser from './pages/ProfileUser.jsx';
 import FavouritePage from './pages/FavouritePage.jsx';
+import AboutUs from './component/AboutUs.jsx';
 import BlogDetail from './pages/Blog-detail.jsx';
 
 
@@ -35,6 +36,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/blog-detail" element={<BlogDetail/>} /> 
         <Route path="/favourite-page" element={<FavouritePage/>} /> 
         <Route path="/profile-user" element={<ProfileUser/>} /> 
+        <Route path="/about" element={<AboutUs/>} />
         
 
        
