@@ -108,7 +108,6 @@ function Blog() {
 
       {/* Mục Tin Tức Mới */}
       <div className="mt-8">
-        {/* Navigation Tabs */}
         <div className="flex justify-center border-b mb-6">
           {["Mục Tin Tức Mới", "Khoa Học", "Phim Ảnh", "Bóng Đá", "Giải Trí", "Nước Ngoài"].map(
             (tab, i) => (

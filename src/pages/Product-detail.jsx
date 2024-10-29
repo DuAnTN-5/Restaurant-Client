@@ -389,7 +389,7 @@ function ProductDetail() {
                     alt=""
                   />
                   <div className="product-caption">
-                    <span className="product-tags">Chicken, Spicyy</span>
+                    <span className="product-tags">Chicken, Spicy</span>
                     <h3 className="product-title">Chicken alfredo</h3>
                     <h4 className="product-price">35.000 đ</h4>
                     <button className="add-to-cart">

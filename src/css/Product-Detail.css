@@ -1,7 +1,8 @@
 @import url("../css/root.css");
 
 .product-detail-page{
-  /* background-color: black; */
+  background-color: #1b1b1b;
+  color: white;
   padding: 40px 0;
 }
 .navbar-detail {
@@ -9,6 +10,7 @@
   margin: 0 auto;
   display: flex;
   padding: 10px 0;
+  background-color: #262525;
 }
 .image-detail{
 
@@ -84,10 +86,10 @@
 }
 /*  */
 
-.product-title {
+/* .product-title {
   font-size: 15px;
-  /* padding: 20px 0; */
-}
+  padding: 20px 0;
+} */
 
 .product-name {
   font-size: 22px;
@@ -170,22 +172,27 @@
   border-radius: 25px;
   cursor: pointer;
 }
+.like:hover {
+  background-color: #785b44;
+  /* color: #fff; */
+  cursor: pointer;
+}
 /* mô tả món ăn */
 .food-description h3 {
-  color: black;
+  /* color: black; */
 }
 .food-description {
   width: 75%;
   margin: 40px auto;
-  /* margin-top: 20px; */
   padding: 15px;
-  background-color: #f9f9f9; /* Màu nền nhẹ */
+  background-color: #262525;
+  /* background-color: #f9f9f9; Màu nền nhẹ */
   border-radius: 8px; /* Bo tròn góc */
 }
 
 .food-description p {
   font-size: 16px;
-  color: black;
+  /* color: black; */
   line-height: 1.5;
 }
 
@@ -194,7 +201,7 @@
   width: 75%;
   margin: 40px auto;
   background-color: #f9f9f9; /* Màu nền nhẹ */
-  border-top: 1px solid #ededed;
+  /* border-top: 1px solid #ededed; */
   padding: 20px;
 }
 
@@ -202,6 +209,7 @@
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: bold;
+  color: black;
 }
 
 .media-list {
@@ -215,7 +223,7 @@
 
 /* Tùy chỉnh thanh cuộn dành cho các trình duyệt Webkit (Chrome, Safari, Edge) */
 .media-list::-webkit-scrollbar {
-  width: 10px; /* Độ rộng của thanh cuộn */
+  width: 8px; /* Độ rộng của thanh cuộn */
 }
 
 /* Nền của thanh cuộn */
@@ -237,6 +245,7 @@
 }
 .media {
   width: 90%;
+  
   box-shadow: rgba(17, 17, 26, 0.1) 5px 5px 5px;
   /* border: 1px solid gray; */
   display: flex;
@@ -311,9 +320,11 @@
     background-color: rgb(191, 191, 191);
 }
 
+
 .comment-meta-item p {
   font-size: 13px;
     background-color: rgb(233, 233, 233);
+    color: #4a3a3a;
     padding: 7px;
 }
 .comment-content {
@@ -406,10 +417,13 @@
   margin-top: 15px;
 }
 .product-content {
+  display: flex;
+  flex-direction: column;
   width: 280px;
   margin-right: 10px;
   border: 1px solid #ededed;
   border-radius: 10px;
+  background-color: #262525
 }
 .product-image {
   padding: 13px 13px 0 13px;
@@ -436,6 +450,12 @@
   font-size: 15px;
   /* padding-right: 20px; */
 }
+
+.add-to-cart:hover {
+  background-color: #785b44;
+  color: #fff;
+  cursor: pointer;
+}
 .product-tags {
   display: inline-block;
   font-size: 12px;
@@ -454,3 +474,4 @@
   font-size: 18px;
   color: #785b44;
 }
+

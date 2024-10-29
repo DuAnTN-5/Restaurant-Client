@@ -29,10 +29,13 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Tạo bóng khi hover */
 }
 .contact__header{
+    background-color: #262525;
     float: right;
     vertical-align: top;
     margin-top: 125px;
     padding-right: 88px;
+    padding-left: 10px;
+    padding-bottom: 10px;
 
 }
 .contact-info{
@@ -84,7 +87,7 @@
     width: 100%;
     /* margin: 0 auto; */
     margin-top: 20px;
-    background-color:black;
+    background-color: #262525;
     padding: 20px;
     border-radius:10px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
@@ -186,6 +189,7 @@
         display: inline-block;
     }
     .contact__header {
+        background-color: #262525;
         width: 37%;
         float: right;
         vertical-align: top;
@@ -258,7 +262,8 @@
     }
 
     .contact__header {
-       
+        background-color: #262525;
+        padding-left: 10px;
         padding-right:0;
     }
     .contact-text {
@@ -300,13 +305,15 @@
 
   @media only screen and (min-width: 426px) and (max-width: 768px){
     .contact {
-        width: 100%;
+        width: 95%;
      
     }
     .form-container {
         width: 100%;
     }
     .contact__header {
+        background-color: #262525;
+        padding-left: 10px;
         width: 100%;
         margin: 0;
         /* float: right; */
@@ -318,14 +325,17 @@
 }
 @media only screen and (max-width: 425px){
     .contact {
-        width: 100%;
+        width: 93%;
+        /* margin: 0 auto; */
      
     }
     .form-container {
         width: 100%;
     }
     .contact__header {
+        background-color: #262525;
         width: 100%;
+        padding-left: 10px;
         margin: 0;
         /* float: right; */
         /* vertical-align: top; */
