@@ -7,7 +7,7 @@ import "aos/dist/aos.css"; // Import CSS của AOS
 import { api } from "../api";
 // import { Link } from 'react-router-dom';
 
-// import "./Content.css";
+// import "./Content.css";  
 
 function Content() {
   const [product, setProduct] = useState([])
@@ -83,7 +83,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -110,7 +110,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -134,7 +134,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -158,7 +158,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -182,7 +182,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -206,7 +206,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
@@ -230,7 +230,7 @@ function Content() {
               src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/13-1.jpg"
               alt="Shushi"
             />
-            <div className="absolute top-[275px] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
+            <div className="absolute top-[50%] left-2 bg-neutral-800 rounded-lg px-3 py-1 text-gray-500 flex items-center space-x-2 z-10">
               <CiStar className="text-yellow-500" />
               <span className="font-bold">5.00</span>
               <span className="text-gray-500">(2)</span>
