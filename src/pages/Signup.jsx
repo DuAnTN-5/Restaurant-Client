@@ -43,66 +43,67 @@ function SignUp() {
     };
 
     return (
-        <div className="container">
-            <div className="container-signup">
-                <div className="welcome-section">
-                    <h2 className="welcome-title">Welcome to <span className="highlight">HIGHTFIVE Restaurant+</span></h2>
-                    <Link to="/"><img src={logohi5} alt="Logo" className="logo" /></Link>
-                    <p className="description">
-                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                    </p>
-                    <p className="copyright">Copyright Hight Five Group</p>
-                </div>
-                <div className="form-section">
-                    <h3>Register</h3>
-                    {errorMessage && <p className="error">{errorMessage}</p>}
-                    <form onSubmit={handleRegister}>
-                        <input
-                            type="text"
-                            placeholder="Name"
-                            required
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            required
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Confirm Password"
-                            required
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        <div className="checkbox">
-                            <input type="checkbox" id="terms" required />
-                            <label htmlFor="terms">Agree to the terms and policy</label>
-                        </div>
-                        <button type="submit" className="btn">Register</button>
-                    </form>
-                    <p className='account'>Already have an account? <Link className='redirect-link' to="/login">Login</Link></p>
-                    <div className="social-buttons">
-                        <button className="facebook icon-social-network">
-                            <i className="fa-brands fa-facebook-f"></i>
-                            <p className="text-social-network">Facebook</p>
-                        </button>
-                        <button className="google icon-social-network">
-                            <i className="fa-brands fa-google"></i>
-                            <p className="text-social-network">Google</p>
-                        </button>
+        <div className="app-signup">
+            <div className="wrapper-container-signup">
+                <div className="container-signup">
+                    <div className="welcome-section">
+                        <h2 className="welcome-title">Welcome to <span className="highlight">HIGHTFIVE Restaurant+</span></h2>
+                        <Link to="/"><img src={logohi5} alt="Logo" className="logo" /></Link>
+                        <p className="description">
+                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        </p>
+                        <p className="copyright">Copyright Hight Five Group</p>
                     </div>
-                    <p className="team-info">HightFive Team © 2024</p>
+                    <div className="form-section">
+                        {errorMessage && <p className="error">{errorMessage}</p>}
+                        <form onSubmit={handleRegister}>
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Confirm Password"
+                                required
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                            <div className="checkbox">
+                                <input type="checkbox" id="terms" required />
+                                <label htmlFor="terms">Agree to the terms and policy</label>
+                            </div>
+                            <button type="submit" className="btn">Register</button>
+                        </form>
+                        <p className='account'>Already have an account? <Link className='redirect-link' to="/login">Login</Link></p>
+                        <div className="social-buttons">
+                            <button className="facebook icon-social-network">
+                                <i className="fa-brands fa-facebook-f"></i>
+                                <p className="text-social-network">Facebook</p>
+                            </button>
+                            <button className="google icon-social-network">
+                                <i className="fa-brands fa-google"></i>
+                                <p className="text-social-network">Google</p>
+                            </button>
+                        </div>
+                        <p className="team-info">HightFive Team © 2024</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -39,8 +39,8 @@ function Login() {
     };
 
     return (
-        <div className="App">
-            <div className="container">
+        <div className="app-login">
+            <div className="wrapper-container-login">
                 <div className="container-login">
                     <div className="welcome-section">
                         <h2 className="welcome-title">Welcome to <span className="highlight">HIGHTFIVE Restaurant+</span></h2>
@@ -51,7 +51,6 @@ function Login() {
                         <p className="copyright">Copyright Hight Five Group</p>
                     </div>
                     <div className="form-section">
-                        <h3>Login</h3>
                         {errorMessage && <p className="error">{errorMessage}</p>}
                         <form onSubmit={handleLogin}>
                             <input
