@@ -86,7 +86,7 @@ function SignUp() {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             />
                             <div className="checkbox">
-                                <input type="checkbox" id="terms" required />
+                                <input className='checkbox-button' type="checkbox" id="terms" required />
                                 <label htmlFor="terms">Agree to the terms and policy</label>
                             </div>
                             <button type="submit" className="btn">Register</button>

@@ -1,10 +1,11 @@
 import "../css/Header2.css";
-import logo from "../assets/logo-hi-5.png";
+import logo from "../assets/logo-hi5-black.png";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Header2() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+  const [isHeaderInfoVisible, setIsHeaderInfoVisible] = useState(true);
   const navbarRef = useRef(null);
   const overlayRef = useRef(null);
 
@@ -24,6 +25,21 @@ function Header2() {
     };
   }, [isNavbarVisible]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsHeaderInfoVisible(false);
+      } else {
+        setIsHeaderInfoVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const handleOverlayClick = () => {
     setIsNavbarVisible(false);
   };
@@ -34,36 +50,38 @@ function Header2() {
 
   return (
     <div className="header-2">
-      <div className="header-info-bgr">
-        <div className="header-info container-vphu">
-          <div className="header-contact">
-            <div className="header-contact-phone">
-              <i className="fas fa-phone icon-contact"></i>
-              <span>SĐT: +84 346 732311</span>
+      {isHeaderInfoVisible && (
+        <div className="header-info-bgr">
+          <div className="header-info container-vphu">
+            <div className="header-contact">
+              <div className="header-contact-phone">
+                <i className="fas fa-phone icon-contact"></i>
+                <span>SĐT: +84 346 732311</span>
+              </div>
+              <div className="header-contact-email">
+                <i className="fas fa-envelope icon-contact"></i>
+                <span>Email: hi5@restan.com</span>
+              </div>
             </div>
-            <div className="header-contact-email">
-              <i className="fas fa-envelope icon-contact"></i>
-              <span>Email: hi5@restan.com</span>
-            </div>
-          </div>
-          <div className="header-social-network">
-            <div className="header-social-network-item">
-              <i className="fa-brands fa-facebook-f icon-social"></i>
-            </div>
-            <div className="header-social-network-item icon-social">
-              <i className="fab fa-twitter"></i>
-            </div>
-            <div className="header-social-network-item icon-social">
-              <i className="fab fa-youtube"></i>
-            </div>
-            <div className="header-social-network-item icon-social">
-              <i className="fa-brands fa-linkedin-in"></i>
+            <div className="header-social-network">
+              <div className="header-social-network-item">
+                <i className="fa-brands fa-facebook-f icon-social"></i>
+              </div>
+              <div className="header-social-network-item icon-social">
+                <i className="fab fa-twitter"></i>
+              </div>
+              <div className="header-social-network-item icon-social">
+                <i className="fab fa-youtube"></i>
+              </div>
+              <div className="header-social-network-item icon-social">
+                <i className="fa-brands fa-linkedin-in"></i>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-      <div className="header-navbar">
+      <div className={`header-navbar ${isHeaderInfoVisible ? '' : 'fixed'}`}>
         <div className="navbar container-vphu" ref={navbarRef}>
           <button
             type="button"
@@ -88,27 +106,22 @@ function Header2() {
               <ul className="navbar-list">
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/">
-                    Trang chủ
-                  </Link>
-                </li>
-                <li className="navbar-item">
-                  <Link className="navbar-link" to="/pages">
-                    About
+                    Trang Chủ
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/menu">
-                    Menu
+                    Thực Đơn
+                  </Link>
+                </li>
+                <li className="navbar-item">
+                  <Link className="navbar-link" to="/about">
+                    Giới Thiệu
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/blog">
-                    Blog
-                  </Link>
-                </li>
-                <li className="navbar-item">
-                  <Link className="navbar-link" to="/shop">
-                    Giỏ Hàng
+                    Tin Tức
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -149,32 +162,27 @@ function Header2() {
                 </div>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/">
-                    Home
-                  </Link>
-                </li>
-                <li className="navbar-item">
-                  <Link className="navbar-link" to="/pages">
-                    Pages
+                    Trang Chủ
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/menu">
-                    Menu
+                    Thực Đơn
+                  </Link>
+                </li>
+                <li className="navbar-item">
+                  <Link className="navbar-link" to="/about">
+                    Giới Thiệu
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/blog">
-                    Blog
-                  </Link>
-                </li>
-                <li className="navbar-item">
-                  <Link className="navbar-link" to="/shop">
-                    Shop
+                    Tin Tức
                   </Link>
                 </li>
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/contact">
-                    Contact
+                    Liên Hệ
                   </Link>
                 </li>
               </ul>
