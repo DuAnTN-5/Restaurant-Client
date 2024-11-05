@@ -1,14 +1,18 @@
 import "../style/About.css";
-import HomeSection from "../component/HomeSection";
 import OurPartner from "../component/OurPartner";
+import BannerAbout from "../assets/bannner-aboutpage.png";
 import ImgAbout1 from "../assets/img-booking2.jpg";
 import ImgAbout2 from "../assets/img-about-introduce.jpg";
 import sampleVideo from "../assets/video-hambergur.mp4";
 
+
+
 function About() {
   return (
     <div className="about-page-container">
-      <HomeSection />
+      <div className="banner-about-page">
+        <img className="bgr-about-page" src={BannerAbout} alt="" />
+      </div>
       <OurPartner />
 
       <div className="about-page-wrapper">

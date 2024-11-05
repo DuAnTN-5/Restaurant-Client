@@ -66,11 +66,11 @@ function Header() {
 
         <div>
           <ul className="navbar-list">
-            <li className="navbar-item"><Link className="navbar-link" to="/">Home</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/pages">Pages</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/menu">Menu</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/blog">Blog</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/shop">Shop</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/">Trang Chủ</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/pages">Thực Đơn</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/menu">Giới Thiệu</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/shop">Tin Tức</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/blog">Liên Hệ</Link></li>
             <li className="navbar-item"><Link className="navbar-link" to="/contact">Contact</Link></li>
           </ul>
         </div>
@@ -90,11 +90,11 @@ function Header() {
                 <i id="button-exit" className="fa-regular fa-circle-xmark"></i>
               </button>
             </div>
-            <li className="navbar-item"><Link className="navbar-link" to="/">Home</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/pages">Pages</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/menu">Menu</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/blog">Blog</Link></li>
-            <li className="navbar-item"><Link className="navbar-link" to="/shop">Shop</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/">Trang chủ</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/pages">Thực Đơn</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/menu">Giới Thiệu</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/blog">Tin Tức</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/shop">Liên Hệ</Link></li>
             <li className="navbar-item"><Link className="navbar-link" to="/contact">Contact</Link></li>
           </ul>
         </div>

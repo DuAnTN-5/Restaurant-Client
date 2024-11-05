@@ -17,7 +17,11 @@ const AboutUs = () => {
            hứa hẹn mang lại trải nghiệm ẩm thực độc đáo, đầy cảm xúc và khó quên cho thực khách.
           </p>  
           <div className="ceo">
-            <button className="discover-more-btn">Xem Thêm</button>
+            <button className="discover-more-btn animation-4">
+              <span className="discover-more-text">
+                Xem Thêm
+              </span>
+              </button>
             <div className="ceo-signature">
               <img src={signature} alt="CEO Signature" />
               <p className="ceo-signature-text">CEO, HightFive Restaurant</p>

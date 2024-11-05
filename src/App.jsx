@@ -17,11 +17,11 @@ function App() {
  
 
   return (
-    <>
+    <div>
       {!isAuthPage && <Header />}
       <Outlet />
       {!isAuthPage && <Footer />}
-    </>
+    </div>
   );
 }
 

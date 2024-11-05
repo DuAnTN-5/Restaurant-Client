@@ -39,8 +39,8 @@ function Login() {
     };
 
     return (
-        <div className="App">
-            <div className="container">
+        <div className="app-login">
+            <div className="wrapper-container-login">
                 <div className="container-login">
                     <div className="welcome-section">
                         <h2 className="welcome-title">Welcome to <span className="highlight">HIGHTFIVE Restaurant+</span></h2>
@@ -51,7 +51,6 @@ function Login() {
                         <p className="copyright">Copyright Hight Five Group</p>
                     </div>
                     <div className="form-section">
-                        <h3>Login</h3>
                         {errorMessage && <p className="error">{errorMessage}</p>}
                         <form onSubmit={handleLogin}>
                             <input
@@ -68,10 +67,10 @@ function Login() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)} 
                             />
+                            <button type="submit" className="btn">Login</button>
                             <div className="forgot-password">
                                 <a href="#">Forgot password?</a>
                             </div>
-                            <button type="submit" className="btn">Login</button>
                         </form>
                         <p className="account">Do not have an account? <Link className="redirect-link" to="/signup">Create an account</Link></p>
                         <div className="social-buttons">

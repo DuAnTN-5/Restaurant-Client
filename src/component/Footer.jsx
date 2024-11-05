@@ -1,5 +1,5 @@
 import '../css/Footer.css'
-import logoHi5 from '../assets/logo-hi-5.png'
+import logoHi5 from '../assets/logo-hi5-while.png'
 export default function Footer() {
   return (
     <div className="footer">
