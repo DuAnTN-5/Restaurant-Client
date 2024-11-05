@@ -20,8 +20,8 @@ function HomePage() {
       <AboutUs />
       <Content />
       {/* <Menu /> */}
-      <ChefSection />
-      <NewsSection />
+      {/* <ChefSection /> */}
+      {/* <NewsSection /> */}
 
     </div>
   );

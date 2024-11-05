@@ -22,161 +22,78 @@ function CartProduct() {
         <div className="cart">
           <div className="cart-container">
             <div className="cart-items">
-              <table className="cart-table">
-                <thead className="cart-menus">
-                  <tr className="cart_menu">
-                    {/* <td className="cart-checkbox">
-                      <input type="checkbox" />
-                    </td> */}
-                    <td className="cart-product">Sản phẩm</td>
-                    <td className="cart-price">Đơn giá</td>
-                    <td className="cart-quantity">Số lượng</td>
-                    <td className="cart-money">Thành tiền</td>
-                    <td className="cart-manipulate">Thao tác</td>
-                  </tr>
-                </thead>
-                <tbody className="cart-contents">
-                  <tr className="cart-content">
-                    {/* <td>
-                      <input type="checkbox" />
-                    </td> */}
-                    <td className="cart-image">
+              <div className="cart-table">
+                <div className="cart-menus">
+                  <div className="cart_menu">
+                    <p className="cart-product">Sản phẩm</p>
+                    <p className="cart-price">Đơn giá</p>
+                    <p className="cart-quantity">Số lượng</p>
+                    <p className="cart-money">Thành tiền</p>
+                    <p className="cart-manipulate">Thao tác</p>
+                  </div>
+                </div>
+                <div className="cart-contents">
+                  <div className="cart-content">
+                    <div className="cart-image">
                       <img
                         className="image"
                         src="https://chuphinhmenu.com/wp-content/uploads/2018/03/chup-hinh-mon-an-menu-nha-trang-khanh-hoa-0008.jpg"
                         alt=""
                       />
                       <p>tên sản phẩm món ăn nó dài dài dài</p>
-                    </td>
-                    <td>200.000</td>
-                    <td>
-                      <div className="counters">
-                        <button className="minus">-</button>
-                        <input className="numbers" defaultValue={1}></input>
-                        <button className="plus">+</button>
-                      </div>
-                    </td>
-                    <td>400.000</td>
-                    <td className="cart-manipulates">Xóa</td>
-                  </tr>
-                  <tr className="cart-content">
-                    {/* <td>
-                      <input type="checkbox" />
-                    </td> */}
-                    <td className="cart-image">
-                      <img
-                        className="image"
-                        src="https://chuphinhmenu.com/wp-content/uploads/2018/03/chup-hinh-mon-an-menu-nha-trang-khanh-hoa-0008.jpg"
-                        alt=""
-                      />
-                      <p>tên sản phẩm món ăn nó dài dài dài</p>
-                    </td>
-                    <td>200.000</td>
-                    <td>
-                      <div className="counters">
-                        <button className="minus">-</button>
-                        <input className="numbers" defaultValue={1}></input>
-                        <button className="plus">+</button>
-                      </div>
-                    </td>
-                    <td>400.000</td>
-                    <td className="cart-manipulates">Xóa</td>
-                  </tr>
-                  <tr className="cart-content">
-                    {/* <td>
-                      <input type="checkbox" />
-                    </td> */}
-                    <td className="cart-image">
-                      <img
-                        className="image"
-                        src="https://chuphinhmenu.com/wp-content/uploads/2018/03/chup-hinh-mon-an-menu-nha-trang-khanh-hoa-0008.jpg"
-                        alt=""
-                      />
-                      <p>tên sản phẩm món ăn nó dài dài dài</p>
-                    </td>
-                    <td>200.000</td>
-                    <td>
-                      <div className="counters">
-                        <button className="minus">-</button>
-                        <input className="numbers" defaultValue={1}></input>
-                        <button className="plus">+</button>
-                      </div>
-                    </td>
-                    <td>400.000</td>
-                    <td className="cart-manipulates">Xóa</td>
-                  </tr>
-                  <tr className="cart-content">
-                    {/* <td>
-                      <input type="checkbox" />
-                    </td> */}
-                    <td className="cart-image">
-                      <img
-                        className="image"
-                        src="https://chuphinhmenu.com/wp-content/uploads/2018/03/chup-hinh-mon-an-menu-nha-trang-khanh-hoa-0008.jpg"
-                        alt=""
-                      />
-                      <p>tên sản phẩm món ăn nó dài dài dài</p>
-                    </td>
-                    <td>200.000</td>
-                    <td>
-                      <div className="counters">
-                        <button className="minus">-</button>
-                        <input className="numbers" defaultValue={1}></input>
-                        <button className="plus">+</button>
-                      </div>
-                    </td>
-                    <td>400.000</td>
-                    <td className="cart-manipulates">Xóa</td>
-                  </tr>
-                </tbody>
-              </table>
+                    </div>
+                    <span>200.000</span>
+                    <div className="counters">
+                      <button className="minus">-</button>
+                      <input className="numbers" defaultValue={1}></input>
+                      <button className="plus">+</button>
+                    </div>
+                    <span>400.000</span>
+                    <span className="cart-manipulates">Xóa</span>
+                  </div>
+                  {/* Thêm nhiều sản phẩm khác nếu cần */}
+                </div>
+              </div>
             </div>
             <div className="cart-summary">
-              <p className="total-title"> Cart totals</p>
+              <p className="total-title">Cart totals</p>
               <ul className="cart-sub-total">
-                <li className="">
-                  <p> Số bàn:</p>
-                  <h5>10</h5>
-                  {/* <div className="custom-borders"></div> */}
+                <li>
+                  <p>Số bàn:</p>
+                  <span>10</span>
                 </li>
                 <li>
                   <p>Subtotal:</p>
-                  <h5>300.000 VND</h5>
+                  <span>300.000 VND</span>
                 </li>
                 <li className="coupon-item">
-                  <p>
-                    Coupon: 
-                    {/* <span>abcxyz</span> */}
-                  </p>
-                  <h5>-20.000 VND</h5>
+                  <p>Coupon:</p>
+                  <span>-20.000 VND</span>
                   <div>
                     <input
                       className="coupon"
                       type="text"
                       name="coupon"
-                      id=""
                       placeholder="Coupon code"
                     />
                     <p>Chọn mã giảm giá:</p>
-                    <select name="" id="" className="discount-code">
+                    <select name="" className="discount-code">
                       <option value="">Voucher</option>
                       <option value="">Giảm giá -25.000 VND</option>
-                      <option value="">Giảm giá -20.000 VND </option>
+                      <option value="">Giảm giá -20.000 VND</option>
                     </select>
                   </div>
                   <div className="custom-border"></div>
                 </li>
-  
                 <li>
                   <p className="total">Total:</p>
-                  <h5 className="total">300.000 VND</h5>
+                  <span className="total">300.000 VND</span>
                 </li>
               </ul>
-  
               <div className="cart-abate">
                 <input type="radio" className="radio" />
                 <i className="cart-icon">
-                  <RiMoneyDollarCircleFill className=""/>
+                  <RiMoneyDollarCircleFill />
                 </i>
                 <p>Trả tiền mặt khi vào bàn</p>
               </div>

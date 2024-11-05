@@ -8,7 +8,7 @@
     margin: 0 auto;
 }
 .contact-item{
-    margin-top: 30px;
+    margin-top: 10px;
     display: inline-block;
     width: 100%;
 }
@@ -331,6 +331,7 @@
     }
     .form-container {
         width: 100%;
+        margin-bottom: 20px;
     }
     .contact__header {
         background-color: #262525;
@@ -348,6 +349,13 @@
         width: 275px;
         padding: 5px;
         margin-bottom: 8px;
+    }
+    .food-description {
+        width: 93%;
+        margin: 12px auto;
+        padding: 15px;
+        background-color: #262525;
+        border-radius: 8px;
     }
     .form-description strong {
         font-size: 14px;

@@ -6,11 +6,12 @@
   padding: 40px 0;
 }
 .navbar-detail {
-  width: 80%;
+  max-width: 1140px;
   margin: 0 auto;
   display: flex;
   padding: 10px 0;
   background-color: #262525;
+  margin-bottom: 30px;
 }
 .image-detail{
 
@@ -182,12 +183,12 @@
   /* color: black; */
 }
 .food-description {
-  width: 75%;
-  margin: 40px auto;
-  padding: 15px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-block: 15px;
+  padding-inline: 23px;
   background-color: #262525;
-  /* background-color: #f9f9f9; Màu nền nhẹ */
-  border-radius: 8px; /* Bo tròn góc */
+  margin-bottom: 30px;
 }
 
 .food-description p {
@@ -198,8 +199,8 @@
 
 /*  phần bình luân */
 .comment-section {
-  width: 75%;
-  margin: 40px auto;
+  max-width: 1140px;
+  margin: 0 auto;
   background-color: #f9f9f9; /* Màu nền nhẹ */
   /* border-top: 1px solid #ededed; */
   padding: 20px;
@@ -245,16 +246,16 @@
 }
 .media {
   width: 90%;
-  
-  box-shadow: rgba(17, 17, 26, 0.1) 5px 5px 5px;
-  /* border: 1px solid gray; */
+  /* box-shadow: rgba(17, 17, 26, 0.1) 5px 5px 5px; */
+  border: 1px solid gray;
   display: flex;
+  background-color: #f1f2f6;
   margin: 2% 2%;
 }
 
 .second-media {
-  width: 85%;
-  margin-left: 7%;
+  width: 77%;
+  margin-left: 15%;
 }
 .second-media .avatar img {
   width: 50px; /* Giảm kích thước hình ảnh */
@@ -403,9 +404,11 @@
 
 /*  */
 .tab-content {
+  max-width: 1140px;
+  margin: 0 auto;
+  margin-top: 30px;
 } 
 .other-dishes{
-  margin-left: 100px;
   font-size: 22px;
   padding-bottom: 10px;
   font-weight: 700;
@@ -413,7 +416,6 @@
 .vt-product {
   display: flex;
   width: 100%;
-  padding: 0 35px;
   margin-top: 15px;
 }
 .product-content {
@@ -481,7 +483,8 @@
     flex-direction: column;
     width: 90%;
     margin: 0 auto;
-    padding: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
   }
 
   .image-detail {
@@ -496,12 +499,12 @@
 
   .navbar-right {
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
   }
 
   .list-image-detail {
-    gap: 10px;
-    justify-content: center;
+    gap: 20px;
+    /* justify-content: center; */
   }
 
   .vt-product {
@@ -514,20 +517,33 @@
   }
 
   .media {
-    flex-direction: column;
     align-items: center;
     width: 100%;
     margin: 0 auto 10px;
   }
 
   .second-media {
-    width: 100%;
-    margin: 0 auto;
+    margin-left: 15%;
+
+    width: 85%;
+    /* margin: 0 auto; */
   }
 
   .comment-details {
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
+  }
+  .comment-section {
+    width: 90%;
+    /* max-width: 1140px; */
+    margin: 0 auto;
+  }
+  .food-description{
+    
+    width: 90%;
+    /* max-width: 1140px; */
+    margin: 0 auto;
+    margin-bottom: 20px;
   }
 }
 
@@ -535,11 +551,6 @@
 @media (max-width: 768px) {
   .product-detail-page {
     padding: 20px 0;
-  }
-
-  .navbar-detail {
-    flex-direction: column;
-    width: 100%;
   }
 
   .image-detail {
@@ -551,65 +562,204 @@
     width: 100%;
     height: auto;
   }
-
+/* 
   .list-image-detail {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
-  }
+  } */
 
   .navbar-right {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
+   padding-top: 20px;
   }
 
   .productQuantity {
-    flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
   }
 
-  .media {
-    flex-direction: column;
-    width: 100%;
-    margin: 0 auto 10px;
-  }
-
-  .comment-details {
-    width: 100%;
-    text-align: center;
-  }
-
-  .vt-product {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .product-content {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .comment-input {
-    width: 100%;
-    padding: 0;
-  }
-
-  .comment-submit {
-    width: 100%;
-    padding: 10px;
-  }
-
-  .add-to-cart {
-    width: 100%;
-    text-align: center;
-    padding: 15px;
-    font-size: 16px;
-  }
-
-  .product-tags,
-  .product-title,
-  .product-price {
-    font-size: 16px;
-  }
+  .other-dishes {
+    margin-left: 35px;}
+    .vt-product {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Tạo 2 món ăn trên mỗi hàng */
+      gap: 10px; /* Khoảng cách giữa các món ăn */
+      width: 100%;
+      margin: 0 auto; /* Căn giữa */
+    }
+  
+    .product-content {
+      width: 100%; /* Đảm bảo các món ăn có độ rộng phù hợp */
+      margin: 0; /* Loại bỏ khoảng cách thừa */
+    }
 }
+
+@media (max-width: 480px) {
+  .product-detail-page {
+    padding: 15px 0;
+  }
+
+  .navbar-detail {
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0;
+    margin-bottom: 20px;
+
+  }
+
+  .image-detail {
+    width: 100%;
+    margin: 0 auto 15px;
+  }
+
+  .navbar-left img {
+    width: 100%;
+    height: auto;
+  }
+  .list-image-detail {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép hình ảnh xuống hàng khi không đủ không gian */
+    gap: 10px;
+    justify-content: center; /* Canh giữa hình ảnh */
+  }
+
+  .list-image-detail img {
+    width: 60px; /* Giảm kích thước hình ảnh nhỏ */
+    height: auto;
+    padding: 5px;
+    border: 1px solid rgb(172, 172, 172);
+    border-radius: 5px;
+  }
+  .navbar-right {
+    width: 100%;
+    padding-top: 15px;
+  }
+
+  .product-name {
+    font-size: 20px;
+    /* text-align: center; */
+  }
+
+  .product-children,
+  .product-title,
+  .product-tags,
+  .product-price {
+    font-size: 14px;
+  }
+
+  .productQuantity {
+    /* flex-direction: column; */
+    align-items: center;
+  }
+
+  /* Phần mô tả món ăn */
+  .food-description {
+    width: 95%;
+    margin: 0 auto;
+    padding: 15px;
+    margin-bottom: 20px;
+
+  }
+ /* Phần bình luận */
+ .comment-section {
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.media {
+  width: 100%;
+  max-width: 90%;
+  margin: 0 auto 10px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start; /* Căn avatar và nội dung lên trên */
+  background-color: #f1f2f6;
+}
+.second-media {
+  width: 77%;
+  margin-left: 15%;
+}
+
+.avatar {
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  object-fit: cover;
+  margin-left: 0;
+}
+
+.comment-details {
+  max-width: calc(100% - 60px);
+  width: 100%;
+}
+
+/* Thông tin người dùng và thời gian */
+.comment-meta-list {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  gap: 8px;
+  font-size: 13px;
+  flex-wrap: wrap; /* Để đảm bảo không lòi ra ngoài */
+}
+
+.comment-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #555;
+  flex-wrap: wrap;
+}
+
+.comment-icon {
+  font-size: 16px;
+  color: #888;
+}
+.comment-meta-list .comment-meta-item:nth-child(1) {
+  display: flex; /* Hiển thị tên người dùng */
+}
+
+/* Ẩn ngày và giờ */
+.comment-meta-list .comment-meta-item:nth-child(2),
+.comment-meta-list .comment-meta-item:nth-child(3) {
+  display: none; /* Ẩn ngày và giờ */
+}
+
+.comment-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.comment-content {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  margin-top: 5px;
+  word-wrap: break-word; /* Để đảm bảo nội dung không lòi ra ngoài */
+}
+
+/* Nút replay (trả lời) */
+.comment-replay {
+  /* color: #1877f2; */
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.replay-icon {
+  font-size: 12px;
+  margin-right: 5px;
+}
+}
+
