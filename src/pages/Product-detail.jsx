@@ -110,7 +110,7 @@ function ProductDetail() {
             <li className="media">
               <div className="avatar">
                 <img
-                  src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/451021686_3567165343596112_987871808300877131_n.jpg?stp=dst-jpg_p526x296&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=HcSxLjVaVFIQ7kNvgFRmCm4&_nc_zt=23&_nc_ht=scontent.fdad3-4.fna&_nc_gid=A3xUAdbDsoCUEymSCQ2zC8e&oh=00_AYCDOLkoVgn8P58WiharXst2cq6V8vhmCxzVGmoTQhkSlQ&oe=671CD678"
+                src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/462284740_3639086459737333_4604508730620509631_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=HLXrsSBNhncQ7kNvgEfvIvF&_nc_zt=23&_nc_ht=scontent.fdad3-4.fna&_nc_gid=AHb0BhUhZmnJaxFpv5lswm-&oh=00_AYDeqj4OG5b688vuQvz6V8C1FgDO5uBd62LNI_qX2tBOCw&oe=67297B59"
                   alt="User Avatar"
                 />
               </div>
@@ -162,7 +162,7 @@ function ProductDetail() {
                       <i className="comment-icon">
                         <MdAccountCircle />
                       </i>
-                      <p className="comment-name">LanHuong</p>
+                      <p className="comment-name">QUan,,</p>
                     </li>
                     <li className="comment-meta-item">
                       <i className="comment-icon">
@@ -389,7 +389,7 @@ function ProductDetail() {
                     alt=""
                   />
                   <div className="product-caption">
-                    <span className="product-tags">Chicken, Spicyy</span>
+                    <span className="product-tags">Chicken, Spicy</span>
                     <h3 className="product-title">Chicken alfredo</h3>
                     <h4 className="product-price">35.000 đ</h4>
                     <button className="add-to-cart">

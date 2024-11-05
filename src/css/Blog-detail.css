@@ -1,0 +1,61 @@
+/* Tổng container */
+.blog-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Phần bài viết */
+  .blog-post {
+    flex: 3;
+    margin-right: 20px;
+  }
+  
+  .post-image {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .post-info {
+    color: #666;
+    margin: 10px 0;
+  }
+  
+  .post-info p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .post-content {
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  
+  
+  /* Danh sách bài đăng gần đây */
+  .recent-posts .post {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .recent-posts .post img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+  }
+  
+  .recent-posts .post p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .recent-posts .post p:first-child {
+    color: #888;
+    font-size: 12px;
+  }
