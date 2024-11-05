@@ -1,174 +1,295 @@
-function Blog() {
+import "../css2/Blog.css";
+
+const Blog = () => {
   return (
-    <div className="container mx-auto max-w-7xl p-4">
-      {/* Mục tin tức chính */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-        {/* Main Article */}
-        <div className="md:col-span-8">
-          <div className="relative">
+    <div className="blog-container">
+      {/* Nội dung chính */}
+      <main className="blog-main">
+        <div className="blog-post">
+          <div className="post-image-wrapper">
             <img
-              src="https://madamelan.vn/storage/tin-tuc/20211121-mdl-suon-heo-nuong-mac-khen.jpg"
-              alt="Main news"
-              className="w-full h-80 object-cover rounded-lg"
+              src="https://freebw.com/templates/royate/images/blog-standard-1.jpg"
+              alt="Bài viết blog 1"
+              className="post-image"
             />
-            <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-4 w-full flex justify-center items-center rounded-b-lg">
-              <h2 className="text-xl text-center">
-                SƯỜN HEO NƯỚNG MẮC KHÉN - TRỌN VỊ NÚI RỪNG TÂY BẮC
-              </h2>
+            <div className="post-date">
+              <span>20</span>
+              <span>THÁNG 6</span>
             </div>
           </div>
-
-          {/* Bài viết phụ */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            {Array(3).fill("").map((_, i) => (
-              <div key={i} className="flex flex-col items-center text-center">
-                <img
-                  src="https://halotravel.vn/wp-content/uploads/2021/02/nha-hang-sang-trong-o-sai-gon-Parkview-Buffet-1-1024x600.jpg"
-                  alt="Sub news"
-                  className="w-full h-40 object-cover rounded-lg"
-                />
-                <h1 className="font-semibold text-sm bg-slate-100 w-full mt-[10px] h-[40px] flex justify-center items-center rounded-md">
-                  THƯỞNG THỨC HƯƠNG VỊ BIỂN CẢ VỚI VẸM XÀO HÚNG DỪA
-                </h1>
-                <p className="mt-2 text-sm text-justify">
-                  Làm thế nào một hương vị mạnh mẽ như húng quế có thể hoà quyện
-                  với sự mềm mại, ngậy béo của dừa và tạo nên một hương vị đầy ấn
-                  tượng? Bạn sẽ có câu trả lời khi thưởng thức món Vẹm xào húng
-                  dừa của Madame Lân - nhà hàng Đà Nẵng bên bờ sông Hàn.
-                </p>
-                <div className="flex items-center justify-center mt-4 text-blue-500 hover:underline cursor-pointer">
-                  <span>Chi tiết</span>
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5l7 7-7 7"
-                    ></path>
-                  </svg>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Thanh bên (Phần Slide) */}
-        <div className="md:col-span-4 space-y-4">
-          {/* Tin nổi bật */}
-          <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
-            <h3 className="font-semibold text-lg text-center">Tin nổi bật</h3>
-            <ul className="mt-2 space-y-2 text-center">
-              {["Hoàng Đức sẽ khoác áo CLB Thanh Niên TP.HCM...", 
-                "Jeff Dean - nhà khoa học AI của Google...", 
-                "Bí kíp tiết kiệm nhưng thương hiệu Mỹ tự tổ chức...", 
-                "iPhone 17 Slim sẽ là chiếc iPhone kỳ lạ..."].map((item, index) => (
-                <li key={index} className="border-b pb-2 text-gray-700 hover:text-red-500 transition-colors duration-200 cursor-pointer">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Quảng cáo */}
-          <div className="bg-gray-100 p-4 rounded-lg shadow-lg text-center">
-            <img
-              src="https://halotravel.vn/wp-content/uploads/2021/02/nha-hang-sang-trong-o-sai-gon-Parkview-Buffet-1-1024x600.jpg"
-              alt="Small image"
-              className="w-20 h-20 object-cover mx-auto rounded-lg"
-            />
-            <p className="text-sm mt-2 text-gray-800 font-semibold">
-              iPhone 17 Slim sẽ là chiếc iPhone kỳ lạ nhất của Apple
+          <div className="post-content">
+            <h2 className="post-title">Nhiều Phiên Bản Khác Nhau</h2>
+            <p className="post-excerpt">
+              Có nhiều biến thể của các đoạn văn của Lorem Ipsum có sẵn, nhưng
+              phần lớn đã bị thay đổi theo một hình thức nào đó...
             </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Tin tức hàng tuần */}
-      <div className="mt-8">
-        <h2 className="text-2xl mb-4 text-gray-700 text-center">Tin tức hàng tuần</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {Array(3).fill("").map((_, i) => (
-            <div key={i} className="flex flex-col items-center">
+            <div className="post-meta">
               <img
-                src="https://halotravel.vn/wp-content/uploads/2021/02/nha-hang-sang-trong-o-sai-gon-Parkview-Buffet-1-1024x600.jpg"
-                alt="Weekly news"
-                className="w-full h-48 object-cover rounded-lg"
+                src="https://freebw.com/templates/royate/images/widget-person.png"
+                alt="Tác giả"
+                className="author-image"
               />
-              <p className="mt-2 text-sm text-center">Jeff Dean - nhà khoa học AI...</p>
+              <span>Được viết bởi Andrea Silva</span>
+              <span>Tráng miệng / Nấu ăn / Thực phẩm</span>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mục Tin Tức Mới */}
-      <div className="mt-8">
-        {/* Navigation Tabs */}
-        <div className="flex justify-center border-b mb-6">
-          {["Mục Tin Tức Mới", "Khoa Học", "Phim Ảnh", "Bóng Đá", "Giải Trí", "Nước Ngoài"].map(
-            (tab, i) => (
-              <button
-                key={i}
-                className={`px-4 py-2 text-gray-700 font-semibold ${
-                  i === 0 ? "text-2xl pr-[60px] font-bold" : ""
-                } border-b-2 border-transparent hover:border-red-500`}
-              >
-                {tab}
-              </button>
-            )
-          )}
-        </div>
-
-        <div className="flex flex-col md:flex-row justify-between">
-          {/* Left Column: News Cards */}
-          <div className="w-full md:w-3/4 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {Array(2).fill("").map((_, i) => (
-              <div key={i} className="bg-white shadow-md rounded-md overflow-hidden">
-                <img
-                  src="https://madamelan.vn/storage/350950366-643849020964476-7010446790931598520-n.jpg"
-                  alt="News"
-                  className="w-full h-40 object-cover"
-                />
-                <div className="p-4 text-center">
-                  <span className="text-red-600 font-bold uppercase text-sm">
-                    Khoa Học
-                  </span>
-                  <h3 className="text-lg font-semibold mt-2">
-                    iPhone 17 Slim sẽ là chiếc iPhone kỳ lạ nhất của Apple
-                  </h3>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Right Column: Social Media & Events */}
-          <div className="w-full md:w-1/4 space-y-6 mt-4 md:mt-0">
-            <div className="bg-white shadow-md rounded-md p-4 text-center ml-[10px]">
-              <h4 className="font-bold text-lg mb-4">Follow Us</h4>
-              <div className="space-y-4">
-                {["Facebook", "Twitter", "Instagram", "YouTube"].map((social, i) => (
-                  <div key={i} className="flex items-center justify-center space-x-2">
-                    <i className={`fab fa-${social.toLowerCase()} text-blue-${i * 100 + 600}`}></i>
-                    <span>3,245 Fans</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white shadow-md rounded-md p-4 text-center ml-[10px]">
-              <h4 className="font-bold text-lg">Music Events</h4>
-              <p className="text-gray-500">Live in Concert</p>
-            </div>
+            <button className="read-more">XEM THÊM</button>
           </div>
         </div>
-      </div>
+
+        <div className="blog-post">
+          <div className="post-image-wrapper">
+            <img
+              src="https://freebw.com/templates/royate/images/blog-standard-2.jpg"
+              alt="Bài viết blog 2"
+              className="post-image"
+            />
+            <div className="post-date">
+              <span>19</span>
+              <span>THÁNG 6</span>
+            </div>
+          </div>
+          <div className="post-content">
+            <h2 className="post-title">Hiểu Biết Cơ Bản</h2>
+            <p className="post-excerpt">
+              Hiểu biết cơ bản về một chủ đề có thể dẫn đến sự đánh giá sâu sắc
+              hơn về những phức tạp của nó...
+            </p>
+            <div className="post-meta">
+              <img
+                src="https://freebw.com/templates/royate/images/widget-person.png"
+                alt="Tác giả"
+                className="author-image"
+              />
+              <span>Được viết bởi John Doe</span>
+              <span>Giáo dục / Học tập</span>
+            </div>
+            <button className="read-more">XEM THÊM</button>
+          </div>
+        </div>
+
+        <div className="blog-post">
+          <div className="post-image-wrapper">
+            <img
+              src="https://freebw.com/templates/royate/images/blog-standard-4.jpg"
+              alt="Bài viết blog 3"
+              className="post-image"
+            />
+            <div className="post-date">
+              <span>18</span>
+              <span>THÁNG 6</span>
+            </div>
+          </div>
+          <div className="post-content">
+            <h2 className="post-title">Khám Phá Công Thức Mới</h2>
+            <p className="post-excerpt">
+              Nấu ăn là một nghệ thuật, và khám phá công thức mới có thể là một
+              cuộc phiêu lưu thú vị cho bất kỳ ai yêu thích ẩm thực...
+            </p>
+            <div className="post-meta">
+              <img
+                src="https://freebw.com/templates/royate/images/widget-person.png"
+                alt="Tác giả"
+                className="author-image"
+              />
+              <span>Được viết bởi Maria Gonzales</span>
+              <span>Thực phẩm / Nấu ăn</span>
+            </div>
+            <button className="read-more">XEM THÊM</button>
+          </div>
+        </div>
+
+        <div className="blog-post">
+          <div className="post-image-wrapper">
+            <img
+              src="https://freebw.com/templates/royate/images/blog-standard-3.jpg"
+              alt="Bài viết blog 4"
+              className="post-image"
+            />
+            <div className="post-date">
+              <span>17</span>
+              <span>THÁNG 6</span>
+            </div>
+          </div>
+          <div className="post-content">
+            <h2 className="post-title">Du Lịch Thế Giới</h2>
+            <p className="post-excerpt">
+              Du lịch mở rộng tầm mắt của bạn về vẻ đẹp của các nền văn hóa khác
+              nhau và những trải nghiệm hình thành nên con người chúng ta...
+            </p>
+            <div className="post-meta">
+              <img
+                src="https://freebw.com/templates/royate/images/widget-person.png"
+                alt="Tác giả"
+                className="author-image"
+              />
+              <span>Được viết bởi Alex Johnson</span>
+              <span>Du lịch / Phiêu lưu</span>
+            </div>
+            <button className="read-more">XEM THÊM</button>
+          </div>
+        </div>
+      </main>
+
+      {/* Sidebar */}
+      <aside className="blog-sidebar-custom">
+        {/* Tìm kiếm */}
+        <div className="sidebar-section-custom search-custom">
+          <input type="text" placeholder="Tìm kiếm" />
+          <button type="submit">Tìm kiếm</button>
+        </div>
+        {/* Thẻ cá nhân */}
+        <div className="profile-card-custom">
+          <img
+            src="https://freebw.com/templates/royate/images/widget-person.png"
+            alt="Hồ sơ"
+            className="profile-image-custom"
+          />
+          <h3>Trần Minh Quân</h3>
+          <p>Đầu bếp trưởng</p>
+          <div className="signature-custom">Chữ ký</div>
+        </div>
+
+        {/* Danh mục */}
+        <div className="sidebar-section-custom">
+          <h3 className="title-categories">Danh Mục</h3>
+          <ul className="categories-list-custom">
+            <li>Hải sản (2)</li>
+            <li>Cà phê (5)</li>
+            <li>Nhà hàng (18)</li>
+            <li>Bánh cupcake (22)</li>
+            <li>Bữa trưa (19)</li>
+          </ul>
+        </div>
+
+        {/* Bài viết mới nhất */}
+        <div className="sidebar-section-custom latest-posts-custom">
+          <h3 className="title-lastestpost">Bài Viết Mới Nhất</h3>
+          <ul>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/latest-post-thumb-1.png"
+                alt="Hình thu nhỏ bài viết"
+              />
+              <div>
+                <span>Có nhiều biến thể</span>
+                <p>Ngày 23 tháng 7, 2018</p>
+              </div>
+            </li>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/latest-post-thumb-2.png"
+                alt="Hình thu nhỏ bài viết"
+              />
+              <div>
+                <span>Tất cả Lorem Ipsum</span>
+                <p>Ngày 23 tháng 7, 2018</p>
+              </div>
+            </li>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/latest-post-thumb-3.png"
+                alt="Hình thu nhỏ bài viết"
+              />
+              <div>
+                <span>Dòng đầu tiên của Lorem</span>
+                <p>Ngày 23 tháng 7, 2018</p>
+              </div>
+            </li>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/latest-post-thumb-4.png"
+                alt="Hình thu nhỏ bài viết"
+              />
+              <div>
+                <span>Khối chuẩn</span>
+                <p>Ngày 23 tháng 7, 2018</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        {/* Theo dõi Instagram */}
+        <div className="sidebar-section-custom latest-posts-custom">
+          <h3 className="title-instagram">Theo Dõi Instagram</h3>
+          <ul className="instagram-gallery">
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/instagram-small-1.jpg"
+                alt="Hình ảnh Instagram 1"
+              />
+            </li>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/instagram-small-2.jpg"
+                alt="Hình ảnh Instagram 2"
+              />
+            </li>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/instagram-small-3.jpg"
+                alt="Hình ảnh Instagram 3"
+              />
+            </li>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/instagram-small-4.jpg"
+                alt="Hình ảnh Instagram 4"
+              />
+            </li>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/instagram-small-5.jpg"
+                alt="Hình ảnh Instagram 5"
+              />
+            </li>
+            <li>
+              <img
+                src="https://freebw.com/templates/royate/images/instagram-small-6.jpg"
+                alt="Hình ảnh Instagram 6"
+              />
+            </li>
+          </ul>
+        </div>
+
+        {/* Đám mây thẻ */}
+        <div className="sidebar-section-custom latest-posts-custom">
+          <h3 className="title-tagcloud">Đám Mây Thẻ</h3>
+          <ul>
+            <li>
+              <div className="tags-custom">
+                <a href="#">Tự nhiên</a>
+                <a href="#">Trái cây</a>
+                <a href="#">Khô</a>
+                <a href="#">Thực phẩm tươi</a>
+                <a href="#">Tự nhiên</a>
+                <a href="#">Lành mạnh</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        {/* Banner Khuyến mãi */}
+        <div className="sidebar-section-custom sale-banner-custom">
+          {/* <h3 className="title-sale">Khuyến mãi lên đến 50%</h3> */}
+          <img
+            src="https://freebw.com/templates/royate/images/widget-banner.jpg"
+            alt="Hình ảnh khuyến mãi"
+          />
+        </div>
+      </aside>
+
+      {/* <div className="arrow left">
+        <span className="arrow-icon prev"></span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        <span className="arrow-icon next"></span>
+      </div> */}
     </div>
   );
-}
+};
 
 export default Blog;

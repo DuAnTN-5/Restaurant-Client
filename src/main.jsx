@@ -17,6 +17,7 @@ import Blog from './pages/Blog.jsx';
 import ProfileUser from './pages/ProfileUser.jsx';
 import FavouritePage from './pages/FavouritePage.jsx';
 import About from './pages/About.jsx';
+import MenuPage from './pages/MenuPage.jsx';
 
 
 
@@ -34,6 +35,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/blog" element={<Blog/>} /> 
         <Route path="/favourite-page" element={<FavouritePage/>} /> 
         <Route path="/profile-user" element={<ProfileUser/>} /> 
+        <Route path="/menu" element={<MenuPage/>} /> 
+
         <Route path="/about" element={<About/>} />
         
 

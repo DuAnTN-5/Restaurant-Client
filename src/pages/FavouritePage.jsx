@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { FaCheck, FaTimes } from "react-icons/fa"; // Import icons from react-icons
+import { useState } from "react"; // Importing React and useState hook
+import { FaCheck, FaTimes } from "react-icons/fa";
+import "../css2/Favourite.css"; // Ensure the path is correct
 
 const productsData = [
   {
@@ -7,28 +8,25 @@ const productsData = [
     name: "Beef Burger",
     price: "$12.00",
     stockStatus: "In stock",
-    image:
-      "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
+    image: "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
   },
   {
     id: 2,
     name: "Chicken Burger",
     price: "$10.00",
     stockStatus: "In stock",
-    image:
-      "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
+    image: "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
   },
   {
     id: 3,
     name: "Veggie Burger",
     price: "$8.00",
     stockStatus: "Out of stock",
-    image:
-      "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
+    image: "https://images2.thanhnien.vn/528068263637045248/2024/8/2/h3-1722573253571452686987.jpg",
   },
 ];
 
-const FavouritePage = () => {
+function FavouritePage() {
   const [selectedProducts, setSelectedProducts] = useState(
     new Array(productsData.length).fill(false)
   );
@@ -68,7 +66,7 @@ const FavouritePage = () => {
     const inStockProducts = productsData.filter(
       (product) => product.stockStatus === "In stock"
     );
-    setCart(inStockProducts);
+    setCart((prevCart) => [...prevCart, ...inStockProducts]);
     alert("Tất cả đã được thêm vào giỏ hàng.");
   };
 
@@ -85,15 +83,15 @@ const FavouritePage = () => {
   const isInCart = (product) => cart.some((item) => item.id === product.id);
 
   return (
-    <div className="container mx-auto max-w-7xl p-4">
-      <h1 className="text-2xl font-bold mb-6 text-center">Sản phẩm yêu thích</h1>
-      <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-        <thead className="bg-black text-white">
+    <div className="favourite-container">
+      <h1 className="favourite-title">Sản phẩm yêu thích</h1>
+      <table className="favourite-table">
+        <thead className="favourite-table-header">
           <tr>
-            <th className="px-2 py-2 text-left">
+            <th className="favourite-checkbox-header">
               <input
                 type="checkbox"
-                className="transform scale-150"
+                className="favourite-select-all-checkbox"
                 onChange={() => {
                   const allSelected = selectedProducts.every(Boolean);
                   setSelectedProducts(
@@ -102,64 +100,48 @@ const FavouritePage = () => {
                 }}
               />
             </th>
-            <th className="px-2 py-2">Tên sản phẩm</th>
-            <th className="px-2 py-2">Đơn giá</th>
-            <th className="px-2 py-2">Tình trạng kho</th>
-            <th className="px-2 py-2 text-center">Hành động</th>
+            <th className="favourite-product-name">Tên sản phẩm</th>
+            <th className="favourite-product-price">Đơn giá</th>
+            <th className="favourite-stock-status">Tình trạng kho</th>
+            <th className="favourite-action-header">Hành động</th>
           </tr>
         </thead>
         <tbody>
           {productsData.map((product, index) => (
-            <tr key={product.id} className="border-b hover:bg-gray-100">
-              <td className="px-2 py-2">
+            <tr key={product.id} className="favourite-table-row">
+              <td className="favourite-checkbox-cell">
                 <input
                   type="checkbox"
                   checked={selectedProducts[index]}
                   onChange={() => toggleSelect(index)}
-                  className="transform scale-150"
+                  className="favourite-product-checkbox"
                 />
               </td>
-              <td className="px-2 py-2">
-                <div className="flex items-center">
+              <td className="favourite-product-info">
+                <div className="favourite-product-image-container">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-16 h-16 object-cover rounded-full"
+                    className="favourite-product-image"
                   />
-                  <span className="ml-4">{product.name}</span>
+                  <span className="favourite-product-name">{product.name}</span>
                 </div>
               </td>
-              <td className="px-2 py-2">{product.price}</td>
-              <td
-                className={`px-2 py-2 ${
-                  product.stockStatus === "In stock"
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
+              <td className="favourite-product-price">{product.price}</td>
+              <td className={`favourite-stock-status ${product.stockStatus === "In stock" ? "in-stock" : "out-of-stock"}`}>
                 {product.stockStatus}
               </td>
-              <td className="px-2 py-2 text-center flex justify-center items-center">
+              <td className="favourite-action-cell">
                 <button
-                  className={`${
-                    product.stockStatus === "Out of stock"
-                      ? "opacity-50 cursor-not-allowed"
-                      : "text-green-500"
-                  }`}
-                  onClick={() =>
-                    isInCart(product)
-                      ? handleRemoveFromCart(product)
-                      : handleAddToCart(product)
-                  }
+                  className={`favourite-add-button ${product.stockStatus === "Out of stock" ? "disabled" : "enabled"}`}
+                  onClick={() => isInCart(product) ? handleRemoveFromCart(product) : handleAddToCart(product)}
                   disabled={product.stockStatus === "Out of stock"}
                 >
                   <FaCheck size={20} />
                 </button>
-                <span className="mx-2" />
+                <span className="favourite-action-separator" />
                 <button
-                  className={`${
-                    isInCart(product) ? "text-red-600" : "opacity-50 cursor-not-allowed"
-                  }`}
+                  className={`favourite-remove-button ${isInCart(product) ? "enabled" : "disabled"}`}
                   onClick={() => handleRemoveFromCart(product)}
                   disabled={!isInCart(product)}
                 >
@@ -170,38 +152,26 @@ const FavouritePage = () => {
           ))}
         </tbody>
       </table>
-      <div className="flex flex-col md:flex-row justify-between mt-6">
-        <div className="flex items-center flex-wrap mb-4 md:mb-0">
-          <button
-            onClick={handleAddSelectedToCart}
-            className="bg-black text-white px-4 py-2 mr-2 rounded-md hover:bg-gray-800 transition duration-200 w-full md:w-auto"
-          >
+      <div className="favourite-action-buttons">
+        <div className="favourite-button-group">
+          <button onClick={handleAddSelectedToCart} className="favourite-button add-selected-button">
             Thêm mục đã chọn
           </button>
-          <button
-            onClick={handleAddAllToCart}
-            className="bg-red-600 text-white px-4 py-2 mr-2 rounded-md hover:bg-red-700 transition duration-200 w-full md:w-auto"
-          >
+          <button onClick={handleAddAllToCart} className="favourite-button add-all-button">
             Thêm tất cả
           </button>
-          <button
-            onClick={handleRemoveAllFromCart}
-            className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 w-full md:w-auto"
-          >
+          <button onClick={handleRemoveAllFromCart} className="favourite-button remove-all-button">
             Xóa tất cả
           </button>
         </div>
         <div>
-          <button
-            onClick={handleViewCart}
-            className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition duration-200 w-full md:w-auto"
-          >
+          <button onClick={handleViewCart} className="favourite-button view-cart-button">
             Xem giỏ hàng
           </button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default FavouritePage;
