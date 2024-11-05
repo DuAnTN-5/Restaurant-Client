@@ -6,8 +6,8 @@ import OurPartner from "../component/OurPartner"
 import FavoriteFood from "../component/FavoriteFood";
 import AboutUs from "../component/AboutUs";
 // import Menu from "../component/Menu";
-import ChefSection from "../component/ChefSection";
-import NewsSection from "../component/NewsSection";
+// import ChefSection from "../component/ChefSection";
+// import NewsSection from "../component/NewsSection";
 import '../style/HomePage.css';
 function HomePage() {
   return (
@@ -20,8 +20,8 @@ function HomePage() {
       <AboutUs />
       <Content />
       {/* <Menu /> */}
-      <ChefSection />
-      <NewsSection />
+      {/* <ChefSection /> */}
+      {/* <NewsSection /> */}
 
     </div>
   );

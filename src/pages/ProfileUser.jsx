@@ -1,23 +1,23 @@
-import { useState } from "react";
-
-function UserProfile() {
-  // Khởi tạo state để lưu thông tin người dùng
+import  { useState } from 'react';
+import "../css2/ProfileUser.css";
+function ProfileUser() {
+  // Initialize state to store user information
   const [userInfo, setUserInfo] = useState({
-    name: "", // Tên người dùng
-    email: "", // Email người dùng
-    password: "", // Mật khẩu người dùng
-    confirmPassword: "", // Xác nhận mật khẩu người dùng
-    phone: "", // Số điện thoại người dùng
-    avatar: "https://via.placeholder.com/150", // Hình đại diện mẫu
+    name: '', // User's name
+    email: '', // User's email
+    password: '', // User's password
+    confirmPassword: '', // Password confirmation
+    phone: '', // User's phone number
+    avatar: 'https://via.placeholder.com/150', // Default avatar image
   });
 
-  // Hàm xử lý thay đổi thông tin nhập vào
+  // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
   };
 
-  // Hàm xử lý thay đổi hình đại diện
+  // Handle avatar change
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -26,163 +26,163 @@ function UserProfile() {
     }
   };
 
-  // Hàm xử lý cập nhật thông tin người dùng
+  // Handle user profile update
   const handleUpdate = () => {
-    console.log("Thông tin người dùng đã cập nhật:", userInfo);
+    console.log('Updated user information:', userInfo);
+    // Add logic to handle the updated information (e.g., send to a server)
   };
 
-  // Hàm xử lý đăng xuất
+  // Handle logout
   const handleLogout = () => {
-    console.log("Người dùng đã đăng xuất");
+    console.log('User has logged out');
+    // Add logic for logout (e.g., clear user data, redirect)
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      {/* Container chính */}
-      <div className="bg-white shadow-lg p-6 rounded-lg w-full max-w-6xl">
-        <div className="grid grid-cols-2 gap-6">
-          {/* Sidebar tài khoản */}
-          <div className="bg-gray-100 p-6 flex flex-col items-center">
+    <div className="profile-container">
+      {/* Main Container */}
+      <div className="profile-card">
+        <div className="profile-grid">
+          {/* Sidebar (left) */}
+          <div className="sidebar">
             <button
-              className="self-start mb-4 text-blue-500 hover:underline"
+              className="back-button"
               onClick={() => window.history.back()}
             >
               ← Trở về
             </button>
-            <div className="relative mb-4">
+            <div className="avatar-container">
               <img
                 src={userInfo.avatar}
-                alt="Hình đại diện người dùng"
-                className="w-32 h-32 rounded-full"
+                alt="User Avatar"
+                className="avatar"
               />
-              {/* Dấu cộng để thay đổi ảnh đại diện */}
-              <label htmlFor="avatar-upload" className="absolute bottom-0 right-0 bg-black text-white rounded-full p-2 cursor-pointer">
+              {/* Label for avatar upload */}
+              <label
+                htmlFor="avatar-upload"
+                className="avatar-upload-label"
+              >
                 +
               </label>
               <input
                 type="file"
                 id="avatar-upload"
                 onChange={handleAvatarChange}
-                className="hidden"
+                className="avatar-upload-input"
               />
             </div>
-            <h2 className="text-xl font-semibold">{userInfo.name}</h2>
-
+            <h2 className="user-name">{userInfo.name || 'Tên người dùng'}</h2>
             <button
               onClick={handleLogout}
-              className="mt-32 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              className="logout-button"
             >
               Đăng xuất
             </button>
           </div>
 
-          {/* Biểu mẫu cập nhật người dùng */}
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-6">Cập nhật người dùng</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {/* Phần 1 bên trái */}
-              <div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium">Tên</label>
+          {/* User Update Form (right) */}
+          <div className="form-container">
+            <h2 className="form-title">Cập nhật người dùng</h2>
+            <div className="form-grid">
+              {/* Left Section */}
+              <div className="form-left">
+                <div className="form-group">
+                  <label className="form-label">Tên</label>
                   <input
                     type="text"
                     name="name"
                     value={userInfo.name}
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded-md"
+                    className="form-input"
                     placeholder="Nhập tên của bạn"
                   />
                 </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-medium">Email</label>
+                <div className="form-group">
+                  <label className="form-label">Email</label>
                   <input
                     type="email"
                     name="email"
                     value={userInfo.email}
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded-md"
+                    className="form-input"
                     placeholder="Nhập email của bạn"
                   />
                 </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-medium">Mật khẩu</label>
+                <div className="form-group">
+                  <label className="form-label">Mật khẩu</label>
                   <input
                     type="password"
                     name="password"
                     value={userInfo.password}
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded-md"
+                    className="form-input"
                     placeholder="Nhập mật khẩu của bạn"
                   />
                 </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-medium">Nhập lại mật khẩu</label>
+                <div className="form-group">
+                  <label className="form-label">Nhập lại mật khẩu</label>
                   <input
                     type="password"
                     name="confirmPassword"
                     value={userInfo.confirmPassword}
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded-md"
+                    className="form-input"
                     placeholder="Nhập lại mật khẩu"
                   />
                 </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-medium">Điện thoại</label>
+                <div className="form-group">
+                  <label className="form-label">Điện thoại</label>
                   <input
                     type="text"
                     name="phone"
                     value={userInfo.phone}
                     onChange={handleInputChange}
-                    className="w-full p-2 border rounded-md"
+                    className="form-input"
                     placeholder="Nhập số điện thoại của bạn"
                   />
                 </div>
               </div>
 
-              {/* Phần 2 bên phải */}
-              <div className="space-y-4">
-                {/* Input cho Facebook và Google */}
-                <div className="relative">
+              {/* Right Section */}
+              <div className="form-right">
+                {/* Facebook URL Input */}
+                <div className="social-input">
                   <input
                     type="text"
                     name="facebook"
-                    className="w-full p-2 border rounded-md"
+                    className="social-input-field"
                     placeholder="Facebook URL"
                   />
-                  <span className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                  <span className="social-icon">
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
                       alt="Facebook logo"
-                      className="w-5 h-5"
+                      className="icon"
                     />
                   </span>
                 </div>
-                <div className="relative">
+                {/* Google URL Input */}
+                <div className="social-input">
                   <input
                     type="text"
                     name="google"
-                    className="w-full p-2 border rounded-md"
+                    className="social-input-field"
                     placeholder="Google URL"
                   />
-                  <span className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                  <span className="social-icon">
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                      src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
                       alt="Google logo"
-                      className="w-5 h-5"
+                      className="icon"
                     />
                   </span>
                 </div>
               </div>
             </div>
-
-            <div className="flex justify-end mt-6">
+            <div className="form-submit">
               <button
                 onClick={handleUpdate}
-                className="px-6 py-2 bg-black text-white rounded-md"
+                className="submit-button"
               >
                 Cập Nhật
               </button>
@@ -194,4 +194,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default ProfileUser;
