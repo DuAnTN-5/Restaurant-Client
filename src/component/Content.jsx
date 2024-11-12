@@ -26,7 +26,7 @@ function Content() {
       })
       .catch((error) => console.log(error));
   }, []);
-   // Thêm mảng phụ thuộc rỗng để chạy effect chỉ một lần khi component mount
+  // Thêm mảng phụ thuộc rỗng để chạy effect chỉ một lần khi component mount
   console.log(category);
 
   // ******************************************************************************************
@@ -319,9 +319,8 @@ function Content() {
           Meet Our Special Chefs
         </h2>
         <div className="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-8 flex-wrap">
+          {/* Chef 1 */}
           <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
             <div className="relative">
               <img
                 className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
@@ -329,7 +328,7 @@ function Content() {
                 alt="Mendia Juxef"
               />
               <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                {/* Các icon mạng xã hội */}
+                {/* Social icons */}
               </div>
             </div>
             <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
@@ -340,9 +339,8 @@ function Content() {
             </p>
           </div>
 
+          {/* Chef 2 */}
           <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
             <div className="relative">
               <img
                 className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
@@ -366,9 +364,8 @@ function Content() {
             </p>
           </div>
 
+          {/* Chef 3 */}
           <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
             <div className="relative">
               <img
                 className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
@@ -392,9 +389,8 @@ function Content() {
             </p>
           </div>
 
+          {/* Chef 4 */}
           <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
             <div className="relative">
               <img
                 className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
@@ -418,9 +414,8 @@ function Content() {
             </p>
           </div>
 
+          {/* Chef 5 */}
           <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
             <div className="relative">
               <img
                 className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
@@ -451,7 +446,7 @@ function Content() {
         <h2 className="text-4xl font-semibold text-white mb-8">
           Our Latest News & Blog
         </h2>
-        <div className="flex justify-center gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {/* Post 1 */}
           <div className="max-w-md shadow-lg overflow-hidden">
             <img
