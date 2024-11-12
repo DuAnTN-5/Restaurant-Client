@@ -12,15 +12,17 @@ import { FaTelegram } from "react-icons/fa";
 function Contact() {
   return (
     <>
-     <div className="contact-page">
+     <div className="contact-page text-vphu">
         <div className="contact">
         <div className="form-container">
-            <h3 className="form-title">Liên hệ với chúng tôi</h3>
+            <h3 className="form-title title-vphu">Liên hệ với chúng tôi</h3>
             <h4 className="form-description">
-              {" "}
-              <strong>Bạn cần hổ trợ ?</strong> Nhà hàng HightFive rất hân hạnh
+             <p className="subtitle-contact subtitle-vphu "> Bạn cần hổ trợ ?</p>
+              <p>
+               Nhà hàng HightFive rất hân hạnh
               được hổ trợ bạn, hãy để lại thông tin cho chúng tôi nhé. Yêu cầu của
               bạn sẽ được xử lí và phản hồi trong thời gian sớm nhất !!!
+              </p>
             </h4>
             <div className="contact-form">
               <div className="form-input">
