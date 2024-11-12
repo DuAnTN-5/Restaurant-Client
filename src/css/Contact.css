@@ -1,3 +1,6 @@
+@import url("./root.css");
+
+
 .contact-page{
     background-color: #1b1b1b;
     color: white;
@@ -65,7 +68,6 @@
 
 }
 .form-title{
-    font-size: 26px;
     font-weight: bold;
     width: 280px;
     /* text-align: center; */
@@ -77,10 +79,9 @@
     /* border-radius: 10px; */
     margin-bottom: 17px;
 }
-.form-description strong{
-    font-size: 17px;
+.subtitle-contact{
+    /* padding-bottom: 5px; */
     font-weight: bold;
-    /* color: gray; */
 }
 
 .contact-form{

@@ -19,6 +19,7 @@ import FavouritePage from './pages/FavouritePage.jsx';
 import MenuPage from './pages/MenuPage.jsx';
 import BlogDetail from './pages/Blog-detail.jsx';
 import About from './pages/About.jsx';
+import EmailVerification from './pages/EmailVerification.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/contact" element={<Contact/>} /> 
         <Route path="/login" element={<Login/>} /> 
         <Route path="/signup" element={<SignUp/>} /> 
+        <Route path="/verify-email/:token" element={<EmailVerification/>} /> 
         <Route path="/cart" element={<CartProduct/>} /> 
         <Route path="/product-detail" element={<ProductDetail/>} /> 
         <Route path="/blog" element={<Blog/>} /> 
