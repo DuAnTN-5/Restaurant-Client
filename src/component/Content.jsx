@@ -25,12 +25,14 @@ function Content() {
   console.log(category);
 
   return (
+    
     <div className="container-vphu mx-auto py-12">
       {/* Phần thực đơn Food Menu */}
       <div className="text-center text-white">
         <h4 className="text-white uppercase tracking-wider text-gray-500 mb-2">
           Food Menu
         </h4>
+        
         <h1 className="text-4xl font-bold mb-8">Our Specials Menu</h1>
         <div className="inline-block border-[1px] border-gray-300 rounded-lg overflow-hidden">
           <div className="flex menu-our-special">
@@ -51,7 +53,7 @@ function Content() {
       </div>
 
       {/* Phần sản phẩm */}
-
+            
       <div className="flex justify-center items-center min-h-screen container mx-auto p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-[1300px] mt-[70px]">
           

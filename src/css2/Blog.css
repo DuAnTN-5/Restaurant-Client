@@ -1,11 +1,8 @@
-/* General Body Styles */
-body {
-  background-color: #1b1b1b; /* Full background color */
-  color: #ffffff; /* Default text color for readability */
-  margin: 0; /* Remove default margin */
-  font-family: Arial, sans-serif; /* Optional: Set a font family */
-}
+.blog-page{
+  color: white; /* Default text color for readability */
+  background-color: #1b1b1b;
 
+}
 /* General Container */
 .blog-container {
   display: flex;
