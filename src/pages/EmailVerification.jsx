@@ -16,7 +16,7 @@ function EmailVerification() {
             api.get(`/verify-email/${token}`)
                 .then(response => {
                     if (response.data.success  === true) {
-                        setMessage('Xác thực email thành công! Đang chuyển hướng tới trang đăng nhập...');
+                        setMessage('Xác thực thành công !');
                         setTimeout(() => {
                             navigate('/login'); // Chuyển hướng về trang đăng nhập sau khi xác thực thành công
                         }, 3000);
@@ -24,7 +24,7 @@ function EmailVerification() {
                         setMessage('Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn.');
                         setTimeout(() => {
                           navigate("/register")
-                      }, 3000);
+                      }, 5000);
                     }
                 })
                 .catch(error => {
@@ -32,7 +32,7 @@ function EmailVerification() {
                     setMessage('Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn.');
                     setTimeout(() => {
                       navigate("/register")
-                  }, 3000);
+                  }, 5000);
                 });
         } else {
             setMessage('Không tìm thấy mã xác thực.');

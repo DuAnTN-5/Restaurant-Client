@@ -15,7 +15,8 @@ function Contact() {
      <div className="contact-page text-vphu">
         <div className="contact">
         <div className="form-container">
-            <h3 className="form-title title-vphu">Liên hệ với chúng tôi</h3>
+            <h3 className="form-title">Liên hệ với chúng tôi</h3>
+            {/* <h3 className="form-title title-vphu">Liên hệ với chúng tôi</h3> */}
             <h4 className="form-description">
              <p className="subtitle-contact subtitle-vphu "> Bạn cần hổ trợ ?</p>
               <p>

@@ -1,0 +1,138 @@
+@import url(../css/root.css);
+/* body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+} */
+.booking-table-page{
+    background-color: #1b1b1b;
+  color: white;
+  padding: 40px 0;
+}
+.table-container {
+    display: flex;
+    gap: 60px;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+/* Bảng sơ đồ nhà hàng */
+.restaurant-layout {
+    width: 50%;
+    background-color: #262525;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.entrance, .bar {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+}
+
+.entrance {
+    background-color: #bfb9b9; /* Màu đỏ cho cửa ra vào */
+    margin-bottom: 20px;
+}
+
+.bar {
+    background-color: #a2a09e; /* Màu nâu cho quầy bar */
+    margin-top: 20px;
+}
+
+/* Sơ đồ bàn */
+.table-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.screen {
+    background-color: #eee;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #666;
+    font-size: 24px;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+}
+
+.table {
+    width: 60px;
+    height: 60px;
+    border: 3px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+/* Màu sắc của các loại bàn */
+.table.regular {
+    border-color: #ccc;
+    background-color: purple;
+}
+.table.vip {
+    border-color: #ccc;
+    background-color: rgb(22, 187, 243);
+}
+.table.premium {
+    border-color: #ccc;
+    background-color: #11cb0e;
+}
+.table.couple {
+    border-color: #ccc;
+    background-color: #f5077e;
+}
+/* .table.booked {
+    background-color: #ddd;
+    color: #999;
+    cursor: not-allowed;
+}
+.table.selected {
+    background-color: #4CAF50;
+    color: white;
+} */
+
+/* Thông tin người dùng */
+.user-info {
+    width: 40%;
+    background-color: #262525;
+    padding: 30px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    /* /-strong/-heart:>:o:-((:-h font-size: 18px; */
+}
+
+.user-info h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.user-info p {
+    margin: 10px 0;
+}
+
+.user-info .label {
+    font-weight: bold;
+    font-size: 20px;
+}
