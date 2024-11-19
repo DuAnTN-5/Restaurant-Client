@@ -9,29 +9,41 @@ function ForgotPassword() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChangeInputs = (event) => {
-    const { name, value } = event.target;
-    // console.log(name, value)
-    setEmail((prevInputs) => ({ ...prevInputs, [name]: value })); // dấu tròn là return về luôn
+    setEmail(event.target.value);
   };
   function handleSubmit(e) {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    api
-      .post("/forgot-password", email)
-      .then((res) => {
-        console.log(res);
-        if(res.data.email_sent === true){
-            toast.success(res.data.message)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Có lỗi xảy ra")
-      })
-      .finally(()=>{
-        setIsSubmitting(false)
-      })
+    let flag = true;
+    // let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!email){
+      flag = false;
+    }else if(!regex.test(email)){
+      toast.error("Vui lòng nhập đúng định dạng email")
+      flag = false
+      setIsSubmitting(false);
+    }
+    if(!flag){
+      setIsSubmitting(false);
+      toast.error("Vui lòng nhập email của bạn")
+    }else{
+      setIsSubmitting(true);
+      api
+        .post("/forgot-password", email)
+        .then((res) => {
+          console.log(res);
+          if(res.data.email_sent === true){
+              toast.success(res.data.message)
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Có lỗi xảy ra")
+        })
+        .finally(()=>{
+          setIsSubmitting(false)
+        })
+    }
   }
   console.log(email);
   return (

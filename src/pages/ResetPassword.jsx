@@ -8,8 +8,9 @@ function ResetPassword() {
     password: "",
     c_password: "",
   });
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const navigate = useNavigate();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { token } = useParams();
   useEffect(() => {
@@ -19,14 +20,14 @@ function ResetPassword() {
         .get(`/verify-email/${token}`)
         .then((response) => {
           if (response.data.success === true) {
-            setMessage("Xác thực thành công !");
+            // setMessage("Xác thực thành công !");
             setTimeout(() => {
               navigate("/login"); // Chuyển hướng về trang đăng nhập sau khi xác thực thành công
             }, 3000);
           } else {
-            setMessage(
-              "Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn."
-            );
+            // setMessage(
+            //   "Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn."
+            // );
             setTimeout(() => {
               navigate("/register");
             }, 5000);
@@ -34,17 +35,17 @@ function ResetPassword() {
         })
         .catch((error) => {
           console.log(error);
-          setMessage(
-            "Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn."
-          );
+          // setMessage(
+          //   "Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn."
+          // );
           setTimeout(() => {
             navigate("/register");
           }, 5000);
         });
     } else {
-      setMessage("Không tìm thấy mã xác thực.");
+      // setMessage("Không tìm thấy mã xác thực.");
     }
-  }, [token]);
+  }, []);
 
   const handleChangeInputs = (event) => {
     const { name, value } = event.target;
@@ -74,23 +75,23 @@ function ResetPassword() {
               <p className="copyright">Copyright Hight Five Group</p>
             </div>
             <div className="form-section">
-              <p className="error">{}</p>
+              {/* <p className="error">{}</p> */}
               <form onSubmit={handleSubmit}>
                 <input
                   type="text"
-                  placeholder="Email của bạn"
-                  name="email"
+                  placeholder="Mật khẩu"
+                  name="password"
                   onChange={handleChangeInputs}
                 />
                 <input
                   type="text"
-                  placeholder="Email của bạn"
-                  name="email"
+                  placeholder="Nhập lại mật khẩu"
+                  name="c_password"
                   onChange={handleChangeInputs}
                 />
 
                 <button type="submit" className="btn" disabled={isSubmitting}>
-                  {isSubmitting ? "Đang thực hiện..." : "Lấy lại mật khẩu"}
+                  {isSubmitting ? "Đang thực hiện..." : "Cập nhật mật khẩu"}
                 </button>
               </form>
 

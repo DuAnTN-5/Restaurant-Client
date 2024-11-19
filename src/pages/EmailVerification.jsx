@@ -64,6 +64,7 @@ function EmailVerification() {
                 type="text"
                 placeholder="Name"
                 name="name"
+                readOnly
                 // required
 
                 // value={name}
@@ -74,6 +75,8 @@ function EmailVerification() {
                 placeholder="Email"
                 // required
                 name="email"
+                readOnly
+
 
                 // value={email}
                 // onChange={(e) => setEmail(e.target.value)}
@@ -83,6 +86,8 @@ function EmailVerification() {
                 placeholder="Password"
                 // required
                 name="password"
+                readOnly
+
 
                 // value={password}
                 // onChange={(e) => setPassword(e.target.value)}
@@ -92,6 +97,8 @@ function EmailVerification() {
                 placeholder="Confirm Password"
                 // required
                 name="c_password"
+                readOnly
+
 
                 // value={confirmPassword}
                 // onChange={(e) => setConfirmPassword(e.target.value)}
