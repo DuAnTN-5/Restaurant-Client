@@ -21,7 +21,6 @@ import BlogDetail from './pages/Blog-detail.jsx';
 import About from './pages/About.jsx';
 import CheckOut from './pages/CheckOut.jsx';
 import CheckOutPay from './pages/CheckOutPay.jsx';
-import ForgotPassword from './pages/ForgotPassword.jsx';
 
 
 
@@ -44,7 +43,6 @@ createRoot(document.getElementById('root')).render(
         <Route path="/menu" element={<MenuPage/>} /> 
         <Route path="/checkout" element={<CheckOut/>} />
         <Route path="/checkout-pay" element={<CheckOutPay/>} />
-        <Route path="/forgot-password" element={<ForgotPassword/>} />
 
 
        
