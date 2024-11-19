@@ -102,8 +102,9 @@ function SignUp() {
           </div>
           <div className="form-section">
             <p className="error">{}</p>
-            <form onSubmit={handleSubmit}>
+            <form className="form-signup" onSubmit={handleSubmit}>
               <input
+              className="input-signup"
                 type="text"
                 placeholder="Name"
                 name="name"
@@ -114,6 +115,7 @@ function SignUp() {
                 // onChange={(e) => setName(e.target.value)}
               />
               <input
+              className="input-signup"
                 type="email"
                 placeholder="Email"
                 // required
@@ -124,6 +126,7 @@ function SignUp() {
                 // onChange={(e) => setEmail(e.target.value)}
               />
               <input
+              className="input-signup"
                 type="password"
                 placeholder="Password"
                 // required
@@ -134,6 +137,7 @@ function SignUp() {
                 // onChange={(e) => setPassword(e.target.value)}
               />
               <input
+              className="input-signup"
                 type="password"
                 placeholder="Confirm Password"
                 // required

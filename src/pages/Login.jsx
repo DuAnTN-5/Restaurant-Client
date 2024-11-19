@@ -98,14 +98,16 @@ console.log(inputs)
             <p className="copyright">Copyright Hight Five Group</p>
           </div>
           <div className="form-section">
-            <form onSubmit={handleSubmit}>
+            <form className="form-login" onSubmit={handleSubmit}>
               <input
+                className="input-login"
                 type="email"
                 placeholder="Email"
                 name="email"
                 onChange={handleChangeInputs}
               />
               <input
+                className="input-login"
                 type="password"
                 placeholder="Password"
                 name="password"

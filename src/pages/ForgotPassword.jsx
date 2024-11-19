@@ -57,6 +57,7 @@ function ForgotPassword() {
               <p className="error">{}</p>
               <form onSubmit={handleSubmit}>
                 <input
+                className="input-login"
                   type="text"
                   placeholder="Email của bạn"
                   name="email"
