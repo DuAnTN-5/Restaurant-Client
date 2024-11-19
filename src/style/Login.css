@@ -65,12 +65,14 @@
   }
   
   
-  form {
+  .form-login {
     display: flex;
     flex-direction: column;
   }
   
-  form input {
+  .input-login {
+    color: #000000;
+    width: 100%;
     margin-bottom: 15px;
     padding: 10px;
     font-size: 14px;
@@ -158,6 +160,7 @@
     font-size: 12px;
   }
 
+
   @media (max-width: 1024px) {
     /* .welcome-section, .form-section {
       width: unset !important;
@@ -180,7 +183,7 @@
       padding: 10px;
     }
     
-    form input, .btn {
+    .input-login, .btn {
         font-size: 14px;
         padding: 8px;
     }
@@ -197,7 +200,7 @@
     .welcome-title {
       font-size: 22px;
     }
-    form input, .btn {
+    .input-login, .btn {
         font-size: 12px;
         padding: 6px;
     }

@@ -62,13 +62,14 @@
   }
   
   
-  form {
+  .form-signup {
     display: flex;
     flex-direction: column;
   }
   
-  form input {
+  .input-signup {
     margin: auto 0;
+    color: #000000;
     margin-bottom: 15px;
     padding: 10px;
     font-size: 14px;
@@ -176,7 +177,7 @@
     padding: 10px;
   }
     
-    form input, .btn {
+    .input-signup, .btn {
         font-size: 14px;
         padding: 8px;
     }
@@ -193,7 +194,7 @@
     .welcome-title {
       font-size: 22px;
     }
-    form input, .btn {
+    .input-signup, .btn {
         font-size: 12px;
         padding: 6px;
     }

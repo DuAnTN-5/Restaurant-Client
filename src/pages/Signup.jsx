@@ -97,26 +97,30 @@ function SignUp() {
           </div>
           <div className="form-section">
             <p className="error">{}</p>
-            <form onSubmit={handleSubmit}>
+            <form className="form-signup" onSubmit={handleSubmit}>
               <input
+              className="input-signup"
                 type="text"
                 placeholder="Name"
                 name="name"
                 onChange={handleChangeInputs}
               />
               <input
+              className="input-signup"
                 type="email"
                 placeholder="Email"
                 name="email"
                 onChange={handleChangeInputs}
               />
               <input
+              className="input-signup"
                 type="password"
                 placeholder="Password"
                 name="password"
                 onChange={handleChangeInputs}
               />
               <input
+              className="input-signup"
                 type="password"
                 placeholder="Confirm Password"
                 name="c_password"
