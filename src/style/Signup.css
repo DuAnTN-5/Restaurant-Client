@@ -95,7 +95,7 @@
   .btn {
     padding: 6px;
     background-color: #1AB394;
-    color: white;
+    /* color: white; */
     font-size: 14px;
     border: none;
     border-radius: 3px;
@@ -206,3 +206,7 @@
       width: 150px;
   }
   }
+
+  form input {
+    color: #000;
+}
