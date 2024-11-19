@@ -97,10 +97,10 @@ const MenuPage = () => {
             </h2>
             <div className="menu-items">
               {category.foods.map((food) => (
-                <div key={food.id} className="menu-item">
-                  <img className="menu-item-img" src={food.imageUrl} alt={food.name} />
-                  <h3 className="menu-item-title">{food.name}</h3>
-                  <ul className="menu-item-ingredients">
+                <div key={food.id} className="menu-item-page">
+                  <img className="menu-item-page-img" src={food.imageUrl} alt={food.name} />
+                  <h3 className="menu-item-page-title">{food.name}</h3>
+                  <ul className="menu-item-page-ingredients">
                     {food.ingredientsList && food.ingredientsList.length > 0 ? (
                       food.ingredientsList.map((ingredient, index) => (
                         <li key={index}>{ingredient}</li>
@@ -109,9 +109,9 @@ const MenuPage = () => {
                       <li>Không có thông tin nguyên liệu</li>
                     )}
                   </ul>
-                  <span className="menu-item-price">{food.price}</span>
+                  <span className="menu-item-page-price">{food.price}</span>
                   <button
-                    className="menu-item-order-btn"
+                    className="menu-item-page-order-btn"
                     onClick={() => alert(`Đặt món ${food.name} thành công`)}
                   >
                     Đặt Món
