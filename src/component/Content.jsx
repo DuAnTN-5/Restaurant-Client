@@ -251,200 +251,60 @@ function Content() {
         </div>
       </div>
 
-      {/* Phần quảng cáo Appstore */}
-      {/* <div className="relative flex flex-col md:flex-row h-screen bg-black mx-auto rounded-[20px] w-[733px] md:w-[1296px]">
-        <div className="flex-1 flex items-center justify-center relative">
-          <div className="relative z-10 flex justify-center">
-            <img
-              src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/21.png"
-              alt="App Interface"
-              className="relative z-20 w-[550px] h-auto transform translate-x-0 "
-            />
-            <img
-              src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/16.png"
-              alt="App Interface"
-              className="relative z-30 w-[450px] h-auto transform translate-x-0 "
-            />
-          </div>
-        </div>
-
-        <div className="flex-1 flex items-center justify-center text-white">
-          <div className="text-center px-8">
-            <h1 className="text-[50px] font-bold mb-4">
-              Are you Ready to Start your online Order?
-            </h1>
-            <p className="text-[16px] mb-8 text-gray-300">
-              Bndulgence diminution so discovered mr apartments. Are off under
-              folly death wrote cause her way spite. Plan upon yet way get cold
-              spot its week. Almost do am or limits hearts. Resolve parties but
-              why she shewing. She sang know now
-            </p>
-            <div className="flex justify-center space-x-4">
-              <a
-                href="#"
-                className="bg-[#b89f76] text-black px-4 py-2 rounded-full hover:bg-gray-200"
-              >
-                App Store
-              </a>
-              <a
-                href="#"
-                className="bg-[#b89f76] text-black px-4 py-2 rounded-full hover:bg-gray-200"
-              >
-                Play Store
-              </a>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       {/* Photo of 5 chef */}
       <div className="py-10 bg-neutral-800 text-white bg-[#EBE9E6]">
-        <div className="flex items-center justify-center space-x-4">
+  <div className="flex items-center justify-center space-x-4">
+    <img
+      className="w-[100px] h-auto"
+      src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/Subtittle-shape-1.png"
+      alt=""
+    />
+    <h1 className="text-[20px] text-[#826a45] font-semibold text-primary-foreground dark:text-primary">
+      MASTER CHEFS
+    </h1>
+    <img
+      className="w-[100px] h-auto"
+      src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/18.png"
+      alt=""
+    />
+  </div>
+
+  <h2 className="text-center text-5xl font-bold mb-6 text-primary-foreground dark:text-primary">
+    Meet Our Special Chefs
+  </h2>
+  
+  {/* Thêm `flex-wrap` và đặt `md:flex-nowrap` để giữ nguyên 1 hàng */}
+  <div className="flex flex-wrap justify-center space-x-0 md:space-x-8">
+    {/* Từng khung hình ảnh */}
+    {["1-1.jpg", "3-2.jpg", "2-2.jpg", "3-2.jpg", "1-1.jpg"].map((imgSrc, index) => (
+      <div key={index} className="text-center group mb-5" style={{ flexBasis: '20%', minWidth: '150px', maxWidth: '200px' }}>
+        <div className="relative">
           <img
-            className="w-[100px] h-auto"
-            src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/Subtittle-shape-1.png"
-            alt=""
+            className="w-full h-auto rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
+            src={`https://wp.validthemes.net/restan/wp-content/uploads/2024/01/${imgSrc}`}
+            alt="Chef"
           />
-          <h1 className="text-[20px] text-[#826a45] font-semibold text-primary-foreground dark:text-primary">
-            MASTER CHEFS
-          </h1>
-          <img
-            className="w-[100px] h-auto"
-            src="https://wp.validthemes.net/restan/wp-content/uploads/2024/04/18.png"
-            alt=""
-          />
-        </div>
-
-        <h2 className="text-center text-5xl font-bold mb-6 text-primary-foreground dark:text-primary">
-          Meet Our Special Chefs
-        </h2>
-        <div className="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-8 flex-wrap">
-          <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/1-1.jpg"
-                alt="Mendia Juxef"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                {/* Các icon mạng xã hội */}
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Mendia Juxef
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              BURGER KING
-            </p>
-          </div>
-
-          <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/3-2.jpg"
-                alt="Mendia Juxef"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                <a href="#" className="text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-white">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Mendia Juxef
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              BURGER KING
-            </p>
-          </div>
-
-          <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/2-2.jpg"
-                alt="Petro William"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                <a href="#" className="text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-white">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Petro William
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              MAIN CHEF
-            </p>
-          </div>
-
-          <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/3-2.jpg"
-                alt="Petro William"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                <a href="#" className="text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-white">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Petro William
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              MAIN CHEF
-            </p>
-          </div>
-
-          <div className="text-center group relative mb-5">
-            {" "}
-            {/* Thêm mb-5 ở đây */}
-            <div className="relative">
-              <img
-                className="w-[250px] h-[250px] rounded-full border-4 border-primary dark:border-primary dark:border-opacity-50"
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/01/1-1.jpg"
-                alt="Petro William"
-              />
-              <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
-                <a href="#" className="text-white">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-white">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
-              Petro William
-            </h3>
-            <p className="text-muted-foreground dark:text-muted-foreground">
-              MAIN CHEF
-            </p>
+          <div className="flex justify-center items-center space-x-4 opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-transform duration-[600ms] absolute inset-0 bg-opacity-50 bg-black rounded-full">
+            {/* Các icon mạng xã hội */}
+            <a href="#" className="text-white">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" className="text-white">
+              <i className="fab fa-youtube"></i>
+            </a>
           </div>
         </div>
+        <h3 className="mt-4 text-lg font-semibold text-primary-foreground dark:text-primary">
+          Mendia Juxef
+        </h3>
+        <p className="text-muted-foreground dark:text-muted-foreground">
+          BURGER KING
+        </p>
       </div>
+    ))}
+  </div>
+</div>
+
 
       {/* 2 post tin tức */}
       <div className="text-center py-12">

@@ -52,8 +52,9 @@ function Login() {
                     </div>
                     <div className="form-section">
                         {errorMessage && <p className="error">{errorMessage}</p>}
-                        <form onSubmit={handleLogin}>
+                        <form className="form-login" onSubmit={handleLogin}>
                             <input
+                                className="input-login"
                                 type="email"
                                 placeholder="Email"
                                 required
@@ -61,6 +62,7 @@ function Login() {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <input
+                                className="input-login"
                                 type="password"
                                 placeholder="Password"
                                 required
@@ -69,7 +71,7 @@ function Login() {
                             />
                             <button type="submit" className="btn">Login</button>
                             <div className="forgot-password">
-                                <a href="#">Forgot password?</a>
+                            <Link to="/forgot-password">Forgot password?</Link>
                             </div>
                         </form>
                         <p className="account">Do not have an account? <Link className="redirect-link" to="/signup">Create an account</Link></p>

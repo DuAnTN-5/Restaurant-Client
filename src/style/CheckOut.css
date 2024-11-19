@@ -1,0 +1,131 @@
+.reservation-container {
+    max-width: 500px;
+    margin: 0px auto;
+    padding: 20px 15px;
+  }
+  .reservation-title {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+  }
+  .reservation-header {
+    background-color: #e7272d;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .reservation-header-text {
+    margin: 0;
+    font-size: 14px;
+  }
+  .phone-checkout {
+    font-weight: 600;
+  }
+  
+  .reservation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .preinstall-book {
+    color: #888;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .btn-submit {
+    background-color: #e7272d;
+  }
+  
+  .btn-reset {
+    background-color: #aaa;
+  }
+  
+  .btn-submit:hover {
+    background-color: #830000;
+  }
+  
+  .btn-reset:hover {
+    background-color: #888;
+  }
+  
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+    }
+  
+    .form-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .btn {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .reservation-header p {
+      font-size: 12px;
+    }
+  
+    input,
+    select,
+    textarea {
+      font-size: 13px;
+    }
+  
+    .btn {
+      font-size: 13px;
+      padding: 8px 15px;
+    }
+  }
+  
