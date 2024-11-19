@@ -124,15 +124,17 @@
 }
 
 .user-info h3 {
+    font-weight: bold;
     font-size: 24px;
     margin-bottom: 15px;
 }
 
-.user-info p {
-    margin: 10px 0;
+.user-info-item {
+    padding-block: 15px;
 }
-
-.user-info .label {
-    font-weight: bold;
-    font-size: 20px;
+.oder{
+    cursor: pointer;
+}
+.oder:hover{
+    background-color: rgb(121, 14, 14);
 }
