@@ -56,29 +56,29 @@ function SignUp() {
                     </div>
                     <div className="form-section">
                         {errorMessage && <p className="error">{errorMessage}</p>}
-                        <form onSubmit={handleRegister}>
-                            <input
+                        <form className='form-signup' onSubmit={handleRegister}>
+                            <input className="input-signup"
                                 type="text"
                                 placeholder="Name"
                                 required
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
-                            <input
+                            <input className="input-signup"
                                 type="email"
                                 placeholder="Email"
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                            <input
+                            <input className="input-signup"
                                 type="password"
                                 placeholder="Password"
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <input
+                            <input className="input-signup"
                                 type="password"
                                 placeholder="Confirm Password"
                                 required

@@ -1,24 +1,44 @@
 import "../style/About.css";
 import OurPartner from "../component/OurPartner";
-import BannerAbout from "../assets/bannner-aboutpage.png";
+import OurMasterChef from "../component/OurMasterChef";
+import BannerAbout from "../assets/banner-about.jpg";
 import ImgAbout1 from "../assets/img-booking2.jpg";
 import ImgAbout2 from "../assets/img-about-introduce.jpg";
 import sampleVideo from "../assets/video-hambergur.mp4";
 
+const AboutPage = () => {
+  const handlePhoneClick = () => {
+    window.location.href = "tel:+84 346732311";
+  };
 
+  const handleEmailClick = () => {
+    window.location.href = "mailto:hi5@gmail.com";
+  };
 
-function About() {
+  const handleWebsiteClick = () => {
+    window.open("https://hi5.com", "_blank");
+  };
+
   return (
     <div className="about-page-container">
       <div className="banner-about-page">
         <img className="bgr-about-page" src={BannerAbout} alt="" />
       </div>
+
       <OurPartner />
 
       <div className="about-page-wrapper">
         <div className="about-page-images">
-          <img src={ImgAbout1} alt="Staff Serving Food" className="about-page-image about-image-left" />
-          <img src={ImgAbout2} alt="Happy Staff" className="about-page-image about-image-right" />
+          <img
+            src={ImgAbout1}
+            alt="Staff Serving Food"
+            className="about-page-image about-image-left"
+          />
+          <img
+            src={ImgAbout2}
+            alt="Happy Staff"
+            className="about-page-image about-image-right"
+          />
         </div>
         <div className="about-page-content">
           <h3 className="about-page-title subtitle-vphu">About Us</h3>
@@ -27,16 +47,24 @@ function About() {
             Một không gian thư giãn và dễ chịu, với nhạc jazz hay, bữa tối và cocktail. The Patio Time Bar mở cửa tại trung tâm Florence.
             Quầy bar duy nhất lấy cảm hứng từ những năm 1960, hứa hẹn mang đến cho bạn trải nghiệm khó quên.
           </p>
-          <button className="about-page-button">Xem Thêm</button>
         </div>
       </div>
 
+      <OurMasterChef />
+
       <div className="opening-hours container-vphu">
         <div className="opening-hours-video">
-            <div className="title-restaurant-hi5">
-                <h1 className="title-restaurant-hi5 title-vphu">Hight Five</h1>
-            </div>
-          <video className="video-player" src={sampleVideo} autoPlay loop muted ref={(video) => video && (video.playbackRate = 1)} />
+          <div className="title-restaurant-hi5">
+            <h1 className="title-restaurant-hi5 title-vphu">Hight Five</h1>
+          </div>
+          <video
+            className="video-player"
+            src={sampleVideo}
+            autoPlay
+            loop
+            muted
+            ref={(video) => video && (video.playbackRate = 1)}
+          />
         </div>
         <div className="opening-hours-content">
           <h3 className="opening-hours-title subtitle-vphu">Mở Cửa</h3>
@@ -54,8 +82,34 @@ function About() {
           </p>
         </div>
       </div>
+
+      {/* Phần thông tin liên hệ */}
+      <div className="contact-page-info container-vphu text-vphu">
+        <h2 className="contact-page-title subtitle-vphu">Thông Tin Liên Lạc</h2>
+        <div className="contact-page-item">
+          <span className="contact-page-label">Address:</span> TP.Đà Nẵng
+        </div>
+        <div className="contact-page-item">
+          <span className="contact-page-label">SĐT:</span>
+          <button className="contact-page-link" onClick={handlePhoneClick}>
+            +84 346 732 311
+          </button>
+        </div>
+        <div className="contact-page-item">
+          <span className="contact-page-label">Email:</span>
+          <button className="contact-page-link" onClick={handleEmailClick}>
+            hi5@gmail.com
+          </button>
+        </div>
+        <div className="contact-page-item">
+          <span className="contact-page-label">Website:</span>
+          <button className="contact-page-link" onClick={handleWebsiteClick}>
+            hi5.com
+          </button>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default About;
+export default AboutPage;

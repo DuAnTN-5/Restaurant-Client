@@ -110,13 +110,13 @@ function Header2() {
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link className="navbar-link" to="/menu">
-                    Thực Đơn
+                  <Link className="navbar-link" to="/about">
+                    Giới Thiệu
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link className="navbar-link" to="/about">
-                    Giới Thiệu
+                  <Link className="navbar-link" to="/menu">
+                    Thực Đơn
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -127,6 +127,11 @@ function Header2() {
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/contact">
                     Liên Hệ
+                  </Link>
+                </li>
+                <li className="navbar-item">
+                  <Link className="navbar-link" to="/checkout">
+                    Đặt Bàn
                   </Link>
                 </li>
               </ul>
@@ -161,13 +166,13 @@ function Header2() {
                   </button>
                 </div>
                 <li className="navbar-item">
-                  <Link className="navbar-link" to="/">
-                    Trang Chủ
+                  <Link className="navbar-link" to="/menu">
+                    Thực Đơn
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link className="navbar-link" to="/menu">
-                    Thực Đơn
+                  <Link className="navbar-link" to="/">
+                    Trang Chủ
                   </Link>
                 </li>
                 <li className="navbar-item">
@@ -183,6 +188,11 @@ function Header2() {
                 <li className="navbar-item">
                   <Link className="navbar-link" to="/contact">
                     Liên Hệ
+                  </Link>
+                </li>
+                <li className="navbar-item">
+                  <Link className="navbar-link" to="/checkout">
+                    Đặt Bàn
                   </Link>
                 </li>
               </ul>
