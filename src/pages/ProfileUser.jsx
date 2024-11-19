@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "../css2/ProfileUser.css";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ProfileUser() {
   const [userInfo, setUserInfo] = useState({
@@ -10,6 +12,7 @@ function ProfileUser() {
     address: "",
     avatar: "https://via.placeholder.com/150",
   });
+  const navigate = useNavigate()
 
   // Hàm xử lý khi người dùng chọn ảnh mới
   const handleChangeAvatar = (event) => {
@@ -24,7 +27,8 @@ function ProfileUser() {
   // Hàm xử lý đăng xuất
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/";
+    toast.success("Đăng xuất thành công")
+    navigate("/")
   };
 
   // Hàm xử lý thay đổi input

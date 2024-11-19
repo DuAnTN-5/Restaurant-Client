@@ -1,53 +1,26 @@
 import { useState } from "react";
 import "../css/BookingForm-3.css";
-import axios from "axios";
+import {useNavigate } from "react-router-dom";
+
 
 function BookingForm3() {
-  const [phone, setPhone] = useState("");
-  const [person, setPerson] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    // Kiểm tra dữ liệu
-    if (!phone || !time) {
-      setErrorMessage("Phone and time are required.");
-      return;
-    }
-
-    const data = {
-      phone,
-      person,
-      date,
-      time,
-    };
-
-    try {
-      // Gửi yêu cầu đến API để đặt bàn
-      const response = await axios.post("API/bookings", data);
-      
-      // Kiểm tra phản hồi từ API
-      if (response.status === 201) {
-        console.log("Booking successful:", response.data);
-        // Reset form
-        setPhone("");
-        setPerson("");
-        setDate("");
-        setTime("");
-        setErrorMessage("");
-      }
-    } catch (error) {
-      // Xử lý lỗi từ API
-      if (error.response) {
-        setErrorMessage(error.response.data.message || "An error occurred. Please try again.");
-      } else {
-        setErrorMessage("An error occurred. Please try again.");
-      }
-    }
+  const [input, setInput] = useState({
+    phone: "",
+    person: "",
+    date: "",
+    time: "",
+  });
+  const navigate = useNavigate("")
+  const handleChangeInputs = (event) => {
+    const { name, value } = event.target;
+    setInput((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
+  console.log(input);
+  function handleSubmit(){
+    localStorage.setItem("user-bookingtable", JSON.stringify(input))
+    navigate("/booking-table")
+  }
+  
 
   return (
     <div className="bgr-booking3 text-vphu">
@@ -55,7 +28,7 @@ function BookingForm3() {
         <div className="hours-section">
           <h2 className="hours-title title-vphu">Giờ Mở Cửa</h2>
           <ul className="hours-list">
-          <li className="hours-item">
+            <li className="hours-item">
               <span className="day">Thứ 2</span>
               <span className="time">6:00 am - 12:00 pm</span>
             </li>
@@ -93,17 +66,17 @@ function BookingForm3() {
         <div className="booking-anchor-point">
           <div className="wrapper-booking">
             <div className="booking-section">
-              {errorMessage && <p className="error">{errorMessage}</p>}
-              <form onSubmit={handleSubmit} className="booking-form">
+              <form className="booking-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="phone" className="label-booking">
                     SĐT :
                   </label>
                   <input
-                    type="text"
+                    type="phone"
                     id="phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    name="phone"
+                    // value={phone}
+                    onChange={handleChangeInputs}
                     className="input-booking"
                     placeholder="+84 346 732311"
                   />
@@ -113,9 +86,14 @@ function BookingForm3() {
                   <label htmlFor="person" className="label-booking">
                     Số Người :
                   </label>
-                  <select id="person" value={person}
-                    onChange={(e) => setPerson(e.target.value)}
-                    className="select-booking">
+                  <select
+                    id="person"
+                    name="person"
+                    onChange={handleChangeInputs}
+                    // value={person}
+                    // onChange={(e) => setPerson(e.target.value)}
+                    className="select-booking"
+                  >
                     <option value="1">1 Người</option>
                     <option value="2">2 Người</option>
                     <option value="3">3 Người</option>
@@ -126,7 +104,7 @@ function BookingForm3() {
                     <option value="8">8 Người</option>
                     <option value="9">9 Người</option>
                     <option value="10">10 Người</option>
-                    <option value="Larger Quantity">Số Lượng Lớn Hơn</option>
+                    {/* <option value="Larger Quantity">Số Lượng Lớn Hơn</option> */}
                   </select>
                 </div>
 
@@ -134,9 +112,15 @@ function BookingForm3() {
                   <label htmlFor="date" className="label-booking">
                     Ngày Đặt :
                   </label>
-                  <input type="date" id="date" value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="input-booking" />
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    onChange={handleChangeInputs}
+                    // value={date}
+                    // onChange={(e) => setDate(e.target.value)}
+                    className="input-booking"
+                  />
                 </div>
 
                 <div className="form-group">
@@ -146,14 +130,16 @@ function BookingForm3() {
                   <input
                     type="time"
                     id="time"
-                    onChange={(e) => setTime(e.target.value)}
+                    name="time"
+                    onChange={handleChangeInputs}
+                    // onChange={(e) => setTime(e.target.value)}
                     className="input-booking"
-                    value={time}
+                    // value={time}
                   />
                 </div>
 
                 <button type="submit" className="button-booking">
-                  Đặt Bàn
+                  Chọn bàn
                 </button>
               </form>
             </div>

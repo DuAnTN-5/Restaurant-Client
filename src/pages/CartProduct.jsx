@@ -158,34 +158,36 @@ function CartProduct() {
                   <span className="total">300.000 VND</span>
                 </li>
               </ul>
-              <div className="cart-abate">
-                <input type="radio" className="radio" />
-                <i className="cart-icon">
-                  <RiMoneyDollarCircleFill />
-                </i>
-                <p>Trả tiền mặt khi vào bàn</p>
-              </div>
-              <div className="cart-abate">
-                <input type="radio" className="radio" />
-                <i className="cart-icon">
-                  <BiSolidBank />
-                </i>
-                <p>Thanh toán ngân hàng</p>
-              </div>
-              <div className="cart-abate">
-                <input type="radio" className="radio" />
-                <i className="cart-icon">
-                  <BsFillPiggyBankFill />
-                </i>
-                <p>Thanh toán momo</p>
-              </div>
-              <div className="cart-abate">
-                <input type="radio" className="radio" />
-                <i className="cart-icon">
-                  <MdPayment />
-                </i>
-                <p>Thanh toán VNPay</p>
-              </div>
+             <div>
+                <div className="cart-abate">
+                  <input type="radio" className="radio" />
+                  <i className="cart-icon">
+                    <RiMoneyDollarCircleFill />
+                  </i>
+                  <p>Trả tiền mặt khi vào bàn</p>
+                </div>
+                <div className="cart-abate">
+                  <input type="radio" className="radio" />
+                  <i className="cart-icon">
+                    <BiSolidBank />
+                  </i>
+                  <p>Thanh toán ngân hàng</p>
+                </div>
+                <div className="cart-abate">
+                  <input type="radio" className="radio" />
+                  <i className="cart-icon">
+                    <BsFillPiggyBankFill />
+                  </i>
+                  <p>Thanh toán momo</p>
+                </div>
+                <div className="cart-abate">
+                  <input type="radio" className="radio" />
+                  <i className="cart-icon">
+                    <MdPayment />
+                  </i>
+                  <p>Thanh toán VNPay</p>
+                </div>
+             </div>
               <div className="button-container">
                 <button className="send">Proceed to checkout</button>
               </div>

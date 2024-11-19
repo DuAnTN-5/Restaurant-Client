@@ -1,5 +1,7 @@
 import "../css/BookingTable.css";
 function BookingTable() {
+
+  // let 
   return (
     <>
       <div className="booking-table-page">
@@ -48,26 +50,34 @@ function BookingTable() {
 
           {/* <!-- Thông tin người dùng --> */}
           <div className="user-info">
-            <h3>Thông Tin Người Dùng</h3>
-            <p>
-              <span className="label">Tên người dùng:</span> Nguyễn Văn A
+            <h3 className="user-info-title">Thông Tin Người Dùng</h3>
+            <p className="user-info-item">
+              <span className="user-info-label">Tên người dùng</span>
+              <span className="user-info-value">: Nguyễn Văn A</span>
             </p>
-            <p>
-              <span className="label">Email:</span> nguyenvana@example.com
+            <p className="user-info-item">
+              <span className="user-info-label">Email</span>
+              <span className="user-info-value">: nguyenvana@example.com</span>
             </p>
-            <p>
-              <span className="label">Số điện thoại:</span> 0901234567
+            <p className="user-info-item">
+              <span className="user-info-label">Số điện thoại</span>
+              <span className="user-info-value">: 0901234567</span>
             </p>
-            <p>
-              <span className="label">Địa chỉ:</span> 123 Đường ABC, Phường 1,
-              Quận X
+            <p className="user-info-item">
+              <span className="user-info-label">Địa chỉ</span>
+              <span className="user-info-value">
+                : 123 Đường ABC, Phường 1, Quận X
+              </span>
             </p>
-            <p>
-              <span className="label">Ngày đặt bàn:</span> 13/11/2024
+            <p className="user-info-item">
+              <span className="user-info-label">Ngày đặt bàn</span>
+              <span className="user-info-value">: 13/11/2024</span>
             </p>
-            <p>
-              <span className="label">Giờ đặt bàn:</span> 18:00 - 20:00
+            <p className="user-info-item">
+              <span className="user-info-label">Giờ đặt bàn</span>
+              <span className="user-info-value">: 18:00 - 20:00</span>
             </p>
+            <div className="bar oder">Đặt bàn</div>
           </div>
         </div>
       </div>
