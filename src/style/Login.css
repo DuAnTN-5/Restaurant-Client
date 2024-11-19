@@ -159,20 +159,6 @@
     font-size: 12px;
   }
 
-  /* Quên mật khẩu */
-  .success-message {
-    color: green;
-    font-size: 14px;
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.error {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 15px;
-    text-align: left;
-}
 
 
   @media (max-width: 1024px) {
