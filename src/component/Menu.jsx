@@ -43,7 +43,7 @@ function Menu() {
         <p>Không có món ăn nào trong danh mục này.</p>
       ) : (
         menuItems.map((item) => (
-          <div className="menu-item" key={item.id}>
+          <div className="menu-item-home" key={item.id}>
             <img src={item.image} alt={item.name} className="menu-image" />
             <div className="menu-details">
               <h3 className="menu-title">{item.name}</h3>
