@@ -1,39 +1,59 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/logo-hi5-black.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../api";
-import { toast } from "react-toastify";
 
-function ForgotPassword() {
-  const [email, setEmail] = useState("");
+function ResetPassword() {
+  const [input, setInput] = useState({
+    password: "",
+    c_password: "",
+  });
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { token } = useParams();
+  useEffect(() => {
+    if (token) {
+      // Gửi yêu cầu xác thực email
+      api
+        .get(`/verify-email/${token}`)
+        .then((response) => {
+          if (response.data.success === true) {
+            setMessage("Xác thực thành công !");
+            setTimeout(() => {
+              navigate("/login"); // Chuyển hướng về trang đăng nhập sau khi xác thực thành công
+            }, 3000);
+          } else {
+            setMessage(
+              "Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn."
+            );
+            setTimeout(() => {
+              navigate("/register");
+            }, 5000);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setMessage(
+            "Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn."
+          );
+          setTimeout(() => {
+            navigate("/register");
+          }, 5000);
+        });
+    } else {
+      setMessage("Không tìm thấy mã xác thực.");
+    }
+  }, [token]);
 
   const handleChangeInputs = (event) => {
     const { name, value } = event.target;
     // console.log(name, value)
-    setEmail((prevInputs) => ({ ...prevInputs, [name]: value })); // dấu tròn là return về luôn
+    setInput((prevInputs) => ({ ...prevInputs, [name]: value })); // dấu tròn là return về luôn
   };
   function handleSubmit(e) {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    api
-      .post("/forgot-password", email)
-      .then((res) => {
-        console.log(res);
-        if(res.data.email_sent === true){
-            toast.success(res.data.message)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Có lỗi xảy ra")
-      })
-      .finally(()=>{
-        setIsSubmitting(false)
-      })
   }
-  console.log(email);
   return (
     <>
       <div className="app-signup">
@@ -62,6 +82,12 @@ function ForgotPassword() {
                   name="email"
                   onChange={handleChangeInputs}
                 />
+                <input
+                  type="text"
+                  placeholder="Email của bạn"
+                  name="email"
+                  onChange={handleChangeInputs}
+                />
 
                 <button type="submit" className="btn" disabled={isSubmitting}>
                   {isSubmitting ? "Đang thực hiện..." : "Lấy lại mật khẩu"}
@@ -77,4 +103,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default ResetPassword;

@@ -9,6 +9,11 @@ function Header2() {
   const navbarRef = useRef(null);
   const overlayRef = useRef(null);
 
+  let token = localStorage.getItem("token");
+  if (token) {
+    token = JSON.parse(token);
+  }
+
   const handleToggleNavbar = () => {
     setIsNavbarVisible(!isNavbarVisible);
   };
@@ -48,6 +53,7 @@ function Header2() {
     setIsNavbarVisible(false);
   };
 
+  console.log(token);
   return (
     <div className="header-2">
       {isHeaderInfoVisible && (
@@ -81,7 +87,7 @@ function Header2() {
         </div>
       )}
 
-      <div className={`header-navbar ${isHeaderInfoVisible ? '' : 'fixed'}`}>
+      <div className={`header-navbar ${isHeaderInfoVisible ? "" : "fixed"}`}>
         <div className="navbar container-vphu" ref={navbarRef}>
           <button
             type="button"
@@ -198,11 +204,24 @@ function Header2() {
               </ul>
             </div>
             <div className="cart-interaction">
-              <Link to="/login">
+              {token ? (
+                <Link to="/profile-user">
+                  <div className="cart-interaction-item">
+                    <i className="fa-regular fa-user navbar-icon"></i>
+                  </div>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <div className="cart-interaction-item">
+                    <i className="fa-regular fa-user navbar-icon"></i>
+                  </div>
+                </Link>
+              )}
+              {/* <Link to="/login">
                 <div className="cart-interaction-item">
                   <i className="fa-regular fa-user navbar-icon"></i>
                 </div>
-              </Link>
+              </Link> */}
               <Link to="/favourite-page">
                 <div className="cart-interaction-item">
                   <i className=" fa-regular fa-heart navbar-icon"></i>
