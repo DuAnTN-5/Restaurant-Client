@@ -8,43 +8,11 @@ import { api } from "../api";
 import { toast } from "react-toastify";
 
 function Login() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [errorMessage, setErrorMessage] = useState("");
-//   const navigate = useNavigate();
-
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       // Gửi yêu cầu đăng nhập tới API
-//       const response = await axios.post("API/login(Thay)", {
-//         email,
-//         password,
-//       });
-
-//       // Nếu đăng nhập thành công
-//       if (response.status === 200) {
-//         // Lưu thông tin người dùng hoặc token nếu cần
-//         localStorage.setItem("token", response.data.token);
-//         navigate("/");
-//       }
-//     } catch (error) {
-//       // Xử lý lỗi
-//       if (error.response) {
-//         // Lỗi từ server
-//         setErrorMessage(error.response.data.message);
-//       } else {
-//         // Lỗi mạng
-//         setErrorMessage("An error occurred. Please try again.");
-//       }
-//     }
-//   };
-
 const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false); 
   const navigate = useNavigate()
   
   const handleChangeInputs = (event) => {
@@ -52,29 +20,53 @@ const [inputs, setInputs] = useState({
     // console.log(name, value)
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value })); // dấu tròn là return về luôn
   };
-
   
   function handleSubmit(event){
     event.preventDefault();
-    api
-    .post("/login", inputs)
-    .then(res =>{
-        console.log(res)
-        if(res.data.success === true){
-            const tokenUser = res.data.data.token
-            toast.success("Đăng nhập thành công")
-            console.log(tokenUser)
-            localStorage.setItem("token", JSON.stringify(tokenUser)) // lưu vào local
-            navigate("/")
-        }
-    })
-    .catch(error=>{
-        console.log(error)
-        if(error.response.data.success === false){
-            toast.error("Tên đăng nhập hoặc mật khẩu không chính xác")
+    let flag = true;
+    // let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!inputs.email){
+      flag = false;
+    }else if(!regex.test(inputs.email)){
+      toast.error("Vui lòng nhập đúng định dạng email")
+      flag = false
+      setIsSubmitting(false);
+    }
+    if(!inputs.password){
+      flag = false;
+    }
+    if(!flag){
+      setIsSubmitting(false);
+      toast.error("Vui lòng nhập đầy đủ thông tin")
+    }else{
+      setIsSubmitting(true);
 
-        }
-    })
+      api
+      .post("/login", inputs)
+      .then(res =>{
+          console.log(res)
+          if(res.data.success === true){
+              const tokenUser = res.data.data.token
+              toast.success("Đăng nhập thành công")
+              console.log(tokenUser)
+              localStorage.setItem("token", JSON.stringify(tokenUser)) // lưu vào local
+              navigate("/")
+          }
+      })
+      .catch(error=>{
+          console.log(error)
+          if(error.response.data.success === false){
+              toast.error("Tên đăng nhập hoặc mật khẩu không chính xác")
+  
+          }
+      })
+      .finally(() => {
+        setIsSubmitting(false); // Đặt isSubmitting thành false khi yêu cầu hoàn tất
+      });
+    }
+
+
 }
 console.log(inputs)
 
@@ -87,7 +79,6 @@ console.log(inputs)
               Welcome to{" "}
               <span className="highlight">HIGHTFIVE Restaurant+</span>
             </h2>
-            {/* <Link to="/"> <img src={logohi5} alt="Logo" className="logo" /></Link> */}
             <Link to="/">
               <img src={logo} alt="Logo" className="logo" />
             </Link>
@@ -111,8 +102,8 @@ console.log(inputs)
                 name="password"
                 onChange={handleChangeInputs}
               />
-              <button type="submit" className="btn">
-                Login
+              <button type="submit" className="btn" disabled={isSubmitting}>
+              {isSubmitting ? 'Đang thực hiện...' : 'Login'}
               </button>
               <div className="forgot-password">
                 <Link to="/forgot-password">Forgot password?</Link>

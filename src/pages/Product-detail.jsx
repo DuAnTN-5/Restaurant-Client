@@ -5,6 +5,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
 import { IoTimeSharp } from "react-icons/io5";
 import { FaArrowTurnDown } from "react-icons/fa6";
+import Rate from "./Rate";
 
 function ProductDetail() {
   return (
@@ -44,14 +45,15 @@ function ProductDetail() {
             <h2 className="product-name">Shushi cao cấp 10 điểm k có nhưnng</h2>
             <div className="rate">
               <span className="rating-text">(4.5)</span>
-              <div className="stars">
+              <Rate />
+              {/* <div className="stars">
                 <i className="star-icon full-star">★</i>
                 <i className="star-icon full-star">★</i>
                 <i className="star-icon full-star">★</i>
                 <i className="star-icon full-star">★</i>
                 <i className="star-icon half-star">★</i>
+              </div> */}
                 <span className="total-ratings">120 lượt đánh giá</span>
-              </div>
             </div>
             <p className="product-children">Giá tiền: $56</p>
             <p className="product-children">
