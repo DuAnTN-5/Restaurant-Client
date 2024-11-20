@@ -27,6 +27,7 @@ import ForgotPassword from './pages/ForgotPassword.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
 import BookingTable from './pages/BookingTable.jsx';
 import BlogDetail from './pages/Blog-detail.jsx';
+import InfoBookingTable from './pages/InfoBookingTable.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -53,6 +54,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/checkout" element={<CheckOut/>} />
           <Route path="/checkout-pay" element={<CheckOutPay/>} />
           <Route path="/booking-table" element={<BookingTable/>} /> 
+          <Route path="/info-booking-table" element={<InfoBookingTable/>} /> 
   
          
         </Route>

@@ -256,6 +256,20 @@
   padding-right: 10px;
 }
 
+.cart-button-oder{
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: #d2a679;
+  width:100px;
+  margin-left: 80%;
+  border-radius:10px ;
+  margin-bottom: 10px;
+}
+.cart-button-oder:hover{
+background-color: #ed8822;
+}
+
 /* Màn hình vừa (tablet) */
 @media (max-width: 1024px) {
   .cart {

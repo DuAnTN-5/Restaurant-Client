@@ -118,7 +118,7 @@ function CartProduct() {
 
           </div>
 
-          <div className="cart-summary">
+          {/* <div className="cart-summary">
            <div className="cart-total">
               <p className="total-title">Cart totals</p>
               <ul className="cart-sub-total">
@@ -130,16 +130,6 @@ function CartProduct() {
                   <p>Subtotal:</p>
                   <span>300.000 VND</span>
                 </li>
-                {/* <li className="coupon-item">
-                  <p>Coupon:</p>
-                  <span>-20.000 VND</span>
-                  <div>
-                    <input
-                      className="coupon"
-                      type="text"
-                      name="coupon"
-                      placeholder="Coupon code"
-                    /> */}
                    <li>
                       <div>
                         <p>Chọn mã giảm giá:</p>
@@ -150,9 +140,7 @@ function CartProduct() {
                         </select>
                       </div>
                    </li>
-                  {/* </div> */}
                   <div className="custom-border"></div>
-                {/* </li> */}
                 <li>
                   <p className="total">Total:</p>
                   <span className="total">300.000 VND</span>
@@ -192,7 +180,10 @@ function CartProduct() {
                 <button className="send">Proceed to checkout</button>
               </div>
            </div>
-          </div>
+          </div> */}
+        </div>
+        <div className="cart-button-oder">
+          <button>Đặt món</button>
         </div>
       </div>
     </>
