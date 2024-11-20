@@ -53,9 +53,11 @@ function SignUp() {
       toast.error("Vui lòng nhập đầy đủ thông tin")
     }else{
       setIsSubmitting(true);
+      toast.info("Vui lòng đợi một lát")
       api
       .post("/register", inputs)
       .then((response) =>{
+      
         console.log(response)
           if(response.data.data.verification_required === true || response.data.success === true){
             toast.info("Đăng kí thành công, Vui lòng kiểm tra email của bạn để xác thực tài khoản")
@@ -96,7 +98,7 @@ function SignUp() {
             <p className="copyright">Copyright Hight Five Group</p>
           </div>
           <div className="form-section">
-            <p className="error">{}</p>
+            {/* <p className="error">{}</p> */}
             <form className="form-signup" onSubmit={handleSubmit}>
               <input
               className="input-signup"
