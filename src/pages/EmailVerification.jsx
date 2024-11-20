@@ -58,12 +58,13 @@ function EmailVerification() {
             <p className="copyright">Copyright Hight Five Group</p>
           </div>
           <div className="form-section">
-            <p className="error">{}</p>
-            <form >
+            {/* <p className="error">{}</p> */}
+            <form  className="form-signup">
               <input
                 type="text"
                 placeholder="Name"
                 name="name"
+              className="input-signup"
                 readOnly
                 // required
 
@@ -76,6 +77,7 @@ function EmailVerification() {
                 // required
                 name="email"
                 readOnly
+                className="input-signup"
 
 
                 // value={email}
@@ -86,6 +88,7 @@ function EmailVerification() {
                 placeholder="Password"
                 // required
                 name="password"
+              className="input-signup"
                 readOnly
 
 
@@ -95,6 +98,7 @@ function EmailVerification() {
               <input
                 type="password"
                 placeholder="Confirm Password"
+              className="input-signup"
                 // required
                 name="c_password"
                 readOnly

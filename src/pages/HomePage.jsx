@@ -16,14 +16,14 @@ function HomePage() {
     <div className="home-page">
       <HomeSection />
       <FavoriteFood />
+      <Menu />
       <ReceiveCoupons />
       <OurPartner />
       <AboutUs />
       <OurMasterChef />
       <BookingForm />
       <RecentPosts />
-      <Content />
-      <Menu />
+      {/* <Content /> */}
       {/* <ChefSection /> */}
 
     </div>
