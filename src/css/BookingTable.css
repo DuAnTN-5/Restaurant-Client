@@ -53,7 +53,8 @@
   }
   
   .date-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr) ;
     justify-content: center;
     gap: 15px;
   }

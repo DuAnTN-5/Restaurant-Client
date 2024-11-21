@@ -39,7 +39,7 @@ function Menu() {
     api
       .get("/product-categories/6")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setMenuItem(res.data.data);
       })
       .catch((error) => {
@@ -49,7 +49,7 @@ function Menu() {
   console.log(menuItem);
 
   return (
-    <div className="our-menu-content">
+    <div className="our-menu-content container-vphu text-vphu">
       <h2 className="title-our-menu title-vphu">Món Ăn Của Chúng Tôi</h2>
       {/* <div className="menu-grid">
       {menuItems.length === 0 ? (

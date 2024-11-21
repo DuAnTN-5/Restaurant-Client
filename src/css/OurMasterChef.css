@@ -17,7 +17,7 @@
 .chefs-list {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(4, 1fr); /* Mặc định 4 cột cho màn hình lớn */
+  grid-template-columns: repeat(5, 1fr); 
 }
 
 .chef-card {

@@ -67,7 +67,22 @@ function BookingForm3() {
           <div className="wrapper-booking">
             <div className="booking-section">
               <form className="booking-form" onSubmit={handleSubmit}>
-                <div className="form-group">
+              <div className="form-group-home">
+                  <label htmlFor="name" className="label-booking">
+                    Họ & Tên :
+                  </label>
+                  <input
+                    type="name"
+                    id="name"
+                    name="name"
+                    // value={phone}
+                    onChange={handleChangeInputs}
+                    className="input-booking"
+                    placeholder="Họ Và Tên"
+                  />
+                </div>
+
+                <div className="form-group-home">
                   <label htmlFor="phone" className="label-booking">
                     SĐT :
                   </label>
@@ -82,7 +97,7 @@ function BookingForm3() {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-home">
                   <label htmlFor="person" className="label-booking">
                     Số Người :
                   </label>
@@ -108,9 +123,9 @@ function BookingForm3() {
                   </select>
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-home">
                   <label htmlFor="date" className="label-booking">
-                    Ngày Đặt :
+                    Ngày :
                   </label>
                   <input
                     type="date"
@@ -123,9 +138,9 @@ function BookingForm3() {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group-home">
                   <label htmlFor="time" className="label-booking">
-                    Giờ Đặt :
+                    Thời Gian :
                   </label>
                   <input
                     type="time"
@@ -151,3 +166,4 @@ function BookingForm3() {
 }
 
 export default BookingForm3;
+
