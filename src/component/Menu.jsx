@@ -49,7 +49,7 @@ function Menu() {
   console.log(menuItem)
 
   return (
-    <div className="our-menu-content">
+    <div className="our-menu-content container-vphu text-vphu">
       <h2 className="title-our-menu title-vphu">Món Ăn Của Chúng Tôi</h2>
     {/* <div className="menu-grid">
       {menuItems.length === 0 ? (
