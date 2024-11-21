@@ -31,6 +31,7 @@ const CheckoutPay = () => {
           <p className="reservation-items">Email: {reservationData.email || "Không cung cấp"}</p>
           <p className="reservation-items">Ngày: {reservationData.date}</p>
           <p className="reservation-items">Thời gian: {reservationData.time}</p>
+          <p className="reservation-items">Số bàn: {reservationData.table}</p>
           <p className="reservation-items">Số khách: {reservationData.guests}</p>
           <p className="reservation-items">Ghi chú: {reservationData.note || "Không có ghi chú"}</p>
         </div>
@@ -124,3 +125,4 @@ const CheckoutPay = () => {
 };
 
 export default CheckoutPay;
+
