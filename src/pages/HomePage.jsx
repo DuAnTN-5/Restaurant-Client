@@ -1,4 +1,4 @@
-import Content from "../component/Content";
+// import Content from "../component/Content";
 import ReceiveCoupons from "../component/Receive-Coupons";
 import HomeSection from "../component/HomeSection";
 import BookingForm from "../component/BookingForm-3";

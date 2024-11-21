@@ -6,6 +6,7 @@ import { MdDateRange } from "react-icons/md";
 import { IoTimeSharp } from "react-icons/io5";
 import { FaArrowTurnDown } from "react-icons/fa6";
 import Rate from "./Rate";
+import ProductRate from "./Product-rate";
 
 function ProductDetail() {
   return (
@@ -53,7 +54,7 @@ function ProductDetail() {
                 <i className="star-icon full-star">★</i>
                 <i className="star-icon half-star">★</i>
               </div> */}
-                <span className="total-ratings">120 lượt đánh giá</span>
+                <span className="total-ratings">120 đánh giá</span>
             </div>
             <p className="product-children">Giá tiền: $56</p>
             <p className="product-children">
@@ -105,6 +106,10 @@ function ProductDetail() {
             trưng. Món ăn được chế biến từ nguyên liệu tươi sống, đảm bảo chất
             lượng và an toàn.
           </p>
+        </div>
+        <div className="food-rate">
+          <h3 className="product-title">Hãy để lại đánh giá của bạn về món ăn</h3>
+          <ProductRate/>
         </div>
         <div className="comment-section">
           <h3>Tất cả bình luận</h3>
