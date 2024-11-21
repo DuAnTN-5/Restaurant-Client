@@ -29,12 +29,12 @@ function ForgotPassword() {
     }else{
       setIsSubmitting(true);
       api
-        .post("/forgot-password", email)
+        .post("/forgot-password",{email})
         .then((res) => {
           console.log(res);
-          if(res.data.email_sent === true){
-              toast.success(res.data.message)
-          }
+          // if(res.data.email_sent === true){
+          //     toast.success(res.data.message)
+          // }
         })
         .catch((error) => {
           console.log(error);

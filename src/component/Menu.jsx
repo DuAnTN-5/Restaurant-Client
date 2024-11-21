@@ -23,7 +23,7 @@ function Menu() {
   //     })
   //     .finally(() => setLoading(false));
   // }, []);
-  
+
   // console.log(menuItems);
   // // Nếu đang tải dữ liệu
   // if (loading) {
@@ -34,24 +34,24 @@ function Menu() {
   // if (error) {
   //   return <div>{error}</div>;
   // }
-  const [menuItem, setMenuItem] = useState([])
-  useEffect(() =>{
+  const [menuItem, setMenuItem] = useState([]);
+  useEffect(() => {
     api
-    .get("/product-categories/6")
-    .then((res) =>{
-      console.log(res)
-      setMenuItem(res.data.data)
-    })
-    .catch(error=>{
-      console.log(error)
-    })
-  }, [])
-  console.log(menuItem)
+      .get("/product-categories/6")
+      .then((res) => {
+        console.log(res);
+        setMenuItem(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  console.log(menuItem);
 
   return (
     <div className="our-menu-content">
       <h2 className="title-our-menu title-vphu">Món Ăn Của Chúng Tôi</h2>
-    {/* <div className="menu-grid">
+      {/* <div className="menu-grid">
       {menuItems.length === 0 ? (
         <p>Không có món ăn nào trong danh mục này.</p>
       ) : (
@@ -69,24 +69,33 @@ function Menu() {
         ))
       )}
     </div> */}
-    <div className="menu-grid">
-      {menuItem.length === 0 ? (
-        <p>Không có món ăn nào trong danh mục này.</p>
-      ) : (
-        menuItem.map((item) => ( 
-           <div className="menu-item-home" key={item.id}>
-            <img src={`http://127.0.0.1:8000/${item.image_url}`} alt={item.name} className="menu-image" />
-            <div className="menu-details">
-              <h3 className="menu-title">{item.name}</h3>
-              <p className="menu-description">{item.ingredients}</p>
-              <p className="menu-price">${item.price}</p>
-              <button className="order-button">Order now</button>
+      <div className="menu-grid">
+        {menuItem.length === 0 ? (
+          <p>Không có món ăn nào trong danh mục này.</p>
+        ) : (
+          menuItem.map((item) => (
+            <div className="menu-item-home" key={item.id}>
+              <img
+                src={`http://127.0.0.1:8000/${item.image_url}`}
+                alt={item.name}
+                className="menu-image"
+              />
+              <div className="menu-details">
+                <h3 className="menu-title">{item.name}</h3>
+                {/* <p className="menu-description">{item.ingredients}</p> */}
+                <p className="menu-description">
+                  {JSON.parse(item.ingredients)
+                    .map((ing) => ing.value)
+                    .join(", ")}
+                </p>
+
+                <p className="menu-price">${item.price}</p>
+                <button className="order-button">Order now</button>
+              </div>
             </div>
-          </div>
-          
-        ))
-      )}
-    </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
