@@ -53,7 +53,7 @@ function Header2() {
     setIsNavbarVisible(false);
   };
 
-  console.log(token);
+  // console.log(token);
   return (
     <div className="header-2">
       {isHeaderInfoVisible && (
@@ -62,11 +62,11 @@ function Header2() {
             <div className="header-contact">
               <div className="header-contact-phone">
                 <i className="fas fa-phone icon-contact"></i>
-                <span>SĐT: +84 346 732311</span>
+                <span>SĐT: +84 1234 567</span>
               </div>
               <div className="header-contact-email">
                 <i className="fas fa-envelope icon-contact"></i>
-                <span>Email: hi5@restan.com</span>
+                <span>Email: Hightfiverestaurant@gmail.com</span>
               </div>
             </div>
             <div className="header-social-network">
