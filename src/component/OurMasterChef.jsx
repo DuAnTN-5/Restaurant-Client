@@ -20,6 +20,12 @@ const chefs = [
     social: ["twitter", "facebook", "google", "instagram"]
   },
   {
+    name: "Anthony Bourdain",
+    title: "Đầu Bếp",
+    imageUrl: "https://s.wsj.net/public/resources/images/BN-XZ106_BOURDA_1000V_20180323105943.jpg",
+    social: ["twitter", "facebook", "google", "instagram"]
+  },
+  {
     name: "Andreas Caminada",
     title: "Đầu Bếp",
     imageUrl: "https://cdn.pastaxi-manager.onepas.vn/content/uploads/articles/lentkdau/10daubepdatnhieusaomechelin/10.jpg",
