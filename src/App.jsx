@@ -11,10 +11,13 @@ function App() {
 
   // Kiểm tra xem đường dẫn có phải là login hoặc signup hay không
   const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/signup" || location.pathname ==="/forgot-password";
+    location.pathname === "/login" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/forgot-password" ||
+    location.pathname.includes("/reset-password") ||
+    location.pathname.includes("/verify-email");
   // console.log("Current Path:", location.pathname);
   // console.log("Is Auth Page:", isAuthPage);
- 
 
   return (
     <div>

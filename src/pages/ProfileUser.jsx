@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../css2/ProfileUser.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { Avatar } from "../assets";
 function ProfileUser() {
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -10,7 +10,7 @@ function ProfileUser() {
     members: "",
     phone: "",
     address: "",
-    avatar: "https://via.placeholder.com/150",
+    avatar:"",
   });
   const navigate = useNavigate()
 
@@ -27,6 +27,7 @@ function ProfileUser() {
   // Hàm xử lý đăng xuất
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("auth");
     toast.success("Đăng xuất thành công")
     navigate("/")
   };
@@ -48,7 +49,7 @@ function ProfileUser() {
         {/* Sidebar bên trái */}
         <div className="sidebar">
           <div className="avatar-container">
-            <img src={userInfo.avatar} alt="User Avatar" className="avatar" />
+            <img src={Avatar} alt="User Avatar" className="avatar-user" />
             <h2 className="user-name">Nguyễn Văn Anh</h2>
             {/* Dấu cộng để chọn ảnh mới */}
             <label className="avatar-plus-icon">
@@ -61,9 +62,10 @@ function ProfileUser() {
               />
             </label>
           </div>
+        
           <ul className="menu-list">
             <li className="menu-item active">Thông tin cá nhân</li>
-            <li className="menu-item">Giỏ Hàng</li>
+            <li className="menu-item">Đổi mật khẩu</li>
             {/* <li className="menu-item">Thiết lập tài khoản</li>
             <li className="menu-item">Báo cáo</li>
             <li className="menu-item">Thông báo</li> */}
@@ -102,6 +104,26 @@ function ProfileUser() {
               type="text"
               name="members"
               value={userInfo.members}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </div> */}
+          {/* <div className="form-group">
+            <label className="form-label">Mật khẩu:</label>
+            <input
+              type="text"
+              // name="phone"
+              value={userInfo.phone}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </div> */}
+          {/* <div className="form-group">
+            <label className="form-label">Nhập lại mật khẩu:</label>
+            <input
+              type="text"
+              // name="phone"
+              value={userInfo.phone}
               onChange={handleInputChange}
               className="form-input"
             />

@@ -71,6 +71,7 @@
   .food-image {
     width: 100%;
     height: auto;
+    cursor: pointer;
   }
   
   /* .food-info {
@@ -177,6 +178,7 @@
   .order-now {
     font-size: 15px;
     padding: 15px 10px;
+    cursor: pointer;
   }
 
   .icon-arrow {

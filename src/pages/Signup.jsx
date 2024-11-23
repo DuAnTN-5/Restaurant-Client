@@ -103,28 +103,28 @@ function SignUp() {
               <input
               className="input-signup"
                 type="text"
-                placeholder="Name"
+                placeholder="Tên của bạn"
                 name="name"
                 onChange={handleChangeInputs}
               />
               <input
               className="input-signup"
                 type="email"
-                placeholder="Email"
+                placeholder="Email của bạn"
                 name="email"
                 onChange={handleChangeInputs}
               />
               <input
               className="input-signup"
                 type="password"
-                placeholder="Password"
+                placeholder="Nhập mật khẩu"
                 name="password"
                 onChange={handleChangeInputs}
               />
               <input
               className="input-signup"
                 type="password"
-                placeholder="Confirm Password"
+                placeholder="Nhập lại mật khẩu"
                 name="c_password"
                 onChange={handleChangeInputs}
               />

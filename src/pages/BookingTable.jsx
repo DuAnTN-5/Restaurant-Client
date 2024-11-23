@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../css/BookingTable.css";
 import { FaArrowAltCircleRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 function BookingTable() {
   const [selectedDate, setSelectedDate] = useState(null); // ngày (được chọn)
   const [selectedTime, setSelectedTime] = useState(null); // giờ (được chọn)
@@ -260,13 +261,15 @@ function BookingTable() {
           )}
         </div>
         <div className="session">
-          <button className="booking-table-continue">
-            {" "}
-            Tiếp tục{" "}
-            <i className="icon-continue">
-              <FaArrowAltCircleRight />
-            </i>
-          </button>
+         <Link to="/checkout-table">
+            <button className="booking-table-continue">
+              {" "}
+              Tiếp tục{" "}
+              <i className="icon-continue">
+                <FaArrowAltCircleRight />
+              </i>
+            </button>
+         </Link>
         </div>
 
         {/* Phần hiển thị thông tin đã chọn */}

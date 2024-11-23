@@ -1,13 +1,22 @@
 import "../css/FavoriteFood.css";
 import { useEffect, useState } from "react";
 import { api } from "../api";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const FoodCategory = () => {
-  // Khai báo state để lưu danh sách món ăn và trạng thái đánh dấu cho icon reviewer
+  let cartLocal = localStorage.getItem("cart");
+  if (cartLocal) {
+    cartLocal = JSON.parse(cartLocal);
+  }
+  let token = localStorage.getItem("token");
+  if (token) {
+    token = JSON.parse(token);
+  } 
+  let quantity = 1;
+  // Khai báo state để lưu danh sách món ăn
   const [foodItems, setFoodItems] = useState([]);
-  const [clickedReviewer, setClickedReviewer] = useState(
-    JSON.parse(localStorage.getItem("likedItems")) || [] // Lấy dữ liệu đã lưu trong localStorage (nếu có)
-  );
+  const [cart, setCart] = useState(cartLocal); 
 
   useEffect(() => {
     api
@@ -19,26 +28,31 @@ const FoodCategory = () => {
         console.log(error);
       });
   }, []);
-
-  const handleReviewerClick = (itemId, itemData) => {
-    // Kiểm tra món ăn đã được yêu thích chưa
-    const newClickedReviewer = [...clickedReviewer];
-    const index = newClickedReviewer.findIndex((item) => item.id === itemId);
-
-    if (index !== -1) {
-      // Nếu đã có trong danh sách, xóa khỏi danh sách
-      newClickedReviewer.splice(index, 1);
-      // Cập nhật localStorage
-      localStorage.setItem("likedItems", JSON.stringify(newClickedReviewer));
-    } else {
-      // Nếu chưa có, thêm vào danh sách
-      newClickedReviewer.push(itemData);
-      // Cập nhật localStorage
-      localStorage.setItem("likedItems", JSON.stringify(newClickedReviewer));
+  const addToCart = (id) => {
+    // alert(id)
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+      return;
     }
-
-    setClickedReviewer(newClickedReviewer);
+    
+    const newCart = { ...cart }; // giữ lại dữ liệu trước đó
+    
+    if (newCart[id]) { // nếu id có rồi, tức là qty > 1 thì +1
+      // lấy id làm key của newCart
+      newCart[id] += quantity;
+      toast.success("Thêm vào giỏ hàng thành công");
+    } else { // nếu id chưa có thì là lấy id đó làm key rồi cho bằng qty là bằng 1
+      newCart[id] = quantity;
+      toast.success("Thêm vào giỏ hàng thành công");
+    }
+    
+    // console.log(newCart);
+    // console.log(menuItem);
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
   };
+  +
+  console.log(foodItems)
 
   return (
     <div className="food-category container-vphu text-vphu">
@@ -47,11 +61,7 @@ const FoodCategory = () => {
       <div className="food-items">
         {foodItems.map((item) => (
           <div className="food-card" key={item.id}>
-            <img
-              src={`http://127.0.0.1:8000/${item.image_url}`}
-              alt={item.name}
-              className="food-image"
-            />
+          <Link to={"product-detail/" + item.slug}>  <img src={`http://127.0.0.1:8000/${item.image_url}`} alt={item.name} className="food-image" /></Link>
             <div className="rating-section">
               <span className="rating">
                 <i className="fa-solid fa-star icon-star"></i>
@@ -65,15 +75,15 @@ const FoodCategory = () => {
               </div>
             </div>
             <div className="food-info">
+            <Link to={"product-detail/" + item.slug}>
               <h3 className="food-name">{item.name}</h3>
-              <p className="favorite-food-description">
-                {JSON.parse(item.ingredients)
-                  .map((ing) => ing.value)
-                  .join(", ")}
-              </p>
+            </Link>
+              <p className="favorite-food-description"> {JSON.parse(item.ingredients)
+                    .map((ing) => ing.value)
+                    .join(", ")}</p>
               <div className="btn-oder">
                 <a href={item.orderLink} className="order-link">
-                  <p className="order-now">Đặt Ngay</p>
+                  <p className="order-now" onClick={() => addToCart(item.id)}>Đặt Ngay</p>
                   <div className="icon-arrow">
                     <i className="fa-solid fa-arrow-right fa-rotate-by"></i>
                   </div>
