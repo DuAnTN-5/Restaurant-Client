@@ -6,33 +6,49 @@ const MenuPage = () => {
   const [categoriesWithFoods, setCategoriesWithFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
-    // Lấy danh mục món ăn và món ăn theo từng danh mục
     const fetchCategoriesAndFoods = async () => {
       try {
+        setLoading(true);
+        setError("");
+
+        // Lấy danh mục sản phẩm
         const categoryResponse = await api.get("/product-categories");
         const categories = categoryResponse.data.data;
 
+        // Lấy món ăn theo từng danh mục
         const categoriesWithFoodsPromises = categories.map(async (category) => {
-          const foodResponse = await api.get(`/product-categories/${category.id}/products`);
+          const foodResponse = await api.get(
+            `/product-categories/${category.id}`
+          );
           const foods = foodResponse.data.data;
 
-          // Phân tích ingredients nếu có
-          const updatedFoods = foods.map(food => {
-            const parsedIngredients = food.ingredients ? JSON.parse(food.ingredients) : [];
-            food.ingredientsList = parsedIngredients.map(item => item.value);
-            return food;
+          // Xử lý danh sách nguyên liệu nếu có
+          const updatedFoods = foods.map((food) => {
+            const parsedIngredients = food.ingredients
+              ? JSON.parse(food.ingredients)
+              : [];
+            return {
+              ...food,
+              ingredientsList: parsedIngredients
+                .slice(0, 4) // Giới hạn 4 nguyên liệu
+                .map((item) => item.value),
+            };
           });
 
           return {
             ...category,
-            foods: updatedFoods, // Lưu món ăn đã được cập nhật với ingredientsList
+            foods: updatedFoods,
           };
         });
 
-        const categoriesWithFoods = await Promise.all(categoriesWithFoodsPromises);
+        const categoriesWithFoods = await Promise.all(
+          categoriesWithFoodsPromises
+        );
         setCategoriesWithFoods(categoriesWithFoods);
+        setActiveCategory(categories[0]?.id || null); // Đặt danh mục đầu tiên làm active
       } catch (err) {
         console.error("Error fetching categories or foods:", err);
         setError("Không thể tải dữ liệu danh mục và món ăn");
@@ -53,79 +69,86 @@ const MenuPage = () => {
   }
 
   return (
-  <div className="menu-page container-vphu">
-    <div className="menu-header">
-      <div className="menu-title">
-        <h2 className="menu-subtitle">FOOD MENU</h2>
-        <h1 className="menu-main-title">Thực Đơn Đặc Biệt</h1>
-      </div>
-    </div>
-
-    <div className="menu-main-container">
-      {/* Sidebar: Danh mục */}
-      <div className="menu-sidebar">
-  <h3 className="menu-sidebar-title">Danh Mục Sản Phẩm</h3>
-  <ul className="menu-sidebar-list">
-    {categoriesWithFoods.map((category) => (
-      <li
-        key={category.id}
-        className="menu-sidebar-item"
-        onClick={() => {
-          const categoryTitleElement = document.getElementById(`category-title-${category.id}`);
-          if (categoryTitleElement) {
-            categoryTitleElement.scrollIntoView({
-              behavior: "smooth", // Cuộn mượt
-              block: "center", // Hiển thị ở giữa màn hình
-            });
-          }
-        }}
-      >
-        {category.name}
-      </li>
-    ))}
-  </ul>
-</div>
-
-
-      {/* Danh mục và món ăn */}
-      <div className="menu-categories-foods">
-        {categoriesWithFoods.map((category) => (
-          <div key={category.id} className="menu-category-section">
-            {/* Thêm id vào tiêu đề danh mục */}
-            <h2 id={`category-title-${category.id}`} className="menu-category-title">
-              {category.name}
-            </h2>
-            <div className="menu-items">
-              {category.foods.map((food) => (
-                <div key={food.id} className="menu-item-page">
-                  <img className="menu-item-page-img" src={food.imageUrl} alt={food.name} />
-                  <h3 className="menu-item-page-title">{food.name}</h3>
-                  <ul className="menu-item-page-ingredients">
-                    {food.ingredientsList && food.ingredientsList.length > 0 ? (
-                      food.ingredientsList.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
-                      ))
-                    ) : (
-                      <li>Không có thông tin nguyên liệu</li>
-                    )}
-                  </ul>
-                  <span className="menu-item-page-price">{food.price}</span>
-                  <button
-                    className="menu-item-page-order-btn"
-                    onClick={() => alert(`Đặt món ${food.name} thành công`)}
-                  >
-                    Đặt Món
-                  </button>
-                </div>
-              ))}
-            </div>
+    <div className="bgr-menu-page">
+      <div className="menu-page container-vphu text-vphu">
+        <div className="menu-header">
+          <div className="menu-title">
+            <h1 className="menu-main-title title-vphu">Thực Đơn Đặc Biệt</h1>
           </div>
-        ))}
+        </div>
+
+        <div className="menu-main-container">
+          <div className="menu-sidebar">
+            <h3 className="title-menu-sidebar subtitle-vphu"> Danh Mục</h3>
+            <ul className="menu-sidebar-list">
+              {categoriesWithFoods.map((category) => (
+                <li
+                  key={category.id}
+                  className={`menu-sidebar-item ${
+                    activeCategory === category.id ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setActiveCategory(category.id);
+                    const categoryTitleElement = document.getElementById(
+                      `category-title-${category.id}`
+                    );
+                    if (categoryTitleElement) {
+                      categoryTitleElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                      });
+                    }
+                  }}
+                >
+                  {category.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Danh mục và món ăn */}
+          <div className="menu-categories-foods">
+            {categoriesWithFoods.map((category) => (
+              <div key={category.id} className="menu-category-section">
+                <h2
+                  id={`category-title-${category.id}`}
+                  className="menu-category-title subtitle-vphu"
+                >
+                  {category.name}
+                </h2>
+                <div className="menu-items">
+                  {category.foods.map((food) => (
+                    <div key={food.id} className="menu-item-page">
+                      <img
+                        className="menu-item-page-img"
+                        src={`http://127.0.0.1:8000/${food.image_url}`}
+                        alt={food.name}
+                      />
+                      <h3 className="menu-item-page-title">{food.name}</h3>
+                      <p className="menu-item-page-ingredients">
+                        {food.ingredientsList.length > 0
+                          ? food.ingredientsList.join(", ")
+                          : "Không có thông tin nguyên liệu"}
+                      </p>
+                      <span className="menu-item-page-price">
+                        {food.price} VNĐ
+                      </span>
+                      <button
+                        className="menu-item-page-order-btn"
+                        onClick={() => alert(`Đặt món ${food.name} thành công`)}
+                      >
+                        Đặt Món
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-);
-
+  );
 };
 
 export default MenuPage;

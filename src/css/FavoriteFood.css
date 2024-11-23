@@ -107,11 +107,27 @@
   .reviewers {
     display: flex;
     align-items: center;
+    color: black;
     border-radius: 25px 0 0 25px;
     background-color: #EBE9E6;
     padding: 15px;
     border-right: 3px solid red;
+    cursor: pointer;
   }
+
+  .reviewers i {
+    transition: color 0.3s ease;
+  }
+  
+  .reviewers.clicked i {
+    color: red;
+  }
+  
+  .clicked-icon {
+    color: red;
+  }
+  
+  
   
   .reviewers img {
     width: 45px;
