@@ -20,13 +20,16 @@ const FoodCategory = () => {
 
   useEffect(() => {
     api
-      .get("/latestProducts")
-      .then((res) => {
-        setFoodItems(res.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .get("/latestProducts")
+    .then(res =>{
+      console.log(res)
+      setFoodItems(res.data.data)
+    })
+    .catch(error =>{
+      console.log(error)
+    })
+   
+          // setFoodItems(sampleFoodItems); 
   }, []);
   const addToCart = (id) => {
     // alert(id)
@@ -64,14 +67,13 @@ const FoodCategory = () => {
           <Link to={"product-detail/" + item.slug}>  <img src={`http://127.0.0.1:8000/${item.image_url}`} alt={item.name} className="food-image" /></Link>
             <div className="rating-section">
               <span className="rating">
-                <i className="fa-solid fa-star icon-star"></i>
-                <p className="number-stars">{item.rating}</p>
+                <i className="fa-solid fa-star icon-star"> </i>
+                <p className="number-stars">
+                {item.rating}
+                </p>
               </span>
-              <div
-                className={`reviewers ${clickedReviewer.some((i) => i.id === item.id) ? "clicked" : ""}`}
-                onClick={() => handleReviewerClick(item.id, item)}
-              >
-                <i className={`fa-regular fa-heart ${clickedReviewer.some((i) => i.id === item.id) ? "clicked-icon" : ""}`}></i>
+              <div className="reviewers">
+              <i className="fa-regular fa-heart"></i>
               </div>
             </div>
             <div className="food-info">
