@@ -1,24 +1,47 @@
 import "../css/Header2.css";
 import logo from "../assets/logo-hi5-black.png";
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { api } from "../api";
 
 function Header2() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   const [isHeaderInfoVisible, setIsHeaderInfoVisible] = useState(true);
+  const navigate = useNavigate()
   const navbarRef = useRef(null);
   const overlayRef = useRef(null);
 
   let token = localStorage.getItem("token");
   if (token) {
     token = JSON.parse(token);
-  }
+  } 
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+    },
+  };
+
 
   const handleToggleNavbar = () => {
     setIsNavbarVisible(!isNavbarVisible);
   };
 
   useEffect(() => {
+    api
+    .get("/user", config)
+    .then((res) =>{
+      console.log(res)
+      let Auth = res.data
+      let auth = JSON.stringify(Auth)
+      localStorage.setItem("auth", auth)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+
     if (isNavbarVisible) {
       document.body.classList.add("no-scroll");
     } else {
@@ -28,7 +51,9 @@ function Header2() {
     return () => {
       document.body.classList.remove("no-scroll");
     };
-  }, [isNavbarVisible]);
+
+
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,6 +76,20 @@ function Header2() {
 
   const handleExitClick = () => {
     setIsNavbarVisible(false);
+  };
+  const clickCart = () => {
+    if (!token) {
+      toast.error("Vui lòng đăng nhập để xem giỏ hàng");
+    } else {
+      navigate("/cart");
+    }
+  };
+  const clickFavouritePage = () => {
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+    }else {
+      navigate("favourite-page");
+    }
   };
 
   // console.log(token);
@@ -136,7 +175,7 @@ function Header2() {
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link className="navbar-link" to="/checkout">
+                  <Link className="navbar-link" to="/booking-table">
                     Đặt Bàn
                   </Link>
                 </li>
@@ -222,16 +261,16 @@ function Header2() {
                   <i className="fa-regular fa-user navbar-icon"></i>
                 </div>
               </Link> */}
-              <Link to="/favourite-page">
-                <div className="cart-interaction-item">
+              {/* <Link to="/favourite-page" onClick={clickFavouritePage}> */}
+                <div className="cart-interaction-item" onClick={clickFavouritePage}>
                   <i className=" fa-regular fa-heart navbar-icon"></i>
                 </div>
-              </Link>
-              <Link to="/cart">
-                <div className="cart-interaction-item icon-end">
+              {/* </Link> */}
+              {/* <Link to="/cart" onClick={clickCart}>  */}
+                <div className="cart-interaction-item icon-end" onClick={clickCart}>
                   <i className="fa-solid fa-cart-shopping navbar-icon"></i>
                 </div>
-              </Link>
+              {/* </Link> */}
             </div>
           </div>
         </div>

@@ -28,6 +28,7 @@ import ResetPassword from './pages/ResetPassword.jsx';
 import BookingTable from './pages/BookingTable.jsx';
 import BlogDetail from './pages/Blog-detail.jsx';
 import InfoBookingTable from './pages/InfoBookingTable.jsx';
+import UpdatePassword from './pages/UpdatePassword.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -44,14 +45,15 @@ createRoot(document.getElementById('root')).render(
           <Route path="/reset-password/:token" element={<ResetPassword/>} /> 
           <Route path="/verify-email/:token" element={<EmailVerification/>} /> 
           <Route path="/cart" element={<CartProduct/>} /> 
-          <Route path="/product-detail" element={<ProductDetail/>} /> 
+          <Route path="/product-detail/:slug" element={<ProductDetail/>} /> 
           <Route path="/blog" element={<Blog/>} /> 
-          <Route path="/blog-detail" element={<BlogDetail/>} /> 
+          <Route path="/blog-detail/:slug" element={<BlogDetail/>} /> 
           <Route path="/favourite-page" element={<FavouritePage/>} /> 
           <Route path="/profile-user" element={<ProfileUser/>} /> 
+          <Route path="/update-password" element={<UpdatePassword/>} /> 
           <Route path="/about" element={<About/>} />
           <Route path="/menu" element={<MenuPage/>} /> 
-          <Route path="/checkout" element={<CheckOut/>} />
+          <Route path="/checkout-table" element={<CheckOut/>} />
           <Route path="/checkout-pay" element={<CheckOutPay/>} />
           <Route path="/booking-table" element={<BookingTable/>} /> 
           <Route path="/info-booking-table" element={<InfoBookingTable/>} /> 
