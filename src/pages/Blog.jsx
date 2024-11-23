@@ -1,13 +1,60 @@
 import { Link } from "react-router-dom";
 import "../css2/Blog.css";
+import { useEffect, useState } from "react";
+import { api } from "../api";
 
 const Blog = () => {
+  const [blog, setBlog] = useState([])
+  useEffect(() =>{
+    api
+    .get("/posts")
+    .then((res) =>{
+      setBlog(res.data.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+  }, [])
+  console.log(blog)
   return (
     <div className="blog-page">
       <div className="blog-container">
         {/* Nội dung chính */}
         <main className="blog-main">
-          <div className="blog-post">
+        {blog.map(item =>{
+          return(
+          <div className="blog-post" key={item.id}>
+            <div className="post-image-wrapper">
+              <img
+                src={`http://127.0.0.1:8000/${item.image_url}`}
+                alt="Bài viết blog 1"
+                className="post-image"
+              />
+              <div className="post-date">
+                <span>{item.created_at}</span>
+                {/* <span>THÁNG 6</span> */}
+              </div>
+            </div>
+            <div className="post-content">
+              <h2 className="post-title">{item.title}</h2>
+              <p className="post-excerpt">
+               {item.summary}
+              </p>
+              <div className="post-meta">
+                <img
+                  src="https://freebw.com/templates/royate/images/widget-person.png"
+                  alt="Tác giả"
+                  className="author-image"
+                />
+                <span>Được viết bởi Andrea Silva</span>
+                <span>Tráng miệng / Nấu ăn / Thực phẩm</span>
+              </div>
+              <Link to={"/blog-detail/" + item.slug}><button className="read-more">XEM THÊM</button></Link>
+            </div>
+          </div>
+          )
+        })}
+          {/* <div className="blog-post">
             <div className="post-image-wrapper">
               <img
                 src="https://freebw.com/templates/royate/images/blog-standard-1.jpg"
@@ -96,37 +143,7 @@ const Blog = () => {
               </div>
               <Link to="/blog-detail"><button className="read-more">XEM THÊM</button></Link>
             </div>
-          </div>
-          <div className="blog-post">
-            <div className="post-image-wrapper">
-              <img
-                src="https://freebw.com/templates/royate/images/blog-standard-1.jpg"
-                alt="Bài viết blog 1"
-                className="post-image"
-              />
-              <div className="post-date">
-                <span>20</span>
-                <span>THÁNG 6</span>
-              </div>
-            </div>
-            <div className="post-content">
-              <h2 className="post-title">Nhiều Phiên Bản Khác Nhau</h2>
-              <p className="post-excerpt">
-                Có nhiều biến thể của các đoạn văn của Lorem Ipsum có sẵn, nhưng
-                phần lớn đã bị thay đổi theo một hình thức nào đó...
-              </p>
-              <div className="post-meta">
-                <img
-                  src="https://freebw.com/templates/royate/images/widget-person.png"
-                  alt="Tác giả"
-                  className="author-image"
-                />
-                <span>Được viết bởi Andrea Silva</span>
-                <span>Tráng miệng / Nấu ăn / Thực phẩm</span>
-              </div>
-              <Link to="/blog-detail"><button className="read-more">XEM THÊM</button></Link>
-            </div>
-          </div>
+          </div> */}
 {/*   
           <div className="blog-post">
             <div className="post-image-wrapper">

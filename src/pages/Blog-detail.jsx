@@ -1,6 +1,19 @@
+import { useParams } from "react-router-dom";
 import "../css2/Blog-detail.css";
+import { useEffect } from "react";
+import { api } from "../api";
 
 export default function BlogDetail() {
+  const params = useParams()
+  useEffect(() =>{
+    api
+    .get("/posts/" + params.slug)
+    .then(res =>{
+      console.log(res)
+    })
+    .catch(error => console.log(error))
+  }, [])
+  console.log(params)
   return (
     <div className="blog-detail-page">
       <div className="container">
