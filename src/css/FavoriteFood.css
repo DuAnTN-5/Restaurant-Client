@@ -145,6 +145,7 @@
   }
   
   .favorite-food-description {
+    height: 80px;
     font-size: 14px;
     color: #cccccc;
     padding: 15px 0;

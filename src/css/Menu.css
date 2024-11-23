@@ -15,6 +15,7 @@
 }
 
 .menu-item-home {
+  position: relative;
   display: flex;
   background-color: #262525;
   transition: transform 0.2s ease-in-out;
@@ -26,11 +27,54 @@
   transform: scale(1.05);
 }
 
+
 .menu-item-home:nth-child(3),
 .menu-item-home:nth-child(4),
 .menu-item-home:nth-child(7),
-.menu-item-home:nth-child(8) {
+.menu-item-home:nth-child(8),
+.menu-item-home:nth-child(11),
+.menu-item-home:nth-child(12) {
   flex-direction: row-reverse;
+}
+
+.heart-icon {
+  background-color: #430c0d;
+  padding: 10px;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.menu-item-home:hover .heart-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+.menu-item-home .heart-icon.left {
+  left: 10px;
+}
+
+.menu-item-home .heart-icon.right {
+  right: 10px;
+}
+
+.menu-grid .menu-item-home:nth-child(3),
+.menu-grid .menu-item-home:nth-child(4),
+.menu-grid .menu-item-home:nth-child(7),
+.menu-grid .menu-item-home:nth-child(8),
+.menu-grid .menu-item-home:nth-child(11),
+.menu-grid .menu-item-home:nth-child(12) {
+  position: relative;
+}
+
+.menu-grid .menu-item-home:nth-child(3) .heart-icon,
+.menu-grid .menu-item-home:nth-child(4) .heart-icon,
+.menu-grid .menu-item-home:nth-child(7) .heart-icon,
+.menu-grid .menu-item-home:nth-child(8) .heart-icon,
+.menu-grid .menu-item-home:nth-child(11) .heart-icon,
+.menu-grid .menu-item-home:nth-child(12) .heart-icon {
+  right: 10px;
+  left: unset;
 }
 
 .menu-image {
