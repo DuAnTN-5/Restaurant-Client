@@ -289,7 +289,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   object-fit: cover; /* Giữ tỷ lệ của ảnh mà không làm vỡ */
   object-position: center; /* Đảm bảo hình ảnh được căn giữa */
 }
@@ -415,8 +415,8 @@
 .product-content {
   display: flex;
   flex-direction: column;
-  width: 280px;
-  margin-right: 10px;
+  width: 200px;
+  margin: 10px 20px;
   border: 1px solid #ededed;
   border-radius: 10px;
   background-color: #262525;
@@ -541,6 +541,12 @@
     margin: 0 auto;
     margin-bottom: 20px;
   }
+  .food-rate {
+    width: 90%;
+    /* max-width: 1140px; */
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
 }
 
 /* Mobile */
@@ -555,7 +561,7 @@
     width: 210px;
     height: 150px;
     border-radius: 50%;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     -o-object-fit: cover;
     object-fit: cover;
     -o-object-position: center;
@@ -700,7 +706,7 @@
     width: 71px;
     height: 71px;
     border-radius: 50%;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     object-fit: cover;
     margin-left: 0;
   }

@@ -111,13 +111,13 @@ function Menu() {
         ) : (
           menuItem.map((item) => (
             <div className="menu-item-home" key={item.id}>
-             <Link to={"product-detail/" + item.slug} >
+             {/* <Link to={"product-detail/" + item.slug} > */}
                 <img
                   src={`http://127.0.0.1:8000/${item.image_url}`}
                   alt={item.name}
                   className="menu-image"
                 />
-             </Link>
+             {/* </Link> */}
               <div className="menu-details">
              <Link to={"product-detail/" + item.slug} >
                 <h3 className="menu-title">{item.name}</h3>

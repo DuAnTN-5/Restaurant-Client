@@ -5,48 +5,60 @@ import { toast } from "react-toastify";
 import { api } from "../api";
 
 function ProductRate(props) {
-  console.log(props);
+  // console.log(props);
   // eslint-disable-next-line react/prop-types
   const product = props.product;
-  console.log(product);
   // eslint-disable-next-line react/prop-types
-  console.log(product.id);
-  // console.log(product.id)
+  const params = props.params
+  // eslint-disable-next-line react/prop-types
+  const setVote = props.setVote
+
   const [rating, setRating] = useState(0);
 
   let token = localStorage.getItem("token");
-  if (!token) {
-    toast.error("Vui lòng đăng nhập");
-  } else {
-    token = JSON.parse(token);
-  }
-
+  
   let auth = localStorage.getItem("auth");
   if (auth) {
     auth = JSON.parse(auth);
   }
-  console.log(auth);
+  // console.log(auth);
+  
   function changeRating(newRating) {
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+    } else {
+      token = JSON.parse(token);
+    }
     console.log(newRating)
     setRating(newRating);
+    console.log(rating);
 
     const formData = new FormData();
     formData.append("user_id", auth.id);
     // eslint-disable-next-line react/prop-types
     formData.append("product_id", product.id);
-    formData.append("rating", rating);
+    formData.append("rating", newRating);
 
     // console.log(formData)
     api
       .post("/ratings", formData)
       .then((res) => {
         console.log(res);
+        if(res.data.data){
+          toast.success(res.data.message)
+          api
+          // eslint-disable-next-line react/prop-types
+          .get("products/" + params.slug)
+          .then((res) =>{
+            console.log(res)
+            setVote(res.data.data)
+          })
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   }
-  console.log(rating);
 
   return (
     <StarRatings

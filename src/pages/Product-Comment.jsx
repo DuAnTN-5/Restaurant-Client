@@ -2,59 +2,121 @@ import { MdAccountCircle } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
 import { IoTimeSharp } from "react-icons/io5";
 import { Avatar } from "../assets";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { api } from "../api";
 // import { FaArrowTurnDown } from "react-icons/fa6";
 
-function ProductComment() {
+function ProductComment(props) {
+  console.log(props)
+  // eslint-disable-next-line react/prop-types
+  const product = props.product;
+  // eslint-disable-next-line react/prop-types
+  console.log(product.id)
   const [comment, setComment] = useState("");
-  const badWords = [
-    "cặc",
-    "cẹc",
-    "qq",
-    "cục",
-    "cức",
-    "buồi",
-    "cẹc",
-    "loz",
-    "lồn",
-    "lòn",
-    "cc",
-    "què",
-    "tật",
-  ];
+
+  let token = localStorage.getItem("token");
+  // eslint-disable-next-line react/prop-types
+  console.log(`/products/${product.id}/comments`)
+  
+  useEffect(() => {
+    // eslint-disable-next-line react/prop-types
+    if (product && product.id) { // Kiểm tra nếu product.id đã có giá trị
+      api
+        // eslint-disable-next-line react/prop-types
+        .get(`/products/${product.id}/comments`)
+        .then((res) => {
+          console.log(res);
+          setComment(res.data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [product]);
 
   const handleChangeComment = (event) => {
     const { value } = event.target;
     // console.log(value);
     setComment(value);
   };
-  // Hàm kiểm tra và thay thế từ bậy bạ bằng '***'
-  const filterBadWords = (text) => {
-    // Lọc và thay thế các từ không phù hợp
-    return text
-      .split(" ") // Tách câu thành mảng từ
-      .map((word) => {
-        // Nếu từ là từ không phù hợp, thay thế bằng '***'
-        return badWords.some((badWord) => word.toLowerCase().includes(badWord))
-        // return badWords.includes(word.toLowerCase())
-         ? "***" : word;
+  function handleCommentSubmit(event) {
+    event.preventDefault();
+
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+    } else {
+      token = JSON.parse(token);
+
+      let auth = localStorage.getItem("auth");
+      if (auth) {
+        auth = JSON.parse(auth);
+      }
+
+      const formData = new FormData();
+      formData.append("user_id", auth.id);
+      // eslint-disable-next-line react/prop-types
+      formData.append("product_id", product.id);
+      formData.append("comment", comment);
+      api
+      .post("/product-comments", formData)
+      .then((res) => {
+        console.log(res)
+        if(res.data.data){
+          toast.success(res.data.message)
+          setComment("")
+        }
       })
-      .join(" "); // Ghép các từ lại thành câu
-  };
-  const handleCommentSubmit = () => {
-    if (comment.trim()) {
-      //sẽ trả về một bản sao của chuỗi gốc nhưng đã loại bỏ tất cả các khoảng trắng ở đầu và cuối chuỗi.
-      // Lọc bình luận để thay thế từ bậy bạ
-      const filteredComment = filterBadWords(comment);
-      console.log(filteredComment);
-
-      setComment(filteredComment);
-      setComment("");
-
-      // // Reset lại textarea sau khi gửi bình luận
-      console.log("comment:", filteredComment);
+      .catch(error =>{
+        console.log(error)
+      })
     }
-  };
+
+  }
+  // const badWords = [
+  //   "cặc",
+  //   "cẹc",
+  //   "qq",
+  //   "cục",
+  //   "cức",
+  //   "buồi",
+  //   "cẹc",
+  //   "loz",
+  //   "lồn",
+  //   "lòn",
+  //   "cc",
+  //   "què",
+  //   "tật",
+  // ];
+
+  // Hàm kiểm tra và thay thế từ bậy bạ bằng '***'
+  // const filterBadWords = (text) => {
+  //   // Lọc và thay thế các từ không phù hợp
+  //   return text
+  //     .split(" ") // Tách câu thành mảng từ
+  //     .map((word) => {
+  //       // Nếu từ là từ không phù hợp, thay thế bằng '***'
+  //       return badWords.some((badWord) => word.toLowerCase().includes(badWord))
+  //       // return badWords.includes(word.toLowerCase())
+  //        ? "***" : word;
+  //     })
+  //     .join(" "); // Ghép các từ lại thành câu
+  // };
+  // const handleCommentSubmit = () => {
+  //   // if (comment.trim()) {
+  //   //   //sẽ trả về một bản sao của chuỗi gốc nhưng đã loại bỏ tất cả các khoảng trắng ở đầu và cuối chuỗi.
+  //   //   // Lọc bình luận để thay thế từ bậy bạ
+  //   //   // const filteredComment = filterBadWords(comment);
+  //   //   // console.log(filteredComment);
+
+  //   //   // setComment(filteredComment);
+  //   //   // setComment("");
+
+  //   //   // // // Reset lại textarea sau khi gửi bình luận
+  //   //   // console.log("comment:", filteredComment);
+  //   // }
+
+  // };
   console.log(comment);
   return (
     <>
@@ -62,9 +124,7 @@ function ProductComment() {
         <h3>Tất cả bình luận</h3>
         <ul className="media-list">
           <li className="media">
-            {/* <div className="avatar"> */}
             <img className="avatar" src={Avatar} alt="User Avatar" />
-            {/* </div> */}
             <div className="comment-details">
               <div className="comment-meta">
                 <ul className="comment-meta-list">
@@ -97,86 +157,7 @@ function ProductComment() {
                 </div> */}
             </div>
           </li>
-          <li className="media">
-            {/* <div className="avatar"> */}
-            <img
-              className="avatar"
-              src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/465267652_3665998010379511_6033648866276197112_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=t_BIKUIH9MkQ7kNvgGUuAKE&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=AwU_cAYDWFmqg4KEPpblq8X&oh=00_AYAkbiEv3qFX8QamvJ_HLwr6vb5b93unitrPQ-CiynVVpQ&oe=67467589"
-              alt="User Avatar"
-            />
-            {/* </div> */}
-            <div className="comment-details">
-              <div className="comment-meta">
-                <ul className="comment-meta-list">
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <MdAccountCircle />
-                    </i>
-                    <p className="comment-name">LanHuong</p>
-                  </li>
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <MdDateRange />
-                    </i>
-                    <p className="comment-name">22/10/2024</p>
-                  </li>
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <IoTimeSharp />
-                    </i>
-                    <p className="comment-name">10:14 a.m</p>
-                  </li>
-                </ul>
-              </div>
-              <p className="comment-content">Món ăn ngon quá!!</p>
-              {/* <div className="comment-replay">
-                  <i className="replay-icon">
-                    <FaArrowTurnDown />
-                  </i>
-                  <span className="replay-text">Replay</span>
-                </div> */}
-            </div>
-          </li>
-          <li className="media">
-            {/* <div className="avatar"> */}
-            <img
-              className="avatar"
-              src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/465267652_3665998010379511_6033648866276197112_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=t_BIKUIH9MkQ7kNvgGUuAKE&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=AwU_cAYDWFmqg4KEPpblq8X&oh=00_AYAkbiEv3qFX8QamvJ_HLwr6vb5b93unitrPQ-CiynVVpQ&oe=67467589"
-              alt="User Avatar"
-            />
-            {/* </div> */}
-            <div className="comment-details">
-              <div className="comment-meta">
-                <ul className="comment-meta-list">
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <MdAccountCircle />
-                    </i>
-                    <p className="comment-name">LanHuong</p>
-                  </li>
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <MdDateRange />
-                    </i>
-                    <p className="comment-name">22/10/2024</p>
-                  </li>
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <IoTimeSharp />
-                    </i>
-                    <p className="comment-name">10:14 a.m</p>
-                  </li>
-                </ul>
-              </div>
-              <p className="comment-content">Món ăn ngon quá!!</p>
-              {/* <div className="comment-replay">
-                  <i className="replay-icon">
-                    <FaArrowTurnDown />
-                  </i>
-                  <span className="replay-text">Replay</span>
-                </div> */}
-            </div>
-          </li>
+        
 
           {/* <li className="media second-media">
               <div className="avatar">
