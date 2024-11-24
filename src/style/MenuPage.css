@@ -1,3 +1,9 @@
+.bgr-menu-page {
+  background: url(../assets/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 .menu-main-container {
   display: flex;
   gap: 30px;
@@ -13,40 +19,63 @@
   bottom: 20px;
   height: auto;
   background-color: #292929;
-  padding: 15px;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   z-index: 10;
   overflow-y: auto; /* Cho phép cuộn khi danh sách dài */
   max-height: calc(100vh - 40px);
 }
+.title-menu-sidebar {
+  color: #ffc107;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 20px 0;
+  text-transform: uppercase;
+  text-align: center;
+  border-bottom: 2px solid #ffc107;
+}
 .menu-header {
+  margin-top: 20px;
   text-align: center;
 }
 
-.menu-sidebar-title {
+/* .menu-sidebar-title {
   color: #ffc107;
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 20px;
   text-transform: uppercase;
-}
+} */
 
 .menu-sidebar-list {
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   list-style-type: none;
   padding: 0;
 }
 
 .menu-sidebar-item {
-  color: #fff;
+  text-align: center;
+  color: #cccccc;
+  padding: 15px 0;
   font-size: 18px;
-  margin-bottom: 15px;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .menu-sidebar-item:hover {
   color: #ffc107;
+}
+.menu-sidebar-item.active {
+  width: 100%;
+  background-color: #3d3d3d;
+  color: #ffc107;
+  border-radius: 8px;
 }
 
 .menu-categories-foods {
@@ -81,6 +110,9 @@
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .menu-item-page-img {
@@ -91,12 +123,14 @@
 }
 
 .menu-item-page-title {
+  min-height: 50px;
   color: white;
   font-size: 18px;
   margin: 10px 0 5px;
 }
 
 .menu-item-page-ingredients {
+  height: 45px;
   font-size: 14px;
   color: #ccc;
   margin-bottom: 10px;

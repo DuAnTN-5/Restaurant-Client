@@ -1,5 +1,8 @@
 .about-page-container {
-    background-color: #1b1b1b;
+    background: url("../assets/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .about-page-wrapper {
@@ -136,7 +139,7 @@
 .contact-page-item {
   font-size: 16px;
   line-height: 1.8;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
 }
 
 .contact-page-label {
