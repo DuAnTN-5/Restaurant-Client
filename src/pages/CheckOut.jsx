@@ -8,38 +8,77 @@ const ReservationForm = () => {
   const navigate = useNavigate();
   const [selectedTable, setSelectedTable] = useState(null);
 
+  // const tables = Array.from({ length: 33 }, (_, index) =>
+  //   `T${(index + 1).toString().padStart(2, "0")}`
+  // ); mapp như Phú làm
+  const tables = [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15",
+    "T16",
+    "T17",
+    "T18",
+    "T19",
+    "T20",
+    "T21",
+    "T22",
+    "T23",
+    "T24",
+    "T25",
+    "T26",
+    "T27",
+    "T28",
+    "T29",
+    "T30",
+    "T31",
+    "T32",
+    "T33",
+  ];
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const reservationData = {
-      name: e.target.name.value,
-      phone: e.target.phone.value,
-      email: e.target.email.value,
-      date: e.target.date.value,
-      time: e.target.time.value,
-      guests: e.target.guests.value,
-      note: e.target.note.value,
-      table: selectedTable,
-    };
+    // const reservationData = {
+    //   name: e.target.name.value,
+    //   phone: e.target.phone.value,
+    //   email: e.target.email.value,
+    //   date: e.target.date.value,
+    //   time: e.target.time.value,
+    //   guests: e.target.guests.value,
+    //   note: e.target.note.value,
+    //   table: selectedTable,
+    // };
 
     // Kiểm tra
-    if (!reservationData.name || !reservationData.phone) {
-      alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
-      return;
-    }
-    if (!selectedTable) {
-      alert("Vui lòng chọn bàn!");
-      return;
-    }
+    // if (!reservationData.name || !reservationData.phone) {
+    //   alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+    //   return;
+    // }
+    // if (!selectedTable) {
+    //   alert("Vui lòng chọn bàn!");
+    //   return;
+    // }
 
     // Lưu vào Local Storage
-    localStorage.setItem("reservationData", JSON.stringify(reservationData));
-    navigate("/checkout-pay");
+    // localStorage.setItem("reservationData", JSON.stringify(reservationData));
+    // navigate("/checkout-pay");
   };
 
   const handleTableSelection = (table) => {
     setSelectedTable(table);
-    alert(`Bạn đã chọn bàn ${table}`);
+    // alert(`Bạn đã chọn bàn ${table}`);
   };
 
   return (
@@ -65,6 +104,22 @@ const ReservationForm = () => {
         <div className="choose-table-box">
           <h3 className="choose-table-title subtitle-vphu">Lựa chọn bàn</h3>
           <div className="choose-table-buttons">
+            {tables.map((table) => (
+              <button
+                key={table}
+                className={`table-button ${
+                  selectedTable === table ? "table-button-active" : ""
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleTableSelection(table);
+                }}
+              >
+                {table}
+              </button>
+            ))}
+          </div>
+          {/* <div className="choose-table-buttons">
             {Array.from({ length: 33 }, (_, index) => (
               <button
                 key={index + 1}
@@ -79,7 +134,7 @@ const ReservationForm = () => {
                 T{index + 1}
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
 

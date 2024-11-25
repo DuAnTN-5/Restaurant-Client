@@ -1,188 +1,87 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../css/BookingTable.css";
 import { FaArrowAltCircleRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 function BookingTable() {
-  const [selectedDate, setSelectedDate] = useState(null); // ngày (được chọn)
-  const [selectedTime, setSelectedTime] = useState(null); // giờ (được chọn)
+  const [selectedDate, setSelectedDate] = useState(null); // Ngày được chọn
+  const [customTime, setCustomTime] = useState(""); // Giờ nhập tay từ người dùng
 
-  const dates = [
-    { day: "Thứ 2", date: "10" },
-    { day: "Thứ 3", date: "11" },
-    { day: "Thứ 4", date: "12" },
-    { day: "Thứ 5", date: "13" },
-    { day: "Thứ 5", date: "14" },
-    { day: "Thứ 6", date: "15" },
-    { day: "Thứ 7", date: "16" },
-    { day: "Chủ nhật", date: "17" },
-    { day: "Thứ 2", date: "18" },
-    { day: "Thứ 3", date: "19" },
-    { day: "Thứ 4", date: "20" },
-    { day: "Thứ 5", date: "21" },
-    { day: "Thứ 5", date: "22" },
-    { day: "Thứ 6", date: "23" },
-    { day: "Thứ 7", date: "24" },
-    { day: "Chủ nhật", date: "25" },
-  ];
+  const [dates, setDates] = useState([]); // Mảng chứa các ngày sẽ được hiển thị
+  const navigate = useNavigate()
 
-  const schedule = {
-    10: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    11: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    12: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    13: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    14: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    15: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    16: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    17: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    18: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    19: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    20: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    21: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    22: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    23: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    24: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-    25: [
-      { time: "09:00-11:00" },
-      { time: "11:00-13:00" },
-      { time: "13:00-15:00" },
-      { time: "15:00-17:00" },
-      { time: "17:00-19:00" },
-      { time: "19:00-21:00" },
-    ],
-  };
-  const disabledTimes = {
-    10: ["09:00-11:00", "17:00-19:00"], // Ngày 10 khóa giờ này
-    11: ["11:00-13:00"], // Ngày 11 khóa giờ này
-    12: ["13:00-15:00", "19:00-21:00"], // Ngày 12 khóa giờ này
-  };
 
-  // const disabledDates = ["21"]; // Ngày bị khóa
-  // const disabledTimes = ["11:40-13:35", "17:55-19:50"]; // Giờ bị khóa
+  let token = localStorage.getItem("token");
+  if (token) {
+    token = JSON.parse(token);
+  }
+
+  // Cấu hình ngày tháng động từ hôm nay đến 14 ngày
+  useEffect(() => {
+    const currentDate = new Date();
+    const upcomingDates = [];
+
+    for (let i = 0; i < 14; i++) {
+      // Giới hạn chỉ tạo 14 ngày
+      currentDate.setDate(currentDate.getDate() + 1);
+      const date = {
+        day: currentDate.toLocaleString("vi-VN", { weekday: "long" }),
+        date: currentDate.getDate(),
+      };
+      upcomingDates.push(date);
+    }
+    setDates(upcomingDates);
+  }, []);
 
   const handleDateClick = (date) => {
+    console.log(date);
     setSelectedDate(date);
-    setSelectedTime(null); // Reset giờ khi đổi ngày
+    // setCustomTime(""); // Reset giờ nhập tay khi chọn ngày mới
   };
 
-  const handleTimeClick = (time) => {
-    setSelectedTime(time);
-    const date = selectedDate.date;
-    if (!disabledTimes[date]) {
-      disabledTimes[date] = [];
-    }
-    if (!disabledTimes[date].includes(time.time)) {
-      disabledTimes[date].push(time.time);
-    }
+  // Kiểm tra tính hợp lệ của giờ nhập (theo định dạng __:__)
+  const handleCustomTimeChange = (e) => {
+    setCustomTime(e.target.value);
   };
-  // console.log(selectedDate.day)
-  // console.log(selectedDate.date)
-  // console.log(selectedTime.time)
 
+  function handleContinue(event) {
+    event.preventDefault();
+    let flag = true;
+    const regex = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/;
+
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+      flag = false;
+    } else if (!selectedDate) {
+      toast.error("Vui lòng chọn ngày");
+      flag = false;
+    } else if (!customTime) {
+      toast.error("Vui lòng chọn giờ");
+      flag = false;
+    } else if (!regex.test(customTime)) {
+      toast.error("Vui nhập nhập giờ và phút cho hợp lệ");
+      flag = false;
+    }
+    if (flag) {
+      const bookingData = {
+        customTime,
+        selectedDate,
+      };
+      localStorage.setItem("bookingInfo", JSON.stringify(bookingData));
+      
+    //   localStorage.setItem("customTime", customTime);
+    // localStorage.setItem("selectedDate", JSON.stringify(selectedDate));
+    navigate("/checkout-table")
+      toast.success("Hãy chọn chỗ ngồi của bạn")  
+      
+    }
+  }
+  console.log({ dates });
+  console.log({ customTime });
+  console.log({ selectedDate });
+  // console.log({selectedDate.day} - {selectedDate.date}</strong> và khung giờ <strong>{customTime})
+  //
   return (
     <div className="booking-table-page">
       <div className="booking-table-container">
@@ -190,102 +89,72 @@ function BookingTable() {
 
         {/* Phần chọn ngày */}
         <div className="section">
-          <h2 className="booking-title ">Chọn ngày</h2>
-          <h2 className="booking-title-label ">Tháng 12</h2>
+          <h2 className="booking-title">Chọn ngày</h2>
+          <h2 className="booking-title-label">Tháng 12</h2>
           <div className="date-list">
-            {dates.map((date, index) => {
-              return (
-                <div
-                  key={index}
-                  // className="date-item"
-                  className={`date-item ${
-                    selectedDate?.date === date.date ? "active" : ""
-                  }`}
-                  onClick={() => handleDateClick(date)}
-                >
-                  <span>{date.day}</span>
-                  <span>{date.date}</span>
-                </div>
-              );
-            })}
+            {dates.map((date, index) => (
+              <div
+                key={index}
+                className={`date-item ${
+                  selectedDate?.date === date.date ? "active" : ""
+                }`}
+                onClick={() => handleDateClick(date)}
+              >
+                <span>{date.day}</span>
+                <span>{date.date}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Phần chọn lịch chiếu */}
+        {/* Phần chọn giờ */}
         <div className="section">
-          <h2 className="booking-title">Chọn giờ </h2>
+          <h2 className="booking-title">Chọn giờ</h2>
           {selectedDate ? (
             <div className="movie-item">
-              <h3>
-                Lịch của ngày {selectedDate.day} - {selectedDate.date}
-              </h3>
+              {/* Hiển thị ô input nếu người dùng đã chọn ngày */}
               <div className="movie-details">
                 <div className="time-list">
-                  {schedule[selectedDate.date]?.map((time, index) => {
-                    //Lấy danh sách các khung giờ cho ngày được chọn (selectedDate.date).
-                    {
-                      /* const isDisabled = disabledTimes?.includes(time.time) || false; */
-                    }
-                    const isDisabled =
-                      disabledTimes[selectedDate.date]?.includes(time.time) ||
-                      false;
-
-                    const isBooked =
-                      isDisabled && selectedTime?.time === time.time;
-                    return (
-                      <div
-                        key={index}
-                        // className={`time-item ${isDisabled ? "disabled" : ""} ${
-                        //   selectedTime === time && !isDisabled ? "active" : ""
-                        // }`}
-                        className={`time-item 
-  ${isDisabled ? "disabled" : ""} 
-  ${selectedTime?.time === time.time && !isDisabled ? "active" : ""} 
-  ${isBooked ? "booked" : ""}`}
-                        onClick={
-                          !isDisabled ? () => handleTimeClick(time) : null
-                        }
-                      >
-                        {time.time}
-                        <span>{time.room}</span>
-                      </div>
-                    );
-                  })}
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Nhập giờ (ví dụ: 09:30)"
+                      // value={customTime}
+                      // name="customTime"
+                      onChange={handleCustomTimeChange}
+                      className="time-input"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           ) : (
-            <p className="loading-date">
-              Hãy chọn ngày để hiển thị lịch chiếu.
-            </p>
+            <p className="loading-date">Hãy chọn ngày để chọn giờ đặt bàn.</p>
           )}
-        </div>
-        <div className="session">
-         <Link to="/checkout-table">
-            <button className="booking-table-continue">
-              {" "}
-              Tiếp tục{" "}
-              <i className="icon-continue">
-                <FaArrowAltCircleRight />
-              </i>
-            </button>
-         </Link>
         </div>
 
         {/* Phần hiển thị thông tin đã chọn */}
-        <div className="section">
+        {/* <div className="section">
           <h2>Thông tin đặt vé</h2>
-          {selectedDate && selectedTime ? (
+          {selectedDate && customTime ? (
             <p>
-              Bạn đã chọn ngày{" "}
-              <strong>
-                {selectedDate.day} - {selectedDate.date}
-              </strong>{" "}
-              và khung giờ <strong>{selectedTime.time}</strong>.
+              Bạn đã chọn ngày <strong>{selectedDate.day} - {selectedDate.date}</strong> và khung giờ <strong>{customTime}</strong>.
             </p>
           ) : (
             <p>Hãy chọn ngày và giờ chiếu.</p>
           )}
+        </div> */}
+
+        {/* Tiến hành thanh toán */}
+        <div className="session">
+          {/* <Link to="/checkout-table"> */}
+          <button className="booking-table-continue" onClick={handleContinue}>
+            Tiếp tục{" "}
+            <i className="icon-continue">
+              <FaArrowAltCircleRight />
+            </i>
+          </button>
+          {/* </Link> */}
         </div>
       </div>
     </div>

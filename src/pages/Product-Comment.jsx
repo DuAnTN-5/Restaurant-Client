@@ -5,29 +5,63 @@ import { Avatar } from "../assets";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../api";
+import { sortBy } from "lodash";
 // import { FaArrowTurnDown } from "react-icons/fa6";
 
 function ProductComment(props) {
-  console.log(props)
+  // console.log(props);
   // eslint-disable-next-line react/prop-types
   const product = props.product;
   // eslint-disable-next-line react/prop-types
-  console.log(product.id)
-  const [comment, setComment] = useState("");
+  // console.log(product.id);
+  const [comment, setComment] = useState(""); // comment gửi lên
+  const [comments, setComments] = useState([]); //comment get về
 
   let token = localStorage.getItem("token");
   // eslint-disable-next-line react/prop-types
-  console.log(`/products/${product.id}/comments`)
-  
+  // console.log(`/products/${product.id}/comments`);
+  const badWords = [
+    "cặc",
+    "cẹc",
+    "qq",
+    "cục",
+    "cức",
+    "buồi",
+    "cẹc",
+    "loz",
+    "lồn",
+    "lòn",
+    "cc",
+    "què",
+    "địt",
+    "dit",
+    "me",
+    "má",
+    "mẹ",
+  ];
+  const filterBadWords = (text) => {
+    return text
+      .split(" ") // Tách câu thành mảng từ
+      .map((word) => {
+        const isBadWord = badWords.some((badWord) => word.toLowerCase().includes(badWord));
+        if (isBadWord) {
+          console.log(`Bad word detected: ${word}`); // Kiểm tra xem từ nào bị thay thế
+        }
+        return isBadWord ? "***" : word;
+      })
+      .join(" "); // Ghép các từ lại thành câu
+  };
+
   useEffect(() => {
     // eslint-disable-next-line react/prop-types
-    if (product && product.id) { // Kiểm tra nếu product.id đã có giá trị
+    if (product && product.id) {
+      // Kiểm tra nếu product.id đã có giá trị
       api
         // eslint-disable-next-line react/prop-types
         .get(`/products/${product.id}/comments`)
         .then((res) => {
-          console.log(res);
-          setComment(res.data)
+          // console.log(res);
+          setComments(res.data.data);
         })
         .catch((error) => {
           console.log(error);
@@ -45,12 +79,15 @@ function ProductComment(props) {
 
     if (!token) {
       toast.error("Vui lòng đăng nhập");
+    }else if(!comment){
+        toast.error("Vui lòng nhập bình luận!");
     } else {
+      
       token = JSON.parse(token);
-
       let auth = localStorage.getItem("auth");
       if (auth) {
         auth = JSON.parse(auth);
+
       }
 
       const formData = new FormData();
@@ -58,20 +95,29 @@ function ProductComment(props) {
       // eslint-disable-next-line react/prop-types
       formData.append("product_id", product.id);
       formData.append("comment", comment);
+      // console.log(formData)
       api
-      .post("/product-comments", formData)
-      .then((res) => {
-        console.log(res)
-        if(res.data.data){
-          toast.success(res.data.message)
-          setComment("")
-        }
-      })
-      .catch(error =>{
-        console.log(error)
-      })
+        .post("/product-comments", formData)
+        .then((res) => {
+          console.log(res);
+          if (res.data.data) {
+            toast.success(res.data.message);
+            api
+              // eslint-disable-next-line react/prop-types
+              .get(`/products/${product.id}/comments`)
+              .then((res) => {
+                setComments(res.data.data);
+              })
+              .catch((error) => {
+                console.error("Failed to fetch comments:", error);
+              });
+            setComment("");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-
   }
   // const badWords = [
   //   "cặc",
@@ -117,47 +163,55 @@ function ProductComment(props) {
   //   // }
 
   // };
-  console.log(comment);
+  // console.log(comment);
+  console.log(comments);
   return (
     <>
       <div className="comment-section">
         <h3>Tất cả bình luận</h3>
         <ul className="media-list">
-          <li className="media">
-            <img className="avatar" src={Avatar} alt="User Avatar" />
-            <div className="comment-details">
-              <div className="comment-meta">
-                <ul className="comment-meta-list">
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <MdAccountCircle />
-                    </i>
-                    <p className="comment-name">LanHuong</p>
-                  </li>
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <MdDateRange />
-                    </i>
-                    <p className="comment-name">22/10/2024</p>
-                  </li>
-                  <li className="comment-meta-item">
-                    <i className="comment-icon">
-                      <IoTimeSharp />
-                    </i>
-                    <p className="comment-name">10:14 a.m</p>
-                  </li>
-                </ul>
-              </div>
-              <p className="comment-content">Món ăn ngon quá!!</p>
-              {/* <div className="comment-replay">
-                  <i className="replay-icon">
-                    <FaArrowTurnDown />
-                  </i>
-                  <span className="replay-text">Replay</span>
-                </div> */}
-            </div>
-          </li>
-        
+          {sortBy(comments, "id").map((item) => {
+            const filteredComment = filterBadWords(item.comment);
+            console.log(filteredComment)
+            return (
+              <li key={item.id} className="media">
+                <img
+                  className="avatar"
+                  src={
+                    item.image !== null
+                      ? `http://127.0.0.1:8000/${item.image}`
+                      : Avatar
+                  }
+                  alt="User Avatar"
+                />
+                <div className="comment-details">
+                  <div className="comment-meta">
+                    <ul className="comment-meta-list">
+                      <li className="comment-meta-item">
+                        <i className="comment-icon">
+                          <MdAccountCircle />
+                        </i>
+                        <p className="comment-name">{item.name}</p>
+                      </li>
+                      <li className="comment-meta-item">
+                        <i className="comment-icon">
+                          <MdDateRange />
+                        </i>
+                        <p className="comment-name">{item.date}</p>
+                      </li>
+                      <li className="comment-meta-item">
+                        <i className="comment-icon">
+                          <IoTimeSharp />
+                        </i>
+                        <p className="comment-name">{item.time}</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <p className="comment-content">{filteredComment}</p>
+                </div>
+              </li>
+            );
+          })}
 
           {/* <li className="media second-media">
               <div className="avatar">

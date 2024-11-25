@@ -252,10 +252,10 @@
   margin: 2% 2%;
 } */
 
-/* .second-media {
+.second-media {
   width: 77%;
   margin-left: 15%;
-} */
+}
 
 /* 
 .second-media .comment-content {
@@ -351,6 +351,12 @@
   font-size: 16px; /* Kích thước chữ */
   font-weight: 500;
 }
+.close-replay{
+  padding: 10px;
+  background-color: red;
+  border-radius: 10px;
+}
+
 
 /* Tùy chỉnh phần nhập bình luận */
 .comment-input {
