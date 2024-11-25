@@ -84,6 +84,22 @@ const ReservationForm = () => {
         <div className="choose-table-box">
           <h3 className="choose-table-title subtitle-vphu">Lựa chọn bàn</h3>
           <div className="choose-table-buttons">
+            {tables.map((table) => (
+              <button
+                key={table}
+                className={`table-button ${
+                  selectedTable === table ? "table-button-active" : ""
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleTableSelection(table);
+                }}
+              >
+                {table}
+              </button>
+            ))}
+          </div>
+          {/* <div className="choose-table-buttons">
             {Array.from({ length: 33 }, (_, index) => (
               <button
                 key={index + 1}
@@ -98,7 +114,7 @@ const ReservationForm = () => {
                 T{index + 1}
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
 
