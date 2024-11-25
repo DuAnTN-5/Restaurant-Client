@@ -1,29 +1,162 @@
 import { useParams } from "react-router-dom";
 import "../css2/Blog-detail.css";
-import { useEffect } from "react";
+import { Children, useEffect, useRef, useState } from "react";
 import { api } from "../api";
+import { MdAccountCircle } from "react-icons/md";
+import { MdDateRange } from "react-icons/md";
+import { IoTimeSharp } from "react-icons/io5";
+import { FaArrowTurnDown } from "react-icons/fa6";
+import { toast } from "react-toastify";
+import { Avatar } from "../assets";
 
 export default function BlogDetail() {
-  const params = useParams()
-  useEffect(() =>{
+  const [idComment, setIdComment] = useState(null);
+  const [blogDetail, setBlogDetail] = useState("");
+  const [comment, setComment] = useState(""); // comment gửi lên
+  const [comments, setComments] = useState([]); //comment get về
+  const params = useParams();
+
+  const inputRef = useRef();
+
+  let token = localStorage.getItem("token");
+
+  useEffect(() => {
     api
-    .get("/posts/" + params.slug)
-    .then(res =>{
-      console.log(res)
-    })
-    .catch(error => console.log(error))
-  }, [])
-  console.log(params)
+      .get("/posts/" + params.slug)
+      .then((res) => {
+        console.log(res);
+        setBlogDetail(res.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    if (blogDetail && blogDetail.id) {
+      api
+        .get(`/posts/${blogDetail.id}/comments`)
+        .then((res) => {
+          console.log(res);
+          setComments(res.data.data);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [blogDetail]);
+  const badWords = [
+    "cặc",
+    "cẹc",
+    "qq",
+    "cục",
+    "cức",
+    "buồi",
+    "cẹc",
+    "loz",
+    "lồn",
+    "lòn",
+    "cc",
+    "què",
+    "địt",
+    "dit",
+    "me",
+    "má",
+    "mẹ",
+  ];
+  const filterBadWords = (text) => {
+    return text
+      .split(" ") // Tách câu thành mảng từ
+      .map((word) => {
+        const isBadWord = badWords.some((badWord) =>
+          word.toLowerCase().includes(badWord)
+        );
+        if (isBadWord) {
+          console.log(`Bad word detected: ${word}`); // Kiểm tra xem từ nào bị thay thế
+        }
+        return isBadWord ? "***" : word;
+      })
+      .join(" "); // Ghép các từ lại thành câu
+  };
+
+  const handleChangeComment = (event) => {
+    const { value } = event.target;
+    // console.log(value);
+    setComment(value);
+  };
+
+  const handleClickReplay = (idComment) => {
+    toast.success(idComment);
+    console.log("idComment after click:", idComment);
+    setIdComment(idComment); //lấy id cha làm idcomment của thg con, còn idcomment cha là 0
+    inputRef.current.focus(); // hàm này để khi kick thẻ đag gắn sự kiện onClick thì nó sẽ đc chuyển tới thẻ đag đc chọn để chọt
+    //hay còn gọi là focus vào textarea
+  };
+  console.log("Current idComment:", idComment);
+  const handleCancelReply = () => {
+    setIdComment(null); // Xóa bình luận cha khi hủy trả lời
+    setComment(""); // Xóa nội dung bình luận
+  };
+  // toast.error(idComment)
+
+  function handleCommentSubmit(event) {
+    event.preventDefault();
+
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+    } else if (!comment) {
+      toast.error("Vui lòng nhập bình luận");
+    } else {
+      token = JSON.parse(token);
+
+      let auth = localStorage.getItem("auth");
+      if (auth) {
+        auth = JSON.parse(auth);
+      }
+      console.log(idComment);
+
+      const formData = new FormData();
+      formData.append("user_id", auth.id);
+      formData.append("post_id", blogDetail.id);
+      formData.append("content", comment);
+      idComment !== null ? formData.append("parent_id", idComment) : "";
+      // formData.append("parent_id", null)
+      console.log(idComment);
+      // console.log("parent_id", idComment !== "null" ? idComment : "");
+      // console.log(formData)
+
+      api
+        .post("/post-comments", formData)
+        .then((res) => {
+          console.log(res);
+          if (res.data.data) {
+            toast.success(res.data.message);
+
+            api
+            .get(`/posts/${blogDetail.id}/comments`)
+            .then((res) => {
+              console.log(res);
+              setComments(res.data.data);
+            })
+            .catch((error) => console.log(error));
+            setComment("");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+
+  // console.log(params)
+
+  console.log({ comment });
   return (
     <div className="blog-detail-page">
       <div className="container">
         <main className="main-content">
           <article>
             <header>
-              <div className="post-header">
+              {/* <div className="post-header">
                 <span className="date-badge">20 JUN</span>
                 <h1>Various Versions Have</h1>
-              </div>
+              </div> */}
               <div className="post-meta">
                 <img
                   src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=50&q=80"
@@ -40,97 +173,159 @@ export default function BlogDetail() {
             </header>
 
             <img
-              src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1200&q=80"
+              src={`http://127.0.0.1:8000/${blogDetail.image_url}`}
               alt="Fresh fish with limes"
               className="main-recipe-image"
             />
 
             <div className="content">
-              <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                blanditiis praesentium voluptatum deleniti atque corrupti quos
-                dolores et quas molestias excepturi sint occaecati cupiditate
-                non provident, similique sunt in culpa qui officia deserunt
-                mollitia animi, id est laborum et dolorum fuga.
-              </p>
+              <h2 className="post-title">{blogDetail.title}</h2>
+              <p className="post-excerpt">{blogDetail.body}</p>
+            </div>
+            <div className="comment-section">
+              <h3>Tất cả bình luận</h3>
+              <ul className="">
+                <ul className="comment-list">
+                  {comments.map((parentComment) => {
+                    const filteredComment = filterBadWords(
+                      parentComment.content
+                    );
 
-              <div className="recipe-images-grid">
-                <img
-                  src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80"
-                  alt="Bowl of soup"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80"
-                  alt="Salmon dish"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1565680018440-d2ff34dd3d70?auto=format&fit=crop&w=600&q=80"
-                  alt="Fresh shrimp"
-                />
-              </div>
+                    return (
+                      <div key={parentComment.id}>
+                        <li className="media" key={parentComment.id}>
+                          {/* Comment cha */}
+                          <div className="avatar">
+                            <img
+                              src={
+                                parentComment.user.image !== null
+                                  ? `http://127.0.0.1:8000/${parentComment.user.image}`
+                                  : Avatar
+                              }
+                              alt="User Avatar"
+                            />
+                          </div>
+                          <div className="comment-details">
+                            <div className="comment-meta">
+                              <ul className="comment-meta-list">
+                                <li className="comment-meta-item">
+                                  <i className="comment-icon">
+                                    <MdAccountCircle />
+                                  </i>
+                                  <p className="comment-name">
+                                    {parentComment.user?.name || "Anonymous"}
+                                  </p>
+                                </li>
+                                <li className="comment-meta-item">
+                                  <i className="comment-icon">
+                                    <MdDateRange />
+                                  </i>
+                                  <p className="comment-name">
+                                    {parentComment.created_at}
+                                  </p>
+                                </li>
+                              </ul>
+                            </div>
+                            <p className="comment-content">{filteredComment}</p>
+                            <div className="comment-replay">
+                              <i className="replay-icon">
+                                <FaArrowTurnDown />
+                              </i>
+                              <span
+                                className="replay-text"
+                                onClick={() =>
+                                  handleClickReplay(parentComment.id)
+                                }
+                              >
+                                Trả lời
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                        {/* Lặp qua danh sách comment con */}
+                        {console.log(parentComment)}
 
-              <div className="share-section">
-                <span>Share:</span>
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">Pinterest</a>
+                        {parentComment.children &&
+                          parentComment.children.length > 0 && (
+                            <ul className="child-comment-list">
+                              {parentComment.children.map((childComment) => {
+                                const filteredChildComment = filterBadWords(
+                                  childComment.content
+                                );
+                                return (
+                                  <li
+                                    className="media second-media"
+                                    key={childComment.id}
+                                  >
+                                    <div className="avatar">
+                                      <img
+                                        src={
+                                          childComment.user.image !== null
+                                            ? `http://127.0.0.1:8000/${childComment.user.image}`
+                                            : Avatar
+                                        }
+                                        alt="User Avatar"
+                                      />
+                                    </div>
+                                    <div className="comment-details">
+                                      <div className="comment-meta">
+                                        <ul className="comment-meta-list">
+                                          <li className="comment-meta-item">
+                                            <i className="comment-icon">
+                                              <MdAccountCircle />
+                                            </i>
+                                            <p className="comment-name">
+                                              {childComment.user?.name ||
+                                                "Anonymous"}
+                                            </p>
+                                          </li>
+                                          <li className="comment-meta-item">
+                                            <i className="comment-icon">
+                                              <MdDateRange />
+                                            </i>
+                                            <p className="comment-name">
+                                              {childComment.created_at}
+                                            </p>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                      <p className="comment-content">
+                                        {filteredChildComment}
+                                      </p>
+                                    </div>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          )}
+                      </div>
+                    );
+                  })}
+                </ul>
+              </ul>
+              {idComment !== null && (
+                <button className="close-replay" onClick={handleCancelReply}>
+                  Hủy bỏ trả lời bình luận
+                </button>
+              )}
+
+              <div className="comment-input">
+                <textarea
+                  value={comment}
+                  rows="11"
+                  ref={inputRef}
+                  onChange={handleChangeComment}
+                  className="comment-textarea"
+                  placeholder="Viết bình luận của bạn..."
+                ></textarea>
+                <button
+                  className="comment-submit"
+                  onClick={handleCommentSubmit}
+                >
+                  Gửi bình luận
+                </button>
               </div>
             </div>
-
-            <section className="comments">
-              <h3>Comments</h3>
-              <div className="comment">
-                <img
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
-                  alt="Amber Reyes"
-                />
-                <div className="comment-content">
-                  <div className="comment-header">
-                    <span className="comment-name">Amber Reyes</span>
-                    <span className="comment-date">March 28, 2018 9:12 am</span>
-                  </div>
-                  <p>
-                    But I must explain to you how all this mistaken idea of
-                    denouncing pleasure and praising pain was born and I will
-                    give you a complete account of the system.
-                  </p>
-                  <a href="#" className="reply-button">
-                    REPLY
-                  </a>
-                </div>
-              </div>
-
-              <div className="comment">
-                <img
-                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80"
-                  alt="Zachary Myers"
-                />
-                <div className="comment-content">
-                  <div className="comment-header">
-                    <span className="comment-name">Zachary Myers</span>
-                    <span className="comment-date">March 28, 2018 9:12 am</span>
-                  </div>
-                  <p>
-                    The generated Lorem Ipsum is therefore always free from
-                    repetition, injected humour, or non-characteristic words.
-                  </p>
-                  <a href="#" className="reply-button">
-                    REPLY
-                  </a>
-                </div>
-              </div>
-            </section>
-
-            <form className="comment-form">
-              <h3>Post a Comment</h3>
-              <textarea placeholder="Your Message"></textarea>
-              <input type="text" placeholder="Your Name" />
-              <input type="email" placeholder="Your Email" />
-              <button type="submit" className="submit-btn">
-                SUBMIT
-              </button>
-            </form>
           </article>
         </main>
 
@@ -210,66 +405,6 @@ export default function BlogDetail() {
               </li>
             </ul>
           </div>
-
-          {/* Theo dõi Instagram */}
-          {/* <div className="sidebar-section-custom latest-posts-custom">
-            <h3 className="title-instagram">Theo Dõi Instagram</h3>
-            <ul className="instagram-gallery">
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/instagram-small-1.jpg"
-                  alt="Hình ảnh Instagram 1"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/instagram-small-2.jpg"
-                  alt="Hình ảnh Instagram 2"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/instagram-small-3.jpg"
-                  alt="Hình ảnh Instagram 3"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/instagram-small-4.jpg"
-                  alt="Hình ảnh Instagram 4"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/instagram-small-5.jpg"
-                  alt="Hình ảnh Instagram 5"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/instagram-small-6.jpg"
-                  alt="Hình ảnh Instagram 6"
-                />
-              </li>
-            </ul>
-          </div> */}
-
-          {/* Đám mây thẻ */}
-          {/* <div className="sidebar-section-custom latest-posts-custom">
-            <h3 className="title-tagcloud">Đám Mây Thẻ</h3>
-            <ul>
-              <li>
-                <div className="tags-custom">
-                  <a href="#">Tự nhiên</a>
-                  <a href="#">Trái cây</a>
-                  <a href="#">Khô</a>
-                  <a href="#">Thực phẩm tươi</a>
-                  <a href="#">Tự nhiên</a>
-                  <a href="#">Lành mạnh</a>
-                </div>
-              </li>
-            </ul>
-          </div> */}
 
           {/* Banner Khuyến mãi */}
           <div className="sidebar-section-custom sale-banner-custom">
