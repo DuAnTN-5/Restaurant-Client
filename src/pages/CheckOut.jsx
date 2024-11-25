@@ -48,7 +48,21 @@ const ReservationForm = () => {
 
     // Lưu vào Local Storage
     localStorage.setItem("reservationData", JSON.stringify(updatedReservationData));
-    navigate("/checkout-pay");
+
+    // Hiển thị thông báo thành công
+    toast.success("Đặt bàn thành công!");
+
+    // Reset lại thông tin
+    setReservationData({
+      name: "",
+      phone: "",
+      email: "",
+      date: "",
+      time: "",
+      guests: "",
+      note: "",
+    });
+    setSelectedTable(null);
   };
 
   const handleInputChange = (e) => {

@@ -9,8 +9,6 @@ const Cart = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [coupon, setCoupon] = useState(""); // Để lưu trữ mã giảm giá
-  const [discount, setDiscount] = useState(0); // Số tiền giảm giá
 
   const getCartFromLocalStorage = () => {
     const cartData = localStorage.getItem("cart");
@@ -33,6 +31,8 @@ const Cart = () => {
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
     }).format(amount);
 
   useEffect(() => {
@@ -100,21 +100,6 @@ const Cart = () => {
     toast.success("Xóa món khỏi giỏ hàng thành công!");
   };
 
-  const handleCouponChange = (e) => {
-    setCoupon(e.target.value);
-  };
-
-  const applyCoupon = () => {
-    // Giả sử bạn có logic kiểm tra mã giảm giá
-    if (coupon === "DISCOUNT10") {
-      setDiscount(10); // Giảm 10%
-      toast.success("Mã giảm giá áp dụng thành công!");
-    } else {
-      setDiscount(0);
-      toast.error("Mã giảm giá không hợp lệ.");
-    }
-  };
-
   const clearCart = () => {
     setCartItems([]); // Xóa tất cả các món trong giỏ hàng
     localStorage.removeItem("cart"); // Xóa dữ liệu giỏ hàng trong localStorage
@@ -151,7 +136,7 @@ const Cart = () => {
 
       setTimeout(() => {
         navigate("/checkout-pay");
-      }, 4000); // Chuyển hướng đến thanh toán sau 5 giây
+      }, 3000); // Chuyển hướng đến thanh toán sau 4 giây
     }
   };
 
@@ -162,6 +147,13 @@ const Cart = () => {
 
   return (
     <div className="cart-container container-vphu">
+      <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1>
+      <div className="sub-cart">
+        <div className="sub-cart-products subtitle-vphu">Thông tin món ăn</div>
+        <div className="sub-cart-total subtitle-vphu">
+          Tổng tiền
+        </div>
+      </div>
       <div className="cart-items">
         {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
@@ -214,22 +206,6 @@ const Cart = () => {
         ))}
       </div>
 
-      <div className="coupon-section">
-        <label htmlFor="coupon-code">
-          <strong>Nhập mã giảm giá:</strong>
-        </label>
-        <input
-          type="text"
-          id="coupon-code"
-          value={coupon}
-          onChange={handleCouponChange}
-          placeholder="Nhập mã giảm giá"
-        />
-        <button className="apply-coupon-btn" onClick={applyCoupon}>
-          Áp dụng
-        </button>
-      </div>
-
       <div className="cart-summary">
         <div className="summary-title">
           <strong>Tổng tiền:</strong>{" "}
@@ -238,7 +214,7 @@ const Cart = () => {
               cartItems.reduce(
                 (total, item) => total + calculateTotal(item.price, item.quantity),
                 0
-              ) * (1 - discount / 100)
+              )
             )}
           </span>
         </div>
