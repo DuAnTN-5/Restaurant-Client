@@ -1,237 +1,259 @@
-import { useEffect, useState } from "react";
-import "../css/CartProduct.css";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { toast } from "react-toastify";
-// import { Link } from "react-router-dom";
+import "../style/CartProduct.css";
 
-function CartProduct() {
-  const [products, setProducts] = useState([]);
+const Cart = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [coupon, setCoupon] = useState(""); // Để lưu trữ mã giảm giá
+  const [discount, setDiscount] = useState(0); // Số tiền giảm giá
 
-  let cart = localStorage.getItem("cart");
-  if (cart) {
-    cart = JSON.parse(cart);
-  }
-  console.log(cart);
+  const getCartFromLocalStorage = () => {
+    const cartData = localStorage.getItem("cart");
+    if (cartData) {
+      try {
+        const parsedCart = JSON.parse(cartData);
+        return Object.entries(parsedCart).map(([id, quantity]) => ({
+          id: parseInt(id, 10),
+          quantity,
+        }));
+      } catch {
+        console.error("Lỗi parse dữ liệu từ localStorage");
+        return [];
+      }
+    }
+    return [];
+  };
+
+  const formatCurrency = (amount) =>
+    new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amount);
 
   useEffect(() => {
-    api
-      .post("/product/cart", cart)
-      .then((res) => {
-        console.log(res);
-        setProducts(res.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  const handleDelete = (id) => {
-    // console.log("id", id);
+    const fetchCartItems = async () => {
+      try {
+        setLoading(true);
+        setError("");
 
-    setProducts(products.filter((product) => product.id !== id));
-    toast.success("Đã xóa sản phẩm");
+        const localCart = getCartFromLocalStorage();
 
-    const itemDelete = JSON.parse(localStorage.getItem("cart"));
-    console.log(itemDelete);
-    if (itemDelete && itemDelete[id]) {
-      delete itemDelete[id];
-      console.log(itemDelete);
+        if (localCart.length === 0) {
+          setCartItems([]);
+          return;
+        }
 
-      localStorage.setItem("cart", JSON.stringify(itemDelete));
-    }
-    // setCartProduct(itemDelete) // setCartProduct ở useContext, nó ở đây để cập nhật lại số lượng icon cart khi mik xóa
-  };
-  const handleDecreaseQty = (id, qty) => {
-    console.log(id);
-    console.log(qty);
-    if (qty <= 1) {
-      // toast.warning("qty dang nho hon 1")
-      setProducts(products.filter((product) => product.id !== id)); // xóa
+        const productResponse = await api.get("/products");
+        const products = productResponse.data.data;
 
-      const itemDelete = JSON.parse(localStorage.getItem("cart"));
+        const mergedCart = localCart
+          .map((cartItem) => {
+            const product = products.find((p) => p.id === cartItem.id);
+            if (!product) return null;
+            return {
+              ...product,
+              quantity: cartItem.quantity,
+            };
+          })
+          .filter(Boolean);
 
-      console.log("id", itemDelete[id]);
-
-      if (itemDelete && itemDelete[id]) {
-        //         itemDelete là giỏ hàng từ localStorage. Kiểm tra xem giỏ hàng có tồn tại và sản phẩm với id tương ứng có trong giỏ hay không.
-        // Nếu cả hai điều kiện đều đúng, sản phẩm sẽ bị xóa khỏi giỏ hàng trong localStorage
-        delete itemDelete[id];
-        console.log("item", itemDelete);
-
-        localStorage.setItem("cart", JSON.stringify(itemDelete));
+        setCartItems(mergedCart);
+      } catch (err) {
+        console.error("Error fetching cart items:", err);
+        setError("Không thể tải dữ liệu giỏ hàng.");
+      } finally {
+        setLoading(false);
       }
+    };
 
-      // setCartProduct(itemDelete) // setCartProduct ở useContext, nó ở đây để cập nhật lại số lượng icon cart khi mik xóa
+    fetchCartItems();
+  }, []);
+
+  const calculateTotal = (price, quantity) => price * quantity;
+
+  const updateCartInLocalStorage = (updatedCart) => {
+    const cart = updatedCart.reduce((acc, item) => {
+      acc[item.id] = item.quantity;
+      return acc;
+    }, {});
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  const handleQuantityChange = (id, newQuantity) => {
+    const updatedCartItems = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity: newQuantity } : item
+    );
+    setCartItems(updatedCartItems);
+    updateCartInLocalStorage(updatedCartItems);
+    toast.success("Cập nhật số lượng thành công!");
+  };
+
+  const removeFromCart = (id) => {
+    const updatedCartItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedCartItems);
+    updateCartInLocalStorage(updatedCartItems);
+    toast.success("Xóa món khỏi giỏ hàng thành công!");
+  };
+
+  const handleCouponChange = (e) => {
+    setCoupon(e.target.value);
+  };
+
+  const applyCoupon = () => {
+    // Giả sử bạn có logic kiểm tra mã giảm giá
+    if (coupon === "DISCOUNT10") {
+      setDiscount(10); // Giảm 10%
+      toast.success("Mã giảm giá áp dụng thành công!");
     } else {
-      // toast.warning("qty lon hon 1")
-      const updateQtyCart = products.map((item) =>
-        item.id === id ? { ...item, qty: qty - 1 } : item
-      );
-      console.log(updateQtyCart);
-      setProducts(updateQtyCart);
-
-      const saveCart = {};
-
-      updateQtyCart.forEach((item) => {
-        saveCart[item.id] = item.qty;
-      });
-
-      localStorage.setItem("cart", JSON.stringify(saveCart));
-      // setCartProduct(saveCart)
+      setDiscount(0);
+      toast.error("Mã giảm giá không hợp lệ.");
     }
   };
-  const handleIncreaseQty = (id, qty) => {
-    const updateQtyCart = products.map((item) =>
-      item.id === id ? { ...item, qty: qty + 1 } : item
-    );
-    console.log(updateQtyCart);
 
-    setProducts(updateQtyCart);
-    // lưu lại vào local
-
-    const saveCart = {};
-
-    updateQtyCart.forEach((item) => {
-      saveCart[item.id] = item.qty;
-    });
-    console.log("savecart", saveCart);
-
-    localStorage.setItem("cart", JSON.stringify(saveCart));
-
-    // setCartProduct(saveCart)
+  const clearCart = () => {
+    setCartItems([]); // Xóa tất cả các món trong giỏ hàng
+    localStorage.removeItem("cart"); // Xóa dữ liệu giỏ hàng trong localStorage
+    toast.success("Đã xóa tất cả các món trong giỏ hàng!");
   };
+
+  const handleCheckout = () => {
+    // Kiểm tra thông tin đặt bàn trong localStorage
+    const reservationData = JSON.parse(localStorage.getItem("reservationData"));
+
+    if (!reservationData || !reservationData.time || !reservationData.table) {
+      // Nếu chưa có thông tin đặt bàn
+      toast.error("Bạn cần đặt bàn để đặt món", {
+        position: "top-center",
+      });
+
+      setTimeout(() => {
+        navigate("/booking-table");
+      }, 2000);
+    } else {
+      // Nếu đã có thông tin đặt bàn
+      toast.success("Thực hiện thanh toán", {
+        position: "top-center",
+      });
+
+      // Lưu thông tin giỏ hàng vào Local Storage
+      const cartData = cartItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+      }));
+      localStorage.setItem("cartData", JSON.stringify(cartData));
+
+      setTimeout(() => {
+        navigate("/checkout-pay");
+      }, 4000); // Chuyển hướng đến thanh toán sau 5 giây
+    }
+  };
+
+  if (loading) return <div className="loading-message">Đang tải dữ liệu...</div>;
+  if (error) return <div className="error-message">{error}</div>;
+  if (cartItems.length === 0)
+    return <div className="empty-cart-message">Giỏ hàng của bạn đang trống.</div>;
 
   return (
-    <>
-      <div className="cart-product-page">
-        <div className="cart">
-          <div className="cart-container">
-            <div className="cart-header">
-              <div className="header-item">Product</div>
-              <div className="header-item">Price</div>
-              <div className="header-item">Quantity</div>
-              <div className="header-item">Total</div>
+    <div className="cart-container container-vphu">
+      <div className="cart-items">
+        {cartItems.map((item) => (
+          <div key={item.id} className="cart-item">
+            <div className="cart-item-image">
+              <img
+                src={`http://127.0.0.1:8000/${item.image_url}`}
+                alt={item.name}
+                className="cart-item-image-img"
+              />
             </div>
-
-            {products.map((item) => {
-              const totalPrice = item.price * item.qty;
-
-              return (
-                <div className="cart-item" key={item.id}>
-                  <button
-                    className="remove-btn"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    ×
-                  </button>
-                  <div className="product-info">
-                    <img
-                      src={`http://127.0.0.1:8000/${item.image_url}`}
-                      alt="Creamy Latte Coffee"
-                      className="productCart-image"
-                    />
-                    <div className="product-details">
-                      <h3 className="product-name">{item.name}</h3>
-                      <p className="product-description">
-                        {/* {item.summary} */}
-                        {item?.summary
-                          ? item.summary.replace(/<\/?p>/g, "")
-                          : "Không có thông tin"}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="product-price">{item.price} VND</p>
-                  <div className="quantity-control">
-                    <button
-                      className="quantity-btn"
-                      onClick={() => handleDecreaseQty(item.id, item.qty)}
-                    >
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      value={item.qty}
-                      className="quantity-input"
-                      readOnly
-                    />
-                    <button
-                      className="quantity-btn"
-                      onClick={() => handleIncreaseQty(item.id, item.qty)}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <p className="product-total"> {totalPrice} VND</p>
-                </div>
-              );
-            })}
-
-            {/* 
-            <div className="cart-item">
-              <button className="remove-btn">×</button>
-              <div className="product-info">
-                <img
-                  src="https://chuphinhmenu.com/wp-content/uploads/2018/03/chup-hinh-mon-an-menu-nha-trang-khanh-hoa-0008.jpg"
-                  alt="Creamy Latte Coffee"
-                  className="productCart-image"
-                />
-                <div className="product-details">
-                  <h3 className="product-name">CREAMY LATTE COFFEE</h3>
-                  <p className="product-description">
-                    Far far away, behind the word mountains, far from the
-                    countries
-                  </p>
-                </div>
+            <div className="cart-item-info">
+              <div className="cart-item-name">{item.name}</div>
+              <div className="cart-item-price">
+                <strong>Giá:</strong> {formatCurrency(item.price)}
               </div>
-              <p className="product-price">$4.90</p>
-              <div className="quantity-control">
-                <button className="quantity-btn">-</button>
-                <input
-                  type="number"
-                  value="1"
-                  className="quantity-input"
-                  readOnly
-                />
-                <button className="quantity-btn">+</button>
-              </div>
-              <p className="product-total">$4.90</p>
             </div>
-            <div className="cart-item">
-              <button className="remove-btn">×</button>
-              <div className="product-info">
-                <img
-                  src="https://chuphinhmenu.com/wp-content/uploads/2018/03/chup-hinh-mon-an-menu-nha-trang-khanh-hoa-0008.jpg"
-                  alt="Creamy Latte Coffee"
-                  className="productCart-image"
-                />
-                <div className="product-details">
-                  <h3 className="product-name">CREAMY LATTE COFFEE</h3>
-                  <p className="product-description">
-                    Far far away, behind the word mountains, far from the
-                    countries
-                  </p>
-                </div>
-              </div>
-              <p className="product-price">$4.90</p>
-              <div className="quantity-control">
-                <button className="quantity-btn">-</button>
-                <input
-                  type="number"
-                  value="1"
-                  className="quantity-input"
-                  readOnly
-                />
-                <button className="quantity-btn">+</button>
-              </div>
-              <p className="product-total">$4.90</p>
-            </div> */}
+            <div className="quantity-control">
+              <button
+                className="quantity-btn"
+                onClick={() =>
+                  item.quantity > 1 && handleQuantityChange(item.id, item.quantity - 1)
+                }
+              >
+                -
+              </button>
+              <input
+                type="number"
+                className="quantity-input"
+                value={item.quantity}
+                onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                min="1"
+              />
+              <button
+                className="quantity-btn"
+                onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+              >
+                +
+              </button>
+            </div>
+            <div className="cart-item-total">
+              <strong>Tổng :</strong> {formatCurrency(calculateTotal(item.price, item.quantity))}
+            </div>
+            <button
+              className="remove-button"
+              onClick={() => removeFromCart(item.id)}
+            >
+              X
+            </button>
           </div>
+        ))}
+      </div>
+
+      <div className="coupon-section">
+        <label htmlFor="coupon-code">
+          <strong>Nhập mã giảm giá:</strong>
+        </label>
+        <input
+          type="text"
+          id="coupon-code"
+          value={coupon}
+          onChange={handleCouponChange}
+          placeholder="Nhập mã giảm giá"
+        />
+        <button className="apply-coupon-btn" onClick={applyCoupon}>
+          Áp dụng
+        </button>
+      </div>
+
+      <div className="cart-summary">
+        <div className="summary-title">
+          <strong>Tổng tiền:</strong>{" "}
+          <span className="summary-total">
+            {formatCurrency(
+              cartItems.reduce(
+                (total, item) => total + calculateTotal(item.price, item.quantity),
+                0
+              ) * (1 - discount / 100)
+            )}
+          </span>
         </div>
-        <div className="cart-button-oder">
-          <button>Đặt món</button>
+        <p className="summary-note">Lưu ý: Giá đã bao gồm thuế VAT.</p>
+        <div className="cart-buttons">
+          <button className="update-cart-btn" onClick={clearCart}>
+            XÓA TẤT CẢ
+          </button>
+          <button className="checkout-btn" onClick={handleCheckout}>
+            THANH TOÁN
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
 
-export default CartProduct;
+export default Cart;

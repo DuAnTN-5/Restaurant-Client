@@ -2,83 +2,63 @@ import { useNavigate } from "react-router-dom";
 import "../style/CheckOut.css";
 import tang1 from "../assets/tang1.png";
 import tang2 from "../assets/tang2.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ReservationForm = () => {
   const navigate = useNavigate();
   const [selectedTable, setSelectedTable] = useState(null);
+  const [reservationData, setReservationData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    date: "",
+    time: "",
+    guests: "",
+    note: "",
+  });
 
-  // const tables = Array.from({ length: 33 }, (_, index) =>
-  //   `T${(index + 1).toString().padStart(2, "0")}`
-  // ); mapp như Phú làm
-  const tables = [
-    "T01",
-    "T02",
-    "T03",
-    "T04",
-    "T05",
-    "T06",
-    "T07",
-    "T08",
-    "T09",
-    "T10",
-    "T11",
-    "T12",
-    "T13",
-    "T14",
-    "T15",
-    "T16",
-    "T17",
-    "T18",
-    "T19",
-    "T20",
-    "T21",
-    "T22",
-    "T23",
-    "T24",
-    "T25",
-    "T26",
-    "T27",
-    "T28",
-    "T29",
-    "T30",
-    "T31",
-    "T32",
-    "T33",
-  ];
+  useEffect(() => {
+    // Lấy dữ liệu từ localStorage
+    const data = JSON.parse(localStorage.getItem("reservationData"));
+    if (data) {
+      setReservationData(data);
+      setSelectedTable(data.table);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const reservationData = {
-    //   name: e.target.name.value,
-    //   phone: e.target.phone.value,
-    //   email: e.target.email.value,
-    //   date: e.target.date.value,
-    //   time: e.target.time.value,
-    //   guests: e.target.guests.value,
-    //   note: e.target.note.value,
-    //   table: selectedTable,
-    // };
+    const updatedReservationData = {
+      ...reservationData,
+      table: selectedTable,
+    };
 
-    // Kiểm tra
-    // if (!reservationData.name || !reservationData.phone) {
-    //   alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
-    //   return;
-    // }
-    // if (!selectedTable) {
-    //   alert("Vui lòng chọn bàn!");
-    //   return;
-    // }
+    // Kiểm tra thông tin
+    if (!updatedReservationData.name || !updatedReservationData.phone) {
+      toast.error("Vui lòng điền đầy đủ thông tin bắt buộc!");
+      return;
+    }
+    if (!selectedTable) {
+      toast.error("Vui lòng chọn bàn!");
+      return;
+    }
 
     // Lưu vào Local Storage
-    // localStorage.setItem("reservationData", JSON.stringify(reservationData));
-    // navigate("/checkout-pay");
+    localStorage.setItem("reservationData", JSON.stringify(updatedReservationData));
+    navigate("/checkout-pay");
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setReservationData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleTableSelection = (table) => {
     setSelectedTable(table);
-    // alert(`Bạn đã chọn bàn ${table}`);
+    toast.success(`Bạn đã chọn bàn ${table}`);
   };
 
   return (
@@ -140,18 +120,16 @@ const ReservationForm = () => {
 
       <form className="reservation-form" onSubmit={handleSubmit}>
         <h3 className="title-info-book-table subtitle-vphu">
-          Thông tin đặt bàn cho đặt bàn{" "}
-          {selectedTable ? `T${selectedTable}` : ""}
+          Thông tin đặt bàn cho {selectedTable || "chưa chọn bàn"}
         </h3>
         <div className="form-group">
-          <label htmlFor="selectedTable">Bàn Đã Chọn:</label>
+          <label htmlFor="selectedTable">Bàn Đã Chọn:</label>
           <input
             className="preinstall-book"
             type="text"
             id="selectedTable"
             name="selectedTable"
-            value={selectedTable ? `Bàn ${selectedTable}` : ""}
-            placeholder="Chưa chọn bàn"
+            value={selectedTable || ""}
             readOnly
           />
         </div>
@@ -163,8 +141,8 @@ const ReservationForm = () => {
             type="text"
             id="name"
             name="name"
-            placeholder="Họ & tên"
-            required
+            value={reservationData.name}
+            onChange={handleInputChange}
           />
         </div>
         <div className="form-group">
@@ -174,8 +152,9 @@ const ReservationForm = () => {
             type="tel"
             id="phone"
             name="phone"
-            placeholder="Số điện thoại"
-            required
+            value={reservationData.phone}
+            onChange={handleInputChange}
+            placeholder="0346732xxx"
           />
         </div>
         <div className="form-group">
@@ -185,7 +164,8 @@ const ReservationForm = () => {
             type="email"
             id="email"
             name="email"
-            placeholder="Email"
+            value={reservationData.email}
+            onChange={handleInputChange}
           />
         </div>
         <div className="form-row">
@@ -193,28 +173,34 @@ const ReservationForm = () => {
             <label htmlFor="date">Ngày</label>
             <input
               className="preinstall-book"
+              type="date"
               id="date"
               name="date"
-              placeholder="Ngày"
+              value={reservationData.date}
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
             <label htmlFor="time">Thời gian</label>
             <input
               className="preinstall-book"
+              type="time"
               id="time"
               name="time"
-              placeholder="Thời gian"
-            ></input>
+              value={reservationData.time}
+              onChange={handleInputChange}
+            />
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="guests">Số khách</label>
+          <label htmlFor="guests">Số khách </label>
           <input
             className="preinstall-book"
             type="number"
             id="guests"
             name="guests"
+            value={reservationData.guests}
+            onChange={handleInputChange}
             placeholder="Số khách"
             min="1"
             max="99"
@@ -229,6 +215,8 @@ const ReservationForm = () => {
             className="preinstall-book"
             id="note"
             name="note"
+            value={reservationData.note}
+            onChange={handleInputChange}
             placeholder="Gợi ý: thêm ghế trẻ em, ..."
           ></textarea>
         </div>
@@ -236,11 +224,28 @@ const ReservationForm = () => {
           <button type="submit" className="btn btn-submit-checkout">
             Đặt bàn
           </button>
-          <button type="reset" className="btn btn-reset-checkout">
+          <button
+            type="button"
+            className="btn btn-reset-checkout"
+            onClick={() => {
+              setReservationData({
+                name: "",
+                phone: "",
+                email: "",
+                date: "",
+                time: "",
+                guests: "",
+                note: "",
+              });
+              setSelectedTable(null);
+            }}
+          >
             Làm lại
           </button>
         </div>
       </form>
+
+      <ToastContainer />
     </div>
   );
 };

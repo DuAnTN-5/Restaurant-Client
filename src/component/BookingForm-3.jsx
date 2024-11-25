@@ -7,6 +7,7 @@ function BookingForm3() {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/booking-table");
+    window.scrollTo(0, 0);
   };
 
   return (

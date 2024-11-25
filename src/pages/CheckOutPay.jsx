@@ -3,26 +3,96 @@ import PayMoney from "../assets/pay-money.jpg";
 import PayBank from "../assets/pay-bank.png";
 import PayMomo from "../assets/pay-momo.jpg";
 import PayVnp from "../assets/pay-vnp.jpg";
+import { api } from "../api";
+import { useEffect, useState } from "react";
 
 const CheckoutPay = () => {
-  // Lấy dữ liệu đặt bàn từ Local Storage
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
   const reservationData = JSON.parse(localStorage.getItem("reservationData"));
 
+  // Hàm định dạng tiền tệ
+  const formatCurrency = (amount) =>
+    new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amount);
+
+  // Lấy giỏ hàng từ localStorage
+  const getCartFromLocalStorage = () => {
+    const cartData = localStorage.getItem("cart");
+    if (cartData) {
+      try {
+        return JSON.parse(cartData);
+      } catch {
+        console.error("Lỗi parse dữ liệu từ localStorage");
+      }
+    }
+    return {};
+  };
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const cart = getCartFromLocalStorage();
+        const productIds = Object.keys(cart).map((id) => parseInt(id, 10));
+
+        if (productIds.length === 0) {
+          setCartItems([]);
+          return;
+        }
+
+        const response = await api.get("/products");
+        const products = response.data.data;
+
+        const detailedCart = productIds.map((id) => {
+          const product = products.find((item) => item.id === id);
+          if (!product) return null;
+          return {
+            ...product,
+            quantity: cart[id],
+          };
+        }).filter(Boolean);
+
+        setCartItems(detailedCart);
+      } catch (err) {
+        console.error("Error fetching cart items:", err);
+        setError("Không thể tải dữ liệu giỏ hàng.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
+
+  const calculateTotal = () =>
+    cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
   const handlePayment = () => {
-    // Giả lập gửi dữ liệu lên API
     console.log("Dữ liệu đặt bàn:", reservationData);
+    console.log("Dữ liệu giỏ hàng:", cartItems);
+
     alert("Thanh toán thành công!");
 
-    // Xóa dữ liệu khỏi Local Storage sau khi hoàn tất
     localStorage.removeItem("reservationData");
+    localStorage.removeItem("cart");
   };
+
+  if (loading) return <div className="loading-message">Đang tải dữ liệu...</div>;
+  if (error) return <div className="error-message">{error}</div>;
+  if (cartItems.length === 0)
+    return <div className="empty-cart-message">Giỏ hàng của bạn đang trống.</div>;
 
   return (
     <div className="checkout-pay-container text-vphu">
-      {/* Tiêu đề */}
       <h1 className="checkout-pay-title title-vphu">Đơn Hàng Của Bạn</h1>
 
-      {/* Thông tin đặt bàn */}
       {reservationData && (
         <div className="reservation-details">
           <h3 className="reservation-title subtitle-vphu">Thông Tin Đặt Bàn:</h3>
@@ -31,13 +101,12 @@ const CheckoutPay = () => {
           <p className="reservation-items">Email: {reservationData.email || "Không cung cấp"}</p>
           <p className="reservation-items">Ngày: {reservationData.date}</p>
           <p className="reservation-items">Thời gian: {reservationData.time}</p>
-          <p className="reservation-items">Số bàn: {reservationData.table}</p>
+          <p className="reservation-items">Số bàn: {reservationData.table}</p>
           <p className="reservation-items">Số khách: {reservationData.guests}</p>
           <p className="reservation-items">Ghi chú: {reservationData.note || "Không có ghi chú"}</p>
         </div>
       )}
 
-      {/* Bảng sản phẩm */}
       <table className="checkout-pay-table">
         <thead>
           <tr>
@@ -46,34 +115,33 @@ const CheckoutPay = () => {
           </tr>
         </thead>
         <tbody>
-          {/* Sản phẩm mẫu */}
+          {cartItems.map((item) => (
+            <tr key={item.id}>
+              <td className="checkout-pay-product-info">
+                <img
+                  src={`http://127.0.0.1:8000/${item.image_url}`}
+                  alt={item.name}
+                  className="checkout-pay-product-image"
+                />
+                <div className="checkout-pay-product-details">
+                  <p className="checkout-pay-product-name">{item.name}</p>
+                  <small className="checkout-pay-product-quantity">× {item.quantity}</small>
+                </div>
+              </td>
+              <td className="checkout-pay-product-price">
+                {formatCurrency(item.price * item.quantity)}
+              </td>
+            </tr>
+          ))}
           <tr>
-            <td className="checkout-pay-product-info">
-              <img
-                src="https://example.com/soup.jpg"
-                alt="Súp Hải Sản"
-                className="checkout-pay-product-image"
-              />
-              <div className="checkout-pay-product-details">
-                <p className="checkout-pay-product-name">Súp Hải Sản</p>
-                <small className="checkout-pay-product-quantity">× 2</small>
-              </div>
-            </td>
-            <td className="checkout-pay-product-price">360.000₫</td>
-          </tr>
-          {/* Tổng cộng */}
-          <tr>
-            <td className="checkout-pay-header-product checkout-pay-subtotal-title">
-              Tổng Cộng:
-            </td>
+            <td className="checkout-pay-header-product checkout-pay-subtotal-title">Tổng Cộng:</td>
             <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
-              360.000₫
+              {formatCurrency(calculateTotal())}
             </td>
           </tr>
         </tbody>
       </table>
 
-      {/* Phương thức thanh toán */}
       <div className="checkout-pay-payment-methods">
         <h3 className="checkout-pay-payment-methods-title">Phương Thức Thanh Toán:</h3>
         <label className="checkout-pay-payment-option">
@@ -114,7 +182,6 @@ const CheckoutPay = () => {
         </label>
       </div>
 
-      {/* Hành động */}
       <div className="checkout-pay-action">
         <button className="checkout-pay-button" onClick={handlePayment}>
           Thanh Toán
@@ -125,4 +192,3 @@ const CheckoutPay = () => {
 };
 
 export default CheckoutPay;
-

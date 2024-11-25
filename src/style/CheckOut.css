@@ -147,6 +147,17 @@ label {
   background-color: #930005;
 }
 
+.filled-input {
+  background-color: #f4f4f4;
+  border-color: #bbb;
+  color: black;
+}
+
+/* Nếu người dùng không thể thay đổi giá trị, có thể làm cho nó trở nên mờ hơn */
+.filled-input[readonly] {
+  background-color: #949494;
+  color: black;
+}
 
 @media (max-width: 1024px) {
   .restaurant-content {
