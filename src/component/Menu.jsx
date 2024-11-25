@@ -55,6 +55,10 @@ function Menu() {
   };
 
   const toggleFavourite = (item) => {
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+      return;
+    }
     const updatedFavourites = favourites.some(fav => fav.id === item.id)
       ? favourites.filter(fav => fav.id !== item.id)
       : [...favourites, item];
