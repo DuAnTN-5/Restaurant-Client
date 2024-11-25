@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { api } from "../api";
+import { toast } from "react-toastify"; // Thêm thông báo toast
 import "../style/MenuPage.css";
 
 const MenuPage = () => {
@@ -7,6 +8,8 @@ const MenuPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeCategory, setActiveCategory] = useState(null);
+
+    
 
   useEffect(() => {
     const fetchCategoriesAndFoods = async () => {
@@ -60,6 +63,26 @@ const MenuPage = () => {
     fetchCategoriesAndFoods();
   }, []);
 
+  // Hàm xử lý đặt món vào giỏ hàng
+  const addToCart = (food) => {
+
+    const token = localStorage.getItem("token");
+  
+  // Check login
+    if (!token) {
+    toast.error("Vui lòng đăng nhập để đặt món.");
+    return;
+  }
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || {};
+    const quantity = cart[food.id] ? cart[food.id] + 1 : 1; // Tăng số lượng nếu món đã có trong giỏ hàng
+    cart[food.id] = quantity;
+
+    localStorage.setItem("cart", JSON.stringify(cart)); // Lưu giỏ hàng vào localStorage
+
+    toast.success(`Đặt món ${food.name} thành công! Số lượng: ${quantity}`);
+  };
+
   if (loading) {
     return <div>Đang tải dữ liệu...</div>;
   }
@@ -106,7 +129,6 @@ const MenuPage = () => {
             </ul>
           </div>
 
-          {/* Danh mục và món ăn */}
           <div className="menu-categories-foods">
             {categoriesWithFoods.map((category) => (
               <div key={category.id} className="menu-category-section">
@@ -135,7 +157,7 @@ const MenuPage = () => {
                       </span>
                       <button
                         className="menu-item-page-order-btn"
-                        onClick={() => alert(`Đặt món ${food.name} thành công`)}
+                        onClick={() => addToCart(food)}
                       >
                         Đặt Món
                       </button>

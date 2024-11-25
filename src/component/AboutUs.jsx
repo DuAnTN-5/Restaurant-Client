@@ -2,26 +2,34 @@ import "../css/AboutUs.css";
 import "../css/root.css";
 import myChef from '../assets/mychef.png';
 import signature from '../assets/signeture-ceo.png';
+import { useNavigate } from 'react-router-dom';
 
 const AboutUs = () => {
+  const navigate = useNavigate();
+
+  const handleSeeMoreClick = () => {
+    navigate('/about');
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="container-vphu">
       <div className="about-us">
         <div className="about-content">
           <h3 className="about-title subtitle-vphu">GIỚI THIỆU</h3>
           <h2 className="main-heading title-vphu">
-          Thưởng thức ẩm thực tuyệt hảo tại Hight Five.
+            Thưởng thức ẩm thực tuyệt hảo tại Hight Five.
           </h2>
           <p className="description-about text-vphu">
-          Nhà hàng mang đến không gian hoài niệm năm 1960, âm nhạc du dương cùng những món ăn tinh tế và cocktail sáng tạo,
-           hứa hẹn mang lại trải nghiệm ẩm thực độc đáo, đầy cảm xúc và khó quên cho thực khách.
-          </p>  
+            Nhà hàng mang đến không gian hoài niệm năm 1960, âm nhạc du dương cùng những món ăn tinh tế và cocktail sáng tạo,
+            hứa hẹn mang lại trải nghiệm ẩm thực độc đáo, đầy cảm xúc và khó quên cho thực khách.
+          </p>
           <div className="ceo">
-            <button className="discover-more-btn animation-4">
+            <button className="discover-more-btn animation-4" onClick={handleSeeMoreClick}>
               <span className="discover-more-text">
                 Xem Thêm
               </span>
-              </button>
+            </button>
             <div className="ceo-signature">
               <img src={signature} alt="CEO Signature" />
               <p className="ceo-signature-text">CEO, HightFive Restaurant</p>

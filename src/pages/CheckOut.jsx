@@ -2,11 +2,34 @@ import { useNavigate } from "react-router-dom";
 import "../style/CheckOut.css";
 import tang1 from "../assets/tang1.png";
 import tang2 from "../assets/tang2.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ReservationForm = () => {
   const navigate = useNavigate();
   const [selectedTable, setSelectedTable] = useState(null);
+  const [reservationData, setReservationData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    date: "",
+    time: "",
+  });
+
+  useEffect(() => {
+    // Lấy dữ liệu từ localStorage
+    const data = JSON.parse(localStorage.getItem("reservationData"));
+    if (data) {
+      setReservationData({
+        name: data.name,
+        email: data.email,
+        date: data.date,
+        time: data.time,
+      });
+      setSelectedTable(data.table);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,11 +47,11 @@ const ReservationForm = () => {
 
     // Kiểm tra
     if (!reservationData.name || !reservationData.phone) {
-      alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+      toast.error("Vui lòng điền đầy đủ thông tin bắt buộc!");
       return;
     }
     if (!selectedTable) {
-      alert("Vui lòng chọn bàn!");
+      toast.error("Vui lòng chọn bàn!");
       return;
     }
 
@@ -39,7 +62,7 @@ const ReservationForm = () => {
 
   const handleTableSelection = (table) => {
     setSelectedTable(table);
-    alert(`Bạn đã chọn bàn ${table}`);
+    toast.success(`Bạn đã chọn bàn ${table}`);
   };
 
   return (
@@ -84,108 +107,113 @@ const ReservationForm = () => {
       </div>
 
       <form className="reservation-form" onSubmit={handleSubmit}>
-        <h3 className="title-info-book-table subtitle-vphu">
-          Thông tin đặt bàn cho đặt bàn{" "}
-          {selectedTable ? `T${selectedTable}` : ""}
-        </h3>
-        <div className="form-group">
-          <label htmlFor="selectedTable">Bàn Đã Chọn:</label>
-          <input
-            className="preinstall-book"
-            type="text"
-            id="selectedTable"
-            name="selectedTable"
-            value={selectedTable ? `Bàn ${selectedTable}` : ""}
-            placeholder="Chưa chọn bàn"
-            readOnly
-          />
-        </div>
+  <h3 className="title-info-book-table subtitle-vphu">
+    Thông tin đặt bàn cho đặt bàn{" "}
+    {selectedTable ? `T${selectedTable}` : ""}
+  </h3>
+  <div className="form-group">
+    <label htmlFor="selectedTable">Bàn Đã Chọn:</label>
+    <input
+      className={`preinstall-book ${selectedTable ? "filled-input" : ""}`}
+      type="text"
+      id="selectedTable"
+      name="selectedTable"
+      value={selectedTable ? `Bàn ${selectedTable}` : ""}
+      placeholder="Chưa chọn bàn"
+      readOnly
+    />
+  </div>
 
-        <div className="form-group">
-          <label htmlFor="name">Họ & Tên (*)</label>
-          <input
-            className="preinstall-book"
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Họ & tên"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phone">Số điện thoại (*)</label>
-          <input
-            className="preinstall-book"
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Số điện thoại"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            className="preinstall-book"
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-          />
-        </div>
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="date">Ngày</label>
-            <input
-              className="preinstall-book"
-              id="date"
-              name="date"
-              placeholder="Ngày"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="time">Thời gian</label>
-            <input
-              className="preinstall-book"
-              id="time"
-              name="time"
-              placeholder="Thời gian"
-            ></input>
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="guests">Số khách</label>
-          <input
-            className="preinstall-book"
-            type="number"
-            id="guests"
-            name="guests"
-            placeholder="Số khách"
-            min="1"
-            max="99"
-            onInput={(e) => {
-              e.target.value = e.target.value.replace(/^0+/, "");
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="note">Ghi chú</label>
-          <textarea
-            className="preinstall-book"
-            id="note"
-            name="note"
-            placeholder="Gợi ý: thêm ghế trẻ em, ..."
-          ></textarea>
-        </div>
-        <div className="form-actions">
-          <button type="submit" className="btn btn-submit-checkout">
-            Đặt bàn
-          </button>
-          <button type="reset" className="btn btn-reset-checkout">
-            Làm lại
-          </button>
-        </div>
-      </form>
+  <div className="form-group">
+    <label htmlFor="name">Họ & Tên</label>
+    <input
+      className={`preinstall-book ${reservationData.name ? "filled-input" : ""}`}
+      type="text"
+      id="name"
+      name="name"
+      value={reservationData.name}
+      readOnly
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="phone">Số điện thoại (*)</label>
+    <input
+      className={`preinstall-book ${reservationData.phone ? "filled-input" : ""}`}
+      type="tel"
+      id="phone"
+      name="phone"
+      placeholder="0346732xxx"
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="email">Email</label>
+    <input
+      className={`preinstall-book ${reservationData.email ? "filled-input" : ""}`}
+      type="email"
+      id="email"
+      name="email"
+      value={reservationData.email}
+      readOnly
+    />
+  </div>
+  <div className="form-row">
+    <div className="form-group">
+      <label htmlFor="date">Ngày</label>
+      <input
+        className={`preinstall-book ${reservationData.date ? "filled-input" : ""}`}
+        id="date"
+        name="date"
+        value={reservationData.date}
+        readOnly
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="time">Thời gian</label>
+      <input
+        className={`preinstall-book ${reservationData.time ? "filled-input" : ""}`}
+        id="time"
+        name="time"
+        value={reservationData.time}
+        readOnly
+      />
+    </div>
+  </div>
+  <div className="form-group">
+    <label htmlFor="guests">Số khách </label>
+    <input
+      className="preinstall-book"
+      type="number"
+      id="guests"
+      name="guests"
+      placeholder="Số khách"
+      min="1"
+      max="99"
+      onInput={(e) => {
+        e.target.value = e.target.value.replace(/^0+/, "");
+      }}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="note">Ghi chú</label>
+    <textarea
+      className="preinstall-book"
+      id="note"
+      name="note"
+      placeholder="Gợi ý: thêm ghế trẻ em, ..."
+    ></textarea>
+  </div>
+  <div className="form-actions">
+    <button type="submit" className="btn btn-submit-checkout">
+      Đặt bàn
+    </button>
+    <button type="reset" className="btn btn-reset-checkout">
+      Làm lại
+    </button>
+  </div>
+</form>
+
+
+      <ToastContainer />
     </div>
   );
 };
