@@ -9,8 +9,7 @@ function BookingTable() {
   const [customTime, setCustomTime] = useState(""); // Giờ nhập tay từ người dùng
 
   const [dates, setDates] = useState([]); // Mảng chứa các ngày sẽ được hiển thị
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   let token = localStorage.getItem("token");
   if (token) {
@@ -69,12 +68,11 @@ function BookingTable() {
         selectedDate,
       };
       localStorage.setItem("bookingInfo", JSON.stringify(bookingData));
-      
-    //   localStorage.setItem("customTime", customTime);
-    // localStorage.setItem("selectedDate", JSON.stringify(selectedDate));
-    navigate("/checkout-table")
-      toast.success("Hãy chọn chỗ ngồi của bạn")  
-      
+      navigate("/checkout-table");
+
+      //   localStorage.setItem("customTime", customTime);
+      // localStorage.setItem("selectedDate", JSON.stringify(selectedDate));
+      // toast.success("Hãy chọn chỗ ngồi của bạn");
     }
   }
   console.log({ dates });
