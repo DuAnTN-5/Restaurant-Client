@@ -17,71 +17,29 @@ const ReservationForm = () => {
     note: "",
   })
 
-  // const tables = Array.from({ length: 33 }, (_, index) =>
-  //   `T${(index + 1).toString().padStart(2, "0")}`
-  // ); mapp như Phú làm
-  const tables = [
-    "T01",
-    "T02",
-    "T03",
-    "T04",
-    "T05",
-    "T06",
-    "T07",
-    "T08",
-    "T09",
-    "T10",
-    "T11",
-    "T12",
-    "T13",
-    "T14",
-    "T15",
-    "T16",
-    "T17",
-    "T18",
-    "T19",
-    "T20",
-    "T21",
-    "T22",
-    "T23",
-    "T24",
-    "T25",
-    "T26",
-    "T27",
-    "T28",
-    "T29",
-    "T30",
-    "T31",
-    "T32",
-    "T33",
-  ];
-  useEffect(() => {
-    let auth = localStorage.getItem("auth");
-    if (auth) {
-      auth = JSON.parse(auth);
-      console.log(auth);
-      setBookingData((prevData) => ({
-        ...prevData,
-        name: auth.name,
-        email: auth.email,
-      }));
-  
-    }
-    let bookingInfo = localStorage.getItem("bookingInfo");
-    if (bookingInfo) {
-      bookingInfo = JSON.parse(bookingInfo);
-      console.log(bookingInfo)
-      setBookingData((prevData) => ({
-        ...prevData,
-        time: bookingInfo.customTime,
-        date: `${bookingInfo.selectedDate.day}/${bookingInfo.selectedDate.date}/12`, // Sửa lại nếu có lỗi
-      }));
-    }
-  }, []);
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setBookingData({ ...bookingData, [name]: value });
+  const tables = Array.from({ length: 33 }, (_, index) => `T${(index + 1).toString().padStart(2, "0")}`);
+
+  // Example bookingInfo structure:
+  const bookingInfo = {
+    customTime: "23:11",
+    selectedDate: { day: "Thứ Tư", date: 27 },
   };
+
+  useEffect(() => {
+    // Lấy dữ liệu từ localStorage
+    const data = JSON.parse(localStorage.getItem("reservationData"));
+    if (data) {
+      setReservationData(data);
+      setSelectedTable(data.table);
+    } else {
+      // Set default date and time từ bookingInfo
+      setReservationData((prevData) => ({
+        ...prevData,
+        date: `${bookingInfo.selectedDate.date}-${bookingInfo.selectedDate.day}`, // Định dạng ngày
+        time: bookingInfo.customTime,
+      }));
+    }
+  }, []); // Chỉ chạy một lần
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -108,8 +66,27 @@ const ReservationForm = () => {
     // }
 
     // Lưu vào Local Storage
-    // localStorage.setItem("reservationData", JSON.stringify(reservationData));
-    // navigate("/checkout-pay");
+    localStorage.setItem("reservationData", JSON.stringify(updatedReservationData));
+
+    // Hiển thị thông báo thành công
+    toast.success("Đặt bàn thành công!");
+
+    // Reset lại thông tin
+    setReservationData({
+      name: "",
+      phone: "",
+      email: "",
+      date: "",
+      time: "",
+      guests: "",
+      note: "",
+    });
+    setSelectedTable(null);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setReservationData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleTableSelection = (table) => {
@@ -144,9 +121,7 @@ const ReservationForm = () => {
             {tables.map((table) => (
               <button
                 key={table}
-                className={`table-button ${
-                  selectedTable === table ? "table-button-active" : ""
-                }`}
+                className={`table-button ${selectedTable === table ? "table-button-active" : ""}`}
                 onClick={(e) => {
                   e.preventDefault();
                   handleTableSelection(table);
@@ -156,7 +131,6 @@ const ReservationForm = () => {
               </button>
             ))}
           </div>
-       
         </div>
       </div>
 
@@ -212,9 +186,10 @@ const ReservationForm = () => {
             <label htmlFor="date">Ngày</label>
             <input
               className="preinstall-book"
-            value={bookingData.date}
+              type="text"
+              id="date"
               name="date"
-              placeholder="Ngày"
+              value={`${bookingInfo.selectedDate.day} - Ngày ${bookingInfo.selectedDate.date}`}
               readOnly
             />
           </div>
@@ -224,8 +199,8 @@ const ReservationForm = () => {
               className="preinstall-book"
             value={bookingData.time}
               name="time"
-              placeholder="Thời gian"
-              readOnly
+              value={reservationData.time} // Thời gian có thể thay đổi
+              onChange={handleInputChange}
             />
           </div>
         </div>

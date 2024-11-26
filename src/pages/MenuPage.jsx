@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../api";
 import { toast } from "react-toastify"; // Thêm thông báo toast
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import "../style/MenuPage.css";
 import { Link } from "react-router-dom";
 
@@ -9,8 +10,10 @@ const MenuPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeCategory, setActiveCategory] = useState(null);
-
-    
+  const [favourites, setFavourites] = useState(() => {
+    const savedFavourites = localStorage.getItem("likedItems");
+    return savedFavourites ? JSON.parse(savedFavourites) : [];
+  });
 
   useEffect(() => {
     const fetchCategoriesAndFoods = async () => {
@@ -64,16 +67,14 @@ const MenuPage = () => {
     fetchCategoriesAndFoods();
   }, []);
 
+
   // Hàm xử lý đặt món vào giỏ hàng
   const addToCart = (food) => {
-
     const token = localStorage.getItem("token");
-  
-  // Check login
     if (!token) {
-    toast.error("Vui lòng đăng nhập để đặt món.");
-    return;
-  }
+      toast.error("Vui lòng đăng nhập để đặt món.");
+      return;
+    }
 
     const cart = JSON.parse(localStorage.getItem("cart")) || {};
     const quantity = cart[food.id] ? cart[food.id] + 1 : 1; // Tăng số lượng nếu món đã có trong giỏ hàng
@@ -82,6 +83,20 @@ const MenuPage = () => {
     localStorage.setItem("cart", JSON.stringify(cart)); // Lưu giỏ hàng vào localStorage
 
     toast.success(`Đặt món ${food.name} thành công! Số lượng: ${quantity}`);
+  };
+
+  // Hàm xử lý thay đổi yêu thích
+  const toggleFavourite = (food) => {
+    let updatedFavourites;
+    if (favourites.some(fav => fav.id === food.id)) {
+      updatedFavourites = favourites.filter(fav => fav.id !== food.id); // Xóa món khỏi yêu thích
+      toast.error(`Đã bỏ yêu thích món ${food.name}`);
+    } else {
+      updatedFavourites = [...favourites, food]; // Thêm món vào danh sách yêu thích
+      toast.success(`Đã yêu thích món ${food.name}`);
+    }
+    setFavourites(updatedFavourites);
+    localStorage.setItem("likedItems", JSON.stringify(updatedFavourites)); // Lưu danh sách vào localStorage
   };
 
   if (loading) {
@@ -108,14 +123,10 @@ const MenuPage = () => {
               {categoriesWithFoods.map((category) => (
                 <li
                   key={category.id}
-                  className={`menu-sidebar-item ${
-                    activeCategory === category.id ? "active" : ""
-                  }`}
+                  className={`menu-sidebar-item ${activeCategory === category.id ? "active" : ""}`}
                   onClick={() => {
                     setActiveCategory(category.id);
-                    const categoryTitleElement = document.getElementById(
-                      `category-title-${category.id}`
-                    );
+                    const categoryTitleElement = document.getElementById(`category-title-${category.id}`);
                     if (categoryTitleElement) {
                       categoryTitleElement.scrollIntoView({
                         behavior: "smooth",
@@ -164,6 +175,18 @@ const MenuPage = () => {
                       >
                         Đặt Món
                       </button>
+
+                      <div
+                        className="heart-icon-menu-page"
+                        onClick={() => toggleFavourite(food)}
+                        style={{ position: "absolute", top: "10px", left: "10px" }}
+                      >
+                        {favourites.some(fav => fav.id === food.id) ? (
+                          <FaHeart color="red" size={20} />
+                        ) : (
+                          <FaRegHeart color="white" size={20} />
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>

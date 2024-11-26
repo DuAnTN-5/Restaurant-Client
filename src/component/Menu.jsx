@@ -3,7 +3,7 @@ import { api } from "../api"; // Đường dẫn đến file cấu hình API
 import "../css/Menu.css";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaHeart, FaRegHeart } from 'react-icons/fa'; // Import icon trái tim
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 function Menu() {
   let cartLocal = localStorage.getItem("cart");

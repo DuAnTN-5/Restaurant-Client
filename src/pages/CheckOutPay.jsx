@@ -18,6 +18,8 @@ const CheckoutPay = () => {
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
     }).format(amount);
 
   // Lấy giỏ hàng từ localStorage
@@ -73,6 +75,10 @@ const CheckoutPay = () => {
 
   const calculateTotal = () =>
     cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  const calculateDeposit = () => {
+    return calculateTotal() * 0.2; // Tiền cọc = 20% tổng tiền
+  };
 
   const handlePayment = () => {
     console.log("Dữ liệu đặt bàn:", reservationData);
@@ -137,6 +143,12 @@ const CheckoutPay = () => {
             <td className="checkout-pay-header-product checkout-pay-subtotal-title">Tổng Cộng:</td>
             <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
               {formatCurrency(calculateTotal())}
+            </td>
+          </tr>
+          <tr>
+            <td className="checkout-pay-header-product checkout-pay-subtotal-title">Tiền Cọc (20%):</td>
+            <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
+              {formatCurrency(calculateDeposit())}
             </td>
           </tr>
         </tbody>
