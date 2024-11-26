@@ -76,7 +76,7 @@ function Menu() {
   ) : (
     menuItem.map((item, index) => (
       <div className="menu-item-home" key={item.id}>
-        <Link className="menu-image" to={"product-detail/" + item.slug}>
+        <Link className="menu-image" to={"/product-detail/" + item.slug}>
           <img
             src={`http://127.0.0.1:8000/${item.image_url}`}
             alt={item.name}

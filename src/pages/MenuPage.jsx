@@ -3,6 +3,7 @@ import { api } from "../api";
 import { toast } from "react-toastify"; // Thêm thông báo toast
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import "../style/MenuPage.css";
+import { Link } from "react-router-dom";
 
 const MenuPage = () => {
   const [categoriesWithFoods, setCategoriesWithFoods] = useState([]);
@@ -152,11 +153,13 @@ const MenuPage = () => {
                 <div className="menu-items">
                   {category.foods.map((food) => (
                     <div key={food.id} className="menu-item-page">
-                      <img
-                        className="menu-item-page-img"
-                        src={`http://127.0.0.1:8000/${food.image_url}`}
-                        alt={food.name}
-                      />
+                    <Link to={"/product-detail/" + food.slug}>
+                        <img
+                          className="menu-item-page-img"
+                          src={`http://127.0.0.1:8000/${food.image_url}`}
+                          alt={food.name}
+                        />
+                     </Link>
                       <h3 className="menu-item-page-title">{food.name}</h3>
                       <p className="menu-item-page-ingredients">
                         {food.ingredientsList.length > 0

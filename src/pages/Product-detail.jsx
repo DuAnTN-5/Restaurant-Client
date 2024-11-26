@@ -1,23 +1,23 @@
 import "../css/Product-Detail.css";
 import { FaCartShopping } from "react-icons/fa6";
-import { CiHeart } from "react-icons/ci";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Slider from "react-slick";
 
 import Rate from "./Rate";
 import ProductRate from "./Product-rate";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { api } from "../api";
-import { toast } from "react-toastify";
 import ProductComment from "./Product-Comment";
+import { toast } from "react-toastify";
 
 function ProductDetail() {
   const [productDetail, setProductDetail] = useState({});
   const [vote, setVote] = useState("");
   const [category, setCategory] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  const [otherDishes, setOtherDishes] = useState([]);
 
   const settings = {
     dots: true,
@@ -61,8 +61,6 @@ function ProductDetail() {
     ],
   };
 
-  // const [otherDishes, setOtherDishes] = useState([]);
-
   let token = localStorage.getItem("token");
   if (token) {
     token = JSON.parse(token);
@@ -80,55 +78,56 @@ function ProductDetail() {
         const data = res.data.data.product;
         if (data.category_id === 1) {
           setCategory("Món khai vị ");
-          // api
-          // .get("product-categories/1")
-          // .then((res) =>
-          // console.log(res))
-          // .catch(error => console.log(error))
+          api
+            .get("product-categories/1")
+            .then((res) => {
+              // console.log(res);
+              setOtherDishes(res.data.data);
+            })
+            .catch((error) => console.log(error));
         } else if (data.category_id === 6) {
           setCategory("Món chính");
-          // api
-          // .get("product-categories/6")
-          // .then((res) =>
-          // console.log(res))
-          // .catch(error => console.log(error))
+          api
+            .get("product-categories/6")
+            .then((res) => {
+              // console.log(res);
+              setOtherDishes(res.data.data);
+            })
+
+            .catch((error) => console.log(error));
         } else if (data.category_id === 11) {
           setCategory("Món tráng miệng");
-          // api
-          // .get("product-categories/11")
-          // .then((res) =>
-          // console.log(res))
-          // .catch(error => console.log(error))
+          api
+            .get("product-categories/11")
+            .then((res) => {
+              // console.log(res);
+              setOtherDishes(res.data.data);
+            })
+            .catch((error) => console.log(error));
         } else if (data.category_id === 16) {
           setCategory("Rượu & Thức uống");
-          // api
-          // .get("product-categories/16")
-          // .then((res) =>
-          // console.log(res))
-          // .catch(error => console.log(error))
+          api
+            .get("product-categories/16")
+            .then((res) => {
+              // console.log(res);
+              setOtherDishes(res.data.data);
+            })
+            .catch((error) => console.log(error));
         } else {
           // 21
           setCategory("Món ăn chay");
-          // api
-          // .get("product-categories/21")
-          // .then((res) =>
-          // console.log(res))
-          // .catch(error => console.log(error))
+          api
+            .get("product-categories/21")
+            .then((res) => {
+              // console.log(res);
+              setOtherDishes(res.data.data);
+            })
+            .catch((error) => console.log(error));
         }
       })
       .catch((error) => console.log(error));
-  }, []);
-  const clickCart = () => {
-    if (!token) {
-      toast.error("Vui lòng đăng nhập thêm vào giỏ hàng");
-    }
-  };
-  const clickFavouritePage = () => {
-    if (!token) {
-      toast.error("Vui lòng đăng nhập");
-    }
-  };
-  // console.log(productDetail);
+  }, [params.slug]);
+  console.log(otherDishes);
   // console.log(vote)
   // console.log(Object.keys(productDetail).length )
 
@@ -195,37 +194,8 @@ function ProductDetail() {
                   return "Không có thông tin nguyên liệu";
                 }
               })()}
-              {/* {productDetail.ingredients} */}
             </p>
-            {/* <p className="product-children">Thành phần: ABC</p> */}
-            {/* <p className="product-children">Mã món ăn: 002</p> */}
-            {/* <div className="productQuantity">
-              <div className="counter">
-                <button className="minus">-</button>
-                <input className="number" defaultValue={1}></input>
-                <button className="plus">+</button>
-              </div>
-              <button className="add">
-                <i>
-                  <FaCartShopping />
-                </i>
-                <span onClick={clickCart} className="">
-                  Add To Cart
-                </span>
-              </button>
-              <i className="like" onClick={clickFavouritePage}>
-                <CiHeart />
-              </i>
-            </div> */}
           </div>
-          {/* <div className="food-description">
-              <h4>Mô tả món ăn</h4>
-              <p>
-                Đây là món ăn độc đáo, kết hợp giữa hương vị tươi ngon của hải sản
-                và sự đậm đà của nước sốt đặc trưng. Món ăn được chế biến từ
-                nguyên liệu tươi sống, đảm bảo chất lượng và an toàn.
-              </p>
-            </div> */}
         </div>
         <div className="food-description">
           <h3 className="product-title">Thông tin chi tiết về món ăn</h3>
@@ -254,105 +224,52 @@ function ProductDetail() {
           />
         </div>
         <ProductComment product={productDetail} />
-
         <div className="tab-content">
           <div>
             <h2 className="other-dishes">Các món ăn khác</h2>
-            {/* <div className="vt-product"> */}
-            {/* <Swiper
-                spaceBetween={20}
-                slidesPerView="auto" // Số item hiện trong 1 lần
-                className="mySwiper "
-                navigation
-              >
-                <SwiperSlide style={{ width: "auto" }}>
-                  <div className="product-content">
-                    <img
-                      className="product-image"
-                      src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                      alt=""
-                    />
-                    <div className="product-caption">
-                      <span className="product-tags">Chicken, Spicy</span>
-                      <h3 className="product-title">Chicken alfredo</h3>
-                      <h4 className="product-price">35.000 đ</h4>
-                      <button className="add-to-cart">
-                        {" "}
-                        <i>
-                          <FaCartShopping />
-                        </i>{" "}
-                        Add to cart
-                      </button>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide style={{ width: "auto" }}>
-                  <div className="product-content">
-                    <img
-                      className="product-image"
-                      src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                      alt=""
-                    />
-                    <div className="product-caption">
-                      <span className="product-tags">Chicken, Spicy</span>
-                      <h3 className="product-title">Chicken alfredo</h3>
-                      <h4 className="product-price">35.000 đ</h4>
-                      <button className="add-to-cart">
-                        {" "}
-                        <i>
-                          <FaCartShopping />
-                        </i>{" "}
-                        Add to cart
-                      </button>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide style={{ width: "auto" }}>
-                  <div className="product-content">
-                    <img
-                      className="product-image"
-                      src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                      alt=""
-                    />
-                    <div className="product-caption">
-                      <span className="product-tags">Chicken, Spicy</span>
-                      <h3 className="product-title">Chicken alfredo</h3>
-                      <h4 className="product-price">35.000 đ</h4>
-                      <button className="add-to-cart">
-                        {" "}
-                        <i>
-                          <FaCartShopping />
-                        </i>{" "}
-                        Add to cart
-                      </button>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide style={{ width: "auto" }}>
-                  <div className="product-content">
-                    <img
-                      className="product-image"
-                      src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                      alt=""
-                    />
-                    <div className="product-caption">
-                      <span className="product-tags">Chicken, Spicy</span>
-                      <h3 className="product-title">Chicken alfredo</h3>
-                      <h4 className="product-price">35.000 đ</h4>
-                      <button className="add-to-cart">
-                        {" "}
-                        <i>
-                          <FaCartShopping />
-                        </i>{" "}
-                        Add to cart
-                      </button>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                
-              </Swiper> */}
             <Slider {...settings}>
-              <div className="padding">
+              {otherDishes.map((item) => {
+                return (
+                  <div className="padding" key={item.id}>
+                    <div className="product-content">
+                      <Link to={"/product-detail/" + item.slug}>
+                        <img
+                          className="product-image"
+                          onClick={() => {
+                            toast.success(
+                              "Đã chuyển đến trang chi tiết sản phẩm mà bạn yêu cầu"
+                            );
+                          }}
+                          src={`http://127.0.0.1:8000/${item.image_url}`}
+                          alt=""
+                        />
+                      </Link>
+                      <div className="product-caption">
+                        <Link to={"/product-detail/" + item.slug}>
+                          <h3 className="product-detail-item-title">{item.name}</h3>
+                        </Link>
+                        <span className="product-tags">
+                          {" "}
+                          {item?.summary
+                            ? item.summary.replace(/<\/?p>/g, "")
+                            : "Không có thông tin"}
+                        </span>
+                        <h4 className="product-price-detail">
+                          {item.price} VND
+                        </h4>
+                        {/* <button className="add-to-cart">
+                      {" "}
+                      <i>
+                        <FaCartShopping />
+                      </i>{" "}
+                      Add to cart
+                    </button> */}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              {/* <div className="padding">
                 <div className="product-content">
                   <img
                     className="product-image"
@@ -456,30 +373,7 @@ function ProductDetail() {
                     </button>
                   </div>
                 </div>
-              </div>
-              <div className="padding">
-                <div className="product-content">
-                  <img
-                    className="product-image"
-                    src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                    alt=""
-                  />
-                  <div className="product-caption">
-                    <span className="product-tags">Chicken, Spicy</span>
-                    <h3 className="product-title">Chicken alfredo</h3>
-                    <h4 className="product-price">35.000 đ</h4>
-                    <button className="add-to-cart">
-                      {" "}
-                      <i>
-                        <FaCartShopping />
-                      </i>{" "}
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-              
-              
+              </div> */}
             </Slider>
             {/* </div> */}
           </div>
