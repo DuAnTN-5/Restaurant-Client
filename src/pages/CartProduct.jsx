@@ -194,7 +194,7 @@ const Cart = () => {
       {/* Hiển thị giỏ hàng */}
       <div className="cart-items">
         {cartItems.map((item) => (
-          <div key={item.id} className="cart-item">
+          <div key={item.id} className="cart-item-cart-product">
             <div className="cart-item-image">
               <img
                 src={`http://127.0.0.1:8000/${item.image_url}`}
@@ -245,7 +245,7 @@ const Cart = () => {
       </div>
 
       {/* Tổng tiền và các nút điều hướng */}
-      <div className="cart-summary">
+      <div className="cart-summary-cart-product">
         <div className="summary-title">
           <strong>Tổng tiền:</strong>{" "}
           <span className="summary-total">
