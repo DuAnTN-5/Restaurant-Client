@@ -246,7 +246,7 @@ function ProductDetail() {
                       </Link>
                       <div className="product-caption">
                         <Link to={"/product-detail/" + item.slug}>
-                          <h3 className="product-title">{item.name}</h3>
+                          <h3 className="product-detail-item-title">{item.name}</h3>
                         </Link>
                         <span className="product-tags">
                           {" "}
