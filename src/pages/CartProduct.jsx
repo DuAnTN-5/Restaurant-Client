@@ -6,10 +6,18 @@ import "../style/CartProduct.css";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showMenus, setShowMenus] = useState([]);
+  const navigate = useNavigate();
 
+  // Hàm lấy thông tin đặt bàn từ localStorage
+  const getReservationsFromLocalStorage = () => {
+    const reservations = JSON.parse(localStorage.getItem("reservations")) || [];
+    return reservations;
+  };
+
+  // Hàm lấy giỏ hàng từ localStorage
   const getCartFromLocalStorage = () => {
     const cartData = localStorage.getItem("cart");
     if (cartData) {
@@ -27,6 +35,7 @@ const Cart = () => {
     return [];
   };
 
+  // Hàm định dạng giá tiền
   const formatCurrency = (amount) =>
     new Intl.NumberFormat("vi-VN", {
       style: "currency",
@@ -35,6 +44,7 @@ const Cart = () => {
       maximumFractionDigits: 3,
     }).format(amount);
 
+  // Lấy thông tin giỏ hàng và sản phẩm từ API
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
@@ -42,7 +52,6 @@ const Cart = () => {
         setError("");
 
         const localCart = getCartFromLocalStorage();
-
         if (localCart.length === 0) {
           setCartItems([]);
           return;
@@ -101,17 +110,15 @@ const Cart = () => {
   };
 
   const clearCart = () => {
-    setCartItems([]); // Xóa tất cả các món trong giỏ hàng
-    localStorage.removeItem("cart"); // Xóa dữ liệu giỏ hàng trong localStorage
+    setCartItems([]);
+    localStorage.removeItem("cart");
     toast.success("Đã xóa tất cả các món trong giỏ hàng!");
   };
 
   const handleCheckout = () => {
-    // Kiểm tra thông tin đặt bàn trong localStorage
-    const reservationData = JSON.parse(localStorage.getItem("reservationData"));
+    const reservationData = getReservationsFromLocalStorage();
 
-    if (!reservationData || !reservationData.time || !reservationData.table) {
-      // Nếu chưa có thông tin đặt bàn
+    if (reservationData.length === 0) {
       toast.error("Bạn cần đặt bàn để đặt món", {
         position: "top-center",
       });
@@ -120,12 +127,10 @@ const Cart = () => {
         navigate("/booking-table");
       }, 2000);
     } else {
-      // Nếu đã có thông tin đặt bàn
       toast.success("Thực hiện thanh toán", {
         position: "top-center",
       });
 
-      // Lưu thông tin giỏ hàng vào Local Storage
       const cartData = cartItems.map((item) => ({
         id: item.id,
         name: item.name,
@@ -136,8 +141,16 @@ const Cart = () => {
 
       setTimeout(() => {
         navigate("/checkout-pay");
-      }, 3000); // Chuyển hướng đến thanh toán sau 4 giây
+      }, 3000);
     }
+  };
+
+  const toggleMenu = (index) => {
+    setShowMenus((prevState) => {
+      const updatedShowMenus = [...prevState];
+      updatedShowMenus[index] = !updatedShowMenus[index];
+      return updatedShowMenus;
+    });
   };
 
   if (loading) return <div className="loading-message">Đang tải dữ liệu...</div>;
@@ -145,15 +158,40 @@ const Cart = () => {
   if (cartItems.length === 0)
     return <div className="empty-cart-message">Giỏ hàng của bạn đang trống.</div>;
 
+  const reservationData = getReservationsFromLocalStorage();
+
   return (
     <div className="cart-container container-vphu">
       <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1>
-      <div className="sub-cart">
-        <div className="sub-cart-products subtitle-vphu">Thông tin món ăn</div>
-        <div className="sub-cart-total subtitle-vphu">
-          Tổng tiền
+
+      {/* Hiển thị tất cả thông tin đặt bàn */}
+      {reservationData.length > 0 && (
+        <div className="reservation-info-container">
+          {reservationData.map((reservation, index) => (
+            <div key={index} className="reservation-info">
+              <div className="reservation-details">
+                <p className="reservation-table"><strong>Bàn:</strong> {reservation.table}</p>
+                <p className="reservation-guests"><strong>Khách:</strong> {reservation.guests} người</p>
+                <p className="reservation-date"><strong>Ngày:</strong> {reservation.date}</p>
+                <p className="reservation-time"><strong>Giờ:</strong> {reservation.time}</p>
+              </div>
+              <button
+                className="toggle-button"
+                onClick={() => toggleMenu(index)}
+              >
+                {showMenus[index] ? "Ẩn" : "Hiện"}
+              </button>
+              {showMenus[index] && (
+                <div className="reservation-additional-info">
+                  {/* Bạn có thể thêm các thông tin bổ sung tại đây nếu cần */}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-      </div>
+      )}
+
+      {/* Hiển thị giỏ hàng */}
       <div className="cart-items">
         {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
@@ -206,6 +244,7 @@ const Cart = () => {
         ))}
       </div>
 
+      {/* Tổng tiền và các nút điều hướng */}
       <div className="cart-summary">
         <div className="summary-title">
           <strong>Tổng tiền:</strong>{" "}
