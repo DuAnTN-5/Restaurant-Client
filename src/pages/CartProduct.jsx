@@ -8,14 +8,8 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [showMenus, setShowMenus] = useState([]);
+  const [showMenu, setShowMenu] = useState(false); // Thêm state để điều khiển việc ẩn/hiện menu món ăn
   const navigate = useNavigate();
-
-  // Hàm lấy thông tin đặt bàn từ localStorage
-  const getReservationsFromLocalStorage = () => {
-    const reservations = JSON.parse(localStorage.getItem("reservations")) || [];
-    return reservations;
-  };
 
   // Hàm lấy giỏ hàng từ localStorage
   const getCartFromLocalStorage = () => {
@@ -116,9 +110,9 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    const reservationData = getReservationsFromLocalStorage();
+    const reservationData = JSON.parse(localStorage.getItem("reservationData"));
 
-    if (reservationData.length === 0) {
+    if (!reservationData || !reservationData.time || !reservationData.table) {
       toast.error("Bạn cần đặt bàn để đặt món", {
         position: "top-center",
       });
@@ -145,108 +139,92 @@ const Cart = () => {
     }
   };
 
-  const toggleMenu = (index) => {
-    setShowMenus((prevState) => {
-      const updatedShowMenus = [...prevState];
-      updatedShowMenus[index] = !updatedShowMenus[index];
-      return updatedShowMenus;
-    });
-  };
-
   if (loading) return <div className="loading-message">Đang tải dữ liệu...</div>;
   if (error) return <div className="error-message">{error}</div>;
   if (cartItems.length === 0)
     return <div className="empty-cart-message">Giỏ hàng của bạn đang trống.</div>;
 
-  const reservationData = getReservationsFromLocalStorage();
+  const reservationData = JSON.parse(localStorage.getItem("reservationData"));
 
   return (
     <div className="cart-container container-vphu">
       <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1>
 
-      {/* Hiển thị tất cả thông tin đặt bàn */}
-      {reservationData.length > 0 && (
-        <div className="reservation-info-container">
-          {reservationData.map((reservation, index) => (
-            <div key={index} className="reservation-info">
-              <div className="reservation-details">
-                <p className="reservation-table"><strong>Bàn:</strong> {reservation.table}</p>
-                <p className="reservation-guests"><strong>Khách:</strong> {reservation.guests} người</p>
-                <p className="reservation-date"><strong>Ngày:</strong> {reservation.date}</p>
-                <p className="reservation-time"><strong>Giờ:</strong> {reservation.time}</p>
-              </div>
-              <button
-                className="toggle-button"
-                onClick={() => toggleMenu(index)}
-              >
-                {showMenus[index] ? "Ẩn" : "Hiện"}
-              </button>
-              {showMenus[index] && (
-                <div className="reservation-additional-info">
-                  {/* Bạn có thể thêm các thông tin bổ sung tại đây nếu cần */}
-                </div>
-              )}
-            </div>
-          ))}
+      {/* Hiển thị thông tin đặt bàn */}
+      {reservationData && (
+        <div className="reservation-info" onClick={() => setShowMenu(!showMenu)}>
+          <div className="reservation-details">
+            <p className="reservation-table"><strong>Bàn:</strong> {reservationData.table}</p>
+            <p className="reservation-guests"><strong>Khách:</strong> {reservationData.guests} người</p>
+            <p className="reservation-date"><strong>Ngày:</strong> {reservationData.date}</p>
+            <p className="reservation-time"><strong>Giờ:</strong> {reservationData.time}</p>
+          </div>
+          <button className="toggle-button">
+            {showMenu ? "Ẩn" : "Hiện"}
+          </button>
         </div>
       )}
 
       {/* Hiển thị giỏ hàng */}
-      <div className="cart-items">
-        {cartItems.map((item) => (
-          <div key={item.id} className="cart-item-cart-product">
-            <div className="cart-item-image">
-              <img
-                src={`http://127.0.0.1:8000/${item.image_url}`}
-                alt={item.name}
-                className="cart-item-image-img"
-              />
-            </div>
-            <div className="cart-item-info">
-              <div className="cart-item-name">{item.name}</div>
-              <div className="cart-item-price">
-                <strong>Giá:</strong> {formatCurrency(item.price)}
+      {/* {showMenu && ( */}
+        <div className="cart-items">
+          {/* {cartItems.map((item) => ( */}
+            <div className="cart-item-cart-product">
+              <div className="cart-item-image">
+                <img
+                  // src={`http://127.0.0.1:8000/${item.image_url}`}
+                  // alt={item.name}
+                  className="cart-item-image-img"
+                />
               </div>
-            </div>
-            <div className="quantity-control">
+              <div className="cart-item-info">
+                <div className="cart-item-name"></div>
+                <div className="cart-item-price">
+                  <strong>Giá:</strong> 
+                  {/* {formatCurrency(item.price)} */}
+                </div>
+              </div>
+              <div className="quantity-control">
+                <button
+                  className="quantity-btn"
+                  // onClick={() =>
+                  //   item.quantity > 1 && handleQuantityChange(item.id, item.quantity - 1)
+                  // }
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  className="quantity-input"
+                  // value={item.quantity}
+                  // onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                  min="1"
+                />
+                <button
+                  className="quantity-btn"
+                  // onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                >
+                  +
+                </button>
+              </div>
+              <div className="cart-item-total">
+                <strong>Tổng :</strong>
+                 {/* {formatCurrency(calculateTotal(item.price, item.quantity))} */}
+              </div>
               <button
-                className="quantity-btn"
-                onClick={() =>
-                  item.quantity > 1 && handleQuantityChange(item.id, item.quantity - 1)
-                }
+                className="remove-button"
+                // onClick={() => removeFromCart(item.id)}
               >
-                -
-              </button>
-              <input
-                type="number"
-                className="quantity-input"
-                value={item.quantity}
-                onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                min="1"
-              />
-              <button
-                className="quantity-btn"
-                onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-              >
-                +
+                X
               </button>
             </div>
-            <div className="cart-item-total">
-              <strong>Tổng :</strong> {formatCurrency(calculateTotal(item.price, item.quantity))}
-            </div>
-            <button
-              className="remove-button"
-              onClick={() => removeFromCart(item.id)}
-            >
-              X
-            </button>
-          </div>
-        ))}
-      </div>
+          {/* ))} */}
+        </div>
+      {/* )} */}
 
       {/* Tổng tiền và các nút điều hướng */}
       <div className="cart-summary-cart-product">
-        <div className="summary-title">
+        <div className="summary-title-cart-product">
           <strong>Tổng tiền:</strong>{" "}
           <span className="summary-total">
             {formatCurrency(
