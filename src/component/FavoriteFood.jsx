@@ -2,6 +2,7 @@ import "../css/FavoriteFood.css";
 import { useEffect, useState } from "react";
 import { api } from "../api";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const FoodCategory = () => {
   // Lấy giỏ hàng và token từ localStorage
@@ -82,11 +83,13 @@ const FoodCategory = () => {
       <div className="food-items">
         {foodItems.map((item) => (
           <div className="food-card" key={item.id}>
-            <img
-              src={`http://127.0.0.1:8000/${item.image_url}`}
-              alt={item.name}
-              className="food-image"
-            />
+          <Link className="menu-image" to={"product-detail/" + item.slug}>
+              <img
+                src={`http://127.0.0.1:8000/${item.image_url}`}
+                alt={item.name}
+                className="food-image"
+              />
+            </Link>
             <div className="rating-section">
               <span className="rating">
                 <i className="fa-solid fa-star icon-star"></i>
@@ -100,7 +103,8 @@ const FoodCategory = () => {
               </div>
             </div>
             <div className="food-info">
-              <h3 className="food-name">{item.name}</h3>
+            <Link to={"/product-detail/" + item.slug}>
+            <h3 className="food-name">{item.name}</h3></Link>
               <p className="favorite-food-description">
                 {JSON.parse(item.ingredients)
                   .map((ing) => ing.value)
