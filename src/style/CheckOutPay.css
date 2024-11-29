@@ -1,15 +1,13 @@
 /* Dark Mode - Cấu trúc chính */
 .dark-mode {
-    background-color: #181818;
     color: #f5f5f5;
   }
   
   /* Container */
   .checkout-pay-container {
     padding: 20px;
-    max-width: 600px;
     margin: 0 auto;
-    border-radius: 8px;
+    background: url("../assets/bg.jpg");
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
   }
   
@@ -19,12 +17,76 @@
     margin-bottom: 20px;
     font-weight: bold;
   }
+  .checkout-oder-container {
+    display: flex;
+    gap: 20px;
+  }
+  .checkout-pay-left {
+    flex: 5;
+  }
+  .reservation-details-checkout-pay, .checkout-pay-discount, .checkout-pay-payment-methods {
+    background-color: #181818;
+    padding: 20px;
+    margin-bottom: 20px;
 
-  .reservation-title {
+  }
+
+  .checkout-pay-discount-title {
+
+  }
+
+  .checkout-pay-discount-input {
+    background-color: #181818;
+    border: 1px solid #aaaaaa;
+    padding: 5px;
+    margin-right: 20px;
+  }
+  .checkout-pay-discount-button {
+    background-color: #ffc107;
+    color: black;
+    font-weight: bolder;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+
+  .checkout-pay-right{
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #181818;
+    padding: 20px;
+  }
+
+  .reservation-title, .checkout-pay-discount-title, .checkout-pay-payment-methods-title {
     color: #e7272d;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .reservation-content {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    border: 2px solid #333;
   }
   .reservation-items {
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bolder;
+  }
+  .reservation-items-text {
+    color: #aaaaaa;
     margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .reservation-items-text-value {
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    text-align: center;
   }
   
   /* Bảng sản phẩm */
@@ -34,6 +96,11 @@
     margin-bottom: 20px;
   }
   
+  /* .checkout-pay-header-product, .checkout-pay-header-subtotal {} */
+  .subtitle-oder {
+    color: #e7272d;
+  }
+
   .checkout-pay-header-product,
   .checkout-pay-header-subtotal {
     text-align: left;
@@ -96,15 +163,10 @@
   
   /* Phương thức thanh toán */
   .checkout-pay-payment-methods {
-    margin-top: 20px;
     font-size: 16px;
   }
   
-  .checkout-pay-payment-methods-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+
   
   .checkout-pay-payment-option {
     display: flex;
@@ -131,12 +193,12 @@
   
   .checkout-pay-button {
     background-color: #e7272d;
+    width: 100%;
     color: white;
     border: none;
     padding: 12px 24px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 4px;
     transition: background-color 0.3s ease;
   }
   
@@ -146,10 +208,6 @@
   
 /* Responsive Design */
 @media (max-width: 767px) {
-    .checkout-pay-container {
-        padding: 20px;
-        max-width: 100%;
-    }
 
 
     .checkout-pay-table {
@@ -176,9 +234,6 @@
         font-size: 14px;
     }
 
-    .checkout-pay-payment-methods-title {
-        font-size: 18px;
-    }
 
     .checkout-pay-payment-icon {
         width: 25px;
@@ -187,10 +242,6 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .checkout-pay-container {
-        padding: 20px;
-        max-width: 90%;
-    }
 
 
     .checkout-pay-table {
@@ -217,12 +268,6 @@
 }
 
 @media (min-width: 1025px) {
-    .checkout-pay-container {
-        padding: 40px;
-        max-width: 75%; /* Điều chỉnh chiều rộng container */
-    }
-
-
 
     .checkout-pay-table {
         font-size: 18px;
