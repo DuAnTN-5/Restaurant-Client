@@ -12,6 +12,7 @@ function ResetPassword() {
   const navigate = useNavigate();
   const params = useParams();
   const token = params.token;
+  
 
   const location = useLocation();
   const email = new URLSearchParams(location.search).get("email");
@@ -64,7 +65,7 @@ function ResetPassword() {
             toast.success("Cập nhật mật khẩu thành công")
             setTimeout(() => {
               navigate('/login'); // Chuyển hướng về trang đăng nhập sau khi xác thực thành công
-          }, 3000);
+          }, 1000);
           }
         })
         .catch((error) => {

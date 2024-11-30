@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import "../css2/Blog-detail.css";
 import { Children, useEffect, useRef, useState } from "react";
-import { api } from "../api";
+import { api, url } from "../api";
+import DOMPurify from 'dompurify';
+import parse from 'html-react-parser';
 import { MdAccountCircle } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
 import { IoTimeSharp } from "react-icons/io5";
@@ -11,23 +13,23 @@ import { Avatar } from "../assets";
 
 export default function BlogDetail() {
   const [idComment, setIdComment] = useState(null);
-  const [blogDetail, setBlogDetail] = useState("");
+  const [blogDetail, setBlogDetail] = useState({});
   const [comment, setComment] = useState(""); // comment gửi lên
   const [comments, setComments] = useState([]); //comment get về
   const params = useParams();
 
   const inputRef = useRef();
-
+  
   let token = localStorage.getItem("token");
-
+  
   useEffect(() => {
     api
-      .get("/posts/" + params.slug)
-      .then((res) => {
-        console.log(res);
-        setBlogDetail(res.data.data);
-      })
-      .catch((error) => console.log(error));
+    .get("/posts/" + params.slug)
+    .then((res) => {
+      console.log(res);
+      setBlogDetail(res.data.data);
+    })
+    .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -110,6 +112,13 @@ export default function BlogDetail() {
         auth = JSON.parse(auth);
       }
       console.log(idComment);
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
 
       const formData = new FormData();
       formData.append("user_id", auth.id);
@@ -122,7 +131,7 @@ export default function BlogDetail() {
       // console.log(formData)
 
       api
-        .post("/post-comments", formData)
+        .post("/post-comments", formData, config)
         .then((res) => {
           console.log(res);
           if (res.data.data) {
@@ -143,7 +152,9 @@ export default function BlogDetail() {
         });
     }
   }
-
+  const cleanHTML = blogDetail.body
+  ? DOMPurify.sanitize(blogDetail.body.replace(/<hr\s*\/?>/gi, ""))
+  : "";
   // console.log(params)
 
   console.log({ comment });
@@ -173,14 +184,26 @@ export default function BlogDetail() {
             </header>
 
             <img
-              src={`http://127.0.0.1:8000/${blogDetail.image_url}`}
+              src={`${url}/${blogDetail.image_url}`}
               alt="Fresh fish with limes"
               className="main-recipe-image"
             />
 
             <div className="content">
               <h2 className="post-title">{blogDetail.title}</h2>
-              <p className="post-excerpt">{blogDetail.body}</p>
+              {/* <div className="post-excerpt" dangerouslySetInnerHTML={{ __html: cleanHTML }}>
+            
+              </div> */}
+              <div
+  className="post-excerpt"
+  dangerouslySetInnerHTML={{
+    __html: cleanHTML || "Không có nội dung",
+  }}
+></div>
+              {/* <p className="post-excerpt">{blogDetail?.summary
+                            ? blogDetail.summary.replace(/<\/?p>/g, "")
+                            : "Không có thông tin"}</p> */}
+              {/* <p className="post-excerpt">{parse(cleanHTML)}</p> */}
             </div>
             <div className="comment-section">
               <h3>Tất cả bình luận</h3>

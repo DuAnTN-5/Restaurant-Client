@@ -56,8 +56,8 @@
 
 }
 .contact-text-item{
-    font-size: 15px;
-    font-weight: 20px;
+    font-size: 12px;
+    /* font-weight: 20px; */
     color: gray;
     padding-left: 50px;
 }

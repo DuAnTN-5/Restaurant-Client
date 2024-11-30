@@ -1,6 +1,7 @@
 .favourite-page{
   background-color: #1b1b1b;
   color: white;
+  padding: 20px;
   /* padding: 40px 0; */
 }
 .cart {
@@ -44,7 +45,9 @@
   padding-left: 10px;  
 }
 
-
+.empty-favourite-message{
+  padding: 20px;
+}
 /*  */
 .cart-container {
   margin: 0 auto;
@@ -120,6 +123,10 @@
 .product-total {
   text-align: center;
   font-size: 18px;
+}
+.product-delete{
+  color: red;
+  cursor: pointer;
 }
 
 .quantity-control {

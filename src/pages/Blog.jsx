@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../css2/Blog.css";
 import { useEffect, useState } from "react";
-import { api } from "../api";
+import { api, url } from "../api";
 
 const Blog = () => {
   const [blog, setBlog] = useState([])
@@ -18,6 +18,8 @@ const Blog = () => {
   console.log(blog)
   return (
     <div className="blog-page">
+     <h1 className="title-cart-page title-vphu">Tin tức của chúng tôi</h1>
+     {/* <h1 className="menu-main-title title-vphu">Thực Đơn Đặc Biệt</h1> */}
       <div className="blog-container">
         {/* Nội dung chính */}
         <main className="blog-main">
@@ -26,7 +28,7 @@ const Blog = () => {
           <div className="blog-post" key={item.id}>
             <div className="post-image-wrapper">
               <img
-                src={`http://127.0.0.1:8000/${item.image_url}`}
+                src={`${url}/${item.image_url}`}
                 alt="Bài viết blog 1"
                 className="post-image"
               />

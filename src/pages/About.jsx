@@ -41,7 +41,7 @@ const AboutPage = () => {
           />
         </div>
         <div className="about-page-content">
-          <h3 className="about-page-title subtitle-vphu">About Us</h3>
+          <h3 className="about-page-title subtitle-vphu">Giới thiệu về chúng tôi</h3>
           <h2 className="about-page-heading title-vphu">Chào Mừng Bạn Đến Với High Five</h2>
           <p className="about-page-description text-vphu">
             Một không gian thư giãn và dễ chịu, với nhạc jazz hay, bữa tối và cocktail. The Patio Time Bar mở cửa tại trung tâm Florence.
@@ -67,19 +67,19 @@ const AboutPage = () => {
           />
         </div>
         <div className="opening-hours-content">
-          <h3 className="opening-hours-title subtitle-vphu">Mở Cửa</h3>
+          <h3 className="opening-hours-title subtitle-vphu">Giờ mở Cửa</h3>
           <p className="opening-hours-paragraph">
             Một không gian thư giãn, dễ chịu với nhạc jazz hay, bữa tối và cocktail. The Patio Time Bar mở cửa ngay trung tâm.
           </p>
           <p className="opening-hours-text text-vphu">
-            <span className="opening-hours-day">CN Đến T3:</span> 11:00 - 10:00
+            <span className="opening-hours-day">Mở cửa hàng ngày:</span> 09:00 - 22:00
           </p>
-          <p className="opening-hours-text text-vphu">
+          {/* <p className="opening-hours-text text-vphu">
             <span className="opening-hours-day">T3 Đến T5:</span> 11:00 - 12:00
           </p>
           <p className="opening-hours-text text-vphu">
             <span className="opening-hours-day">T6 Đến T7:</span> 12:00 - 13:00
-          </p>
+          </p> */}
         </div>
       </div>
 

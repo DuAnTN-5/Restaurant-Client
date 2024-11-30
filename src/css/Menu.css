@@ -42,6 +42,7 @@
   padding: 10px;
   border-radius: 50%;
   opacity: 0;
+  cursor: pointer;
   transform: translateX(-30px);
   transition: opacity 0.3s, transform 0.3s;
 }

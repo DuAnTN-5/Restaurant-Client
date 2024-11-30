@@ -89,6 +89,13 @@ function ProductComment(props) {
         auth = JSON.parse(auth);
 
       }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
 
       const formData = new FormData();
       formData.append("user_id", auth.id);
@@ -97,7 +104,7 @@ function ProductComment(props) {
       formData.append("comment", comment);
       // console.log(formData)
       api
-        .post("/product-comments", formData)
+        .post("/product-comments", formData, config)
         .then((res) => {
           console.log(res);
           if (res.data.data) {

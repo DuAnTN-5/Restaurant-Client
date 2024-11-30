@@ -14,6 +14,7 @@ function ProductRate(props) {
   const setVote = props.setVote
 
   const [rating, setRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState(0); // Theo dõi số lần đánh giá
 
   let token = localStorage.getItem("token");
   
@@ -29,6 +30,13 @@ function ProductRate(props) {
     } else {
       token = JSON.parse(token);
     }
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    };
     console.log(newRating)
     setRating(newRating);
     console.log(rating);
@@ -41,7 +49,7 @@ function ProductRate(props) {
 
     // console.log(formData)
     api
-      .post("/ratings", formData)
+      .post("/ratings", formData, config)
       .then((res) => {
         console.log(res);
         if(res.data.data){

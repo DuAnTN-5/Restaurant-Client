@@ -1,16 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-hi5-black.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../api";
 import { toast } from "react-toastify";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate()
 
   const handleChangeInputs = (event) => {
     setEmail(event.target.value);
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token)
+
+    if (token) {
+      navigate("/");
+    }
+  }, []);
   function handleSubmit(e) {
     e.preventDefault();
     let flag = true;
