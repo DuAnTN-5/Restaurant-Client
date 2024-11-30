@@ -3,7 +3,7 @@ import "../style/Login.css";
 import logo from "../assets/logo-hi5-black.png";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../api";
 import { toast } from "react-toastify";
 
@@ -20,6 +20,15 @@ const [inputs, setInputs] = useState({
     // console.log(name, value)
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value })); // dấu tròn là return về luôn
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token)
+
+    if (token) {
+      navigate("/");
+    }
+  }, []);
   
   function handleSubmit(event){
     event.preventDefault();
@@ -45,12 +54,15 @@ const [inputs, setInputs] = useState({
       api
       .post("/login", inputs)
       .then(res =>{
-          console.log(res)
+          // console.log(res)
           if(res.data.success === true){
               const tokenUser = res.data.data.token
               toast.success("Đăng nhập thành công")
               console.log(tokenUser)
               localStorage.setItem("token", JSON.stringify(tokenUser)) // lưu vào local
+              const auth = res.data.data.user
+              localStorage.setItem("auth", JSON.stringify(auth)) // lưu vào local
+
               navigate("/")
           }
       })

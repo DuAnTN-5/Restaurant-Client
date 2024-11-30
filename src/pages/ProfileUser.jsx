@@ -3,6 +3,7 @@ import "../css2/ProfileUser.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Avatar } from "../assets";
+import { api, url } from "../api";
 function ProfileUser() {
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -11,6 +12,7 @@ function ProfileUser() {
     address: "",
     avatar: "",
   });
+  const [avatarUser, setAvatarUser] = useState(""); // hình ảnh user nếu có r nó sẽ ở đây
   const [avatar, setAvatar] = useState(""); //để luu thông tin hình ảnh để check image va size
   const [file, setFile] = useState(); // để lưu hình ảnh mã hóa và gửi qua api
   const navigate = useNavigate();
@@ -30,7 +32,10 @@ function ProfileUser() {
       setUserInfo({
         name: auth.name,
         email: auth.email,
+        // avatar: auth.image,
+        phone: auth.phone_number,
       });
+      setAvatarUser(auth.image);
     }
   }, []);
 
@@ -71,11 +76,7 @@ function ProfileUser() {
       setUserInfo((prev) => ({ ...prev, avatar: imageUrl })); // để bỏ ảnh hiển thị lên giao diện
     }
   };
-  // localStorage.setItem("userAvatar", imageUrl); // Lưu URL vào localStorage
-  // console.log(imageUrl)
-  // if (file) {
-  //   const formData = new FormData();
-  //   formData.append("avatar", file);
+
   function handleUpdate(e) {
     e.preventDefault();
     let flag = true;
@@ -111,18 +112,37 @@ function ProfileUser() {
     }
 
     if (flag) {
-      toast.success("Cập nhật thông tin thành công");
-      // const formData = new FormData();
-      // formData.append("name", input.name);
-      // formData.append("price", input.price);
-      // formData.append("category", input.id_category);
-      // formData.append("brand", input.id_brand);
-      // formData.append("company", input.company_profile);
-      // formData.append("detail", input.detail);
-      // formData.append("status", input.status);
-      // formData.append("sale", input.sale);
-      // getFile.map((item) => formData.append("avatarCheckBox[]", item));
-      // fileUpload.map((key) => formData.append("file[]", key));
+      
+      let token = localStorage.getItem("token");
+      if (token) {
+        token = JSON.parse(token);
+      }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
+      const formData = new FormData();
+      formData.append("name", userInfo.name);
+      formData.append("phone_number", userInfo.phone);
+      // formData.append("price", userInfo.email);
+      formData.append("address", userInfo.address);
+      formData.append("image", file);
+
+      api
+        .post("/update-user-info", formData, config)
+        .then((res) => {
+          console.log(res);
+          if (res.data.success === true) {
+            
+            toast.success("Cập nhật thông tin thành công");
+          navigate("/")
+
+          }
+        })
+        .catch((error) => console.log(error));
     }
   }
   function handleUpdatePassword(e) {
@@ -136,23 +156,67 @@ function ProfileUser() {
     if (!passwordInfo.new) {
       toast.error("Vui lòng nhập mật khẩu mới");
       flag = false;
-    }
-    if (!passwordInfo.confirm) {
+    } else if (!passwordInfo.confirm) {
       toast.error("Vui lòng nhập lại mật khẩu");
       flag = false;
+    } else if (passwordInfo.new !== passwordInfo.confirm) {
+      toast.error("Mật khẩu nhập lại không đúng");
+      flag = false;
     }
-
     if (flag) {
+      let token = localStorage.getItem("token");
+      if (token) {
+        token = JSON.parse(token);
+      }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
+      // toast.success("Đặt lại mật khẩu thành công");
+      const formData = new FormData();
+      formData.append("current_password", passwordInfo.old);
+      formData.append("new_password",passwordInfo.new);
+      formData.append("new_password_confirmation", passwordInfo.confirm);
+      api
+      .post("/change-password", formData, config) 
+      .then((res) =>{
+        console.log(res)
+        if(res.data.success){
+          toast.success("Mật khẩu đã được cập nhật thành công.")
+          navigate("/")
+        }
 
-      toast.success("Đặt lại mật khẩu thành công");
+      })
+      .catch((error) =>{
+        console.log(error)
+        // if(error.response.data.data.new_password){
+        //   toast.warning("Mật khẩu mới phải có ít nhất 6 ký tự")
+        // }
+        // if(error.response.data.message){
+        //   toast.warning("Mật khẩu hiện tại không đúng")
+        // }
+        if(error.status === 404){
+          toast.warning("Mật khẩu mới phải có ít nhất 6 ký tự")
+
+        }
+        if(error.status === 400){
+          toast.warning("Mật khẩu hiện tại không đúng")
+
+        }
+      })
     }
   }
 
-  console.log(userInfo);
+  // console.log(userInfo.avatar);
+  // console.log(`${url}/${avatarUser}`);
+  // console.log(userInfo);
   //  console.log(userInfo.avatar)
-  console.log(avatar);
+  // console.log(avatarUser);
   console.log(passwordInfo);
-  console.log(file)
+  // console.log(file)
   return (
     <div className="profile-container">
       <div className="profile-card">
@@ -160,11 +224,23 @@ function ProfileUser() {
         <div className="sidebar">
           <div className="avatar-container">
             <img
-              src={userInfo.avatar || Avatar}
+              //  src={userInfo.avatar ? `${url}${userInfo.avatar}` : Avatar}
+              src={
+                userInfo.avatar // Ưu tiên ảnh mới chọn
+                  ? userInfo.avatar
+                  : avatarUser // Nếu không có ảnh mới, hiển thị ảnh từ API
+                  ? `${url}/${avatarUser}`
+                  : Avatar // Nếu không có cả hai, hiển thị ảnh mặc định
+              }
+              // src={ avatarUser ? (`${url}/${avatarUser}`):
+              //   (userInfo.avatar ? `${url}${userInfo.avatar}` : Avatar)
+              //  }
+              // src={`${url}/${avatarUser}`}
+              // src={userInfo.avatar || Avatar}
               alt="UserAvatar"
               className="avatar-user"
             />
-            <h2 className="user-name">Nguyễn Văn Anh</h2>
+            <h2 className="user-name">{userInfo.name}</h2>
             {/* Dấu cộng để chọn ảnh mới */}
             <label className="avatar-plus-icon">
               +
@@ -229,7 +305,7 @@ function ProfileUser() {
                 <input
                   type="text"
                   name="phone"
-                  // value={userInfo.phone}
+                  value={userInfo.phone}
                   onChange={handleInputChange}
                   className="form-input"
                 />

@@ -1,5 +1,5 @@
 import "../css/Product-Detail.css";
-import { FaCartShopping } from "react-icons/fa6";
+// import { FaCartShopping } from "react-icons/fa6";
 import "swiper/css";
 import Slider from "react-slick";
 
@@ -7,9 +7,9 @@ import Rate from "./Rate";
 import ProductRate from "./Product-rate";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { api } from "../api";
+import { api, url } from "../api";
 import ProductComment from "./Product-Comment";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 function ProductDetail() {
   const [productDetail, setProductDetail] = useState({});
@@ -138,7 +138,7 @@ function ProductDetail() {
           <div className="image-detail">
             <div className="navbar-left">
               <img
-                src={`http://127.0.0.1:8000/${productDetail.image_url}`}
+                src={`${url}/${productDetail.image_url}`}
                 alt=""
               />
             </div>
@@ -234,13 +234,14 @@ function ProductDetail() {
                     <div className="product-content">
                       <Link to={"/product-detail/" + item.slug}>
                         <img
-                          className="product-image"
-                          onClick={() => {
-                            toast.success(
-                              "Đã chuyển đến trang chi tiết sản phẩm mà bạn yêu cầu"
-                            );
-                          }}
-                          src={`http://127.0.0.1:8000/${item.image_url}`}
+                          className="product-image-detail-page"
+                          // onClick={() => {
+                          //   toast.success(
+                          //     "Đã chuyển đến trang chi tiết sản phẩm mà bạn yêu cầu"
+                          
+                          //   );
+                          // }}
+                          src={`${url}/${item.image_url}`}
                           alt=""
                         />
                       </Link>
@@ -249,6 +250,7 @@ function ProductDetail() {
                           <h3 className="product-detail-item-title">{item.name}</h3>
                         </Link>
                         <span className="product-tags">
+                        {/* {item.summary} */}
                           {" "}
                           {item?.summary
                             ? item.summary.replace(/<\/?p>/g, "")

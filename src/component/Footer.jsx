@@ -53,7 +53,7 @@ export default function Footer() {
                 <i className="fa-solid fa-location-dot"></i>
               </div>
               <div className="text-footer">
-                175 10h Street, Office 375 Berlin, De 21562
+              116 Nguyễn Huy Tưởng, Hòa Minh, Liên Chiểu
               </div>
             </div>
             <div className="contact-info-footer-item">
@@ -61,7 +61,7 @@ export default function Footer() {
                 <i className="fa-solid fa-phone"></i>
               </div>
               <div className="text-footer">
-                +84 346732311
+                +84 123 4567
               </div>
             </div>
             <div className="contact-info-footer-item">
@@ -69,7 +69,7 @@ export default function Footer() {
                 <i className="fa-solid fa-envelope"></i>
               </div>
               <div className="text-footer">
-                hi5@restan.com
+              HightFiverestaurant@gmail.com
               </div>
             </div>
           </div>

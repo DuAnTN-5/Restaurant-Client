@@ -29,12 +29,14 @@ import BookingTable from './pages/BookingTable.jsx';
 import BlogDetail from './pages/Blog-detail.jsx';
 import InfoBookingTable from './pages/InfoBookingTable.jsx';
 import UpdatePassword from './pages/UpdatePassword.jsx';
+import ScrollToTop from './component/ScrollToTop.jsx';
 
 
 createRoot(document.getElementById('root')).render(
   <Router>
   
      {/* <AuthProvider> */}
+     <ScrollToTop />
         <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} /> 

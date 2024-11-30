@@ -1,19 +1,164 @@
 import { useState, useEffect } from "react";
-import { api } from "../api";
+import { api, url } from "../api";
 import { toast } from "react-toastify"; // Thêm thông báo toast
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaHeart } from "react-icons/fa";
 import "../style/MenuPage.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+// import { set } from "lodash";
 
 const MenuPage = () => {
   const [categoriesWithFoods, setCategoriesWithFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeCategory, setActiveCategory] = useState(null);
-  const [favourites, setFavourites] = useState(() => {
-    const savedFavourites = localStorage.getItem("likedItems");
-    return savedFavourites ? JSON.parse(savedFavourites) : [];
-  });
+
+  let favouriteLocal = localStorage.getItem("favourite");
+  if (favouriteLocal) {
+    favouriteLocal = JSON.parse(favouriteLocal);
+  }
+  const [favourite, setFavourite] = useState(favouriteLocal); // lấy local ra để thêm tiếp tục sản phẩm
+
+  // let bookingFoodLocal = localStorage.getItem("bookingFoodLocal");
+  // if (bookingFoodLocal) {
+  //   bookingFoodLocal = JSON.parse(bookingFoodLocal);
+  // }
+  // console.log(bookingFoodLocal);
+
+  const location = useLocation();
+  // const [bookingFood, setBookingFood] = useState({bookingFoodLocal});
+  // const [bookingFood, setBookingFood] = useState({
+  //   id: "",
+  //   qty: "",
+  // });
+  const [foodId, setFoodId] = useState("");
+  const [foodQty, setFoodQty] = useState("1");
+  const [tableId, setTableId] = useState(null);
+
+  
+
+  // bấm đặt món là chuyển qua trang menu cùng id bàn
+
+  useEffect(() => {
+    // Lấy query param từ URL
+    const params = new URLSearchParams(location.search);
+    // console.log(params)
+
+    const id = params.get("tableId");
+    // console.log(id);
+    if (id) {
+      setTableId(id);
+      // const idTable = { idTable: id };
+      // localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
+      toast.info(`Bạn đang đặt món cho bàn số: ${id}`);
+    }
+  }, [location]);
+
+  // bấm đặt món là chuyển qua trang menu cùng id bàn
+  const handleInputChange = (e) => {
+    setFoodQty(e.target.value);
+  };
+
+  let cartID = localStorage.getItem("cartID")?? null;
+  // console.log(cartID)
+  
+  const addToCart = (foodId, foodName) => {
+    // console.log(foodId);
+    if (!tableId) {
+      toast.error("Vui lòng đặt bàn");
+      return;
+    }
+    setFoodId(foodId)
+    const formData = new FormData();
+    formData.append("cart_id", cartID);
+    formData.append("product_id", foodId);
+    formData.append("quantity", foodQty);
+
+    let token = localStorage.getItem("token");
+      if (token) {
+        token = JSON.parse(token);
+      }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
+
+    api
+    .post("/cart/add-product", formData, config)
+    .then(res =>{
+      console.log(res)
+      if(res.data.status){
+        toast.success(`Món ăn ${foodName} đã được thêm vào bàn ${tableId}`)
+      }else{
+        toast.error(`Thêm món ăn ${foodName} thất bại  `)
+
+      }
+    })
+    .catch(error => console.log(error))
+
+  };
+  const addToFavourite = (id) => {
+    let token = localStorage.getItem("token");
+   
+    if(!token){
+      toast.error("Vui lòng đăng nhập")
+    }else{
+    token = JSON.parse(token);
+      const newFavourite = { ...favourite }; // giữ lại dữ liệu trước đó
+
+      if (newFavourite[id]) {
+        // nếu id có rồi, tức là qty > 1 thì +1
+        // lấy id làm key của newCart
+        newFavourite[id] += 1;
+        toast.success("Thêm vào yêu thích thành công");
+      } else {
+        // nếu id chưa có thì là lấy id đó làm key rồi cho bằng qty là bằng 1
+        newFavourite[id] = 1;
+        toast.success("Thêm vào yêu thích thành công");
+      }
+
+      // console.log(newCart);
+      setFavourite(newFavourite);
+      // abc(newCart)
+      setFavourite(newFavourite);
+      // lưu vào local
+      localStorage.setItem("favourite", JSON.stringify(newFavourite));
+    }
+    // if (token) {
+
+    //   token = JSON.parse(token);
+    //   const newFavourite = { ...favourite }; // giữ lại dữ liệu trước đó
+
+    //   if (newFavourite[id]) {
+    //     // nếu id có rồi, tức là qty > 1 thì +1
+    //     // lấy id làm key của newCart
+    //     newFavourite[id] += 1;
+    //     toast.success("Thêm vào giỏ hàng thành công");
+    //   } else {
+    //     // nếu id chưa có thì là lấy id đó làm key rồi cho bằng qty là bằng 1
+    //     newFavourite[id] = 1;
+    //     toast.success("Thêm vào giỏ hàng thành công");
+    //   }
+
+    //   // console.log(newCart);
+    //   setFavourite(newFavourite);
+    //   // abc(newCart)
+    //   setFavourite(newFavourite);
+    //   // lưu vào local
+    //   localStorage.setItem("favourite", JSON.stringify(newFavourite));
+    // }
+  };
+
+
+
+  // console.log(bookingFood);
+  console.log({tableId});
+  console.log({foodQty})
+  console.log({foodId})
+
+
 
   useEffect(() => {
     const fetchCategoriesAndFoods = async () => {
@@ -67,38 +212,6 @@ const MenuPage = () => {
     fetchCategoriesAndFoods();
   }, []);
 
-
-  // Hàm xử lý đặt món vào giỏ hàng
-  const addToCart = (food) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      toast.error("Vui lòng đăng nhập để đặt món.");
-      return;
-    }
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || {};
-    const quantity = cart[food.id] ? cart[food.id] + 1 : 1; // Tăng số lượng nếu món đã có trong giỏ hàng
-    cart[food.id] = quantity;
-
-    localStorage.setItem("cart", JSON.stringify(cart)); // Lưu giỏ hàng vào localStorage
-
-    toast.success(`Đặt món ${food.name} thành công! Số lượng: ${quantity}`);
-  };
-
-  // Hàm xử lý thay đổi yêu thích
-  const toggleFavourite = (food) => {
-    let updatedFavourites;
-    if (favourites.some(fav => fav.id === food.id)) {
-      updatedFavourites = favourites.filter(fav => fav.id !== food.id); // Xóa món khỏi yêu thích
-      toast.error(`Đã bỏ yêu thích món ${food.name}`);
-    } else {
-      updatedFavourites = [...favourites, food]; // Thêm món vào danh sách yêu thích
-      toast.success(`Đã yêu thích món ${food.name}`);
-    }
-    setFavourites(updatedFavourites);
-    localStorage.setItem("likedItems", JSON.stringify(updatedFavourites)); // Lưu danh sách vào localStorage
-  };
-
   if (loading) {
     return <div>Đang tải dữ liệu...</div>;
   }
@@ -113,6 +226,11 @@ const MenuPage = () => {
         <div className="menu-header">
           <div className="menu-title">
             <h1 className="menu-main-title title-vphu">Thực Đơn Đặc Biệt</h1>
+            {tableId && (
+              <p className="text-vphu menu-table-padding">
+                Bạn đang đặt món cho bàn số: {tableId}
+              </p>
+            )}
           </div>
         </div>
 
@@ -123,10 +241,14 @@ const MenuPage = () => {
               {categoriesWithFoods.map((category) => (
                 <li
                   key={category.id}
-                  className={`menu-sidebar-item ${activeCategory === category.id ? "active" : ""}`}
+                  className={`menu-sidebar-item ${
+                    activeCategory === category.id ? "active" : ""
+                  }`}
                   onClick={() => {
                     setActiveCategory(category.id);
-                    const categoryTitleElement = document.getElementById(`category-title-${category.id}`);
+                    const categoryTitleElement = document.getElementById(
+                      `category-title-${category.id}`
+                    );
                     if (categoryTitleElement) {
                       categoryTitleElement.scrollIntoView({
                         behavior: "smooth",
@@ -153,14 +275,14 @@ const MenuPage = () => {
                 <div className="menu-items">
                   {category.foods.map((food) => (
                     <div key={food.id} className="menu-item-page">
-                    <Link to={"/product-detail/" + food.slug}>
+                      <Link to={"/product-detail/" + food.slug}>
                         <img
                           className="menu-item-page-img"
-                          src={`http://127.0.0.1:8000/${food.image_url}`}
+                          src={`${url}/${food.image_url}`}
                           alt={food.name}
                         />
-                     </Link>
-                      <h3 className="menu-item-page-title">{food.name}</h3>
+                      </Link>
+                      <Link to={"/product-detail/" + food.slug}><h3 className="menu-item-page-title">{food.name}</h3></Link>
                       <p className="menu-item-page-ingredients">
                         {food.ingredientsList.length > 0
                           ? food.ingredientsList.join(", ")
@@ -169,23 +291,38 @@ const MenuPage = () => {
                       <span className="menu-item-page-price">
                         {food.price} VNĐ
                       </span>
-                      <button
+                      <div className="order-controls">
+        <input
+          type="number"
+          className="menu-item-page-quantity"
+          defaultValue="1"
+          min="1"
+          onChange={handleInputChange}
+          max="10"
+        />
+        <button
+          className="menu-item-page-order-btn"
+          onClick={() => addToCart(food.id, food.name)}
+        >
+          Đặt Món
+        </button>
+      </div>
+                      {/* <button
                         className="menu-item-page-order-btn"
-                        onClick={() => addToCart(food)}
+                        onClick={() => addToCart(food.id)}
                       >
                         Đặt Món
-                      </button>
-
+                      </button> */}
                       <div
                         className="heart-icon-menu-page"
-                        onClick={() => toggleFavourite(food)}
-                        style={{ position: "absolute", top: "10px", left: "10px" }}
+                        onClick={() => addToFavourite(food.id)}
+                        style={{
+                          position: "absolute",
+                          top: "10px",
+                          left: "10px",
+                        }}
                       >
-                        {favourites.some(fav => fav.id === food.id) ? (
-                          <FaHeart color="red" size={20} />
-                        ) : (
-                          <FaRegHeart color="white" size={20} />
-                        )}
+                        <FaHeart color="red" size={20} />
                       </div>
                     </div>
                   ))}

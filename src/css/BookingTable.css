@@ -161,3 +161,46 @@ body {
   text-align: center;
   font-style: italic;
 }
+.time-hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+.time-selector {
+  display: flex; /* Hiển thị các phần tử con theo hàng ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 5px; /* Khoảng cách giữa các phần tử */
+}
+
+.time-select {
+  padding: 8px; /* Khoảng đệm bên trong */
+  font-size: 14px; /* Kích thước chữ */
+  border: 1px solid #ccc; /* Viền */
+  border-radius: 5px; /* Bo góc */
+  color: #000; /* Màu chữ đen */
+  outline: none; /* Bỏ viền khi focus */
+  cursor: pointer; /* Hiệu ứng con trỏ */
+  transition: border-color 0.2s ease-in-out; /* Hiệu ứng hover */
+}
+
+.time-select:hover {
+  border-color: #007bff; /* Màu viền khi hover */
+}
+
+.time-select:focus {
+  border-color: #007bff; /* Màu viền khi focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Hiệu ứng ánh sáng */
+}
+
+.time-hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+.time-separator {
+  font-size: 18px; /* Kích thước dấu : */
+  font-weight: bold; /* Đậm dấu : */
+  color: #000; /* Màu đen */
+}
+

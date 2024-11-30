@@ -10,7 +10,9 @@
   justify-content: space-between;
   padding: 20px;
 }
-
+.menu-table-padding{
+  padding-top: 20px;
+}
 .menu-sidebar {
   width: 15%;
   position: fixed;
@@ -143,20 +145,41 @@
   color: #ffc107;
   margin-bottom: 10px;
 }
+/* Controls Container */
+.order-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
 
+/* Input for Quantity */
+.menu-item-page-quantity {
+  width: 60px;
+  color: black;
+  padding: 7px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  text-align: center;
+  /* background-color: #fff; */
+}
 .menu-item-page:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
 }
 
 .menu-item-page-order-btn {
-  display: inline-block;
+  width: 70%;
+  /* display: inline-block; */
   background-color: #ffc107;
   color: #292929;
   font-size: 14px;
   font-weight: bold;
-  padding: 10px 15px;
-  margin-top: 10px;
+  padding: 10px;
+  /* padding: 10px 15px; */
+  /* margin-top: 10px; */
   border: none;
   border-radius: 4px;
   cursor: pointer;

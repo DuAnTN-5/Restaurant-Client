@@ -1,21 +1,24 @@
 import "../css/Header2.css";
 import logo from "../assets/logo-hi5-black.png";
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { api } from "../api";
+import { api, url } from "../api";
 
 function Header2() {
+  const [avatarUser, setAvatarUser] = useState();
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   const [isHeaderInfoVisible, setIsHeaderInfoVisible] = useState(true);
-  const navigate = useNavigate()
+  const location = useLocation()
+  const navigate = useNavigate();
   const navbarRef = useRef(null);
   const overlayRef = useRef(null);
+  // console.log(location)
 
   let token = localStorage.getItem("token");
   if (token) {
     token = JSON.parse(token);
-  } 
+  }
   let config = {
     headers: {
       Authorization: "Bearer " + token,
@@ -24,23 +27,23 @@ function Header2() {
     },
   };
 
-
   const handleToggleNavbar = () => {
     setIsNavbarVisible(!isNavbarVisible);
   };
 
   useEffect(() => {
     api
-    .get("/user", config)
-    .then((res) =>{
-      console.log(res)
-      let Auth = res.data
-      let auth = JSON.stringify(Auth)
-      localStorage.setItem("auth", auth)
-    })
-    .catch((error) =>{
-      console.log(error)
-    })
+      .get("/user", config)
+      .then((res) => {
+        // console.log(res);
+        setAvatarUser(res.data.image);
+        let Auth = res.data;
+        let auth = JSON.stringify(Auth);
+        localStorage.setItem("auth", auth);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     if (isNavbarVisible) {
       document.body.classList.add("no-scroll");
@@ -51,9 +54,8 @@ function Header2() {
     return () => {
       document.body.classList.remove("no-scroll");
     };
-
-
-  }, []);
+  }, [location.pathname]);
+  // console.log(avatarUser)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +81,7 @@ function Header2() {
   };
   const clickCart = () => {
     if (!token) {
-      toast.error("Vui lòng đăng nhập để xem giỏ hàng");
+      toast.error("Vui lòng đăng nhập");
     } else {
       navigate("/cart");
     }
@@ -87,8 +89,15 @@ function Header2() {
   const clickFavouritePage = () => {
     if (!token) {
       toast.error("Vui lòng đăng nhập");
-    }else {
-      navigate("favourite-page");
+    } else {
+      navigate("/favourite-page");
+    }
+  };
+  const handleBooking = () => {
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+    } else {
+      navigate("/booking-table");
     }
   };
 
@@ -175,9 +184,9 @@ function Header2() {
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link className="navbar-link" to="/booking-table">
+                  <p className="navbar-link" onClick={handleBooking}>
                     Đặt Bàn
-                  </Link>
+                  </p>
                 </li>
               </ul>
             </div>
@@ -245,8 +254,17 @@ function Header2() {
             <div className="cart-interaction">
               {token ? (
                 <Link to="/profile-user">
-                  <div className="cart-interaction-item">
-                    <i className="fa-regular fa-user navbar-icon"></i>
+                  {/* <div className="cart-interaction-item-avatar" setAvatarUser={setAvatarUser}> */}
+                  <div className="cart-interaction-item-avatar">
+                    {avatarUser ? (
+                      <img
+                        className="avatarUser"
+                        src={`${url}/${avatarUser}`}
+                        alt=""
+                      />
+                    ) : (
+                      <i className="fa-regular fa-user navbar-icon"></i>
+                    )}
                   </div>
                 </Link>
               ) : (
@@ -256,20 +274,27 @@ function Header2() {
                   </div>
                 </Link>
               )}
+              {/* (<img className="avatarUser" src={`${url}+${avatarUser}`}alt="" /> */}
               {/* <Link to="/login">
                 <div className="cart-interaction-item">
                   <i className="fa-regular fa-user navbar-icon"></i>
                 </div>
               </Link> */}
               {/* <Link to="/favourite-page" onClick={clickFavouritePage}> */}
-                <div className="cart-interaction-item" onClick={clickFavouritePage}>
-                  <i className=" fa-regular fa-heart navbar-icon"></i>
-                </div>
+              <div
+                className="cart-interaction-item"
+                onClick={clickFavouritePage}
+              >
+                <i className=" fa-regular fa-heart navbar-icon"></i>
+              </div>
               {/* </Link> */}
               {/* <Link to="/cart" onClick={clickCart}>  */}
-                <div className="cart-interaction-item icon-end" onClick={clickCart}>
-                  <i className="fa-solid fa-cart-shopping navbar-icon"></i>
-                </div>
+              <div
+                className="cart-interaction-item icon-end"
+                onClick={clickCart}
+              >
+                <i className="fa-solid fa-cart-shopping navbar-icon"></i>
+              </div>
               {/* </Link> */}
             </div>
           </div>

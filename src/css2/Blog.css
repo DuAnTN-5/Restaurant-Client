@@ -1,6 +1,7 @@
 .blog-page{
   color: white; /* Default text color for readability */
   background-color: #1b1b1b;
+  padding: 20px;
 
 }
 /* General Container */
@@ -70,6 +71,10 @@
   font-size: 1rem;
   color: #ddd; /* Light grey text for excerpts */
   margin: 10px 0 20px;
+}
+.post-excerpt p {
+  padding-bottom: 10px;
+  line-height: 1.5;
 }
 
 .post-meta {

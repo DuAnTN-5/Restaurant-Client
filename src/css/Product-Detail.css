@@ -288,7 +288,7 @@
 .avatar{
   margin-left: 15px;
   width: 150px;
-  height: 150px;
+  /* height: 150px; */
   border-radius: 50%;
   /* border: 1px solid #ddd; */
   object-fit: cover; /* Giữ tỷ lệ của ảnh mà không làm vỡ */
@@ -488,6 +488,9 @@
   height: 30px;
   margin-bottom: 10px;
   font-weight: 700;
+}
+.product-image-detail-page{
+  padding: 5px;
 }
 .product-price-detail {
   font-size: 15px;

@@ -1,8 +1,8 @@
 import "../style/Signup.css";
 import logo from "../assets/logo-hi5-black.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../api";
 import { toast } from "react-toastify";
 
@@ -15,6 +15,16 @@ function SignUp() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false); 
   console.log("isSubmitting:", isSubmitting);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token)
+
+    if (token) {
+      navigate("/");
+    }
+  }, []);
 
   const handleChangeInputs = (event) => {
     const { name, value } = event.target;

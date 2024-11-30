@@ -1,250 +1,156 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { api } from "../api";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import "../style/CartProduct.css";
+import Modal from "../component/Modal";
+import { api } from "../api";
+// import { toast } from "react-toastify";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [showMenu, setShowMenu] = useState(false); // Thêm state để điều khiển việc ẩn/hiện menu món ăn
-  const navigate = useNavigate();
+  const [cartProduct, setCartProduct] = useState([]);
+  // const [cartID, setCartID] = useState();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState([]);
+  const [error, setError] = useState(false);
 
-  // Hàm lấy giỏ hàng từ localStorage
-  const getCartFromLocalStorage = () => {
-    const cartData = localStorage.getItem("cart");
-    if (cartData) {
-      try {
-        const parsedCart = JSON.parse(cartData);
-        return Object.entries(parsedCart).map(([id, quantity]) => ({
-          id: parseInt(id, 10),
-          quantity,
-        }));
-      } catch {
-        console.error("Lỗi parse dữ liệu từ localStorage");
-        return [];
-      }
-    }
-    return [];
+  let auth = localStorage.getItem("auth");
+  if (auth) {
+    auth = JSON.parse(auth);
+    console.log(auth);
+  }
+
+  let token = localStorage.getItem("token");
+  if (token) {
+    token = JSON.parse(token);
+  }
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+    },
   };
-
-  // Hàm định dạng giá tiền
-  const formatCurrency = (amount) =>
-    new Intl.NumberFormat("vi-VN", {
-      style: "currency",
-      currency: "VND",
-      minimumFractionDigits: 3,
-      maximumFractionDigits: 3,
-    }).format(amount);
-
-  // Lấy thông tin giỏ hàng và sản phẩm từ API
   useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        setLoading(true);
-        setError("");
+    api
+      .get("/cart/list/" + auth.id, config)
+      .then((res) => {
+        console.log(res);
+        if(res.data.status){
+          setCartProduct(res.data.data);
 
-        const localCart = getCartFromLocalStorage();
-        if (localCart.length === 0) {
-          setCartItems([]);
-          return;
         }
-
-        const productResponse = await api.get("/products");
-        const products = productResponse.data.data;
-
-        const mergedCart = localCart
-          .map((cartItem) => {
-            const product = products.find((p) => p.id === cartItem.id);
-            if (!product) return null;
-            return {
-              ...product,
-              quantity: cartItem.quantity,
-            };
-          })
-          .filter(Boolean);
-
-        setCartItems(mergedCart);
-      } catch (err) {
-        console.error("Error fetching cart items:", err);
-        setError("Không thể tải dữ liệu giỏ hàng.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCartItems();
+      })
+      .catch((error) => console.log(error));
   }, []);
 
-  const calculateTotal = (price, quantity) => price * quantity;
+  // Hiển thị modal khi bấm vào "Xem"
+  const handleShowDetails = (id, tableID) => {
+    console.log(id);
+    localStorage.setItem("cartID", id);
+    localStorage.setItem("tableID", tableID);
+    api
+      .get("/cart/list-product/" + id, config)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status) {
+          // toast.error("")
+          setModalContent(res.data.data);
+          setError(true);
+        } else {
+          setError(false);
+          setModalContent(res.data.message);
+        }
+      })
+      .catch((error) => console.log(error));
 
-  const updateCartInLocalStorage = (updatedCart) => {
-    const cart = updatedCart.reduce((acc, item) => {
-      acc[item.id] = item.quantity;
-      return acc;
-    }, {});
-    localStorage.setItem("cart", JSON.stringify(cart));
+    // setModalContent(products);
+    setModalOpen(true);
   };
 
-  const handleQuantityChange = (id, newQuantity) => {
-    const updatedCartItems = cartItems.map((item) =>
-      item.id === id ? { ...item, quantity: newQuantity } : item
-    );
-    setCartItems(updatedCartItems);
-    updateCartInLocalStorage(updatedCartItems);
-    toast.success("Cập nhật số lượng thành công!");
-  };
+  const handleRemoveTable =(id) =>{
+    console.log(id)
+    api
+    .post("")
+    .then()
+    .catch()
+  }
 
-  const removeFromCart = (id) => {
-    const updatedCartItems = cartItems.filter((item) => item.id !== id);
-    setCartItems(updatedCartItems);
-    updateCartInLocalStorage(updatedCartItems);
-    toast.success("Xóa món khỏi giỏ hàng thành công!");
-  };
 
-  const clearCart = () => {
-    setCartItems([]);
-    localStorage.removeItem("cart");
-    toast.success("Đã xóa tất cả các món trong giỏ hàng!");
-  };
 
-  const handleCheckout = () => {
-    const reservationData = JSON.parse(localStorage.getItem("reservationData"));
-
-    if (!reservationData || !reservationData.time || !reservationData.table) {
-      toast.error("Bạn cần đặt bàn để đặt món", {
-        position: "top-center",
-      });
-
-      setTimeout(() => {
-        navigate("/booking-table");
-      }, 2000);
-    } else {
-      toast.success("Thực hiện thanh toán", {
-        position: "top-center",
-      });
-
-      const cartData = cartItems.map((item) => ({
-        id: item.id,
-        name: item.name,
-        quantity: item.quantity,
-        price: item.price,
-      }));
-      localStorage.setItem("cartData", JSON.stringify(cartData));
-
-      setTimeout(() => {
-        navigate("/checkout-pay");
-      }, 3000);
-    }
-  };
-
-  if (loading) return <div className="loading-message">Đang tải dữ liệu...</div>;
-  if (error) return <div className="error-message">{error}</div>;
-  if (cartItems.length === 0)
-    return <div className="empty-cart-message">Giỏ hàng của bạn đang trống.</div>;
-
-  const reservationData = JSON.parse(localStorage.getItem("reservationData"));
+  console.log(cartProduct);
 
   return (
     <div className="cart-container container-vphu">
-      <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1>
+      <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1>
 
-      {/* Hiển thị thông tin đặt bàn */}
-      {reservationData && (
-        <div className="reservation-info" onClick={() => setShowMenu(!showMenu)}>
+      {
+        cartProduct.length === 0 ? (
+      <p className="empty-cart-message">Giỏ hàng của bạn đang trống</p>
+    ) : (
+      cartProduct.map((reservation) => (
+        <div key={reservation.id} className="reservation-cart-container">
+          {/* Thông tin bàn */}
           <div className="reservation-details">
-            <p className="reservation-table"><strong>Bàn:</strong> {reservationData.table}</p>
-            <p className="reservation-guests"><strong>Khách:</strong> {reservationData.guests} người</p>
-            <p className="reservation-date"><strong>Ngày:</strong> {reservationData.date}</p>
-            <p className="reservation-time"><strong>Giờ:</strong> {reservationData.time}</p>
+            <p className="reservation-table">
+              <strong>Bàn:</strong> {reservation.table_id}
+            </p>
+            <p className="reservation-guests">
+              <strong>Khách:</strong> {reservation.guest_count} người
+            </p>
+            <p className="reservation-date">
+              <strong>Ngày:</strong> {reservation.date}
+            </p>
+            <p className="reservation-time">
+              <strong>Giờ:</strong> {reservation.time}
+            </p>
+            <button
+              className="reservation-toggle-button"
+              onClick={() => handleRemoveTable(reservation.id)}
+            >
+              Xóa bàn
+            </button>
           </div>
-          <button className="toggle-button">
-            {showMenu ? "Ẩn" : "Hiện"}
-          </button>
-        </div>
-      )}
 
-      {/* Hiển thị giỏ hàng */}
-      {/* {showMenu && ( */}
-        <div className="cart-items">
-          {/* {cartItems.map((item) => ( */}
+          {/* Danh sách sản phẩm */}
+          <div className="cart-items">
             <div className="cart-item-cart-product">
               <div className="cart-item-image">
-                <img
-                  // src={`http://127.0.0.1:8000/${item.image_url}`}
-                  // alt={item.name}
-                  className="cart-item-image-img"
-                />
+                <span className="cart-item-image-text">
+                  Món ăn hiện tại: {reservation.count}
+                </span>
               </div>
               <div className="cart-item-info">
-                <div className="cart-item-name"></div>
-                <div className="cart-item-price">
-                  <strong>Giá:</strong> 
-                  {/* {formatCurrency(item.price)} */}
+                <div className="cart-item-name">
+                  <strong
+                    style={{ cursor: "pointer", color: "#d2a679" }}
+                    onClick={() =>
+                      handleShowDetails(reservation.id, reservation.table_id)
+                    }
+                  >
+                    Xem món
+                  </strong>
                 </div>
               </div>
-              <div className="quantity-control">
-                <button
-                  className="quantity-btn"
-                  // onClick={() =>
-                  //   item.quantity > 1 && handleQuantityChange(item.id, item.quantity - 1)
-                  // }
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  className="quantity-input"
-                  // value={item.quantity}
-                  // onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                  min="1"
-                />
-                <button
-                  className="quantity-btn"
-                  // onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                >
-                  +
-                </button>
-              </div>
               <div className="cart-item-total">
-                <strong>Tổng :</strong>
-                 {/* {formatCurrency(calculateTotal(item.price, item.quantity))} */}
+                <strong>Tổng: {reservation.total} VND</strong>
               </div>
-              <button
-                className="remove-button"
-                // onClick={() => removeFromCart(item.id)}
-              >
-                X
-              </button>
             </div>
-          {/* ))} */}
+          </div>
+          <button
+            className="button-checkout-item"
+            // onClick={() => handleCheckout(reservation.id)}
+          >
+            Thanh Toán
+          </button>
         </div>
-      {/* )} */}
+      ))
+    )
+    }
 
-      {/* Tổng tiền và các nút điều hướng */}
-      <div className="cart-summary-cart-product">
-        <div className="summary-title-cart-product">
-          <strong>Tổng tiền:</strong>{" "}
-          <span className="summary-total">
-            {formatCurrency(
-              cartItems.reduce(
-                (total, item) => total + calculateTotal(item.price, item.quantity),
-                0
-              )
-            )}
-          </span>
-        </div>
-        <p className="summary-note">Lưu ý: Giá đã bao gồm thuế VAT.</p>
-        <div className="cart-buttons">
-          <button className="update-cart-btn" onClick={clearCart}>
-            XÓA TẤT CẢ
-          </button>
-          <button className="checkout-btn" onClick={handleCheckout}>
-            THANH TOÁN
-          </button>
-        </div>
-      </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        content={modalContent}
+        error={error}
+      />
     </div>
   );
 };

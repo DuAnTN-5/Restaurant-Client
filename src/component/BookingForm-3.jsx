@@ -1,13 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import "../css/BookingForm-3.css";
+import { toast } from "react-toastify";
 
 function BookingForm3() {
   const navigate = useNavigate("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/booking-table");
-    window.scrollTo(0, 0);
+  let token = localStorage.getItem("token");
+  if (token) {
+    token = JSON.parse(token);
+  }
+  const handleBooking = () => {
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+    } else {
+      navigate("/booking-table");
+    }
   };
 
   return (
@@ -19,32 +25,44 @@ function BookingForm3() {
             {/* Nội dung giờ mở cửa */}
             <li className="hours-item">
               <span className="day">Thứ 2:</span>
-              <span className="time">6:00 am - 12:00 pm</span>
+              <div className="closed-day">
+                <span className="time">9:00 : 22:00</span>
+              </div>
             </li>
             <li className="hours-item">
               <span className="day">Thứ 3:</span>
-              <span className="time">8:30 am - 11:00 pm</span>
+              <div className="closed-day">
+                <span className="time">9:00 : 22:00</span>
+              </div>
             </li>
             <li className="hours-item">
               <span className="day">Thứ 4:</span>
-              <span className="time">8:30 am - 11:00 pm</span>
+              <div className="closed-day">
+                <span className="time">9:00 : 22:00</span>
+              </div>
             </li>
             <li className="hours-item">
               <span className="day">Thứ 5:</span>
-              <span className="time">8:30 am - 11:00 pm</span>
+              <div className="closed-day">
+                <span className="time">9:00 : 22:00</span>
+              </div>
             </li>
             <li className="hours-item">
               <span className="day">Thứ 6:</span>
-              <span className="time">8:30 am - 11:00 pm</span>
+              <div className="closed-day">
+                <span className="time">9:00 : 22:00</span>
+              </div>
             </li>
             <li className="hours-item">
               <span className="day">Thứ 7:</span>
-              <span className="time">8:30 am - 11:00 pm</span>
+              <div className="closed-day">
+                <span className="time">9:00 : 22:00</span>
+              </div>
             </li>
             <li className="hours-item-closed">
               <span className="day">Chủ Nhật:</span>
               <div className="closed-day">
-                <span className="time">Đóng cửa</span>
+                <span className="time">9:00 : 22:00</span>
               </div>
             </li>
           </ul>
@@ -67,7 +85,7 @@ function BookingForm3() {
                 <button
                   type="button"
                   className="button-booking"
-                  onClick={handleSubmit}
+                  onClick={handleBooking}
                 >
                   Đặt bàn ngay
                 </button>

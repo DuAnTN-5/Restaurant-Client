@@ -159,6 +159,17 @@ label {
   color: black;
 }
 
+/*  */
+.table-button-disabled {
+  background-color: #838181;
+  color: #fff;
+  cursor: not-allowed;
+}
+.table-button-disabled:hover{
+  background-color: #838181;
+}
+
+/*  */
 @media (max-width: 1024px) {
   .restaurant-content {
     flex-direction: column;

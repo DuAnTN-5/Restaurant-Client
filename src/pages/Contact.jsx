@@ -66,14 +66,14 @@ function Contact() {
                 </i>
                 <span className="contact-text">Cao đẳng FPT Polytechnic</span>
               </div>
-              <a className="contact-text-item"> Rosemead, CA 91770 </a>
+              <a className="contact-text-item"> 116 Nguyễn Huy Tưởng, Hòa Minh, Liên Chiểu </a>
               <div className="contact-info">
                 <i className="contact-icon">
                   <IoMdPhonePortrait />
                 </i>
-                <span className="contact-text">079 79 79 79</span>
+                <span className="contact-text">+84 123 4567</span>
               </div>
-              <a className="contact-text-item"> Mon to Fri 9am to 6pm </a>
+              <a className="contact-text-item"> Thứ 2 đến Chủ nhật: 09:00-22:00</a>
               <div className="contact-info">
                 <i className="contact-icon">
                   <IoMailOpen />
@@ -82,7 +82,7 @@ function Contact() {
                   HightFiverestaurant@gmail.com
                 </span>
               </div>
-              <a className="contact-text-item"> Send us your query anytime!!</a>
+              <a className="contact-text-item"> Gửi cho chúng tôi phản hồi của bạn bất cứ lúc nào!!</a>
               <div className="contact-icon-website">
                 <i><FaSquareInstagram/></i>
                 <i><FaFacebook/></i>

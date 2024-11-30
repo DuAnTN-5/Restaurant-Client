@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import logo from "../assets/logo-hi5-black.png";
 import { api } from '../api/index';
+import { toast } from 'react-toastify';
 
 function EmailVerification() {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+    
     const { token } = useParams();
     
     console.log(token)
@@ -17,6 +19,7 @@ function EmailVerification() {
                 .then(response => {
                     if (response.data.success  === true) {
                         setMessage('Xác thực thành công !');
+                        toast.success("Xác thực thành thông")
                         setTimeout(() => {
                             navigate('/login'); // Chuyển hướng về trang đăng nhập sau khi xác thực thành công
                         }, 3000);
