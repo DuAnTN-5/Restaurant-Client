@@ -1,12 +1,11 @@
 import { useParams } from "react-router-dom";
 import "../css2/Blog-detail.css";
-import { Children, useEffect, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 import { api, url } from "../api";
 import DOMPurify from 'dompurify';
-import parse from 'html-react-parser';
+// import parse from 'html-react-parser';
 import { MdAccountCircle } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
-import { IoTimeSharp } from "react-icons/io5";
 import { FaArrowTurnDown } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { Avatar } from "../assets";
@@ -172,6 +171,7 @@ export default function BlogDetail() {
                 <img
                   src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=50&q=80"
                   alt="Andrea Silva"
+                  className="avatar-blog-detail"
                 />
                 By <a href="#">Andrea Silva</a>
                 <span className="divider">/</span>
@@ -218,7 +218,7 @@ export default function BlogDetail() {
                       <div key={parentComment.id}>
                         <li className="media" key={parentComment.id}>
                           {/* Comment cha */}
-                          <div className="avatar">
+                          <div >
                             <img
                               src={
                                 parentComment.user.image !== null
@@ -226,6 +226,7 @@ export default function BlogDetail() {
                                   : Avatar
                               }
                               alt="User Avatar"
+                              className="avatar"
                             />
                           </div>
                           <div className="comment-details">
@@ -280,7 +281,7 @@ export default function BlogDetail() {
                                     className="media second-media"
                                     key={childComment.id}
                                   >
-                                    <div className="avatar">
+                                    <div >
                                       <img
                                         src={
                                           childComment.user.image !== null
@@ -288,6 +289,7 @@ export default function BlogDetail() {
                                             : Avatar
                                         }
                                         alt="User Avatar"
+                                        className="avatar"
                                       />
                                     </div>
                                     <div className="comment-details">
