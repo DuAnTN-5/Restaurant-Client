@@ -80,14 +80,14 @@ function BookingTable() {
       //   // 0,
       //   // 0
       );
-      console.log(bookingDate)
+      // console.log(bookingDate)
 
       if (selectedDate) {
         bookingDate.setFullYear(currentDate.getFullYear()); // Giữ nguyên năm hiện tại
         bookingDate.setMonth(currentDate.getMonth()); // Giữ nguyên tháng hiện tại
         bookingDate.setDate(selectedDate.date); // Cập nhật ngày được user chọn
         bookingDate.setHours(inputHours, inputMinutes, 0, 0); // giờ hiện tại
-        console.log(bookingDate)
+        // console.log(bookingDate)
       }
       console.log(bookingDate.setMonth(currentDate.getMonth()))
       
@@ -117,34 +117,35 @@ function BookingTable() {
     }
 
     if (flag) {
-      const bookingData = {
-        customTime,
-        selectedDate,
+      const currentDate = new Date();
+      const month = currentDate.getMonth() + 1; // Lấy tháng (0 - 11, cộng thêm 1 để thành tháng thực)
+      const year = currentDate.getFullYear();
+
+      
+      // setBookingTable({
+      //   time: customTime,
+      //   // date: `/${selectedDate.date}/${month}/${year}`, // Cập nhật đúng định dạng ngày
+      //   date: `${year}/${month}/${selectedDate.date}`, // Cập nhật đúng định dạng ngày
+      //   // date: `${selectedDate.day}/${selectedDate.date}/${month}/${year}`, // Cập nhật đúng định dạng ngày
+      // });
+       const bookingData = {
+        time: customTime,
+        // date: `/${selectedDate.date}/${month}/${year}`, // Cập nhật đúng định dạng ngày
+        date: `${year}-${month}-${selectedDate.date}`, // Cập nhật đúng định dạng ngày
+        // date: `${selectedDate.day}/${selectedDate.date}/${month}/${year}`, // Cập nhật đúng định dạng ngày
       };
+      // const bookingData = {
+      //   customTime,
+      //   selectedDate,
+      // };
+
       localStorage.setItem("bookingInfo", JSON.stringify(bookingData));
 
-
-      // const currentDate = new Date();
-      // const month = currentDate.getMonth() + 1; // Lấy tháng (0 - 11, cộng thêm 1 để thành tháng thực)
-      // const year = currentDate.getFullYear();
-
-    //   let bookingInfo = localStorage.getItem("bookingInfo");
-    // if (bookingInfo) {
-    //   bookingInfo = JSON.parse(bookingInfo);
-    //   // console.log(bookingInfo);
-    //   // console.log(bookingInfo.selectedTable);
-    //   setBookingTable((prevData) => ({
-    //     ...prevData,
-    //     time: bookingInfo.customTime,
-    //     date: `${bookingInfo.selectedDate.day}/${bookingInfo.selectedDate.date}/${month}/${year}`, // Sửa lại nếu có lỗi
-    //   }));
-    // }
-
-
+     
       navigate("/checkout-table");
     }
   }
-  console.log({ dates });
+  // console.log({ dates });
   console.log({ customTime });
   console.log({ selectedDate });
   // console.log(bookingTable);
