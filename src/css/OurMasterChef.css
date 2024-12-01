@@ -121,7 +121,8 @@
   }
 
   .chef-card img {
-    width: 80%; /* Thu nhỏ hình ảnh */
+    width: 80%; 
+    margin: 0 auto;
   }
 
   .chef-card h3 {

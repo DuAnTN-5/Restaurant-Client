@@ -12,11 +12,11 @@ const AboutPage = () => {
   };
 
   const handleEmailClick = () => {
-    window.location.href = "mailto:hi5@gmail.com";
+    window.location.href = "mailto:Hightfiverestaurant@gmail.com";
   };
 
   const handleWebsiteClick = () => {
-    window.open("https://hi5.com", "_blank");
+    window.open("https://hightfiverestaurant.store", "_blank");
   };
 
   return (
@@ -86,27 +86,30 @@ const AboutPage = () => {
       {/* Phần thông tin liên hệ */}
       <div className="contact-page-info container-vphu text-vphu">
         <h2 className="contact-page-title subtitle-vphu">Thông Tin Liên Lạc</h2>
-        <div className="contact-page-item">
-          <span className="contact-page-label">Address:</span> TP.Đà Nẵng
+        <div className="contact-page-info-wrapper">
+            <div className="contact-page-item">
+              <span className="contact-page-label">Address:</span> TP.Đà Nẵng
+            </div>
+            <div className="contact-page-item">
+              <span className="contact-page-label">SĐT:</span>
+              <button className="contact-page-link" onClick={handlePhoneClick}>
+                +84 346 732 311
+              </button>
+            </div>
+            <div className="contact-page-item">
+              <span className="contact-page-label">Email:</span>
+              <button className="contact-page-link" onClick={handleEmailClick}>
+                Hightfiverestaurant@gmail.com
+              </button>
+            </div>
+            <div className="contact-page-item">
+              <span className="contact-page-label">Website:</span>
+              <button className="contact-page-link" onClick={handleWebsiteClick}>
+                hightfiverestaurant.store
+              </button>
+            </div>
         </div>
-        <div className="contact-page-item">
-          <span className="contact-page-label">SĐT:</span>
-          <button className="contact-page-link" onClick={handlePhoneClick}>
-            +84 346 732 311
-          </button>
-        </div>
-        <div className="contact-page-item">
-          <span className="contact-page-label">Email:</span>
-          <button className="contact-page-link" onClick={handleEmailClick}>
-            hi5@gmail.com
-          </button>
-        </div>
-        <div className="contact-page-item">
-          <span className="contact-page-label">Website:</span>
-          <button className="contact-page-link" onClick={handleWebsiteClick}>
-            hi5.com
-          </button>
-        </div>
+
       </div>
     </div>
   );
