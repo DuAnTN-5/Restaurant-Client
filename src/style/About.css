@@ -5,6 +5,12 @@
     background-attachment: fixed;
 }
 
+.bgr-about-page {
+  object-fit: cover;
+    object-position: center center;
+    height: 80vh;
+    width: 100%;
+}
 .about-page-wrapper {
     display: flex;
     max-width: 1390px;
