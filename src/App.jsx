@@ -1,5 +1,6 @@
 import "./App.css";
 import Footer from "./component/Footer";
+import Nav from "./component/Nav";
 
 import Header from "./component/Header2";
 import { Outlet, useLocation } from "react-router-dom";
@@ -22,6 +23,7 @@ function App() {
   return (
     <div>
       {!isAuthPage && <Header />}
+      {<Nav />}
       <Outlet />
       {!isAuthPage && <Footer />}
     </div>
