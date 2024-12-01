@@ -77,11 +77,11 @@ const Modal = ({ isOpen, onClose, content, error }) => {
           <table>
             <thead>
               <tr>
-                <th>Image</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th className="subtitle-modal">Image</th>
+                <th className="subtitle-modal">Product</th>
+                <th className="subtitle-modal">Price</th>
+                <th className="subtitle-modal">Quantity</th>
+                <th className="subtitle-modal">Total</th>
                 
               </tr>
             </thead>
@@ -89,16 +89,16 @@ const Modal = ({ isOpen, onClose, content, error }) => {
                {/* eslint-disable-next-line react/prop-types */}
               {content?.map((item, index) => (
                 <tr key={index}>
-                  <td>
+                  <td className="modal-items">
                     <img
                       src={`${url}/${item.product_image}`}
                       alt={item.product_name}
                       className="product-image modal-image"
                     />
                   </td>
-                  <td>{item.product_name}</td>
-                  <td>{item.price} VND</td>
-                  <td>
+                  <td className="modal-items">{item.product_name}</td>
+                  <td className="modal-items">{item.price} VND</td>
+                  <td className="modal-items">
                     <div className="quantity-controls">
                     <button
                            onClick={()=>{handleDecrease(item.id, item.quantity)}}
@@ -113,8 +113,8 @@ const Modal = ({ isOpen, onClose, content, error }) => {
                         </div>
                   </td>
                   {/* <td>{item.quantity}</td> */}
-                  <td>{(item.price * item.quantity).toFixed(2)} VND</td>
-                  <td>
+                  <td className="modal-items">{(item.price * item.quantity).toFixed(2)} VND</td>
+                  <td className="modal-items">
                       <button
                         className="remove-product-button"
                            onClick={()=>{handleDelete(item.id)}}
