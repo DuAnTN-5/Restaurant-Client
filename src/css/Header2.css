@@ -146,7 +146,7 @@
   height: 40px; /* Đảm bảo các thành phần có cùng kích thước */
   margin-right: 20px; /* Khoảng cách giữa các phần tử */
   border-radius: 50%; /* Tạo hình tròn */
-  background-color: #f0f0f0; /* Màu nền mặc định */
+  background-color: #000000; /* Màu nền mặc định */
 }
 
 .cart-interaction-item {
@@ -155,7 +155,7 @@
 
 .cart-interaction-item-avatar {
   overflow: hidden; /* Ẩn phần thừa của ảnh */
-  background-color: #f0f0f0; /* Nền mặc định cho avatar */
+  background-color: #000000; /* Nền mặc định cho avatar */
 }
 
 .avatarUser {
