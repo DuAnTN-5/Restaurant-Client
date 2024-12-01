@@ -36,7 +36,7 @@
     margin-top: 10px;
   }
   
-  table th, table td {
+  .subtitle-modal, .modal-items {
     border: 1px solid #000000;
     padding: 8px;
     vertical-align: middle;
@@ -48,7 +48,7 @@
     width: 100% !important;
     height: 100px !important;
  }
-  table th {
+  .subtitle-modal {
     background-color: #d2a679;
   }
   .quantity-controls {
