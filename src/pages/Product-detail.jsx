@@ -17,6 +17,14 @@ function ProductDetail() {
   const [category, setCategory] = useState("");
   // const navigate = useNavigate();
 
+
+   // chuyển đổi đơn vị tiền 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amount * 1000);
+  };
   const [otherDishes, setOtherDishes] = useState([]);
 
   const settings = {
@@ -142,7 +150,7 @@ function ProductDetail() {
                 alt=""
               />
             </div>
-            <div className="list-image-detail">
+            {/* <div className="list-image-detail">
               <img
                 src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
                 alt=""
@@ -155,11 +163,11 @@ function ProductDetail() {
                 src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
                 alt=""
               />
-              {/* <img
+              <img
                 src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
                 alt=""
-              /> */}
-            </div>
+              />
+            </div> */}
           </div>
           <div className="navbar-right">
             <div>
@@ -181,7 +189,8 @@ function ProductDetail() {
               </span>
             </div>
             <p className="product-children">
-              Giá tiền: {productDetail?.price} VND
+              Giá tiền:  {formatCurrency(productDetail?.price)}
+               {/* {productDetail?.price} VND */}
             </p>
             <p className="product-children">
               Nguyên liệu chính:{" "}
@@ -253,11 +262,12 @@ function ProductDetail() {
                         {/* {item.summary} */}
                           {" "}
                           {item?.summary
-                            ? item.summary.replace(/<\/?p>/g, "")
+                            ? item?.summary.replace(/<\/?p>/g, "")
                             : "Không có thông tin"}
                         </span>
                         <h4 className="product-price-detail">
-                          {item.price} VND
+                        {formatCurrency(item?.price)}
+                          {/* {item.price} VND */}
                         </h4>
                         {/* <button className="add-to-cart">
                       {" "}
