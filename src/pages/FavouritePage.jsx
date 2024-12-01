@@ -40,7 +40,16 @@ function FavouritePage() {
     }
 
   };
+
+   // chuyển đổi đơn vị tiền 
+   const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amount * 1000);
+  };
   console.log(product)
+
 
   return (
     <>
@@ -79,7 +88,7 @@ function FavouritePage() {
                       </p>
                     </div>
                   </div>
-                  <p className="product-price">{item.price} VND</p>
+                  <p className="product-price">{formatCurrency(item.price)}</p>
                   <div className="quantity-control">
                     {/* <button className="quantity-btn">-</button> */}
                     <input

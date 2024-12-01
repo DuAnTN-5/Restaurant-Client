@@ -90,7 +90,7 @@ const MenuPage = () => {
     .then(res =>{
       console.log(res)
       if(res.data.status){
-        toast.success(`Món ăn ${foodName} đã được thêm vào bàn ${tableId}`)
+        toast.success(`Món ${foodName} đã được thêm vào bàn ${tableId}, số lượng: ${foodQty}`)
       }else{
         toast.error(`Thêm món ăn ${foodName} thất bại  `)
 
@@ -99,6 +99,15 @@ const MenuPage = () => {
     .catch(error => console.log(error))
 
   };
+
+   // chuyển đổi đơn vị tiền 
+   const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amount * 1000);
+  };
+
   const addToFavourite = (id) => {
     let token = localStorage.getItem("token");
    
@@ -289,7 +298,8 @@ const MenuPage = () => {
                           : "Không có thông tin nguyên liệu"}
                       </p>
                       <span className="menu-item-page-price">
-                        {food.price} VNĐ
+                        {formatCurrency(food.price)}
+                        {/* {formatCurrency(food.total)} */}
                       </span>
                       <div className="order-controls">
         <input
