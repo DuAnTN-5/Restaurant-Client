@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../style/CartProduct.css";
 import Modal from "../component/Modal";
 import { api } from "../api";
+import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
 
 const Cart = () => {
@@ -41,6 +42,14 @@ const Cart = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  // chuyển đổi đơn vị tiền 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amount * 1000);
+  };
+
   // Hiển thị modal khi bấm vào "Xem"
   const handleShowDetails = (id, tableID) => {
     console.log(id);
@@ -68,9 +77,34 @@ const Cart = () => {
   const handleRemoveTable =(id) =>{
     console.log(id)
     api
-    .post("")
-    .then()
-    .catch()
+    .post(`/cart/${id}/delete`, {}, config)
+    .then(res =>{
+      console.log(res)
+      if(res.data.status){
+        toast.success(res.data.message)
+        api
+        .get("/cart/list/" + auth.id, config)
+        .then((res) => {
+          console.log(res);
+          if(res.data.status){
+            setCartProduct(res.data.data);
+  
+          }
+        })
+        .catch((error) => console.log(error));
+      //   api
+      //   .get("/cart/list-product/" + cartID, config)
+      //   .then(res =>{
+      //     console.log(res)
+      //     // setConTent(res.data.data)
+      //   })
+      //   .catch(error => console.log(error))
+
+      }
+    })
+    .catch(error =>{
+      console.log(error)
+    })
   }
 
 
@@ -130,7 +164,7 @@ const Cart = () => {
                 </div>
               </div>
               <div className="cart-item-total">
-                <strong>Tổng: {reservation.total} VND</strong>
+                <strong>Tổng: {formatCurrency(reservation.total)}</strong>
               </div>
             </div>
           </div>
@@ -150,6 +184,7 @@ const Cart = () => {
         onClose={() => setModalOpen(false)}
         content={modalContent}
         error={error}
+        setConTent={setModalContent}
       />
     </div>
   );

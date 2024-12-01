@@ -9,18 +9,26 @@ import { api } from "../api";
 const ReservationForm = () => {
   const navigate = useNavigate();
   const [selectedTable, setSelectedTable] = useState(null); // Bàn được chọn
+  const [selectedTableName, setSelectedTableName] = useState(""); // Tên bàn được chọn
   const [tables, setTables] = useState([]); // Danh sách tất cả bàn từ API
   const [orderButtonVisible, setOrderButtonVisible] = useState(false); // hiển thị nút đặt món
-  const [filteredTables, setFilteredTables] = useState([]); // Danh sách bàn của ngày đã chọn
   const [bookingData, setBookingData] = useState({
     name: "",
-    phone: "",
+    // phone: "",
     email: "",
     date: "",
     time: "",
     guests: "",
     note: "",
   });
+  // Hàm chuẩn hóa ngày (thêm số 0 cho ngày và tháng nếu cần)
+  const normalizeDate = (date) => {
+    const parts = date.split("-");
+    const year = parts[0];
+    const month = parts[1].padStart(2, "0"); // Thêm số 0 cho tháng nếu cần
+    const day = parts[2].padStart(2, "0"); // Thêm số 0 cho ngày nếu cần
+    return `${year}-${month}-${day}`;
+  };
 
   useEffect(() => {
     // Lấy thông tin booking từ localStorage
@@ -46,38 +54,30 @@ const ReservationForm = () => {
         Accept: "application/json",
       },
     };
-    // api
-    //   .get("/tables", config)
-    //   .then((res) => {
-    //     console.log(res);
-    //     // setTables(res.data.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+
     api
       .get("/tables", config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const data = res.data.data;
-        setTables(data);
 
         if (data && bookingData.date) {
-          console.log("Ngày được chọn:", bookingData.date);
-          console.log("Dữ liệu API keys:", Object.keys(data));
-    
+          // console.log("Ngày được chọn:", bookingData.date);
+          // console.log("Dữ liệu API:", data);
+
+          const normalizedBookingDate = normalizeDate(bookingData.date); // Chuẩn hóa ngày từ localStorage
+
           // Duyệt qua danh sách keys để tìm key trùng khớp
           Object.keys(data).forEach((key) => {
-            console.log(key)
-            
-            // if (key.trim() === bookingData.date.trim()) {
-            //   console.log("Tìm thấy ngày:", key);
-            //   const selectedDateTables = data[key]; // Lấy dữ liệu bàn của ngày này
-            //   setFilteredTables(selectedDateTables);
-            // }
+            const normalizedKey = normalizeDate(key); // Chuẩn hóa ngày từ API
+            if (normalizedKey === normalizedBookingDate) {
+              // console.log("Tìm thấy ngày:", key);
+              setTables(data[key]); // Lấy dữ liệu bàn cho ngày đó
+            }
           });
         } else {
-          console.warn("Không tìm thấy bàn cho ngày:", bookingData.date);
+          // console.log("Không tìm thấy bàn cho ngày:", bookingData.date);
+          // console.warn("Không tìm thấy bàn cho ngày:", bookingData.date);
         }
       })
       .catch((error) => {
@@ -85,127 +85,127 @@ const ReservationForm = () => {
       });
   }, [bookingData.date]);
 
-  // useEffect(() => {
-  //   let auth = localStorage.getItem("auth");
-  //   if (auth) {
-  //     auth = JSON.parse(auth);
-  //     // console.log(auth);
-  //     setBookingData((prevData) => ({
-  //       ...prevData,
-  //       name: auth.name,
-  //       email: auth.email,
-  //       phone: auth.phone_number,
-  //     }));
-  //   }
-  //   const currentDate = new Date();
-  //   const month = currentDate.getMonth() + 1; // Lấy tháng (0 - 11, cộng thêm 1 để thành tháng thực)
-  //   const year = currentDate.getFullYear();
-  //   let bookingInfo = localStorage.getItem("bookingInfo");
-  //   if (bookingInfo) {
-  //     bookingInfo = JSON.parse(bookingInfo);
-  //     // console.log(bookingInfo);
-  //     // console.log(bookingInfo.selectedTable);
-  //     setBookingData((prevData) => ({
-  //       ...prevData,
-  //       time: bookingInfo.customTime,
-  //       date: `${bookingInfo.selectedDate.day}/${bookingInfo.selectedDate.date}/${month}/${year}`, // Sửa lại nếu có lỗi
-  //     }));
-  //   }
-  // }, []);
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setBookingData({ ...bookingData, [name]: value });
-  // };
-  // const handleTableSelection = (table) => {
-  //   if (table.status === "available") {
-  //     setSelectedTable(table.id);
-  //   }
-  // };
+  useEffect(() => {
+    let auth = localStorage.getItem("auth");
+    if (auth) {
+      auth = JSON.parse(auth);
+      console.log(auth);
+      setBookingData((prevData) => ({
+        ...prevData,
+        name: auth.name,
+        email: auth.email,
+        // phone: auth.phone_number,
+      }));
+    }
+    let bookingInfo = localStorage.getItem("bookingInfo");
+    if (bookingInfo) {
+      bookingInfo = JSON.parse(bookingInfo);
+      // console.log(bookingInfo);
+      // console.log(bookingInfo.selectedTable);
+      setBookingData((prevData) => ({
+        ...prevData,
+        time: bookingInfo.time,
+        date: bookingInfo.date, // Sửa lại nếu có lỗi
+      }));
+    }
+  }, []);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   let flag = true;
-  //   if (!bookingData.guests) {
-  //     toast.error("Vui lòng nhập số người");
-  //     flag = false;
-  //   }
-  //   if (selectedTable === null) {
-  //     toast.error("Vui lòng chọn bàn");
-  //     flag = false;
-  //   }
-  //   if (flag) {
-  //     let auth = localStorage.getItem("auth");
-  //     if (auth) {
-  //       auth = JSON.parse(auth);
-  //     }
-  //     let token = localStorage.getItem("token");
-  //     if (token) {
-  //       token = JSON.parse(token);
-  //     }
-  //     let config = {
-  //       headers: {
-  //         Authorization: "Bearer " + token,
-  //         "Content-type": "application/x-www-form-urlencoded",
-  //         Accept: "application/json",
-  //       },
-  //     };
-  //     // console.log(auth)
-  //     const formData = new FormData();
-  //     formData.append("table_id", selectedTable);
-  //     formData.append("user_id", auth.id);
-  //     formData.append("date", bookingData.date);
-  //     formData.append("time", bookingData.time);
-  //     formData.append("guest_count", bookingData.guests);
-  //     formData.append("notes", bookingData.note);
-  //     // auth.id
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBookingData({ ...bookingData, [name]: value });
+  };
 
-  //     api
-  //       .post("/cart/add-cart", formData, config)
-  //       .then((res) => {
-  //         console.log(res);
-  //         if (res.data.status) {
+  const handleTableSelection = (table_id, table_name, table_status) => {
+    console.log(table_id)
+    console.log(table_name)
+    console.log(table_status)
+    if (table_status === "available") {
+      setSelectedTable(table_id);
+      setSelectedTableName(table_name); // Lưu tên bàn vào state
+    }
+  };
 
-  //           const updatedBookingInfo = {
-  //             ...JSON.parse(localStorage.getItem("bookingInfo")), // Lấy bookingInfo từ localStorage
-  //             selectedTable, // Thêm thông tin số bàn
-  //             guests: bookingData.guests, // Thêm số khách
-  //             note: bookingData.note, // Thêm ghi chú
-  //           };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let flag = true;
+    if (!bookingData.guests) {
+      toast.error("Vui lòng nhập số người");
+      flag = false;
+    }
+    if (selectedTable === null) {
+      toast.error("Vui lòng chọn bàn");
+      flag = false;
+    }
+    if (flag) {
+      let auth = localStorage.getItem("auth");
+      if (auth) {
+        auth = JSON.parse(auth);
+      }
+      let token = localStorage.getItem("token");
+      if (token) {
+        token = JSON.parse(token);
+      }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
+      // console.log(auth)
+      const normalizedDate = normalizeDate(bookingData.date);
+      const formData = new FormData();
+      formData.append("table_id", selectedTable);
+      formData.append("user_id", auth.id);
+      formData.append("date", normalizedDate);
+      formData.append("time", bookingData.time);
+      formData.append("guest_count", bookingData.guests);
+      formData.append("notes", bookingData.note);
+      // auth.id
 
-  //           // Lưu lại vào localStorage
-  //           localStorage.setItem("bookingInfo", JSON.stringify(updatedBookingInfo));
+      api
+        .post("/cart/add-cart", formData, config)
+        .then((res) => {
+          console.log(res);
+          if (res.data.status) {
 
-  //           setOrderButtonVisible(true); // Hiển thị nút Đặt món
+            const updatedBookingInfo = {
+              ...JSON.parse(localStorage.getItem("bookingInfo")), // Lấy bookingInfo từ localStorage
+              selectedTable, // Thêm thông tin số bàn
+              guests: bookingData.guests, // Thêm số khách
+              note: bookingData.note, // Thêm ghi chú
+            };
 
-  //           toast.success("Đặt bàn thành công!", { autoClose: 3000 });
-  //           toast.success("Bạn có muốn chọn món không", { autoClose: 3000 });
-  //           setTimeout(() => {
-  //             toast.success("Nếu có hãy bấm chọn món để tiếp tục", {
-  //               autoClose: 3000,
-  //             });
-  //           }, 3000);
-  //           localStorage.setItem(
-  //             "cartID",
-  //             (res.data.data.id)
-  //           );
-  //         } else {
-  //           toast.error(res.data.message);
-  //         }
-  //       })
-  //       .catch((error) => console.log(error));
-  //     // lưu id cart vào local
-  //     // localStorage.getItem("cartID", JSON.stringify(res.data.data))
+            // Lưu lại vào localStorage
+            localStorage.setItem("bookingInfo", JSON.stringify(updatedBookingInfo));
 
-  //   }
-  // };
+            setOrderButtonVisible(true); // Hiển thị nút Đặt món
 
-  // const handleTableSelection = (table) => {
-  //   setSelectedTable(table);
-  // };
-  // console.log(tables);
+            toast.success("Đặt bàn thành công!", { autoClose: 3000 });
+            // toast.success("Bạn có muốn chọn món không", { autoClose: 3000 });
+            // setTimeout(() => {
+            //   toast.success("Nếu có hãy bấm chọn món để tiếp tục", {
+            //     autoClose: 3000,
+            //   });
+            // }, 3000);
+            localStorage.setItem(
+              "cartID",
+              (res.data.data.id)
+            );
+          } else {
+            toast.error(res.data.message);
+          }
+        })
+        .catch((error) => console.log(error));
+      // lưu id cart vào local
+      // localStorage.getItem("cartID", JSON.stringify(res.data.data))
+
+    }
+  };
+
   console.log({ bookingData });
-  console.log({ filteredTables });
-  // console.log(selectedTable);
+  console.log({ tables });
+  console.log(selectedTable);
 
   return (
     <div className="reservation-container container-vphu text-vphu">
@@ -230,11 +230,13 @@ const ReservationForm = () => {
         <div className="choose-table-box">
           <h3 className="choose-table-title subtitle-vphu">Lựa chọn bàn</h3>
           <div className="choose-table-buttons">
-            {/* {tables.map((table) => (
+          {tables.map(table =>{
+            {/* console.log(table) */}
+            return(
               <button
-                key={table.id}
+                key={table.table_id}
                 className={`table-button ${
-                  selectedTable === table.id ? "table-button-active" : ""
+                  selectedTable === table.table_id ? "table-button-active" : ""
                 } ${
                   table.status === "reserved" || table.status === "occupied"
                     ? "table-button-disabled"
@@ -242,36 +244,24 @@ const ReservationForm = () => {
                 }`}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleTableSelection(table);
+                  handleTableSelection(table.table_id, table.table_number,table.status );
                 }}
                 disabled={
                   table.status === "reserved" || table.status === "occupied"
                 }
               >
-                {table.number}
+                {table.table_number}
               </button>
-            ))} */}
-            {/* {tables.map((table) => (
-              <button
-                key={table}
-                className={`table-button ${
-                  selectedTable === table ? "table-button-active" : ""
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleTableSelection(table);
-                }}
-              >
-                {table}
-              </button>
-            ))} */}
+            )
+          })}
+        
           </div>
         </div>
       </div>
 
       <form
         className="reservation-form"
-        //  onSubmit={handleSubmit}
+         onSubmit={handleSubmit}
       >
         <h3 className="title-info-book-table subtitle-vphu">
           Thông tin đặt bàn
@@ -282,7 +272,7 @@ const ReservationForm = () => {
             className="preinstall-book"
             type="text"
             name="selectedTable"
-            value={selectedTable ? `Bàn ${selectedTable}` : ""}
+            value={selectedTable ? `Bàn ${selectedTableName}` : ""}
             placeholder="Chưa chọn bàn"
             readOnly
           />
@@ -295,22 +285,22 @@ const ReservationForm = () => {
             type="text"
             name="name"
             value={bookingData.name}
-            // onChange={handleInputChange}
-            readOnly
+            onChange={handleInputChange}
+            // readOnly
             placeholder="Họ & tên"
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="phone">Số điện thoại (*)</label>
           <input
             className="preinstall-book"
             type="number"
             name="phone"
             value={bookingData.phone}
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
             placeholder="Số điện thoại"
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -338,7 +328,6 @@ const ReservationForm = () => {
             <label htmlFor="time">Thời gian</label>
             <input
               className="preinstall-book"
-              // type="time"
               value={bookingData.time}
               name="time"
               placeholder="Thời gian"
@@ -353,7 +342,7 @@ const ReservationForm = () => {
             type="number"
             name="guests"
             // value={reservationData.guests}
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
             placeholder="Số khách"
             min="1"
             max="15"
@@ -366,7 +355,7 @@ const ReservationForm = () => {
             className="preinstall-book"
             name="note"
             // value={reservationData.note}
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
             placeholder="Gợi ý: thêm ghế trẻ em, ..."
           ></textarea>
         </div>
