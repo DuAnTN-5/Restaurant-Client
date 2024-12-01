@@ -11,7 +11,6 @@ const ReservationForm = () => {
   const [selectedTable, setSelectedTable] = useState(null); // Bàn được chọn
   const [tables, setTables] = useState([]); // Danh sách tất cả bàn từ API
   const [orderButtonVisible, setOrderButtonVisible] = useState(false); // hiển thị nút đặt món
-  const [filteredTables, setFilteredTables] = useState([]); // Danh sách bàn của ngày đã chọn
   const [bookingData, setBookingData] = useState({
     name: "",
     phone: "",
@@ -21,6 +20,14 @@ const ReservationForm = () => {
     guests: "",
     note: "",
   });
+  // Hàm chuẩn hóa ngày (thêm số 0 cho ngày và tháng nếu cần)
+  const normalizeDate = (date) => {
+    const parts = date.split("-");
+    const year = parts[0];
+    const month = parts[1].padStart(2, "0"); // Thêm số 0 cho tháng nếu cần
+    const day = parts[2].padStart(2, "0"); // Thêm số 0 cho ngày nếu cần
+    return `${year}-${month}-${day}`;
+  };
 
   useEffect(() => {
     // Lấy thông tin booking từ localStorage
@@ -46,38 +53,30 @@ const ReservationForm = () => {
         Accept: "application/json",
       },
     };
-    // api
-    //   .get("/tables", config)
-    //   .then((res) => {
-    //     console.log(res);
-    //     // setTables(res.data.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+
     api
       .get("/tables", config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const data = res.data.data;
-        setTables(data);
 
         if (data && bookingData.date) {
-          console.log("Ngày được chọn:", bookingData.date);
-          console.log("Dữ liệu API keys:", Object.keys(data));
-    
+          // console.log("Ngày được chọn:", bookingData.date);
+          // console.log("Dữ liệu API:", data);
+
+          const normalizedBookingDate = normalizeDate(bookingData.date); // Chuẩn hóa ngày từ localStorage
+
           // Duyệt qua danh sách keys để tìm key trùng khớp
           Object.keys(data).forEach((key) => {
-            console.log(key)
-            
-            // if (key.trim() === bookingData.date.trim()) {
-            //   console.log("Tìm thấy ngày:", key);
-            //   const selectedDateTables = data[key]; // Lấy dữ liệu bàn của ngày này
-            //   setFilteredTables(selectedDateTables);
-            // }
+            const normalizedKey = normalizeDate(key); // Chuẩn hóa ngày từ API
+            if (normalizedKey === normalizedBookingDate) {
+              // console.log("Tìm thấy ngày:", key);
+              setTables(data[key]); // Lấy dữ liệu bàn cho ngày đó
+            }
           });
         } else {
-          console.warn("Không tìm thấy bàn cho ngày:", bookingData.date);
+          // console.log("Không tìm thấy bàn cho ngày:", bookingData.date);
+          // console.warn("Không tìm thấy bàn cho ngày:", bookingData.date);
         }
       })
       .catch((error) => {
@@ -116,11 +115,11 @@ const ReservationForm = () => {
   //   const { name, value } = e.target;
   //   setBookingData({ ...bookingData, [name]: value });
   // };
-  // const handleTableSelection = (table) => {
-  //   if (table.status === "available") {
-  //     setSelectedTable(table.id);
-  //   }
-  // };
+  const handleTableSelection = (table) => {
+    if (table.status === "available") {
+      setSelectedTable(table.id);
+    }
+  };
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -204,7 +203,7 @@ const ReservationForm = () => {
   // };
   // console.log(tables);
   console.log({ bookingData });
-  console.log({ filteredTables });
+  console.log({ tables });
   // console.log(selectedTable);
 
   return (
@@ -230,6 +229,30 @@ const ReservationForm = () => {
         <div className="choose-table-box">
           <h3 className="choose-table-title subtitle-vphu">Lựa chọn bàn</h3>
           <div className="choose-table-buttons">
+          {tables.map(table =>{
+            console.log(table)
+            return(
+              <button
+                key={table.id}
+                className={`table-button ${
+                  selectedTable === table.id ? "table-button-active" : ""
+                } ${
+                  table.status === "reserved" || table.status === "occupied"
+                    ? "table-button-disabled"
+                    : ""
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleTableSelection(table);
+                }}
+                disabled={
+                  table.status === "reserved" || table.status === "occupied"
+                }
+              >
+                {table.number}
+              </button>
+            )
+          })}
             {/* {tables.map((table) => (
               <button
                 key={table.id}
@@ -251,20 +274,7 @@ const ReservationForm = () => {
                 {table.number}
               </button>
             ))} */}
-            {/* {tables.map((table) => (
-              <button
-                key={table}
-                className={`table-button ${
-                  selectedTable === table ? "table-button-active" : ""
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleTableSelection(table);
-                }}
-              >
-                {table}
-              </button>
-            ))} */}
+           
           </div>
         </div>
       </div>
