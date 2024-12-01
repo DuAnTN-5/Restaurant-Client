@@ -2,6 +2,8 @@
 .header-info-bgr {
   background-color: #826a45;
   color: #ffffff;
+  position: relative;
+  top: 0;
 }
 .header-info {
   display: flex;
@@ -10,13 +12,26 @@
   max-width: 1400px;
   margin: 0 auto;
 }
+.header-2 {
+  position: relative;
+  top: 0;
+}
+.over {
+  position: relative;
+  top: 0;
+}
 /* Css fixed Header */
-.header-navbar.fixed {
+/* .header-navbar.fixed {
   z-index: 100;
   width: 100vw;
-}
+} */
 .header-navbar {
   background-color: #ffffff;
+  position: sticky;
+  position: -webkit-sticky;
+  width: 100%;
+  top: 0;
+  z-index: 9999;
 }
 .header-contact,
 .header-social-network {
@@ -85,9 +100,9 @@
   z-index: 999;
 }
 /* CSS cho class "no-scroll" */
-.no-scroll {
+/* .no-scroll {
   overflow: hidden;
-}
+} */
 
 /* Đảm bảo các phần tử có thể cuộn khi lớp này được thêm */
 

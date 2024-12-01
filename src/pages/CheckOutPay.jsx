@@ -122,38 +122,99 @@ const CheckoutPay = () => {
         <div className="reservation-details-checkout-pay">
   <h3 className="reservation-title subtitle-vphu">Thông Tin Đặt Bàn:</h3>
   <div className="reservation-content">
-    <div className="reservation-items">
+    <div className="reservation-first-items">
+      <div className="reservation-items elm-first-co">
       <p className="reservation-items-text">Số bàn:</p>
-      <p className="reservation-items-text-value">{reservationData.table}</p>
+      <input
+        type="text"
+        className="reservation-items-text-value input-first-co"
+        value={reservationData.table}
+        readOnly
+        disabled
+      />
     </div>
-    <div className="reservation-items">
-      <p className="reservation-items-text">Ngày:</p>
-      <p className="reservation-items-text-value">{reservationData.date}</p>
-    </div>
-    <div className="reservation-items">
-      <p className="reservation-items-text">Thời gian:</p>
-      <p className="reservation-items-text-value">{reservationData.time}</p>
-    </div>
-    <div className="reservation-items">
+
+    <div className="reservation-items elm-first-co">
       <p className="reservation-items-text">Số khách:</p>
-      <p className="reservation-items-text-value">{reservationData.guests}</p>
+      <input
+        type="text"
+        className="reservation-items-text-value input-first-co"
+        value={reservationData.guests}
+        readOnly
+        disabled
+      />
     </div>
-    <div className="reservation-items">
-      <p className="reservation-items-text">Họ & Tên:</p>
-      <p className="reservation-items-text-value">{reservationData.name}</p>
+    <div className="reservation-items elm-first-co">
+      <p className="reservation-items-text">Thời gian:</p>
+      <input
+        type="text"
+        className="reservation-items-text-value input-first-co"
+        value={reservationData.time}
+        readOnly
+        disabled
+      />
     </div>
-    <div className="reservation-items">
-      <p className="reservation-items-text">Số điện thoại:</p>
-      <p className="reservation-items-text-value">{reservationData.phone}</p>
     </div>
-    <div className="reservation-items">
-      <p className="reservation-items-text">Email:</p>
-      <p className="reservation-items-text-value">{reservationData.email || "Không cung cấp"}</p>
+
+    <div className="reservation-second-items">
+      <div className="reservation-items">
+        <p className="reservation-items-text">Ngày:</p>
+        <input
+          type="text"
+          className="reservation-items-text-value input-end-co"
+          value={reservationData.date}
+          readOnly
+          disabled
+        />
+      </div>
+
+      <div className="reservation-items">
+        <p className="reservation-items-text">Họ & Tên:</p>
+        <input
+          type="text"
+          className="reservation-items-text-value input-end-co"
+          value={reservationData.name}
+          readOnly
+          disabled
+        />
+      </div>
+        </div>
+
+    <div className="reservation-second-items">
+      <div className="reservation-items">
+        <p className="reservation-items-text">Số điện thoại:</p>
+        <input
+          type="text"
+          className="reservation-items-text-value input-end-co"
+          value={reservationData.phone}
+          readOnly
+          disabled
+        />
+      </div>
+      <div className="reservation-items">
+        <p className="reservation-items-text">Email:</p>
+        <input
+          type="text"
+          className="reservation-items-text-value input-end-co"
+          value={reservationData.email || "Không cung cấp"}
+          readOnly
+          disabled
+        />
+      </div>
     </div>
-    <div className="reservation-items">
-      <p className="reservation-items-text">Ghi chú:</p>
-      <p className="reservation-items-text-value">{reservationData.note || "Không có ghi chú"}</p>
-    </div>
+
+
+      <div className="reservation-items elm-end-co">
+        <p className="reservation-items-text">Ghi chú:</p>
+        <input
+          type="text"
+          className="reservation-items-text-value input-end-co"
+          value={reservationData.note || "Không có ghi chú"}
+          readOnly
+          disabled
+        />
+      </div>
+
   </div>
 </div>
 

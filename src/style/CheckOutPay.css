@@ -22,7 +22,7 @@
   gap: 20px;
 }
 .checkout-pay-left {
-  flex: 5;
+  flex: 2;
 }
 .reservation-details-checkout-pay, .checkout-pay-discount, .checkout-pay-payment-methods {
   background-color: #181818;
@@ -68,9 +68,7 @@
   margin-bottom: 15px;
 }
 .reservation-content {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+
   border: 2px solid #333;
 }
 .reservation-items {
@@ -78,6 +76,29 @@
   border-radius: 8px;
   font-weight: bolder;
 }
+
+
+.reservation-first-items {
+  display: flex;
+}
+.elm-first-co {
+  /* flex: 100px;
+  text-align: center; */
+}
+.input-first-co {
+  width: 70px;
+}
+
+.reservation-second-items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-end-co {
+  width: 100%;
+  text-align: left !important;
+}
+
 .reservation-items-text {
   color: #aaaaaa;
   margin-bottom: 5px;
@@ -87,6 +108,10 @@
   padding: 10px;
   border: 1px solid #aaaaaa;
   text-align: center;
+  background-color: transparent;
+  pointer-events: none;
+  user-select: none;
+  
 }
 
 /* Bảng sản phẩm */
@@ -206,10 +231,22 @@
   background-color: #e0554d;
 }
 
-/* Responsive Design */
-@media (max-width: 767px) {
 
+@media (max-width: 1024px) {
+  .checkout-oder-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .checkout-pay-left, .checkout-pay-right {
+    flex: none;
+    
+  }
+}
+@media (max-width: 768px) {
 
+  .checkout-pay-right {
+    width: 100%;
+  }
   .checkout-pay-table {
       font-size: 14px;
   }
@@ -227,7 +264,7 @@
   }
 
   .checkout-pay-product-price {
-      text-align: left;
+      /* text-align: left; */
   }
 
   .checkout-pay-payment-methods {
@@ -241,44 +278,45 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
 
-
-  .checkout-pay-table {
-      font-size: 16px;
+@media (max-width: 580px) {
+  .reservation-second-items {
+    display: block;
   }
-
-  .checkout-pay-product-info {
-      flex-direction: row;
+  .checkout-pay-left, .checkout-pay-right {
+    width: 100%;
   }
-
-  .checkout-pay-product-image {
-      width: 70px;
-      height: 70px;
+  .input-end-co {
+    text-align: center;
   }
-
-  .checkout-pay-payment-methods {
-      font-size: 16px;
-  }
-
-  .checkout-pay-payment-icon {
-      width: 30px;
-      height: 30px;
+  .reservation-first-items {
+    justify-content: space-between;
   }
 }
 
-@media (min-width: 1025px) {
-
-  .checkout-pay-table {
-      font-size: 18px;
+@media (max-width: 480px) {
+  .checkout-pay-header-product , .checkout-pay-header-subtotal {
+    font-size: 18px ;
   }
-
-  .checkout-pay-payment-methods {
-      font-size: 16px;
+  .checkout-pay-subtotal-title, .checkout-pay-subtotal-amount {
+    font-size: 16px;
   }
-
-  .checkout-pay-payment-icon {
-      width: 30px;
-      height: 30px;
+}
+@media (max-width: 375px) {
+  .reservation-first-items {
+    display: block;
+  }
+  .input-first-co {
+    width: 100%;
+    text-align: left;
+  }
+  .checkout-pay-discount-button {
+    margin-top: 10px;
+  }
+  .checkout-pay-header-product , .checkout-pay-header-subtotal {
+    font-size: 18px ;
+  }
+  .checkout-pay-subtotal-title, .checkout-pay-subtotal-amount {
+    font-size: 14px;
   }
 }
