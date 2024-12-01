@@ -50,7 +50,15 @@
     right: 80px;
     z-index: 2;
   }
-  
+  .contact-page-info-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 150px;
+    gap: 20px;
+  }
+
   .about-page-title {
     font-size: 16px;
     color: #aaaaaa;
@@ -144,8 +152,10 @@
 
 .contact-page-item {
   font-size: 16px;
+  /* border-bottom: 1px solid #cccccc; */
   line-height: 1.8;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .contact-page-label {
@@ -185,6 +195,9 @@
     .title-restaurant-hi5 {
         text-align: left;
     }
+    .about-page-wrapper {
+      margin: 50px;
+    }
   }
   @media (max-width: 992px) {
     
@@ -192,7 +205,6 @@
   @media (max-width: 768px) {
     .about-page-wrapper {
         display: block;
-        margin-bottom: 50px;
     }
     .about-page-content {
         max-width: 525px;
@@ -228,7 +240,6 @@
     .opening-hours-content {
         position: unset;
         width: 100%;
-        background-color: unset;
     }
 
     .contact-page-info {
@@ -236,23 +247,30 @@
       padding: 0 20px;
     }
   
-    .contact-page-item {
-      font-size: 14px;
+    .contact-page-item, .contact-page-link, .opening-hours-paragraph, .about-page-description {
+      font-size: 15px;
     }
   }
   @media (max-width: 576px) {
     .about-page-images {
         max-width: 100%;
+        margin: 30px;
     }
     .about-page-content {
-        max-width: 80%;
+      padding: 0 30px;
     }
 
     .contact-page-info {
     padding: 0 10px;
   }
 
-  .contact-page-item {
-    font-size: 12px;
+  .contact-page-item, .contact-page-link {
+    font-size: 14px;
+  }
+  .about-page-wrapper {
+    margin: 0;
+  }
+  .opening-hours-paragraph, .opening-hours-text, .about-page-description {
+    font-size: 14px;
   }
   }

@@ -82,8 +82,8 @@
     margin: 0 auto;
     height: 100px;
     border-radius: 5px;
-    user-select: none; /* Ngăn người dùng bôi đen */
-    pointer-events: none; /* Ngăn mọi sự kiện chuột trên hình ảnh */
+    user-select: none;
+    pointer-events: none;
 }
 
 @media (max-width: 1024px) {
@@ -100,5 +100,12 @@
 @media (max-width: 600px) {
     .slide-our-partner {
         flex: 0 0 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .our-partner-title {
+        font-size: 16px !important;
+        width: 300px;
     }
 }

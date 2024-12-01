@@ -122,3 +122,31 @@
 .order-button:hover {
   background-color: #a67c34;
 }
+
+@media (max-width: 1200px) {
+  .menu-details {
+    margin: auto 0;
+  }
+  
+}
+@media (max-width: 580px) {
+  .menu-item-home {
+    flex-direction: column;
+  }
+
+  .menu-item-home:nth-child(3),
+.menu-item-home:nth-child(4),
+.menu-item-home:nth-child(7),
+.menu-item-home:nth-child(8),
+.menu-item-home:nth-child(11),
+.menu-item-home:nth-child(12) {
+  flex-direction: column;
+}
+  .menu-grid {
+    grid-template-columns: auto;
+  }
+  .menu-image, .menu-details {
+    width: 100%;
+    height: auto;
+  }
+}

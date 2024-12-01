@@ -4,6 +4,7 @@
   background-position: center;
   background-attachment: fixed;
 }
+
 .menu-main-container {
   display: flex;
   gap: 30px;
@@ -14,10 +15,10 @@
   padding-top: 20px;
 }
 .menu-sidebar {
-  width: 15%;
+  width: 18%;
   position: fixed;
   left: 0;
-  top: 20%;
+  top: 25%;
   bottom: 20px;
   height: auto;
   background-color: #292929;
@@ -234,8 +235,18 @@
   transform: scale(0.95);
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 1024px) {
+  .menu-sidebar-item {
+    font-size: 16px;
+  }
+  .title-menu-sidebar {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
   .menu-sidebar {
+    display: none;
     position: relative;
     width: 100%;
     height: auto;
@@ -243,11 +254,13 @@
     margin-bottom: 20px;
   }
 
+
   .menu-categories-foods {
     margin-left: 0;
+    width: 100%;
   }
 
   .menu-sidebar-item {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
