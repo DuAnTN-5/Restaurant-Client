@@ -3,6 +3,7 @@ import "../style/CartProduct.css";
 import Modal from "../component/Modal";
 import { api } from "../api";
 import { toast } from "react-toastify";
+import { Navigate, useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 
 const Cart = () => {
@@ -10,7 +11,9 @@ const Cart = () => {
   // const [cartID, setCartID] = useState();
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState([]);
+  // const [checkLength, setCheckLength] = useState([]);
   const [error, setError] = useState(false);
+  const navigate = useNavigate()
 
   let auth = localStorage.getItem("auth");
   if (auth) {
@@ -62,6 +65,7 @@ const Cart = () => {
         if (res.data.status) {
           // toast.error("")
           setModalContent(res.data.data);
+
           setError(true);
         } else {
           setError(false);
@@ -106,8 +110,24 @@ const Cart = () => {
       console.log(error)
     })
   }
-
-
+  const handleCheckout = (id, tableID) =>{
+    
+    localStorage.setItem("cartID", id);
+    localStorage.setItem("tableID", tableID);
+    api
+    .get("/cart/list-product/" + id, config)
+    .then((res) => {
+      console.log(res);
+      if (res.data && res.data.data && res.data.data.length > 0) {
+        // Điều hướng sang trang thanh toán
+        navigate("/checkout-pay");
+      } else {
+        // Hiển thị thông báo lỗi
+        toast.error("Không có món ăn nào trong bàn để thanh toán!");
+      }
+    })
+    .catch((error) => console.log(error));
+  }
 
   console.log(cartProduct);
 
@@ -170,7 +190,7 @@ const Cart = () => {
           </div>
           <button
             className="button-checkout-item"
-            // onClick={() => handleCheckout(reservation.id)}
+            onClick={() => handleCheckout(reservation.id,  reservation.table_id)}
           >
             Thanh Toán
           </button>

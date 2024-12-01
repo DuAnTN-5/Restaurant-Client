@@ -7,12 +7,20 @@ import { api } from "../api";
 import { useEffect, useState } from "react";
 
 const CheckoutPay = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [discountCode, setDiscountCode] = useState("");
+  const [info, setInfo] = useState({
+    table:"",
+    guest:"",
+    time:"",
+    date:"",
+    name:"",
+    email:"",
+    note:"",
+  });
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState("");
+  // const [discountCode, setDiscountCode] = useState("");
 
-  const reservationData = JSON.parse(localStorage.getItem("reservationData"));
+  // const reservationData = JSON.parse(localStorage.getItem("reservationData"));
 
   // Hàm định dạng tiền tệ
   const formatCurrency = (amount) =>
@@ -23,95 +31,46 @@ const CheckoutPay = () => {
       maximumFractionDigits: 3,
     }).format(amount);
 
+    useEffect( () =>{
+      const tableID = localStorage.getItem("tableID");
+
+      setInfo((prevData) => ({
+        ...prevData,
+        table: tableID
+      }));
+
+    },[])
   // Lấy giỏ hàng từ localStorage
-  const getCartFromLocalStorage = () => {
-    const cartData = localStorage.getItem("cart");
-    if (cartData) {
-      try {
-        return JSON.parse(cartData);
-      } catch {
-        console.error("Lỗi parse dữ liệu từ localStorage");
-      }
-    }
-    return {};
-  };
+  // if (cartData) {
+     
+    // }
 
   useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        setLoading(true);
-        setError("");
-
-        const cart = getCartFromLocalStorage();
-        const productIds = Object.keys(cart).map((id) => parseInt(id, 10));
-
-        if (productIds.length === 0) {
-          setCartItems([]);
-          return;
-        }
-
-        const response = await api.get("/products");
-        const products = response.data.data;
-
-        const detailedCart = productIds
-          .map((id) => {
-            const product = products.find((item) => item.id === id);
-            if (!product) return null;
-            return {
-              ...product,
-              quantity: cart[id],
-            };
-          })
-          .filter(Boolean);
-
-        setCartItems(detailedCart);
-      } catch (err) {
-        console.error("Error fetching cart items:", err);
-        setError("Không thể tải dữ liệu giỏ hàng.");
-      } finally {
-        setLoading(false);
+    let cartID = localStorage.getItem("cartID");
+    console.log(cartID)
+    let token = localStorage.getItem("token");
+      if (token) {
+        token = JSON.parse(token);
       }
-    };
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
+    // if (token) {
+    //   token = JSON.parse(token);
+    // }
+    api
+    .get(`/cart/list-product/${cartID}}`, config)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(error =>console.log(error))
 
-    fetchCartItems();
   }, []);
-
-  const calculateTotal = () =>
-    cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-
-  const calculateDeposit = () => {
-    return calculateTotal() * 0.2; // Tiền cọc = 20% tổng tiền
-  };
-
-  const handlePayment = () => {
-    console.log("Dữ liệu đặt bàn:", reservationData);
-    console.log("Dữ liệu giỏ hàng:", cartItems);
-
-    alert("Thanh toán thành công!");
-
-    localStorage.removeItem("reservationData");
-    localStorage.removeItem("cart");
-  };
-
-  const handleApplyDiscount = () => {
-    if (!discountCode) {
-      alert("Vui lòng nhập mã giảm giá!");
-      return;
-    }
-
-    // Ví dụ xử lý mã giảm giá
-    if (discountCode === "DISCOUNT10") {
-      alert("Áp dụng mã giảm giá thành công: Giảm 10%");
-      // Thực hiện giảm giá ở đây (cập nhật tổng tiền, v.v.)
-    } else {
-      alert("Mã giảm giá không hợp lệ!");
-    }
-  };
-
-  if (loading) return <div className="loading-message">Đang tải dữ liệu...</div>;
-  if (error) return <div className="error-message">{error}</div>;
-  if (cartItems.length === 0)
-    return <div className="empty-cart-message">Giỏ hàng của bạn đang trống.</div>;
+  console.log(info)
 
   return (
     <div className="checkout-pay-container">
@@ -127,8 +86,9 @@ const CheckoutPay = () => {
       <p className="reservation-items-text">Số bàn:</p>
       <input
         type="text"
+        name="table"
         className="reservation-items-text-value input-first-co"
-        value={reservationData.table}
+        // value={reservationData.table}
         readOnly
         disabled
       />
@@ -138,8 +98,9 @@ const CheckoutPay = () => {
       <p className="reservation-items-text">Số khách:</p>
       <input
         type="text"
+        name="guest"
         className="reservation-items-text-value input-first-co"
-        value={reservationData.guests}
+        // value={reservationData.guests}
         readOnly
         disabled
       />
@@ -148,8 +109,9 @@ const CheckoutPay = () => {
       <p className="reservation-items-text">Thời gian:</p>
       <input
         type="text"
+        name="time"
         className="reservation-items-text-value input-first-co"
-        value={reservationData.time}
+        // value={reservationData.time}
         readOnly
         disabled
       />
@@ -161,8 +123,9 @@ const CheckoutPay = () => {
         <p className="reservation-items-text">Ngày:</p>
         <input
           type="text"
+          name="date"
           className="reservation-items-text-value input-end-co"
-          value={reservationData.date}
+          // value={reservationData.date}
           readOnly
           disabled
         />
@@ -172,31 +135,33 @@ const CheckoutPay = () => {
         <p className="reservation-items-text">Họ & Tên:</p>
         <input
           type="text"
+          name="name"
           className="reservation-items-text-value input-end-co"
-          value={reservationData.name}
+          // value={reservationData.name}
           readOnly
           disabled
         />
       </div>
         </div>
 
-    <div className="reservation-second-items">
-      <div className="reservation-items">
+    <div className="reservation-end-items">
+      {/* <div className="reservation-items">
         <p className="reservation-items-text">Số điện thoại:</p>
         <input
           type="text"
           className="reservation-items-text-value input-end-co"
-          value={reservationData.phone}
+          // value={reservationData.phone}
           readOnly
           disabled
         />
-      </div>
+      </div> */}
       <div className="reservation-items">
         <p className="reservation-items-text">Email:</p>
         <input
           type="text"
+          name="email"
           className="reservation-items-text-value input-end-co"
-          value={reservationData.email || "Không cung cấp"}
+          // value={reservationData.email || "Không cung cấp"}
           readOnly
           disabled
         />
@@ -209,7 +174,8 @@ const CheckoutPay = () => {
         <input
           type="text"
           className="reservation-items-text-value input-end-co"
-          value={reservationData.note || "Không có ghi chú"}
+          name="note"
+          // value={reservationData.note || "Không có ghi chú"}
           readOnly
           disabled
         />
@@ -226,12 +192,12 @@ const CheckoutPay = () => {
               type="text"
               className="checkout-pay-discount-input"
               placeholder="Nhập mã giảm giá tại đây"
-              value={discountCode}
-              onChange={(e) => setDiscountCode(e.target.value)}
+              // value={discountCode}
+              // onChange={(e) => setDiscountCode(e.target.value)}
             />
             <button
               className="checkout-pay-discount-button"
-              onClick={handleApplyDiscount}
+              // onClick={handleApplyDiscount}
             >
               Áp Dụng
             </button>
@@ -241,7 +207,7 @@ const CheckoutPay = () => {
         {/* Phương thức thanh toán */}
         <div className="checkout-pay-payment-methods">
           <h3 className="checkout-pay-payment-methods-title subtitle-vphu">Phương Thức Thanh Toán:</h3>
-          <label className="checkout-pay-payment-option">
+          {/* <label className="checkout-pay-payment-option">
             <input type="radio" name="payment" value="cash" defaultChecked />
             <img
               src={PayMoney}
@@ -267,7 +233,7 @@ const CheckoutPay = () => {
               className="checkout-pay-payment-icon"
             />
             Thanh toán bằng Momo
-          </label>
+          </label> */}
           <label className="checkout-pay-payment-option">
             <input type="radio" name="payment" value="vnPay" />
             <img
@@ -289,39 +255,47 @@ const CheckoutPay = () => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item) => (
-              <tr key={item.id}>
+            {/* {cartItems.map((item) => ( */}
+              <tr 
+              // key={item.id}
+              >
                 <td className="checkout-pay-product-info">
                   <img
-                    src={`http://127.0.0.1:8000/${item.image_url}`}
-                    alt={item.name}
+                    // src={`http://127.0.0.1:8000/${item.image_url}`}
+                    // alt={item.name}
                     className="checkout-pay-product-image"
                   />
                   <div className="checkout-pay-product-details">
-                    <p className="checkout-pay-product-name">{item.name}</p>
-                    <small className="checkout-pay-product-quantity">× {item.quantity}</small>
+                    <p className="checkout-pay-product-name">
+                    {/* {item.name} */}
+                    </p>
+                    <small className="checkout-pay-product-quantity">× 
+                    {/* {item.quantity} */}
+                    </small>
                   </div>
                 </td>
                 <td className="checkout-pay-product-price">
-                  {formatCurrency(item.price * item.quantity)}
+                  {/* {formatCurrency(item.price * item.quantity)} */}
                 </td>
               </tr>
-            ))}
+            {/* ))} */}
             <tr>
               <td className="checkout-pay-header-product checkout-pay-subtotal-title">Tổng Cộng:</td>
               <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
-                {formatCurrency(calculateTotal())}
+                {/* {formatCurrency(calculateTotal())} */}
               </td>
             </tr>
             <tr>
               <td className="checkout-pay-header-product checkout-pay-subtotal-title">Tiền Cọc (20%):</td>
               <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
-                {formatCurrency(calculateDeposit())}
+                {/* {formatCurrency(calculateDeposit())} */}
               </td>
             </tr>
           </tbody>
         </table>
-        <button className="checkout-pay-button" onClick={handlePayment}>
+        <button className="checkout-pay-button"
+        //  onClick={handlePayment}
+         >
           Thanh Toán
         </button>
       </div>

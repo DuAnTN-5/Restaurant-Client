@@ -2,13 +2,8 @@ import "../css/Header2.css";
 
 
 function Header2() {
-  
-  
-  // console.log(token);
   return (
     <div className="header-2">
-      
-        {/* {isHeaderInfoVisible && ( */}
         <div className="header-info-bgr">
           <div className="header-info container-vphu">
             <div className="header-contact">

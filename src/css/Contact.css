@@ -97,6 +97,7 @@
 .form-input {
     display: flex;
     gap: 10px; /* Khoảng cách giữa hai div */
+    /* color: black; */
 }
 
 .form-input div {
@@ -113,6 +114,9 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+.contact-input-color{
+    color: black;
 }
 .form-textarea {
     margin-top: 20px; /* Tạo khoảng cách phía trên textarea */
