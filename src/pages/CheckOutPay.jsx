@@ -3,10 +3,13 @@ import PayMoney from "../assets/pay-money.jpg";
 import PayBank from "../assets/pay-bank.png";
 import PayMomo from "../assets/pay-momo.jpg";
 import PayVnp from "../assets/pay-vnp.jpg";
-import { api } from "../api";
+import { api, url } from "../api";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { kebabCase } from "lodash";
 
 const CheckoutPay = () => {
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [info, setInfo] = useState({
     table:"",
     guest:"",
@@ -16,6 +19,7 @@ const CheckoutPay = () => {
     email:"",
     note:"",
   });
+  const [food, setFood] = useState([])
   // const [loading, setLoading] = useState(true);
   // const [error, setError] = useState("");
   // const [discountCode, setDiscountCode] = useState("");
@@ -31,13 +35,33 @@ const CheckoutPay = () => {
       maximumFractionDigits: 3,
     }).format(amount);
 
-    useEffect( () =>{
-      const tableID = localStorage.getItem("tableID");
+  useEffect( () =>{
+      
+        let tableID = localStorage.getItem("tableID");
+        
+        let bookingInfo = localStorage.getItem("bookingInfo");
+        if (bookingInfo) {
+          bookingInfo = JSON.parse(bookingInfo);
+        }
+        let auth = localStorage.getItem("auth");
+        if (auth) {
+          auth = JSON.parse(auth);
+        }
+      console.log(bookingInfo)
 
       setInfo((prevData) => ({
         ...prevData,
-        table: tableID
+        table: tableID,
+        guest: bookingInfo.guests,
+        time: bookingInfo.time,
+        date: bookingInfo.date,
+        note: bookingInfo.note,
+        email: auth.email,
+        name: auth.name,
       }));
+
+
+    
 
     },[])
   // Lấy giỏ hàng từ localStorage
@@ -59,18 +83,63 @@ const CheckoutPay = () => {
           Accept: "application/json",
         },
       };
-    // if (token) {
-    //   token = JSON.parse(token);
-    // }
+   
     api
-    .get(`/cart/list-product/${cartID}}`, config)
+    .get(`/cart/list-product/${cartID}`, config)
     .then(res => {
-      console.log(res)
+      // console.log(res)
+      setFood(res.data.data)
     })
+    
     .catch(error =>console.log(error))
 
   }, []);
+
+  // Hàm tính tổng tiền
+  const calculateTotal = () => {
+    return food.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
+  // Hàm tính tiền cọc (20% của tổng tiền)
+  const calculateDeposit = () => {
+    return calculateTotal() * 0.2;
+  };
+  let amount= formatCurrency(calculateDeposit())
+  const handlePayment = () => {
+    if (!paymentMethod) {
+      toast.error("Vui lòng chọn phương thức thanh toán!");
+      return;
+    }else{
+      let tableID = localStorage.getItem("tableID");
+      let token = localStorage.getItem("token");
+      if (token) {
+        token = JSON.parse(token);
+      }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
+      const depositAmount = calculateDeposit();
+      const formData = new FormData();
+      formData.append("cart_id", tableID);
+      formData.append("amount", depositAmount.toFixed(0));
+
+      api
+      .post("/vnpay/payment", formData, config)
+      .then(res =>{
+        console.log(res)
+        
+      })
+      .catch(error => console.log(error))
+    }
+  }
+  
   console.log(info)
+  console.log(food)
+  console.log(paymentMethod)
 
   return (
     <div className="checkout-pay-container">
@@ -88,7 +157,7 @@ const CheckoutPay = () => {
         type="text"
         name="table"
         className="reservation-items-text-value input-first-co"
-        // value={reservationData.table}
+        value={info.table}
         readOnly
         disabled
       />
@@ -100,6 +169,7 @@ const CheckoutPay = () => {
         type="text"
         name="guest"
         className="reservation-items-text-value input-first-co"
+        value={info.guest}
         // value={reservationData.guests}
         readOnly
         disabled
@@ -111,6 +181,7 @@ const CheckoutPay = () => {
         type="text"
         name="time"
         className="reservation-items-text-value input-first-co"
+        value={info.time}
         // value={reservationData.time}
         readOnly
         disabled
@@ -125,7 +196,8 @@ const CheckoutPay = () => {
           type="text"
           name="date"
           className="reservation-items-text-value input-end-co"
-          // value={reservationData.date}
+        value={info.date}
+        // value={reservationData.date}
           readOnly
           disabled
         />
@@ -137,7 +209,8 @@ const CheckoutPay = () => {
           type="text"
           name="name"
           className="reservation-items-text-value input-end-co"
-          // value={reservationData.name}
+        value={info.name}
+        // value={reservationData.name}
           readOnly
           disabled
         />
@@ -161,7 +234,8 @@ const CheckoutPay = () => {
           type="text"
           name="email"
           className="reservation-items-text-value input-end-co"
-          // value={reservationData.email || "Không cung cấp"}
+        value={info.email}
+        // value={reservationData.email || "Không cung cấp"}
           readOnly
           disabled
         />
@@ -175,7 +249,8 @@ const CheckoutPay = () => {
           type="text"
           className="reservation-items-text-value input-end-co"
           name="note"
-          // value={reservationData.note || "Không có ghi chú"}
+        value={info.note}
+        // value={reservationData.note || "Không có ghi chú"}
           readOnly
           disabled
         />
@@ -235,7 +310,9 @@ const CheckoutPay = () => {
             Thanh toán bằng Momo
           </label> */}
           <label className="checkout-pay-payment-option">
-            <input type="radio" name="payment" value="vnPay" />
+            <input type="radio" name="payment" 
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            value="vnPay" />
             <img
               src={PayVnp}
               alt="Thanh toán VNPay"
@@ -255,46 +332,51 @@ const CheckoutPay = () => {
             </tr>
           </thead>
           <tbody>
-            {/* {cartItems.map((item) => ( */}
+          {food.map(item =>{
+          return(
               <tr 
-              // key={item.id}
+              key={item.id}
               >
                 <td className="checkout-pay-product-info">
                   <img
-                    // src={`http://127.0.0.1:8000/${item.image_url}`}
-                    // alt={item.name}
+                    src={`${url}/${item.product_image}`}
+                    alt="error"
                     className="checkout-pay-product-image"
                   />
                   <div className="checkout-pay-product-details">
                     <p className="checkout-pay-product-name">
-                    {/* {item.name} */}
+                    {item.product_name}
                     </p>
                     <small className="checkout-pay-product-quantity">× 
-                    {/* {item.quantity} */}
+                    {item.quantity}
                     </small>
                   </div>
                 </td>
                 <td className="checkout-pay-product-price">
-                  {/* {formatCurrency(item.price * item.quantity)} */}
+                  {formatCurrency(item.price * item.quantity)}
                 </td>
               </tr>
+          )
+          })}
+            {/* {cartItems.map((item) => ( */}
             {/* ))} */}
             <tr>
               <td className="checkout-pay-header-product checkout-pay-subtotal-title">Tổng Cộng:</td>
               <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
-                {/* {formatCurrency(calculateTotal())} */}
+                {formatCurrency(calculateTotal())}
               </td>
             </tr>
             <tr>
               <td className="checkout-pay-header-product checkout-pay-subtotal-title">Tiền Cọc (20%):</td>
               <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
-                {/* {formatCurrency(calculateDeposit())} */}
+                {amount}
               </td>
             </tr>
           </tbody>
         </table>
         <button className="checkout-pay-button"
         //  onClick={handlePayment}
+        onClick={handlePayment}
          >
           Thanh Toán
         </button>
