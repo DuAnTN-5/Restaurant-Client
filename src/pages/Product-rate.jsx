@@ -14,7 +14,7 @@ function ProductRate(props) {
   const setVote = props.setVote
 
   const [rating, setRating] = useState(0);
-  const [ratingCount, setRatingCount] = useState(0); // Theo dõi số lần đánh giá
+  // const [ratingCount, setRatingCount] = useState(0); // Theo dõi số lần đánh giá
 
   let token = localStorage.getItem("token");
   
