@@ -1,17 +1,17 @@
 import "../css/Header2.css";
 import logo from "../assets/logo-hi5-black.png";
 import { useState, useRef, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api, url } from "../api";
 
 
-function nav() {
+function Nav() {
 
     const [avatarUser, setAvatarUser] = useState();
     const [isNavbarVisible, setIsNavbarVisible] = useState(false);
     // const [isHeaderInfoVisible, setIsHeaderInfoVisible] = useState(true);
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
     const navbarRef = useRef(null);
     const overlayRef = useRef(null);
@@ -21,42 +21,42 @@ function nav() {
     if (token) {
       token = JSON.parse(token);
     }
-    // let config = {
-    //   headers: {
-    //     Authorization: "Bearer " + token,
-    //     "Content-type": "application/x-www-form-urlencoded",
-    //     Accept: "application/json",
-    //   },
-    // };
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    };
   
     const handleToggleNavbar = () => {
       setIsNavbarVisible(!isNavbarVisible);
     };
   
-    // useEffect(() => {
-    //   api
-    //     .get("/user", config)
-    //     .then((res) => {
-    //       // console.log(res);
-    //       setAvatarUser(res.data.image);
-    //       let Auth = res.data;
-    //       let auth = JSON.stringify(Auth);
-    //       localStorage.setItem("auth", auth);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
+    useEffect(() => {
+      api
+        .get("/user", config)
+        .then((res) => {
+          // console.log(res);
+          setAvatarUser(res.data.image);
+          let Auth = res.data;
+          let auth = JSON.stringify(Auth);
+          localStorage.setItem("auth", auth);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   
-    //   //   if (isNavbarVisible) {
-    //   //     document.body.classList.add("no-scroll");
-    //   //   } else {
-    //   //     document.body.classList.remove("no-scroll");
-    //   //   }
+      //   if (isNavbarVisible) {
+      //     document.body.classList.add("no-scroll");
+      //   } else {
+      //     document.body.classList.remove("no-scroll");
+      //   }
   
-    //   //   return () => {
-    //   //     document.body.classList.remove("no-scroll");
-    //   //   };
-    //   // }, [location.pathname]);
+      //   return () => {
+      //     document.body.classList.remove("no-scroll");
+      //   };
+      // }, [location.pathname]);
     //   // // console.log(avatarUser)
   
     //   // useEffect(() => {
@@ -72,7 +72,7 @@ function nav() {
     //   //   return () => {
     //   //     window.removeEventListener("scroll", handleScroll);
     //   //   };
-    // }, []);
+    }, []);
   
     const handleOverlayClick = () => {
       setIsNavbarVisible(false);
@@ -271,4 +271,4 @@ function nav() {
           </div>
     );
 }
-export default nav;
+export default Nav;

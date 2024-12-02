@@ -1,12 +1,13 @@
 import "../style/CheckOutPay.css";
-import PayMoney from "../assets/pay-money.jpg";
-import PayBank from "../assets/pay-bank.png";
-import PayMomo from "../assets/pay-momo.jpg";
+// import PayMoney from "../assets/pay-money.jpg";
+// import PayBank from "../assets/pay-bank.png";
+// import PayMomo from "../assets/pay-momo.jpg";
 import PayVnp from "../assets/pay-vnp.jpg";
 import { api, url } from "../api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { kebabCase } from "lodash";
+import { useNavigate } from "react-router-dom";
+// import { kebabCase } from "lodash";
 
 const CheckoutPay = () => {
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -19,11 +20,12 @@ const CheckoutPay = () => {
     email:"",
     note:"",
   });
+  const [isModalOpen, setIsModalOpen] = useState(false); // State kiểm soát modal
   const [food, setFood] = useState([])
   // const [loading, setLoading] = useState(true);
   // const [error, setError] = useState("");
   // const [discountCode, setDiscountCode] = useState("");
-
+  const navigate = useNavigate()
   // const reservationData = JSON.parse(localStorage.getItem("reservationData"));
 
   // Hàm định dạng tiền tệ
@@ -126,16 +128,28 @@ const CheckoutPay = () => {
       const formData = new FormData();
       formData.append("cart_id", tableID);
       formData.append("amount", depositAmount.toFixed(0));
-
+console.log("amount", depositAmount.toFixed(2))
       api
       .post("/vnpay/payment", formData, config)
       .then(res =>{
         console.log(res)
-        
+        if(res.data.status === "success"){
+          const checkoutVnPay = res.data.payment_url
+          // window.location.href = checkoutVnPay;
+          // console.log(checkoutVnPay)
+          setIsModalOpen(true);
+          // navigate(`${checkoutVnPay}`)
+
+        }
       })
       .catch(error => console.log(error))
     }
   }
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    navigate("/"); // Điều hướng về trang chính sau khi đóng modal (tùy chọn)
+  };
   
   console.log(info)
   console.log(food)
@@ -381,7 +395,25 @@ const CheckoutPay = () => {
           Thanh Toán
         </button>
       </div>
+       {/* Modal thanh toán thành công */}
+       {/* Modal thanh toán thành công */}
+      {isModalOpen && (
+        <div className="success-modal-overlay">
+          <div className="success-modal">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/5290/5290058.png" // Icon stick xanh
+              alt="Success"
+              className="success-modal-icon"
+            />
+            <h2 className="success-modal-title">Thanh Toán Thành Công!</h2>
+            <button className="success-modal-button" onClick={closeSuccessModal}>
+              OK
+            </button>
+          </div>
+        </div>
+      )}
       </div>
+
     </div>
   );
 };
