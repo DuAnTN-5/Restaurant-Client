@@ -42,6 +42,7 @@ function ProfileUser() {
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
+  console.log(avatarUser)
 
   // Hàm xử lý đăng xuất
   const handleLogout = () => {
