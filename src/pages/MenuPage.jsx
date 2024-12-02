@@ -167,7 +167,7 @@ const MenuPage = () => {
   console.log({foodQty})
   console.log({foodId})
 
-
+  const [searchTerm, setSearchTerm] = useState("");   
 
   useEffect(() => {
     const fetchCategoriesAndFoods = async () => {
@@ -242,6 +242,15 @@ const MenuPage = () => {
             )}
           </div>
         </div>
+        <div className="menu-search-bar">
+    <input
+      type="text"
+      placeholder="Tìm kiếm món ăn..."
+      className="menu-search-input"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+  </div>
 
         <div className="menu-main-container">
           <div className="menu-sidebar">

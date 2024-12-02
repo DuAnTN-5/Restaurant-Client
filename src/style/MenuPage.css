@@ -4,6 +4,14 @@
   background-position: center;
   background-attachment: fixed;
 }
+.menu-search-bar {
+  float: inline-end;
+  color: #262525;
+}
+.menu-search-input {
+  padding: 10px;
+  border-radius: 8px;
+}
 
 .menu-main-container {
   display: flex;
