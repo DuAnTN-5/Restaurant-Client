@@ -89,10 +89,10 @@ function ProfileUser() {
       toast.error("Vui lòng nhập số điện thoại");
       flag = false;
     }
-    if (!userInfo.address) {
-      toast.error("Vui lòng nhập địa chỉ");
-      flag = false;
-    }
+    // if (!userInfo.address) {
+    //   toast.error("Vui lòng nhập địa chỉ");
+    //   flag = false;
+    // }
     if (!userInfo.avatar) {
       toast.error("Vui lòng chọn hình ảnh");
       flag = false;
@@ -138,7 +138,7 @@ function ProfileUser() {
           console.log(res);
           if (res.data.success === true) {
             
-            toast.success("Cập nhật thông tin thành công");
+          toast.success("Cập nhật thông tin thành công");
           navigate("/")
 
           }

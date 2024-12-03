@@ -1,19 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../style/CartProduct.css";
 import Modal from "../component/Modal";
 import { api } from "../api";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { CartContext } from "../../CartContext";
 // import { toast } from "react-toastify";
 
 const Cart = () => {
   const [cartProduct, setCartProduct] = useState([]);
   // const [cartID, setCartID] = useState();
+  // const [cartCount, setCartCount] = useState(0); // State để lưu số lượng bàn
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState([]);
   // const [checkLength, setCheckLength] = useState([]);
   const [error, setError] = useState(false);
   const navigate = useNavigate()
+
+  const { setCartCount } = useContext(CartContext); // useContext
+
 
   let auth = localStorage.getItem("auth");
   if (auth) {
@@ -39,7 +44,7 @@ const Cart = () => {
         console.log(res);
         if(res.data.status){
           setCartProduct(res.data.data);
-
+          setCartCount(res.data.data.length); // Cập nhật số lượng bàn
         }
       })
       .catch((error) => console.log(error));
@@ -92,6 +97,8 @@ const Cart = () => {
           console.log(res);
           if(res.data.status){
             setCartProduct(res.data.data);
+          setCartCount(res.data.data.length); // Cập nhật số lượng bàn
+
   
           }
         })

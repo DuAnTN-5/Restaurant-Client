@@ -36,6 +36,7 @@ function ForgotPassword() {
       setIsSubmitting(false);
       toast.error("Vui lòng nhập email của bạn")
     }else{
+      toast.info("Vui lòng đợi một lát")
       setIsSubmitting(true);
       api
         .post("/forgot-password",{email})
@@ -47,7 +48,10 @@ function ForgotPassword() {
         })
         .catch((error) => {
           console.log(error);
-          toast.error("Có lỗi xảy ra")
+          if(error.response.data.errors){
+
+            toast.error("Email đã nhập không hợp lệ")
+          }
         })
         .finally(()=>{
           setIsSubmitting(false)

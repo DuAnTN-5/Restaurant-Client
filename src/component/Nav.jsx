@@ -1,9 +1,10 @@
 import "../css/Header2.css";
 import logo from "../assets/logo-hi5-black.png";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api, url } from "../api";
+import { CartContext } from "../../CartContext";
 
 
 function Nav() {
@@ -16,6 +17,8 @@ function Nav() {
     const navbarRef = useRef(null);
     const overlayRef = useRef(null);
     // console.log(location)
+
+    const { cartCount } = useContext(CartContext);
   
     let token = localStorage.getItem("token");
     if (token) {
@@ -37,7 +40,7 @@ function Nav() {
       api
         .get("/user", config)
         .then((res) => {
-          // console.log(res);
+          console.log(res);
           setAvatarUser(res.data.image);
           let Auth = res.data;
           let auth = JSON.stringify(Auth);
@@ -262,7 +265,9 @@ function Nav() {
                     className="cart-interaction-item icon-end"
                     onClick={clickCart}
                   >
+
                     <i className="fa-solid fa-cart-shopping navbar-icon"></i>
+                    {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
                   </div>
                   {/* </Link> */}
                 </div>
