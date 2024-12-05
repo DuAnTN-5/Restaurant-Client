@@ -30,6 +30,7 @@ function Menu() {
     api
       .get("/product-categories/6")
       .then((res) => {
+        console.log(res)
         setMenuItem(res.data.data);
       })
       .catch((error) => {

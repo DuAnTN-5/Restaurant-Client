@@ -4,6 +4,7 @@ import { api, url } from "../api";
 import { toast } from "react-toastify";
 import { Link, useLocation } from "react-router-dom";
 
+
 const FoodCategory = () => {
   const [foodItems, setFoodItems] = useState([]);
   const [tableId, setTableId] = useState(null);
@@ -37,7 +38,7 @@ const FoodCategory = () => {
     // console.log(id);
     if (id) {
       setTableId(id);
-      toast.info(`Bạn đang đặt món cho bàn số: ${id}`);
+      // toast.info(`Bạn đang đặt món cho bàn số: ${id}`);
     }
   }, [location]);
 
@@ -74,19 +75,25 @@ const FoodCategory = () => {
       // lưu vào local
       localStorage.setItem("favourite", JSON.stringify(newFavourite));
     }
-
+    
   };
+  console.log(foodItems)
 
   return (
     <div className="food-category container-vphu text-vphu">
       <h4 className="category-subtitle subtitle-vphu">MÓN ĂN</h4>
       <h2 className="category-title title-vphu">Top Thực Phẩm Nổi Bật</h2>
       <div className="food-items">
-        {foodItems.map((item) => (
+        {foodItems.map((item) =>{
+          let image = JSON.parse(item.image_url);
+          {/* console.log(image) */}
+          let firstImage = image[0];
+          return(
+
           <div className="food-card" key={item.id}>
             <Link className="menu-image" to={"product-detail/" + item.slug}>
               <img
-                src={`${url}/${item.image_url}`}
+                src={`${url}/${firstImage}`}
                 alt={item.name}
                 className="food-image"
               />
@@ -112,7 +119,7 @@ const FoodCategory = () => {
                 <h3 className="food-name">{item.name}</h3>
               </Link>
               <p className="favorite-food-description">
-                {/* {item.ingredients} */}
+                {item.ingredients}
                 {/* {JSON.parse(item.ingredients)
                   .map((ing) => ing.value)
                   .join(", ")} */}
@@ -129,7 +136,11 @@ const FoodCategory = () => {
               </div>
             </div>
           </div>
-        ))}
+          )
+        } 
+          
+        
+        )}
       </div>
     </div>
   );

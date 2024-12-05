@@ -80,7 +80,7 @@ function ProductDetail() {
     api
       .get("products/" + params.slug)
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setVote(res.data.data);
         setProductDetail(res.data.data.product);
         const data = res.data.data.product;
