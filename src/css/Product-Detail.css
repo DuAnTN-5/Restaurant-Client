@@ -197,6 +197,7 @@
   background-color: #262525;
   /* border-top: 1px solid #ededed; */
   padding: 20px;
+  min-height: 0px;
 }
 
 .comment-section h3 {
@@ -208,7 +209,7 @@
 
 .media-list {
   width: 100%;
-  height: 700px;
+  max-height: 700px;
   overflow-y: auto;
   margin-bottom: 20px;
   scrollbar-width: thin; /* Dành cho Firefox */
@@ -288,7 +289,7 @@
 .avatar{
   margin-left: 15px;
   width: 150px;
-  /* height: 150px; */
+  height: 150px;
   border-radius: 50%;
   /* border: 1px solid #ddd; */
   object-fit: cover; /* Giữ tỷ lệ của ảnh mà không làm vỡ */

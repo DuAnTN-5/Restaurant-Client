@@ -136,8 +136,6 @@ function ProductDetail() {
       .catch((error) => console.log(error));
   }, [params.slug]);
   console.log(otherDishes);
-  // console.log(vote)
-  // console.log(Object.keys(productDetail).length )
 
   return (
     <>
@@ -177,13 +175,6 @@ function ProductDetail() {
             <div className="rate">
               <span className="rating-text">({vote?.average_rating})</span>
               <Rate vote={vote} />
-              {/* <div className="stars">
-                <i className="star-icon full-star">★</i>
-                <i className="star-icon full-star">★</i>
-                <i className="star-icon full-star">★</i>
-                <i className="star-icon full-star">★</i>
-                <i className="star-icon half-star">★</i>
-              </div> */}
               <span className="total-ratings">
                 {vote?.total_ratings} đánh giá
               </span>
@@ -244,12 +235,6 @@ function ProductDetail() {
                       <Link to={"/product-detail/" + item.slug}>
                         <img
                           className="product-image-detail-page"
-                          // onClick={() => {
-                          //   toast.success(
-                          //     "Đã chuyển đến trang chi tiết sản phẩm mà bạn yêu cầu"
-                          
-                          //   );
-                          // }}
                           src={`${url}/${item.image_url}`}
                           alt=""
                         />
@@ -281,113 +266,8 @@ function ProductDetail() {
                   </div>
                 );
               })}
-              {/* <div className="padding">
-                <div className="product-content">
-                  <img
-                    className="product-image"
-                    src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                    alt=""
-                  />
-                  <div className="product-caption">
-                    <span className="product-tags">Chicken, Spicy</span>
-                    <h3 className="product-title">Chicken alfredo</h3>
-                    <h4 className="product-price">35.000 đ</h4>
-                    <button className="add-to-cart">
-                      {" "}
-                      <i>
-                        <FaCartShopping />
-                      </i>{" "}
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="padding">
-                <div className="product-content">
-                  <img
-                    className="product-image"
-                    src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                    alt=""
-                  />
-                  <div className="product-caption">
-                    <span className="product-tags">Chicken, Spicy</span>
-                    <h3 className="product-title">Chicken alfredo</h3>
-                    <h4 className="product-price">35.000 đ</h4>
-                    <button className="add-to-cart">
-                      {" "}
-                      <i>
-                        <FaCartShopping />
-                      </i>{" "}
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="padding">
-                <div className="product-content">
-                  <img
-                    className="product-image"
-                    src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                    alt=""
-                  />
-                  <div className="product-caption">
-                    <span className="product-tags">Chicken, Spicy</span>
-                    <h3 className="product-title">Chicken alfredo</h3>
-                    <h4 className="product-price">35.000 đ</h4>
-                    <button className="add-to-cart">
-                      {" "}
-                      <i>
-                        <FaCartShopping />
-                      </i>{" "}
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="padding">
-                <div className="product-content">
-                  <img
-                    className="product-image"
-                    src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                    alt=""
-                  />
-                  <div className="product-caption">
-                    <span className="product-tags">Chicken, Spicy</span>
-                    <h3 className="product-title">Chicken alfredo</h3>
-                    <h4 className="product-price">35.000 đ</h4>
-                    <button className="add-to-cart">
-                      {" "}
-                      <i>
-                        <FaCartShopping />
-                      </i>{" "}
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="padding">
-                <div className="product-content">
-                  <img
-                    className="product-image"
-                    src="https://wp.validthemes.net/restan/wp-content/uploads/2024/05/fried-chicekn.png"
-                    alt=""
-                  />
-                  <div className="product-caption">
-                    <span className="product-tags">Chicken, Spicy</span>
-                    <h3 className="product-title">Chicken alfredo</h3>
-                    <h4 className="product-price">35.000 đ</h4>
-                    <button className="add-to-cart">
-                      {" "}
-                      <i>
-                        <FaCartShopping />
-                      </i>{" "}
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              </div> */}
+             
             </Slider>
-            {/* </div> */}
           </div>
         </div>
       </div>

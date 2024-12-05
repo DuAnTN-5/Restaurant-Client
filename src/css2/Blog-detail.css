@@ -388,3 +388,16 @@
         color: white;
         transition: all 0.3s ease;
     }
+
+    .comment-list {
+        /* position: relative; */
+        /* border-radius: 8px; */
+        /* padding: 16px; */
+        min-height: 0px; /* Chiều cao tối thiểu */
+        max-height: 500px; /* Chiều cao tối đa */
+        overflow-y: auto; /* Kích hoạt cuộn dọc khi nội dung vượt quá chiều cao */
+        overflow-x: hidden; /* Tắt cuộn ngang */
+      }
+      
+     
+     

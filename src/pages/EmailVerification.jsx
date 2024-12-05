@@ -19,10 +19,8 @@ function EmailVerification() {
                 .then(response => {
                     if (response.data.success  === true) {
                         setMessage('Xác thực thành công !');
-                        toast.success("Xác thực thành thông")
-                        setTimeout(() => {
                             navigate('/login'); // Chuyển hướng về trang đăng nhập sau khi xác thực thành công
-                        }, 3000);
+                        toast.success("Xác thực thành thông")
                     } else {
                         setMessage('Xác thực email thất bại. Mã xác thực không hợp lệ hoặc đã hết hạn.');
                         setTimeout(() => {

@@ -94,13 +94,14 @@
 .read-more {
   position: absolute;
   right: 20px;
-  bottom: 20px;
+  bottom: 5px;
   padding: 10px 20px;
   background-color: #007bff; /* Button color */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  /* top: 10%; */
 }
 
 .read-more:hover {
@@ -297,6 +298,32 @@
 /* Responsive Styling */
 
 /* Tablet Screen (Below 1024px) */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.page-button {
+  background-color: black;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.page-button.active {
+  background-color: black;
+  color: #fff;
+}
+
+.page-button:hover {
+  background-color: rgb(33, 33, 33);
+}
+
+
 @media (max-width: 1024px) {
   .blog-container {
       flex-direction: column;

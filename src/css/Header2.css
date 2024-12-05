@@ -172,6 +172,30 @@
   margin: 0;
 }
 
+/* icon cart */
+/* .cart-icon-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.navbar-icon {
+  font-size: 24px;
+  color: #333;
+} */
+
+.cart-count {
+  position: absolute;
+  top: 16px;
+  right: 38px;
+  background-color: red;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  text-align: center;
+}
 @media (max-width: 1400px) {
   .header-info,
   .navbar {

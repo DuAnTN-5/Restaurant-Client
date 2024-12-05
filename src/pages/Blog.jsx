@@ -4,26 +4,42 @@ import { useEffect, useState } from "react";
 import { api, url } from "../api";
 
 const Blog = () => {
-  const [blog, setBlog] = useState([])
-  useEffect(() =>{
+  const [blog, setBlog] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
+  const postsPerPage = 2; // Số bài viết trên mỗi trang
+
+  useEffect(() => {
     api
-    .get("/posts")
-    .then((res) =>{
-      setBlog(res.data.data)
-    })
-    .catch((error) =>{
-      console.log(error)
-    })
-  }, [])
-  console.log(blog)
+      .get("/posts")
+      .then((res) => {
+        setBlog(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // Tính toán chỉ số của các bài viết hiển thị trong trang hiện tại
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = blog.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Tạo danh sách các số trang
+  const totalPages = Math.ceil(blog.length / postsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  console.log(blog);
+
   return (
     <div className="blog-page">
-     <h1 className="title-cart-page title-vphu">Tin tức của chúng tôi</h1>
-     {/* <h1 className="menu-main-title title-vphu">Thực Đơn Đặc Biệt</h1> */}
+      <h1 className="title-cart-page title-vphu">Tin tức của chúng tôi</h1>
+      {/* <h1 className="menu-main-title title-vphu">Thực Đơn Đặc Biệt</h1> */}
       <div className="blog-container">
         {/* Nội dung chính */}
         <main className="blog-main">
-        {blog.map(item =>{
+          {/* {blog.map(item =>{
           return(
           <div className="blog-post" key={item.id}>
             <div className="post-image-wrapper">
@@ -34,7 +50,6 @@ const Blog = () => {
               />
               <div className="post-date">
                 <span>{item.created_at}</span>
-                {/* <span>THÁNG 6</span> */}
               </div>
             </div>
             <div className="post-content">
@@ -55,9 +70,41 @@ const Blog = () => {
             </div>
           </div>
           )
-        })}
+        })} */}
+          {currentPosts.map((item) => (
+            <div className="blog-post" key={item.id}>
+              <div className="post-image-wrapper">
+              <Link to={"/blog-detail/" + item.slug}>
+                <img
+                  src={`${url}/${item.image_url}`}
+                  alt="Bài viết blog"
+                  className="post-image"
+                />
+                </Link>
+                <div className="post-date">
+                  {/* <span>{item.created_at}</span> */}
+                </div>
+              </div>
+              <div className="post-content">
+                <h2 className="post-title">{item.title}</h2>
+                <p className="post-excerpt">{item.summary}</p>
+                {/* <div className="post-meta">
+                  <img
+                    src="https://freebw.com/templates/royate/images/widget-person.png"
+                    alt="Tác giả"
+                    className="author-image"
+                  />
+                  <span>Được viết bởi Andrea Silva</span>
+                  <span>Tráng miệng / Nấu ăn / Thực phẩm</span>
+                </div> */}
+                <Link to={"/blog-detail/" + item.slug}>
+                  <button className="read-more">XEM THÊM</button>
+                </Link>
+              </div>
+            </div>
+          ))}
         </main>
-  
+
         {/* Sidebar */}
         <aside className="blog-sidebar-custom">
           <div className="profile-card-custom">
@@ -70,7 +117,7 @@ const Blog = () => {
             <p>Đầu bếp trưởng</p>
             <div className="signature-custom">Chữ ký</div>
           </div>
-  
+
           {/* Danh mục */}
           <div className="sidebar-section-custom">
             <h3 className="title-categories">Danh Mục</h3>
@@ -82,7 +129,7 @@ const Blog = () => {
               <li>Bữa trưa (19)</li>
             </ul>
           </div>
-  
+
           {/* Bài viết mới nhất */}
           <div className="sidebar-section-custom latest-posts-custom">
             <h3 className="title-lastestpost">Bài Viết Mới Nhất</h3>
@@ -129,9 +176,7 @@ const Blog = () => {
               </li>
             </ul>
           </div>
-  
-        
-  
+
           {/* Banner Khuyến mãi */}
           <div className="sidebar-section-custom sale-banner-custom">
             {/* <h3 className="title-sale">Khuyến mãi lên đến 50%</h3> */}
@@ -141,7 +186,20 @@ const Blog = () => {
             />
           </div>
         </aside>
-      
+      </div>
+      {/* Phân trang */}
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            className={`page-button ${
+              currentPage === index + 1 ? "active" : ""
+            }`}
+            onClick={() => paginate(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

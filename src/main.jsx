@@ -30,6 +30,7 @@ import BlogDetail from './pages/Blog-detail.jsx';
 import InfoBookingTable from './pages/InfoBookingTable.jsx';
 import UpdatePassword from './pages/UpdatePassword.jsx';
 import ScrollToTop from './component/ScrollToTop.jsx';
+import { CartProvider } from '../CartContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -37,6 +38,7 @@ createRoot(document.getElementById('root')).render(
   
      {/* <AuthProvider> */}
      <ScrollToTop />
+     <CartProvider>
         <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} /> 
@@ -63,6 +65,7 @@ createRoot(document.getElementById('root')).render(
          
         </Route>
         </Routes>
+        </CartProvider>
      {/* </AuthProvider> */}
     <ToastContainer autoClose="2000"/>
   </Router>

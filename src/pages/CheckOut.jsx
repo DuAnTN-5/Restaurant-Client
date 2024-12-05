@@ -2,9 +2,10 @@ import { useNavigate } from "react-router-dom";
 import "../style/CheckOut.css";
 import tang1 from "../assets/tang1.png";
 import tang2 from "../assets/tang2.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../api";
+import { CartContext } from "../../CartContext";
 
 const ReservationForm = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ const ReservationForm = () => {
     guests: "",
     note: "",
   });
+
+  const { setCartCount } = useContext(CartContext); // useContext
   // Hàm chuẩn hóa ngày (thêm số 0 cho ngày và tháng nếu cần)
   const normalizeDate = (date) => {
     const parts = date.split("-");
@@ -180,8 +183,20 @@ const ReservationForm = () => {
             localStorage.setItem("bookingInfo", JSON.stringify(updatedBookingInfo));
 
             setOrderButtonVisible(true); // Hiển thị nút Đặt món
+            api
+            .get("/cart/list/" + auth.id, config)
+            .then((res) => {
+              console.log(res);
+              if(res.data.status){
+              setCartCount(res.data.data.length); // Cập nhật số lượng bàn
+    
+      
+              }
+            })
+            .catch((error) => console.log(error));
 
             toast.success("Đặt bàn thành công!", { autoClose: 3000 });
+
             // toast.success("Bạn có muốn chọn món không", { autoClose: 3000 });
             // setTimeout(() => {
             //   toast.success("Nếu có hãy bấm chọn món để tiếp tục", {

@@ -38,6 +38,8 @@ function ProductComment(props) {
     "me",
     "má",
     "mẹ",
+    "chó",
+    "chim"
   ];
   const filterBadWords = (text) => {
     return text
