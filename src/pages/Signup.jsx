@@ -19,7 +19,7 @@ function SignUp() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token)
+    // console.log(token)
 
     if (token) {
       navigate("/");
@@ -75,6 +75,9 @@ function SignUp() {
       })
       .catch(error =>{
         console.log(error)
+        if(error.response.data.success === false){
+          toast.error("Email này đã được sử dụng ")
+        }
         // if(error){
         //   toast.error("Có lỗi xảy ra")
         // }

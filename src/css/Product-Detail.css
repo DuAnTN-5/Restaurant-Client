@@ -197,7 +197,7 @@
   background-color: #262525;
   /* border-top: 1px solid #ededed; */
   padding: 20px;
-  min-height: 300px;
+  min-height: 0px;
 }
 
 .comment-section h3 {
