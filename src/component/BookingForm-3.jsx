@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 function BookingForm3() {
   const navigate = useNavigate("");
   let token = localStorage.getItem("token");
-  if (token) {
-    token = JSON.parse(token);
-  }
+  // if (token) {
+  //   token = JSON.parse(token);
+  // }
   const handleBooking = () => {
     if (!token) {
       toast.error("Vui lòng đăng nhập");

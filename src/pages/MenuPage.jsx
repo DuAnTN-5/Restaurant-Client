@@ -6,8 +6,44 @@ import "../style/MenuPage.css";
 import { Link, useLocation } from "react-router-dom";
 // import { set } from "lodash";
 
+function normalizeString(str) {
+  // Chuẩn hóa chuỗi sang ký tự Latin cơ bản
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function filterFoodItems(categories, searchString) {
+  if (!searchString) return []; // Nếu không có chuỗi tìm kiếm, trả về danh sách rỗng
+  const normalizeSearchString = normalizeString(searchString);
+
+  // Lọc danh mục với các món ăn phù hợp
+  const filteredCategories = categories.map((category) => {
+    const filteredFoods = category.foods.filter((food) => {
+      const normalizeFoodName = normalizeString(food.name);
+      return normalizeFoodName.includes(normalizeSearchString);
+    });
+
+    // Trả về danh mục với mảng `foods` rỗng nếu không có món ăn phù hợp
+    return {
+      ...category,
+      foods: filteredFoods,
+    };
+  });
+
+  // Kiểm tra nếu tất cả `foods` trong danh mục đều rỗng, trả về mảng rỗng
+  const hasMatchedItems = filteredCategories.some(
+    (category) => category.foods.length > 0
+  );
+  return hasMatchedItems ? filteredCategories : [];
+}
+
 const MenuPage = () => {
   const [categoriesWithFoods, setCategoriesWithFoods] = useState([]);
+  const [filterdCategoriesWithFoods, setFilterdCategoriesWithFoods] = useState(
+    []
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeCategory, setActiveCategory] = useState(null);
@@ -34,8 +70,6 @@ const MenuPage = () => {
   const [foodQty, setFoodQty] = useState("1");
   const [tableId, setTableId] = useState(null);
 
-  
-
   // bấm đặt món là chuyển qua trang menu cùng id bàn
 
   useEffect(() => {
@@ -58,50 +92,50 @@ const MenuPage = () => {
     setFoodQty(e.target.value);
   };
 
-  let cartID = localStorage.getItem("cartID")?? null;
+  let cartID = localStorage.getItem("cartID") ?? null;
   // console.log(cartID)
-  
+
   const addToCart = (foodId, foodName) => {
     // console.log(foodId);
     if (!tableId) {
       toast.error("Vui lòng đặt bàn");
       return;
     }
-    setFoodId(foodId)
+    setFoodId(foodId);
     const formData = new FormData();
     formData.append("cart_id", cartID);
     formData.append("product_id", foodId);
     formData.append("quantity", foodQty);
 
     let token = localStorage.getItem("token");
-      if (token) {
-        token = JSON.parse(token);
-      }
-      let config = {
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-type": "application/x-www-form-urlencoded",
-          Accept: "application/json",
-        },
-      };
+    if (token) {
+      token = JSON.parse(token);
+    }
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    };
 
     api
-    .post("/cart/add-product", formData, config)
-    .then(res =>{
-      console.log(res)
-      if(res.data.status){
-        toast.success(`Món ${foodName} đã được thêm vào bàn ${tableId}, số lượng: ${foodQty}`)
-      }else{
-        toast.error(`Thêm món ăn ${foodName} thất bại  `)
-
-      }
-    })
-    .catch(error => console.log(error))
-
+      .post("/cart/add-product", formData, config)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status) {
+          toast.success(
+            `Món ${foodName} đã được thêm vào bàn ${tableId}, số lượng: ${foodQty}`
+          );
+        } else {
+          toast.error(`Thêm món ăn ${foodName} thất bại  `);
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
-   // chuyển đổi đơn vị tiền 
-   const formatCurrency = (amount) => {
+  // chuyển đổi đơn vị tiền
+  const formatCurrency = (amount) => {
     return new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
@@ -110,11 +144,11 @@ const MenuPage = () => {
 
   const addToFavourite = (id) => {
     let token = localStorage.getItem("token");
-   
-    if(!token){
-      toast.error("Vui lòng đăng nhập")
-    }else{
-    token = JSON.parse(token);
+
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+    } else {
+      token = JSON.parse(token);
       const newFavourite = { ...favourite }; // giữ lại dữ liệu trước đó
 
       if (newFavourite[id]) {
@@ -160,14 +194,18 @@ const MenuPage = () => {
     // }
   };
 
-
-
   // console.log(bookingFood);
-  console.log({tableId});
-  console.log({foodQty})
-  console.log({foodId})
+  // console.log({tableId});
+  // console.log({foodQty})
+  // console.log({foodId})
 
-  const [searchTerm, setSearchTerm] = useState("");   
+  const handleSearchFood = (e) => {
+    if (!e.target.value) {
+      return setFilterdCategoriesWithFoods(categoriesWithFoods);
+    }
+    const filteredList = filterFoodItems(categoriesWithFoods, e.target.value);
+    setFilterdCategoriesWithFoods(filteredList);
+  };
 
   useEffect(() => {
     const fetchCategoriesAndFoods = async () => {
@@ -209,6 +247,7 @@ const MenuPage = () => {
           categoriesWithFoodsPromises
         );
         setCategoriesWithFoods(categoriesWithFoods);
+        setFilterdCategoriesWithFoods(categoriesWithFoods);
         setActiveCategory(categories[0]?.id || null); // Đặt danh mục đầu tiên làm active
       } catch (err) {
         console.error("Error fetching categories or foods:", err);
@@ -243,14 +282,13 @@ const MenuPage = () => {
           </div>
         </div>
         <div className="menu-search-bar">
-    <input
-      type="text"
-      placeholder="Tìm kiếm món ăn..."
-      className="menu-search-input"
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-    />
-  </div>
+          <input
+            type="text"
+            placeholder="Tìm kiếm món ăn..."
+            className="menu-search-input"
+            onChange={handleSearchFood}
+          />
+        </div>
 
         <div className="menu-main-container">
           <div className="menu-sidebar">
@@ -282,72 +320,90 @@ const MenuPage = () => {
           </div>
 
           <div className="menu-categories-foods">
-            {categoriesWithFoods.map((category) => (
-              <div key={category.id} className="menu-category-section">
-                <h2
-                  id={`category-title-${category.id}`}
-                  className="menu-category-title subtitle-vphu"
-                >
-                  {category.name}
-                </h2>
-                <div className="menu-items">
-                  {category.foods.map((food) => (
-                    <div key={food.id} className="menu-item-page">
-                      <Link to={"/product-detail/" + food.slug}>
-                        <img
-                          className="menu-item-page-img"
-                          src={`${url}/${food.image_url}`}
-                          alt={food.name}
-                        />
-                      </Link>
-                      <Link to={"/product-detail/" + food.slug}><h3 className="menu-item-page-title">{food.name}</h3></Link>
-                      <p className="menu-item-page-ingredients">
-                        {food.ingredientsList.length > 0
-                          ? food.ingredientsList.join(", ")
-                          : "Không có thông tin nguyên liệu"}
-                      </p>
-                      <span className="menu-item-page-price">
-                        {formatCurrency(food.price)}
-                        {/* {formatCurrency(food.total)} */}
-                      </span>
-                      <div className="order-controls">
-        <input
-          type="number"
-          className="menu-item-page-quantity"
-          defaultValue="1"
-          min="1"
-          onChange={handleInputChange}
-          max="10"
-        />
-        <button
-          className="menu-item-page-order-btn"
-          onClick={() => addToCart(food.id, food.name)}
-        >
-          Đặt Món
-        </button>
-      </div>
-                      {/* <button
-                        className="menu-item-page-order-btn"
-                        onClick={() => addToCart(food.id)}
-                      >
-                        Đặt Món
-                      </button> */}
-                      <div
-                        className="heart-icon-menu-page"
-                        onClick={() => addToFavourite(food.id)}
-                        style={{
-                          position: "absolute",
-                          top: "10px",
-                          left: "10px",
-                        }}
-                      >
-                        <FaHeart color="red" size={20} />
+            {filterdCategoriesWithFoods?.length ? (
+              <div>
+                {filterdCategoriesWithFoods?.map((category) => (
+                  <div key={category.id} className="menu-category-section">
+                    <h2
+                      id={`category-title-${category.id}`}
+                      className="menu-category-title subtitle-vphu"
+                    >
+                      {category.name}
+                    </h2>
+                    {category.foods?.length ? (
+                      <div className="menu-items">
+                        {category.foods.map((food) => (
+                          <div key={food.id} className="menu-item-page">
+                            <Link to={"/product-detail/" + food.slug}>
+                              <img
+                                className="menu-item-page-img"
+                                src={`${url}/${food.image_url}`}
+                                alt={food.name}
+                              />
+                            </Link>
+                            <Link to={"/product-detail/" + food.slug}>
+                              <h3 className="menu-item-page-title">
+                                {food.name}
+                              </h3>
+                            </Link>
+                            <p className="menu-item-page-ingredients">
+                              {food.ingredientsList.length > 0
+                                ? food.ingredientsList.join(", ")
+                                : "Không có thông tin nguyên liệu"}
+                            </p>
+                            <span className="menu-item-page-price">
+                              {formatCurrency(food.price)}
+                              {/* {formatCurrency(food.total)} */}
+                            </span>
+                            <div className="order-controls">
+                              <input
+                                type="number"
+                                className="menu-item-page-quantity"
+                                defaultValue="1"
+                                min="1"
+                                onChange={handleInputChange}
+                                max="10"
+                              />
+                              <button
+                                className="menu-item-page-order-btn"
+                                onClick={() => addToCart(food.id, food.name)}
+                              >
+                                Đặt Món
+                              </button>
+                            </div>
+                            {/* <button
+                            className="menu-item-page-order-btn"
+                            onClick={() => addToCart(food.id)}
+                          >
+                            Đặt Món
+                          </button> */}
+                            <div
+                              className="heart-icon-menu-page"
+                              onClick={() => addToFavourite(food.id)}
+                              style={{
+                                position: "absolute",
+                                top: "10px",
+                                left: "10px",
+                              }}
+                            >
+                              <FaHeart color="red" size={20} />
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ) : (
+                      <div>
+                        <p>Không tìm thấy món ăn phù hợp</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            ))}
+            ) : (
+              <div>
+                <p>Không tìm thấy món ăn phù hợp.</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
