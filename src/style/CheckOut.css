@@ -1,6 +1,7 @@
 .restaurant-content {
   display: flex;
   gap: 20px;
+  
   justify-content: space-between;
   margin-bottom: 30px;
 }
@@ -81,6 +82,7 @@
 
 .reservation-container {
   margin: 0px auto;
+  background-color: #262525;
   padding: 20px 15px;
 }
 

@@ -31,6 +31,7 @@ import InfoBookingTable from './pages/InfoBookingTable.jsx';
 import UpdatePassword from './pages/UpdatePassword.jsx';
 import ScrollToTop from './component/ScrollToTop.jsx';
 import { CartProvider } from '../CartContext.jsx';
+import BookingHistory from './pages/BookingHistory .jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -61,6 +62,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/checkout-pay" element={<CheckOutPay/>} />
           <Route path="/booking-table" element={<BookingTable/>} /> 
           <Route path="/info-booking-table" element={<InfoBookingTable/>} /> 
+          <Route path="/booking-history" element={<BookingHistory/>} /> 
   
          
         </Route>

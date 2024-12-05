@@ -74,6 +74,60 @@
   .receive-coupon-btn:hover {
     background-color: #450000;
   }
+  /*  */
+  .receive-coupon-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .coupon-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .coupon-logo {
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+  
+  .logo-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .coupon-details {
+    flex-grow: 1;
+  }
+  
+  .coupon-code {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .coupon-discount {
+    font-size: 14px;
+    color: #ff5722;
+  }
+  
+  .coupon-expiry {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .coupon-save-btn {
+    flex-shrink: 0;
+  }
+  
   
   @media (max-width: 767px) {
     .title-receive-coupon::after, .title-receive-coupon::before {

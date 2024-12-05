@@ -19,8 +19,9 @@ const CheckoutPay = () => {
     name: "",
     email: "",
     note: "",
+    id:""
   });
-
+  const [coupon, setCoupon] = useState("")
   const [isModalOpen, setIsModalOpen] = useState(false); // State kiểm soát modal
   const [isModalFailureOpen, setIsModalFailureOpen] = useState(false);
   const [food, setFood] = useState([]);
@@ -51,6 +52,7 @@ const CheckoutPay = () => {
       auth = JSON.parse(auth);
     }
     console.log(bookingInfo);
+    console.log(auth)
 
     setInfo((prevData) => ({
       ...prevData,
@@ -61,13 +63,11 @@ const CheckoutPay = () => {
       note: bookingInfo.note,
       email: auth.email,
       name: auth.name,
+      id: auth.id,
     }));
   }, []);
-  // Lấy giỏ hàng từ localStorage
-  // if (cartData) {
 
-  // }
-
+ 
   useEffect(() => {
     let cartID = localStorage.getItem("cartID");
     console.log(cartID);
@@ -124,14 +124,18 @@ const CheckoutPay = () => {
       const formData = new FormData();
       formData.append("cart_id", tableID);
       formData.append("amount", depositAmount.toFixed(0));
-      console.log("amount", depositAmount.toFixed(2));
+      formData.append("user_id", info.id)
+      // console.log("amount", depositAmount.toFixed(2));
       api
         .post("/vnpay/payment", formData, config)
         .then((res) => {
+          setPaymentMethod("");
           console.log(res);
           if (res.data.status === "success") {
             const checkoutVnPay = res.data.payment_url;
             window.location.href = checkoutVnPay;
+            console.log(checkoutVnPay);
+
             // setIsModalOpen(true);
           }
         })
@@ -141,45 +145,78 @@ const CheckoutPay = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    // navigate("/"); // Điều hướng về trang chính sau khi đóng modal (tùy chọn)
+    navigate("/"); // Điều hướng về trang chính sau khi đóng modal (tùy chọn)
   };
 
   const closeFailureModal = () => {
     setIsModalFailureOpen(false);
+    navigate("/cart"); // Điều hướng về trang chính sau khi đóng modal (tùy chọn)
   };
 
-  const location = useLocation();
-  console.log(location)
-  useEffect(() => {
-      // Lấy query parameters từ URL
-  const queryParams = new URLSearchParams(location.search);
+  const handleChangeCoupon = (e) =>{
+    setCoupon(e.target.value)
+  }
+  const handleApplyDiscount = () =>{
+    if(!coupon){
+      toast.error("Bạn chưa nhập mã giảm giá")
+    }else{
+     
+      console.log(info.id)
 
-  // Nếu có thay đổi về URL query, ví dụ vnp_ResponseCode hoặc thông tin khác, hãy xử lý logic ở đây.
-  const responseCode = queryParams.get("vnp_ResponseCode");
-  console.log("Query Parameters: ", queryParams);
-  console.log("reponseCode ", responseCode);
-
-  if (responseCode) {
-    api
-      .get(`/vnpay/callback/${responseCode}`)
-      .then((res) => {
-        console.log("Response from callback: ", res);
-        if (res.data.status === "error") {
-          setIsModalFailureOpen(true); // Hiển thị modal thất bại
-        } else {
-          setIsModalOpen(true); // Hiển thị modal thành công
-        }
-      })
-      .catch((error) => {
-        console.log("Error during callback request: ", error);
-      });
+      // api
+      // .post("/check-coupon", info.id, )
+      // .then(res =>{
+      //   console.log(res)
+      // })
+      // .catch(error => console.log(error))
+    }
   }
 
+  const location = useLocation();
+  console.log(location);
+  // useEffect(() => {
+  //   const queryParams = new URLSearchParams(location.search);
+  //   const responseCode = queryParams.get("vnp_ResponseCode");
+  //     if (responseCode) { 
+  //     api
+  //     .get("/vnpay/callback")
+  //     .then(res =>{
+  //       console.log(res)
+  //     })
+  //     .catch(error => console.log(error))
+  //   }
+  // }, [location.search]); 
+  // setIsModalOpen(true); // Hiển thị modal thành công
+  
+  // setIsModalFailureOpen(true); // Hiển thị modal thất bại
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const responseCode = queryParams.get("vnp_ResponseCode");
+    const secureHash = queryParams.get("vnp_SecureHash");
+  
+    if (responseCode && secureHash) {
+      // Thực hiện gọi API với các tham số từ URL
+      api
+        .get(`/vnpay/callback`, {
+          params: {
+            vnp_ResponseCode: responseCode,
+            vnp_SecureHash: secureHash,
+          },
+        })
+        .then((res) => {
+          console.log("API Response: ", res);
+        })
+        .catch((error) => console.error("API Error: ", error));
+    } else {
+      console.log("Thiếu thông tin trong URL: vnp_ResponseCode hoặc vnp_SecureHash");
+    }
   }, [location.search]);
-
+  
   console.log(info);
-  console.log(food);
-  console.log(paymentMethod);
+  // console.log(food);
+  // console.log(paymentMethod);
+  console.log();
+  console.log(coupon)
 
   return (
     <div className="checkout-pay-container">
@@ -309,12 +346,14 @@ const CheckoutPay = () => {
                 type="text"
                 className="checkout-pay-discount-input"
                 placeholder="Nhập mã giảm giá tại đây"
+                onChange={handleChangeCoupon}
+
                 // value={discountCode}
                 // onChange={(e) => setDiscountCode(e.target.value)}
               />
               <button
                 className="checkout-pay-discount-button"
-                // onClick={handleApplyDiscount}
+                onClick={handleApplyDiscount}
               >
                 Áp Dụng
               </button>

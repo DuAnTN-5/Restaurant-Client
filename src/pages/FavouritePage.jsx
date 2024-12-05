@@ -10,11 +10,21 @@ function FavouritePage() {
     if (favouriteLocal) {
       favouriteLocal = JSON.parse(favouriteLocal);
     }
-    // console.log(cart);
-
+    console.log(favouriteLocal);
+    let token = localStorage.getItem("token");
+    if (token) {
+      token = JSON.parse(token);
+    }
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    };
     //   setProduct(cart);
     api
-      .post("/product/cart", favouriteLocal)
+      .post("/product/cart", favouriteLocal, config)
       .then((res) => {
         console.log(res);
         setProduct(res.data.data);
@@ -53,60 +63,62 @@ function FavouritePage() {
 
   return (
     <>
-      <div className="favourite-page container-vphu">
-      <h1 className="title-cart-page title-vphu">Món ăn yêu thích</h1>
-        <div className="cart">
-          <div className="cart-container">
-            <div className="cart-header">
-              <div className="header-item">Món ăn</div>
-              <div className="header-item">Giá tiền</div>
-              <div className="header-item">Số lượng</div>
-              <div className="header-item"> Xóa</div>
-            </div>
-            {product.length === 0 ?(
-              <p className="empty-favourite-message">Món ăn yêu thích của bạn đang trống</p>
-
-            ):
-
-            product.map((item) => {
-              return (
-                <div className="cart-item" key={item.id}>
-                  <button className="remove-btn"></button>
-                  <div className="product-info">
-                    <img
-                      src={`${url}/${item.image_url}`}
-                      alt="Creamy Latte Coffee"
-                      className="productCart-image"
-                    />
-                    <div className="product-details">
-                      <h3 className="product-name">{item.name}</h3>
-                      <p className="product-description">
-                       {/* {item.summary} */}
-                       {/* {item?.summary
-              ? item.summary.replace(/<\/?p>/g, "")
-              : "Không có thông tin"} */}
-                      </p>
+     <div className="cart-component">
+        <div className="favourite-page container-vphu">
+        <h1 className="title-cart-page title-vphu">Món ăn yêu thích</h1>
+          <div className="cart">
+            <div className="cart-container">
+              <div className="cart-header">
+                <div className="header-item">Món ăn</div>
+                <div className="header-item">Giá tiền</div>
+                <div className="header-item">Số lượng</div>
+                <div className="header-item"> Xóa</div>
+              </div>
+              {product.length === 0 ?(
+                <p className="empty-favourite-message">Món ăn yêu thích của bạn đang trống</p>
+  
+              ):
+  
+              product.map((item) => {
+                return (
+                  <div className="cart-item" key={item.id}>
+                    <button className="remove-btn"></button>
+                    <div className="product-info">
+                      <img
+                        src={`${url}/${item.image_url}`}
+                        alt="Creamy Latte Coffee"
+                        className="productCart-image"
+                      />
+                      <div className="product-details">
+                        <h3 className="product-name">{item.name}</h3>
+                        <p className="product-description">
+                         {/* {item.summary} */}
+                         {/* {item?.summary
+                ? item.summary.replace(/<\/?p>/g, "")
+                : "Không có thông tin"} */}
+                        </p>
+                      </div>
                     </div>
+                    <p className="product-price">{formatCurrency(item.price)}</p>
+                    <div className="quantity-control">
+                      {/* <button className="quantity-btn">-</button> */}
+                      <input
+                        type="number"
+                        value={item.qty}
+                        className="quantity-input"
+                        readOnly
+                      />
+                      {/* <button className="quantity-btn">+</button> */}
+                    </div>
+                    <p onClick={() =>handleDelete(item.id)} className="product-total product-delete">Xóa</p>
                   </div>
-                  <p className="product-price">{formatCurrency(item.price)}</p>
-                  <div className="quantity-control">
-                    {/* <button className="quantity-btn">-</button> */}
-                    <input
-                      type="number"
-                      value={item.qty}
-                      className="quantity-input"
-                      readOnly
-                    />
-                    {/* <button className="quantity-btn">+</button> */}
-                  </div>
-                  <p onClick={() =>handleDelete(item.id)} className="product-total product-delete">Xóa</p>
-                </div>
-              );
-            })}
-            
+                );
+              })}
+              
+            </div>
           </div>
         </div>
-      </div>
+     </div>
     </>
   );
 }

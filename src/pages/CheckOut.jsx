@@ -223,186 +223,189 @@ const ReservationForm = () => {
   console.log(selectedTable);
 
   return (
-    <div className="reservation-container container-vphu text-vphu">
-      <h1 className="reservation-title-checkout title-vphu">Đặt Bàn</h1>
-      <div className="restaurant-content">
-        <div className="restaurant-map">
-          <h3 className="title-restaurant-map subtitle-vphu">
-            Sơ Đồ Tầng 1 & 2
+   <div className="cart-component">
+      <div className="reservation-container container-vphu text-vphu">
+        <h1 className="reservation-title-checkout title-vphu">Đặt Bàn</h1>
+        <div className="restaurant-content">
+          <div className="restaurant-map">
+            <h3 className="title-restaurant-map subtitle-vphu">
+              Sơ Đồ Tầng 1 & 2
+            </h3>
+            <div className="restaurant-map-image-wrapper">
+              <div className="restaurant-map-item-image">
+                <img src={tang1} alt="Tầng 1" />
+                <p className="restaurant-map-image-text">Tầng 1</p>
+              </div>
+              <div className="restaurant-map-item-image">
+                <img src={tang2} alt="Tầng 2" />
+                <p className="restaurant-map-image-text">Tầng 2</p>
+              </div>
+            </div>
+          </div>
+  
+          <div className="choose-table-box">
+            <h3 className="choose-table-title subtitle-vphu">Lựa chọn bàn</h3>
+            <div className="choose-table-buttons">
+            {tables.map(table =>{
+              {/* console.log(table) */}
+              return(
+                <button
+                  key={table.table_id}
+                  className={`table-button ${
+                    selectedTable === table.table_id ? "table-button-active" : ""
+                  } ${
+                    table.status === "reserved" || table.status === "occupied"
+                      ? "table-button-disabled"
+                      : ""
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleTableSelection(table.table_id, table.table_number,table.status );
+                  }}
+                  disabled={
+                    table.status === "reserved" || table.status === "occupied"
+                  }
+                >
+                  {table.table_number}
+                </button>
+              )
+            })}
+          
+            </div>
+          </div>
+        </div>
+  
+        <form
+          className="reservation-form"
+           onSubmit={handleSubmit}
+        >
+          <h3 className="title-info-book-table subtitle-vphu">
+            Thông tin đặt bàn
           </h3>
-          <div className="restaurant-map-image-wrapper">
-            <div className="restaurant-map-item-image">
-              <img src={tang1} alt="Tầng 1" />
-              <p className="restaurant-map-image-text">Tầng 1</p>
-            </div>
-            <div className="restaurant-map-item-image">
-              <img src={tang2} alt="Tầng 2" />
-              <p className="restaurant-map-image-text">Tầng 2</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="choose-table-box">
-          <h3 className="choose-table-title subtitle-vphu">Lựa chọn bàn</h3>
-          <div className="choose-table-buttons">
-          {tables.map(table =>{
-            {/* console.log(table) */}
-            return(
-              <button
-                key={table.table_id}
-                className={`table-button ${
-                  selectedTable === table.table_id ? "table-button-active" : ""
-                } ${
-                  table.status === "reserved" || table.status === "occupied"
-                    ? "table-button-disabled"
-                    : ""
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleTableSelection(table.table_id, table.table_number,table.status );
-                }}
-                disabled={
-                  table.status === "reserved" || table.status === "occupied"
-                }
-              >
-                {table.table_number}
-              </button>
-            )
-          })}
-        
-          </div>
-        </div>
-      </div>
-
-      <form
-        className="reservation-form"
-         onSubmit={handleSubmit}
-      >
-        <h3 className="title-info-book-table subtitle-vphu">
-          Thông tin đặt bàn
-        </h3>
-        <div className="form-group">
-          <label htmlFor="selectedTable">Bàn Đã Chọn:</label>
-          <input
-            className="preinstall-book"
-            type="text"
-            name="selectedTable"
-            value={selectedTable ? `Bàn ${selectedTableName}` : ""}
-            placeholder="Chưa chọn bàn"
-            readOnly
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="name">Họ & Tên</label>
-          <input
-            className="preinstall-book"
-            type="text"
-            name="name"
-            value={bookingData.name}
-            onChange={handleInputChange}
-            // readOnly
-            placeholder="Họ & tên"
-          />
-        </div>
-        {/* <div className="form-group">
-          <label htmlFor="phone">Số điện thoại (*)</label>
-          <input
-            className="preinstall-book"
-            type="number"
-            name="phone"
-            value={bookingData.phone}
-            onChange={handleInputChange}
-            placeholder="Số điện thoại"
-          />
-        </div> */}
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            className="preinstall-book"
-            type="email"
-            name="email"
-            value={bookingData.email}
-            // onChange={handleInputChange}
-            readOnly
-            placeholder="Email"
-          />
-        </div>
-        <div className="form-row">
           <div className="form-group">
-            <label htmlFor="date">Ngày</label>
+            <label htmlFor="selectedTable">Bàn Đã Chọn:</label>
             <input
               className="preinstall-book"
-              value={bookingData.date}
-              name="date"
-              placeholder="Ngày"
+              type="text"
+              name="selectedTable"
+              value={selectedTable ? `Bàn ${selectedTableName}` : ""}
+              placeholder="Chưa chọn bàn"
               readOnly
             />
           </div>
+  
           <div className="form-group">
-            <label htmlFor="time">Thời gian</label>
+            <label htmlFor="name">Họ & Tên</label>
             <input
               className="preinstall-book"
-              value={bookingData.time}
-              name="time"
-              placeholder="Thời gian"
-              readOnly
+              type="text"
+              name="name"
+              value={bookingData.name}
+              onChange={handleInputChange}
+              // readOnly
+              placeholder="Họ & tên"
             />
           </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="guests">Số khách</label>
-          <input
-            className="preinstall-book"
-            type="number"
-            name="guests"
-            // value={reservationData.guests}
-            onChange={handleInputChange}
-            placeholder="Số khách"
-            min="1"
-            max="15"
-          />
-          <p className="time-hint">Chỉ nhận từ 1 khách đến 15 khách</p>
-        </div>
-        <div className="form-group">
-          <label htmlFor="note">Ghi chú</label>
-          <textarea
-            className="preinstall-book"
-            name="note"
-            // value={reservationData.note}
-            onChange={handleInputChange}
-            placeholder="Gợi ý: thêm ghế trẻ em, ..."
-          ></textarea>
-        </div>
-        <div className="form-actions">
-          <button type="submit" className="btn btn-submit-checkout">
-            Đặt bàn
-          </button>
-          {orderButtonVisible && (
-            <button
-              // onClick={() => navigate("/menu")} // Điều hướng đến trang menu
-
-              // bấm đặt món là chuyển qua trang menu cùng id bàn
-              onClick={() => {
-                const bookingInfo = JSON.parse(
-                  localStorage.getItem("bookingInfo")
-                );
-                if (bookingInfo && bookingInfo.selectedTable) {
-                  navigate(`/menu?tableId=${bookingInfo.selectedTable}`); // Điều hướng sang Menu với tableId
-                } else {
-                  toast.error("Không tìm thấy bàn đã chọn!");
-                }
-              }}
-              // onClick={handleBooking}
-              // className="btn btn-order-now"
-              className="btn btn-order-now"
-            >
-              Đặt món
+          {/* <div className="form-group">
+            <label htmlFor="phone">Số điện thoại (*)</label>
+            <input
+              className="preinstall-book"
+              type="number"
+              name="phone"
+              value={bookingData.phone}
+              onChange={handleInputChange}
+              placeholder="Số điện thoại"
+            />
+          </div> */}
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              className="preinstall-book"
+              type="email"
+              name="email"
+              value={bookingData.email}
+              // onChange={handleInputChange}
+              readOnly
+              placeholder="Email"
+            />
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="date">Ngày</label>
+              <input
+                className="preinstall-book"
+                value={new Date(bookingData.date).toLocaleDateString()}
+                // value={bookingData.date}
+                name="date"
+                placeholder="Ngày"
+                readOnly
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="time">Thời gian</label>
+              <input
+                className="preinstall-book"
+                value={bookingData.time}
+                name="time"
+                placeholder="Thời gian"
+                readOnly
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="guests">Số khách</label>
+            <input
+              className="preinstall-book"
+              type="number"
+              name="guests"
+              // value={reservationData.guests}
+              onChange={handleInputChange}
+              placeholder="Số khách"
+              min="1"
+              max="15"
+            />
+            <p className="time-hint">Chỉ nhận từ 1 khách đến 15 khách</p>
+          </div>
+          <div className="form-group">
+            <label htmlFor="note">Ghi chú</label>
+            <textarea
+              className="preinstall-book"
+              name="note"
+              // value={reservationData.note}
+              onChange={handleInputChange}
+              placeholder="Gợi ý: thêm ghế trẻ em, ..."
+            ></textarea>
+          </div>
+          <div className="form-actions">
+            <button type="submit" className="btn btn-submit-checkout">
+              Đặt bàn
             </button>
-          )}
-        </div>
-      </form>
-    </div>
+            {orderButtonVisible && (
+              <button
+                // onClick={() => navigate("/menu")} // Điều hướng đến trang menu
+  
+                // bấm đặt món là chuyển qua trang menu cùng id bàn
+                onClick={() => {
+                  const bookingInfo = JSON.parse(
+                    localStorage.getItem("bookingInfo")
+                  );
+                  if (bookingInfo && bookingInfo.selectedTable) {
+                    navigate(`/menu?tableId=${bookingInfo.selectedTable}`); // Điều hướng sang Menu với tableId
+                  } else {
+                    toast.error("Không tìm thấy bàn đã chọn!");
+                  }
+                }}
+                // onClick={handleBooking}
+                // className="btn btn-order-now"
+                className="btn btn-order-now"
+              >
+                Đặt món
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
+   </div>
   );
 };
 
