@@ -7,6 +7,7 @@ body {
 /* Booking Table Page */
 .booking-table-page {
   display: flex;
+  background-color: #1b1b1b;
   justify-content: center;
   padding: 40px;
 }
