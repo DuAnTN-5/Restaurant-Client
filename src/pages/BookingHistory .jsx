@@ -1,77 +1,64 @@
 // import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../css2/UniqueBookingHistory.css"; // Đường dẫn tới CSS
+import { api } from "../api";
 
 const BookingHistory = () => {
-//   const [bookings, setBookings] = useState([]);
- 
+  const [bookings, setBookings] = useState([]);
 
+useEffect(() =>{
+  let auth = localStorage.getItem("auth");
+  if (auth) {
+    auth = JSON.parse(auth);
+  }
+  let token = localStorage.getItem("token");
+  if (token) {
+    token = JSON.parse(token);
+  }
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+    },
+  };
+api
+.get("/paid-carts/" + auth.id, config)
+.then(res =>{
+  console.log(res)
+  setBookings(res.data.data)
+})
+.catch(error =>{
+  console.log(error)
+})
+}, [])
+console.log(bookings)
 
   return (
-    // <div classNameNameName="unique-booking-history-container">
-    //   <h2 classNameNameName="unique-booking-title">Lịch Sử Đặt Bàn</h2>
-    //   <div classNameNameName="unique-booking-list">
-    //     {bookings.length > 0 ? (
-    //       bookings.map((booking) => (
-    //         <div classNameNameName="unique-booking-item" key={booking.id}>
-    //           <div classNameNameName="unique-booking-row">
-    //             <p classNameNameName="unique-booking-label">Bàn:</p>
-    //             <p classNameNameName="unique-booking-value">{booking.tableNumber}</p>
-    //           </div>
-    //           <div classNameNameName="unique-booking-row">
-    //             <p classNameNameName="unique-booking-label">Ngày giờ:</p>
-    //             <p classNameNameName="unique-booking-value">
-    //               {new Date(booking.dateTime).toLocaleString()}
-    //             </p>
-    //           </div>
-    //           <div classNameNameName="unique-booking-row">
-    //             <p classNameNameName="unique-booking-label">Số khách:</p>
-    //             <p classNameNameName="unique-booking-value">{booking.numberOfGuests}</p>
-    //           </div>
-    //           <div classNameNameName="unique-booking-row">
-    //             <p classNameNameName="unique-booking-label">Món ăn:</p>
-    //             <p classNameNameName="unique-booking-value">{booking.dishes.join(", ")}</p>
-    //           </div>
-    //           <div classNameNameName="unique-booking-row">
-    //             <p classNameNameName="unique-booking-label">Trạng thái:</p>
-    //             <p classNameNameName="unique-booking-value">{booking.status}</p>
-    //           </div>
-    //           <div classNameNameName="unique-booking-row">
-    //             <p classNameNameName="unique-booking-label">Tổng tiền:</p>
-    //             <p classNameNameName="unique-booking-value">
-    //               {parseFloat(booking.totalPrice).toLocaleString()} VND
-    //             </p>
-    //           </div>
-    //           <div classNameNameName="unique-booking-row">
-    //             <p classNameNameName="unique-booking-label">Tiền cọc:</p>
-    //             <p classNameNameName="unique-booking-value">
-    //               {parseFloat(booking.deposit).toLocaleString()} VND
-    //             </p>
-    //           </div>
-    //         </div>
-    //       ))
-    //     ) : (
-    //       <p classNameNameName="unique-booking-no-data">Không có lịch sử đặt bàn</p>
-    //     )}
-    //   </div>
-    // </div>
     <div className="history-container">
     <h2 className="history-title">Lịch Sử Đặt Bàn</h2>
     <div className="history-list">
-      <div className="history-item">
+    {bookings.map((item) =>{
+      return(
+
+      <div className="history-item" key={item.id}>
         <div className="history-header">
-          <p className="history-table">Bàn: <strong>Bàn 1</strong></p>
+          <p className="history-table">Bàn: <strong>{item.table_id}</strong></p>
           <p className="history-status history-paid">Đã thanh toán</p>
         </div>
         <div className="history-content">
-          <p><span>Ngày giờ:</span> 03/12/2024 - 18:30</p>
-          <p><span>Số khách:</span> 4</p>
-          <p><span>Món ăn:</span> Cá hồi nướng, Salad trộn, Nước ép cam</p>
+          <p><span>Ngày: </span>{new Date(item.date).toLocaleDateString()}</p>
+          <p><span>Giờ: </span>{item.time}</p>
+          <p><span>Số khách: </span>{item.guest_count}</p>
+          {/* <p><span>Món ăn:</span> Cá hồi nướng, Salad trộn, Nước ép cam</p>
           <p><span>Tổng tiền:</span> 1,200,000 VND</p>
-          <p><span>Tiền cọc:</span> 300,000 VND</p>
+          <p><span>Tiền cọc:</span> 300,000 VND</p> */}
         </div>
       </div>
+      )
+    })}
 
-      <div className="history-item">
+      {/* <div className="history-item">
         <div className="history-header">
           <p className="history-table">Bàn: <strong>Bàn 3</strong></p>
           <p className="history-status history-unpaid">Chưa thanh toán</p>
@@ -83,7 +70,7 @@ const BookingHistory = () => {
           <p><span>Tổng tiền:</span> 800,000 VND</p>
           <p><span>Tiền cọc:</span> 200,000 VND</p>
         </div>
-      </div>
+      </div> */}
     </div>
   </div>
   );

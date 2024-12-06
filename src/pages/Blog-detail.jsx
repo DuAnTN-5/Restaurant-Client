@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import "../css2/Blog-detail.css";
-import {  useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api, url } from "../api";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 // import parse from 'html-react-parser';
 import { MdAccountCircle } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
@@ -18,17 +18,17 @@ export default function BlogDetail() {
   const params = useParams();
 
   const inputRef = useRef();
-  
+
   let token = localStorage.getItem("token");
-  
+
   useEffect(() => {
     api
-    .get("/posts/" + params.slug)
-    .then((res) => {
-      console.log(res);
-      setBlogDetail(res.data.data);
-    })
-    .catch((error) => console.log(error));
+      .get("/posts/" + params.slug)
+      .then((res) => {
+        console.log(res);
+        setBlogDetail(res.data.data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -62,7 +62,6 @@ export default function BlogDetail() {
     "mẹ",
     "chim",
     "chó",
-    
   ];
   const filterBadWords = (text) => {
     return text
@@ -140,12 +139,12 @@ export default function BlogDetail() {
             toast.success(res.data.message);
 
             api
-            .get(`/posts/${blogDetail.id}/comments`)
-            .then((res) => {
-              console.log(res);
-              setComments(res.data.data);
-            })
-            .catch((error) => console.log(error));
+              .get(`/posts/${blogDetail.id}/comments`)
+              .then((res) => {
+                console.log(res);
+                setComments(res.data.data);
+              })
+              .catch((error) => console.log(error));
             setComment("");
           }
         })
@@ -155,8 +154,8 @@ export default function BlogDetail() {
     }
   }
   const cleanHTML = blogDetail.body
-  ? DOMPurify.sanitize(blogDetail.body.replace(/<hr\s*\/?>/gi, ""))
-  : "";
+    ? DOMPurify.sanitize(blogDetail.body.replace(/<hr\s*\/?>/gi, ""))
+    : "";
   // console.log(params)
 
   console.log({ comment });
@@ -198,11 +197,11 @@ export default function BlogDetail() {
             
               </div> */}
               <div
-  className="post-excerpt"
-  dangerouslySetInnerHTML={{
-    __html: cleanHTML || "Không có nội dung",
-  }}
-></div>
+                className="post-excerpt"
+                dangerouslySetInnerHTML={{
+                  __html: cleanHTML || "Không có nội dung",
+                }}
+              ></div>
               {/* <p className="post-excerpt">{blogDetail?.summary
                             ? blogDetail.summary.replace(/<\/?p>/g, "")
                             : "Không có thông tin"}</p> */}
@@ -221,7 +220,7 @@ export default function BlogDetail() {
                       <div key={parentComment.id}>
                         <li className="media" key={parentComment.id}>
                           {/* Comment cha */}
-                          <div >
+                          <div>
                             <img
                               src={
                                 parentComment.user.image !== null
@@ -284,7 +283,7 @@ export default function BlogDetail() {
                                     className="media second-media"
                                     key={childComment.id}
                                   >
-                                    <div >
+                                    <div>
                                       <img
                                         src={
                                           childComment.user.image !== null

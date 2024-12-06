@@ -14,12 +14,12 @@ import '../style/HomePage.css';
 function HomePage() {
   return (
     <div className="home-page">
-      <HomeSection />
-      <FavoriteFood />
-      <Menu />
-      <ReceiveCoupons />
-      <OurPartner />
-      <AboutUs />
+      <HomeSection/>
+      <FavoriteFood/>
+      <Menu/>
+      <ReceiveCoupons/>
+      <OurPartner/>
+      <AboutUs/>
       <OurMasterChef />
       <BookingForm />
       <RecentPosts />
