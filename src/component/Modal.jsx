@@ -150,7 +150,7 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
         <div>
           <table>
             <thead>
-              <tr>
+              <tr className="row-subtitle-modal">
                 <th className="subtitle-modal">Image</th>
                 <th className="subtitle-modal">Product</th>
                 <th className="subtitle-modal">Price</th>
@@ -162,8 +162,8 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
             <tbody>
                {/* eslint-disable-next-line react/prop-types */}
               {content?.map((item, index) => (
-                <tr key={index}>
-                  <td className="modal-items">
+                <tr className="modal-items-wrapper" key={index}>
+                  <td className="modal-items modal-items-image-product">
                     <img
                       src={`${url}/${item.product_image}`}
                       alt={item.product_name}

@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "../style/CartProduct.css";
+import { FaHistory } from "react-icons/fa";
 import Modal from "../component/Modal";
 import { api } from "../api";
 import { toast } from "react-toastify";
@@ -142,6 +143,10 @@ const Cart = () => {
   return (
    <div className="cart-component">
         <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1> 
+        <div className="reservation-history">
+          <FaHistory />
+        <span className="reservation-history-text-sub">Lịch sử đặt bàn</span>
+        </div>
       <div className="cart-container container-vphu">
   
         {

@@ -6,15 +6,28 @@
 }
 .menu-search-bar {
   float: inline-end;
+  margin: 20px 20px 0 0;
   color: #262525;
 }
+.menu-search-bar-change {
+  /* display: none; */
+  color: #262525;
+}
+.menu-search-input-change {
+  padding: 7px;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+
+}
+
 .menu-search-input {
   padding: 10px;
   border-radius: 8px;
 }
 
 .menu-main-container {
-  display: flex;
+  /* display: flex; */
   gap: 30px;
   justify-content: space-between;
   padding: 20px;
@@ -41,14 +54,14 @@
   color: #ffc107;
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
   padding: 20px 0;
   text-transform: uppercase;
   text-align: center;
   border-bottom: 2px solid #ffc107;
 }
 .menu-header {
-  margin-top: 20px;
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -90,8 +103,8 @@
 }
 
 .menu-categories-foods {
-  margin-left: 18%;
-  width: 82%;
+  margin-left: 21%;
+  width: 80%;
 }
 
 .menu-category-section {
@@ -244,7 +257,53 @@
   transform: scale(0.95);
 }
 
+.menu-sidebar-change {
+  display: none;
+  cursor: pointer;
+}
+
+.sidebar-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 100%;
+  background-color: #f4f4f4;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.sidebar-content ul {
+  list-style: none;
+  padding: 0;
+  padding-top: 50px;
+}
+
+.sidebar-content li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.sidebar-content .active {
+  font-weight: bold;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999;
+}
+
 @media (max-width: 1024px) {
+  .menu-sidebar {
+    width: 22%;
+    /* top: 30%; */
+  }
   .menu-sidebar-item {
     font-size: 16px;
   }
@@ -272,4 +331,35 @@
   .menu-sidebar-item {
     font-size: 14px;
   }
+  .menu-sidebar-change {
+    display: block;
+    position: fixed;
+    top: 20%;
+    left: 10px;
+    background-color: #e7272d;
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    z-index: 9;
+  }
+}
+@media (max-width: 480px) {
+  .menu-category-title {
+    padding-top: 20px;
+  }
+  .menu-sidebar-change {
+    font-size: 13px;
+    top: 28%;
+    padding: 7px;
+  }
+}
+
+
+@media (max-width: 375px) {
+  
+  .menu-item-page {
+    max-width: 100%;
+  }
+
 }

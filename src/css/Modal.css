@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 10000;
   }
   
   .modal-content {
@@ -199,4 +199,31 @@
   
   .continue-order-button:hover {
     background-color: #218838; /* Màu xanh lá đậm khi hover */
+  }
+  @media (max-width: 768px) {
+    .row-subtitle-modal {
+      display: none;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .modal-content {
+      width: 80%;
+    }
+    .modal-items-wrapper {
+      display: flex;
+      flex-direction: column
+    }
+    .subtitle-modal, .modal-items {
+      border: none;
+    }
+    .modal-items-wrapper, .modal-items-image-product {
+      border: 1px solid #000000;
+      border-radius: 8px;
+    }
+    .modal-items-wrapper {
+      margin-top: 20px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
   }
