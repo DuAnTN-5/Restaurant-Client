@@ -191,6 +191,56 @@ function Nav() {
                         ></i>
                       </button>
                     </div>
+                    <li className="button-user-change">
+                    <div className="cart-interaction-change">
+                  {token ? (
+                    <Link to="/profile-user">
+                      {/* <div className="cart-interaction-item-avatar" setAvatarUser={setAvatarUser}> */}
+                      <div className="cart-interaction-item-avatar">
+                        {avatarUser ? (
+                          <img
+                            className="avatarUser"
+                            src={`${url}/${avatarUser}`}
+                            alt=""
+                          />
+                        ) : (
+                          <i className="fa-regular fa-user navbar-icon"></i>
+                        )}
+                      </div>
+                    </Link>
+                  ) : (
+                    <Link to="/login">
+                      <div className="cart-interaction-item">
+                        <i className="fa-regular fa-user navbar-icon"></i>
+                      </div>
+                    </Link>
+                  )}
+                  {/* (<img className="avatarUser" src={`${url}+${avatarUser}`}alt="" /> */}
+                  {/* <Link to="/login">
+                    <div className="cart-interaction-item">
+                      <i className="fa-regular fa-user navbar-icon"></i>
+                    </div>
+                  </Link> */}
+                  {/* <Link to="/favourite-page" onClick={clickFavouritePage}> */}
+                  <div
+                    className="cart-interaction-item"
+                    onClick={clickFavouritePage}
+                  >
+                    <i className=" fa-regular fa-heart navbar-icon"></i>
+                  </div>
+                  {/* </Link> */}
+                  {/* <Link to="/cart" onClick={clickCart}>  */}
+                  <div
+                    className="cart-interaction-item icon-end"
+                    onClick={clickCart}
+                  >
+
+                    <i className="fa-solid fa-cart-shopping navbar-icon"></i>
+                    {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+                  </div>
+                  {/* </Link> */}
+                </div>
+                    </li>
                     <li className="navbar-item">
                       <Link className="navbar-link" to="/menu">
                         Thực Đơn
@@ -221,7 +271,9 @@ function Nav() {
                         Đặt Bàn
                       </Link>
                     </li>
+                    
                   </ul>
+                  
                 </div>
                 <div className="cart-interaction">
                   {token ? (
