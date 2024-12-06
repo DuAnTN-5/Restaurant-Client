@@ -33,7 +33,7 @@ const Blog = () => {
   console.log(blog);
 
   return (
-    <div className="blog-page">
+    <div className="blog-page text-vphu">
       <h1 className="title-cart-page title-vphu">Tin tức của chúng tôi</h1>
       {/* <h1 className="menu-main-title title-vphu">Thực Đơn Đặc Biệt</h1> */}
       <div className="blog-container">

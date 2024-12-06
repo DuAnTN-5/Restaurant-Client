@@ -153,13 +153,13 @@ function BookingTable() {
   // console.log({selectedDate.day} - {selectedDate.date}</strong> và khung giờ <strong>{customTime})
   //
   return (
-    <div className="booking-table-page">
+    <div className="booking-table-page-wrapper">
+        <h2 className="booking-title-page title-vphu">Lịch đặt bàn</h2> 
       <div className="booking-table-container">
-        <h2 className="booking-title-page">Lịch đặt bàn</h2>
 
         {/* Phần chọn ngày */}
         <div className="section">
-          <h2 className="booking-title">Chọn ngày</h2>
+          <h2 className="booking-title subtitle-vphu">Chọn ngày</h2>
           {/* <h2 className="booking-title-label">Tháng 12</h2> */}
           <div className="date-list">
             {dates.map((date, index) => (
@@ -179,7 +179,7 @@ function BookingTable() {
 
         {/* Phần chọn giờ */}
         <div className="section">
-          <h2 className="booking-title">Chọn giờ </h2>
+          <h2 className="booking-title subtitle-vphu">Chọn giờ </h2>
           {selectedDate ? (
             <div className="movie-item">
               {/* Hiển thị ô input nếu người dùng đã chọn ngày */}

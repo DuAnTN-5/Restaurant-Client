@@ -1,3 +1,9 @@
+.checkout-table-wrapper {
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 .restaurant-content {
   display: flex;
   gap: 20px;
@@ -82,7 +88,6 @@
 
 .reservation-container {
   margin: 0px auto;
-  background-color: #262525;
   padding: 20px 15px;
 }
 
@@ -114,6 +119,9 @@
 
 .reservation-form {
   max-width: 500px;
+  background-color: #262525;
+  border-radius: 8px;
+  padding: 20px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -138,6 +146,7 @@ label {
 }
 
 .preinstall-book {
+  border-radius: 5px;
   color: #888;
   padding: 10px;
  
@@ -190,5 +199,11 @@ label {
   }
   .restaurant-map-item-image {
     width: unset;
+  }
+}
+
+@media (max-width: 580px) {
+  .form-row {
+    flex-direction: column;
   }
 }

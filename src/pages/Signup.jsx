@@ -90,7 +90,7 @@ function SignUp() {
       });
 
     }
-
+console.log(inputs)
   }
   return (
     <div className="app-signup">

@@ -1,6 +1,9 @@
 /* Tổng thể */
 .cart-component{
-  background-color: #1b1b1b;
+  background-image: url("../assets/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .cart-container {
@@ -16,6 +19,7 @@
 
 /* Tiêu đề giỏ hàng */
 .title-cart-page {
+  padding-top: 40px;
   text-align: center;
   font-size: 36px;
   font-weight: bold;
@@ -204,8 +208,7 @@
   background-color: #2ecc71;
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .reservation-details {
     flex-direction: column;
   }
@@ -218,5 +221,17 @@
   .summary-title-cart-product,
   .summary-total {
     font-size: 18px;
+  }
+  .cart-item-image, .cart-item-info, .cart-item-total {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width:480px) {
+  .reservation-cart-container {
+    padding: 20px;
+  }
+  .cart-item-cart-product {
+    padding: 10px;
   }
 }
