@@ -264,6 +264,7 @@
   .header-top {
       max-width: 540px;
   }
+  
 }
 @media (max-width: 425px) {
   .navbar-right {
