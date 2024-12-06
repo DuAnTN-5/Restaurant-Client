@@ -64,8 +64,8 @@ function FavouritePage() {
   return (
     <>
      <div className="cart-component">
-        <div className="favourite-page container-vphu">
         <h1 className="title-cart-page title-vphu">Món ăn yêu thích</h1>
+        <div className="favourite-page container-vphu">
           <div className="cart">
             <div className="cart-container">
               <div className="cart-header">

@@ -2,7 +2,10 @@
 
 
 .contact-page{
-    background-color: #1b1b1b;
+    background-image: url("../assets/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: white;
 }
 .contact{
@@ -81,6 +84,7 @@
 }
 .subtitle-contact{
     /* padding-bottom: 5px; */
+    color: #e7272d;
     font-weight: bold;
 }
 
@@ -142,7 +146,7 @@
 }
 .send {
     padding: 10px 20px;
-    background-color: rgb(196, 33, 60); /* Màu nền cho nút */
+    background-color: #e7272d; /* Màu nền cho nút */
     color: white; /* Màu chữ */
     border: none; /* Xóa viền */
     border-radius: 4px; /* Bo góc */
@@ -199,7 +203,7 @@
         float: right;
         vertical-align: top;
         margin-top: 125px;
-        padding-right: 88px;
+        padding-right: 0;
     }
     .form-title {
         font-size: 22px;
@@ -224,6 +228,23 @@
         
     }
 }
+
+@media (max-width: 1024px) {
+    .contact {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    .form-container {
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+    .contact__header {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
 @media only screen and (min-width: 874px) and (max-width: 990px) {
     .contact-text {
         font-size: 15px;

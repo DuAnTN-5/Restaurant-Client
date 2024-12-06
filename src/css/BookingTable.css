@@ -1,18 +1,21 @@
 /* General styles */
 body {
-  background-color: #1b1b1b;
+  
   color: #ffffff;
 }
 
 /* Booking Table Page */
-.booking-table-page {
-  display: flex;
-  background-color: #1b1b1b;
-  justify-content: center;
+.booking-table-page-wrapper {
+  /* display: flex; */
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   padding: 40px;
 }
 
 .booking-table-container {
+  margin: 0 auto;
   width: 100%;
   background-color: #2d2d2d;
   max-width: 800px;
@@ -34,6 +37,7 @@ body {
 }
 
 .booking-title {
+  color: #e7272d;
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
@@ -205,3 +209,29 @@ body {
   color: #000; /* Màu đen */
 }
 
+@media (max-width: 768px) {
+    .date-list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+  .date-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .loading-date {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-table-page-wrapper {
+     padding: 10px;
+  }
+  .session {
+    justify-content: center;
+  }
+  .booking-title-page {
+    padding-top: 40px;
+  }
+}

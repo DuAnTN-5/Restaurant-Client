@@ -1,5 +1,9 @@
+@import url("../css/root.css");
 .blog-detail-page{
-        background-color: #1b1b1b;
+    background-image: url("../assets/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
         color: white;
         padding: 40px 0;
       }
@@ -8,8 +12,18 @@
     margin: 0 auto;
     /* color: white; */
     display: flex;
+
     
 }
+.content {
+    color: #cccccc !important;
+    font-family: var(--font-family-text) !important;
+}
+
+.container, h2, h3, h4 {
+    /* color: white !important; */
+}
+
 /* .avatar-blog-detail{
 
 } */
@@ -18,6 +32,7 @@
 .main-content {
     padding: 20px;
     width: 70%;
+    border-radius: 8px;
     background-color: #2d2d2d;
     /* padding-right: 2rem;
     padding: 2rem;
@@ -398,6 +413,37 @@
         overflow-y: auto; /* Kích hoạt cuộn dọc khi nội dung vượt quá chiều cao */
         overflow-x: hidden; /* Tắt cuộn ngang */
       }
+
+      .read_more {
+        max-width: 80% !important;
+        margin: 0 auto !important;
+      }
       
      
+     @media (max-width: 1024px) {
+        .container {
+          flex-direction: column;
+          padding: 30px;
+        }
+        .main-content {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .post-excerpt p, .sappo {
+            max-width: 80% !important;
+            margin: 0 auto !important;
+        }
+     }
+
      
+     @media (max-width: 425px) {
+        .main-content {
+            width: 100%;
+        }
+        .post-meta {
+            flex-wrap: wrap;
+        }
+        .carousel-inner {
+            width: 100% !important;
+        }
+     }

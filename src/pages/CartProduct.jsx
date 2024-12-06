@@ -141,8 +141,8 @@ const Cart = () => {
 
   return (
    <div className="cart-component">
+        <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1> 
       <div className="cart-container container-vphu">
-        <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1>
   
         {
           cartProduct.length === 0 ? (

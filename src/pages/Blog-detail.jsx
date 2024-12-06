@@ -357,10 +357,10 @@ export default function BlogDetail() {
         </main>
 
         <aside className="blog-sidebar-custom">
-          {/* Tìm kiếm */}
+          {/* Tìm kiếm */}
           {/* <div className="sidebar-section-custom search-custom">
-            <input type="text" placeholder="Tìm kiếm" />
-            <button type="submit">Tìm kiếm</button>
+            <input type="text" placeholder="Tìm kiếm" />
+            <button type="submit">Tìm kiếm</button>
           </div> */}
           {/* Thẻ cá nhân */}
           <div className="profile-card-custom">
