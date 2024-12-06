@@ -65,23 +65,14 @@ const ReservationForm = () => {
         const data = res.data.data;
 
         if (data && bookingData.date) {
-          // console.log("Ngày được chọn:", bookingData.date);
-          // console.log("Dữ liệu API:", data);
-
           const normalizedBookingDate = normalizeDate(bookingData.date); // Chuẩn hóa ngày từ localStorage
-
-          // Duyệt qua danh sách keys để tìm key trùng khớp
           Object.keys(data).forEach((key) => {
             const normalizedKey = normalizeDate(key); // Chuẩn hóa ngày từ API
             if (normalizedKey === normalizedBookingDate) {
-              // console.log("Tìm thấy ngày:", key);
               setTables(data[key]); // Lấy dữ liệu bàn cho ngày đó
             }
           });
-        } else {
-          // console.log("Không tìm thấy bàn cho ngày:", bookingData.date);
-          // console.warn("Không tìm thấy bàn cho ngày:", bookingData.date);
-        }
+        } 
       })
       .catch((error) => {
         console.error("Error fetching tables:", error);
@@ -189,12 +180,31 @@ const ReservationForm = () => {
               console.log(res);
               if(res.data.status){
               setCartCount(res.data.data.length); // Cập nhật số lượng bàn
-    
-      
               }
             })
             .catch((error) => console.log(error));
 
+            // 
+            api
+            .get("/tables", config)
+            .then((res) => {
+              // console.log(res);
+              const data = res.data.data;
+      
+              if (data && bookingData.date) {
+                const normalizedBookingDate = normalizeDate(bookingData.date); // Chuẩn hóa ngày từ localStorage
+                Object.keys(data).forEach((key) => {
+                  const normalizedKey = normalizeDate(key); // Chuẩn hóa ngày từ API
+                  if (normalizedKey === normalizedBookingDate) {
+                    setTables(data[key]); // Lấy dữ liệu bàn cho ngày đó
+                  }
+                });
+              } 
+            })
+            .catch((error) => {
+              console.error("Error fetching tables:", error);
+            });
+            setSelectedTable(null)
             toast.success("Đặt bàn thành công!", { autoClose: 3000 });
 
             // toast.success("Bạn có muốn chọn món không", { autoClose: 3000 });

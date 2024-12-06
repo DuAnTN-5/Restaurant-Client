@@ -87,6 +87,7 @@ function ProductDetail() {
     api
       .get("products/" + params.slug)
       .then((res) => {
+        console.log(res)
         console.log(res.data.data.product);
         setVote(res.data.data);
         let productData = res.data.data.product

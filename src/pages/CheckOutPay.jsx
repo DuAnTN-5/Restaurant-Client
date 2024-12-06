@@ -52,8 +52,8 @@ const CheckoutPay = () => {
     if (auth) {
       auth = JSON.parse(auth);
     }
-    console.log(bookingInfo);
-    console.log(auth);
+    // console.log(bookingInfo);
+    // console.log(auth);
 
     setInfo((prevData) => ({
       ...prevData,
@@ -70,7 +70,7 @@ const CheckoutPay = () => {
 
   useEffect(() => {
     let cartID = localStorage.getItem("cartID");
-    console.log(cartID);
+    // console.log(cartID);
     let token = localStorage.getItem("token");
     if (token) {
       token = JSON.parse(token);
@@ -105,7 +105,6 @@ const CheckoutPay = () => {
     const discountAmount = (total * discountPercentage) / 100; // Số tiền giảm
     return total - discountAmount; // Tổng tiền sau khi giảm
   };
-  console.log(calculateTotalCoupon);
 
   // Hàm tính tiền cọc (20% của tổng tiền)
   const calculateDeposit = () => {
@@ -123,6 +122,7 @@ const CheckoutPay = () => {
       return;
     } else {
       let tableID = localStorage.getItem("tableID");
+      let cartID = localStorage.getItem("cartID");
       let token = localStorage.getItem("token");
       if (token) {
         token = JSON.parse(token);
@@ -135,18 +135,36 @@ const CheckoutPay = () => {
         },
       };
       const depositAmount = calculateDeposit();
+      const depositAmountTotal = calculateTotal();
+      // console.log("table_id", tableID);
+      // console.log("cart_id", cartID);
+      // console.log("amount", depositAmount.toFixed(0));
+      // console.log("total_amount", depositAmountTotal.toFixed(0));
+      // console.log("user_id", info.id);
+      // console.log("coupon_id", couponTotal.id);
+
       const formData = new FormData();
-      formData.append("cart_id", tableID);
+      formData.append("table_id", tableID);
       formData.append("amount", depositAmount.toFixed(0));
+      formData.append("total_amount", depositAmountTotal.toFixed(0));
+      formData.append("cart_id", cartID);
       formData.append("user_id", info.id);
+      if (couponTotal && couponTotal.id) {
+        formData.append("coupon_id", couponTotal.id);
+      }
+      // else {
+      //   formData.append("coupon_id", null);
+      // }
+      // formData.append("coupon_id", couponTotal.id);
       // console.log("amount", depositAmount.toFixed(2));
       api
         .post("/vnpay/payment", formData, config)
         .then((res) => {
           setPaymentMethod("");
           console.log(res);
-          if (res.data.status === "success") {
+          if (res.data.status) {
             const checkoutVnPay = res.data.payment_url;
+            toast.success("nhảy trang");
             window.location.href = checkoutVnPay;
             console.log(checkoutVnPay);
 
@@ -174,13 +192,25 @@ const CheckoutPay = () => {
     if (!coupon) {
       toast.error("Bạn chưa nhập mã giảm giá");
     } else {
+      let token = localStorage.getItem("token");
+      if (token) {
+        token = JSON.parse(token);
+      }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
+        },
+      };
+
       const formData = new FormData();
       formData.append("user_id", info.id);
       formData.append("coupon_code", coupon);
       // console.log(info.id)
 
       api
-        .post("/check-coupon", formData)
+        .post("/check-coupon", formData, config)
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
@@ -197,7 +227,7 @@ const CheckoutPay = () => {
   };
 
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   // useEffect(() => {
   //   const queryParams = new URLSearchParams(location.search);
   //   const responseCode = queryParams.get("vnp_ResponseCode");
@@ -215,6 +245,7 @@ const CheckoutPay = () => {
   // setIsModalFailureOpen(true); // Hiển thị modal thất bại
   // //
   // useEffect(() => {
+  //   // setPaymentMethod("");
   //   const queryParams = new URLSearchParams(window.location.search);
   //   console.log(queryParams.toString());
   //   const queryParamss = new URLSearchParams(location.search);
@@ -237,32 +268,54 @@ const CheckoutPay = () => {
   //   }
   // }, [location.search]);
 
-  // useEffect(() => {
-  //   const queryParams = new URLSearchParams(location.search);
-  //   const responseCode = queryParams.get("vnp_ResponseCode");
-  //   const secureHash = queryParams.get("vnp_SecureHash");
-  //   const txnRef = queryParams.get("vnp_TxnRef"); // Lấy vnp_TxnRef từ URL
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const responseCode = queryParams.get("vnp_ResponseCode");
+    // const secureHash = queryParams.get("vnp_SecureHash");
+    // const txnRef = queryParams.get("vnp_TxnRef"); // Lấy vnp_TxnRef từ URL
 
-  //   if (responseCode && secureHash && txnRef) {
-  //     // Thực hiện gọi API với các tham số từ URL
-  //     api
-  //       .get(`/vnpay/callback`, {
-  //         params: {
-  //           vnp_ResponseCode: responseCode,
-  //           vnp_SecureHash: secureHash,
-  //           vnp_TxnRef: txnRef, // Thêm tham số vnp_TxnRef
-  //         },
-  //       })
-  //       .then((res) => {
-  //         console.log("API Response: ", res);
-  //       })
-  //       .catch((error) => console.error("API Error: ", error));
-  //   } else {
-  //     console.log("Thiếu thông tin trong URL: vnp_ResponseCode, vnp_SecureHash hoặc vnp_TxnRef");
-  //   }
-  // }, [location.search]);
+    let token = localStorage.getItem("token");
+    if (token) {
+      token = JSON.parse(token);
+    }
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    };
 
-  console.log(info);
+    if (responseCode) {
+      // Thực hiện gọi API với các tham số từ URL
+      api
+        .get(`/vnpay/callback?` + queryParams.toString(), config)
+        // .get(`/vnpay/callback`, {params: {
+        //     // vnp_ResponseCode: responseCode,
+        //     vnp_SecureHash: secureHash,
+        //     vnp_TxnRef: txnRef, // Thêm tham số vnp_TxnRef
+        //   },
+        //   config,
+        // })
+        .then((res) => {
+          console.log("API Response: ", res);
+          if (!res.data.status) {
+            setIsModalFailureOpen(true); // Hiển thị modal thất bại
+            // toast.error(res.data.message);
+          } else {
+            setIsModalOpen(true); // Hiển thị modal thành công
+          }
+
+        })
+        .catch((error) => console.error("API Error: ", error));
+    } else {
+      console.log(
+        "Thiếu thông tin trong URL: vnp_ResponseCode, vnp_SecureHash hoặc vnp_TxnRef"
+      );
+    }
+  }, [location.search]);
+
+  // console.log(info);
   // console.log(food);
   // console.log(paymentMethod);
   // console.log(coupon);
@@ -474,11 +527,14 @@ const CheckoutPay = () => {
             </thead>
             <tbody>
               {food.map((item) => {
+                let image = JSON.parse(item.product_image);
+          console.log(image)
+          let firstImage = image[0];
                 return (
                   <tr key={item.id}>
                     <td className="checkout-pay-product-info">
                       <img
-                        src={`${url}/${item.product_image}`}
+                        src={`${url}/${firstImage}`}
                         alt="error"
                         className="checkout-pay-product-image"
                       />

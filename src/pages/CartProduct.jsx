@@ -99,8 +99,6 @@ const Cart = () => {
           if(res.data.status){
             setCartProduct(res.data.data);
           setCartCount(res.data.data.length); // Cập nhật số lượng bàn
-
-  
           }
         })
         .catch((error) => console.log(error));

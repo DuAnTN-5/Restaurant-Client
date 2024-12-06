@@ -85,9 +85,12 @@ const FoodCategory = () => {
       <h2 className="category-title title-vphu">Top Thực Phẩm Nổi Bật</h2>
       <div className="food-items">
         {foodItems.map((item) =>{
+          console.log(item)
           let image = JSON.parse(item.image_url);
-          {/* console.log(image) */}
+          console.log(image)
           let firstImage = image[0];
+          console.log(firstImage)
+          console.log(`${url}/${firstImage}`)
           return(
 
           <div className="food-card" key={item.id}>

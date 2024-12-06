@@ -148,10 +148,14 @@ function Menu() {
         {menuItem.length === 0 ? (
           <p>Không có món ăn nào trong danh mục này.</p>
         ) : (
-          menuItem.map((item, index) => (
+          menuItem.map((item, index) => {
+            let image = JSON.parse(item.image_url);
+          console.log(image)
+          let firstImage = image[0];
+            return(
             <div className="menu-item-home" key={item.id}>
               <Link className="menu-image" to={"/product-detail/" + item.slug}>
-                <img src={`${url}/${item.image_url}`} alt={item.name} />
+                <img src={`${url}/${firstImage}`} alt={item.name} />
               </Link>
               <div className="menu-details">
                 <Link to={"product-detail/" + item.slug}>
@@ -209,7 +213,9 @@ function Menu() {
           </div> */}
               </div>
             </div>
-          ))
+          )
+          }
+          )
         )}
       </div>
     </div>
