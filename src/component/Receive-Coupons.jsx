@@ -62,43 +62,6 @@ const ReceiveCoupons = () => {
   }, [])
 
   return (
-    // <div className="receive-coupon container-vphu">
-    //   <div className="receive-coupon-wrapper">
-    //     <div className="receive-coupon-title">
-    //       <h3 className='title-receive-coupon subtitle-vphu'>VOUCHER GIẢM GIÁ</h3>
-    //     </div>
-    //     <Slider {...settings}>
-    //       {Array(5).fill().map((_, index) => (
-    //         <div className="receive-coupon-item" key={index}>
-    //           <img className='receive-coupon-image' src={ImageVoucher} alt="Image voucher" />
-    //           <div className="receive-coupon-btn">Đặt Bàn</div>
-    //         </div>
-    //       ))}
-    //     </Slider>
-    //   </div>
-    // </div>
-    // <div className="receive-coupon container-vphu">
-    //   <div className="receive-coupon-wrapper">
-    //     <div className="receive-coupon-title">
-    //       <h3 className='title-receive-coupon subtitle-vphu'>VOUCHER GIẢM GIÁ</h3>
-    //     </div>
-    //     <Slider {...settings}>
-    //       {coupons.map((coupon) => (
-    //         <div className="receive-coupon-item" key={coupon.id}>
-    //           <img className='receive-coupon-image' src={ImageVoucher} alt="Image voucher" />
-    //           <div className="receive-coupon-code">Mã: {coupon.code}</div>
-    //           <div className="receive-coupon-discount">
-    //             Giảm: {coupon.value}% ({coupon.discount_type})
-    //           </div>
-    //           <div className="receive-coupon-date">
-    //             HSD: {new Date(coupon.end_date).toLocaleDateString()}
-    //           </div>
-    //           <div className="receive-coupon-btn">Đặt Bàn</div>
-    //         </div>
-    //       ))}
-    //     </Slider>
-    //   </div>
-    // </div>
     <div className="receive-coupon container-vphu">
   <div className="receive-coupon-wrapper">
     <div className="receive-coupon-title">

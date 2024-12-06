@@ -19,9 +19,10 @@ const CheckoutPay = () => {
     name: "",
     email: "",
     note: "",
-    id:""
+    id: "",
   });
-  const [coupon, setCoupon] = useState("")
+  const [coupon, setCoupon] = useState({});
+  const [couponTotal, setCouponTotal] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); // State kiểm soát modal
   const [isModalFailureOpen, setIsModalFailureOpen] = useState(false);
   const [food, setFood] = useState([]);
@@ -52,7 +53,7 @@ const CheckoutPay = () => {
       auth = JSON.parse(auth);
     }
     console.log(bookingInfo);
-    console.log(auth)
+    console.log(auth);
 
     setInfo((prevData) => ({
       ...prevData,
@@ -67,7 +68,6 @@ const CheckoutPay = () => {
     }));
   }, []);
 
- 
   useEffect(() => {
     let cartID = localStorage.getItem("cartID");
     console.log(cartID);
@@ -98,10 +98,24 @@ const CheckoutPay = () => {
     return food.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
+  // Hàm tính tổng tiền sau khi áp mã giảm giá
+  const calculateTotalCoupon = () => {
+    const discountPercentage = parseFloat(couponTotal.value) || 0; // API trả về giá trị mã giảm giá, ví dụ 25%
+    const total = calculateTotal(); // Tổng tiền ban đầu
+    const discountAmount = (total * discountPercentage) / 100; // Số tiền giảm
+    return total - discountAmount; // Tổng tiền sau khi giảm
+  };
+  console.log(calculateTotalCoupon);
+
   // Hàm tính tiền cọc (20% của tổng tiền)
   const calculateDeposit = () => {
-    return calculateTotal() * 0.2;
+    if (couponTotal) {
+      return calculateTotalCoupon() * 0.2;
+    } else {
+      return calculateTotal() * 0.2;
+    }
   };
+
   let amount = formatCurrency(calculateDeposit());
   const handlePayment = () => {
     if (!paymentMethod) {
@@ -124,7 +138,7 @@ const CheckoutPay = () => {
       const formData = new FormData();
       formData.append("cart_id", tableID);
       formData.append("amount", depositAmount.toFixed(0));
-      formData.append("user_id", info.id)
+      formData.append("user_id", info.id);
       // console.log("amount", depositAmount.toFixed(2));
       api
         .post("/vnpay/payment", formData, config)
@@ -153,31 +167,41 @@ const CheckoutPay = () => {
     navigate("/cart"); // Điều hướng về trang chính sau khi đóng modal (tùy chọn)
   };
 
-  const handleChangeCoupon = (e) =>{
-    setCoupon(e.target.value)
-  }
-  const handleApplyDiscount = () =>{
-    if(!coupon){
-      toast.error("Bạn chưa nhập mã giảm giá")
-    }else{
-     
-      console.log(info.id)
+  const handleChangeCoupon = (e) => {
+    setCoupon(e.target.value);
+  };
+  const handleApplyDiscount = () => {
+    if (!coupon) {
+      toast.error("Bạn chưa nhập mã giảm giá");
+    } else {
+      const formData = new FormData();
+      formData.append("user_id", info.id);
+      formData.append("coupon_code", coupon);
+      // console.log(info.id)
 
-      // api
-      // .post("/check-coupon", info.id, )
-      // .then(res =>{
-      //   console.log(res)
-      // })
-      // .catch(error => console.log(error))
+      api
+        .post("/check-coupon", formData)
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            setCouponTotal(res.data.coupon);
+            toast.success("Sử dụng mã giảm giá thành công");
+          }
+        })
+        .catch((error) => {
+          if (error.status === 400) {
+            toast.error(error.response.data.message);
+          }
+        });
     }
-  }
+  };
 
   const location = useLocation();
   console.log(location);
   // useEffect(() => {
   //   const queryParams = new URLSearchParams(location.search);
   //   const responseCode = queryParams.get("vnp_ResponseCode");
-  //     if (responseCode) { 
+  //     if (responseCode) {
   //     api
   //     .get("/vnpay/callback")
   //     .then(res =>{
@@ -185,38 +209,65 @@ const CheckoutPay = () => {
   //     })
   //     .catch(error => console.log(error))
   //   }
-  // }, [location.search]); 
+  // }, [location.search]);
   // setIsModalOpen(true); // Hiển thị modal thành công
-  
+
   // setIsModalFailureOpen(true); // Hiển thị modal thất bại
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const responseCode = queryParams.get("vnp_ResponseCode");
-    const secureHash = queryParams.get("vnp_SecureHash");
-  
-    if (responseCode && secureHash) {
-      // Thực hiện gọi API với các tham số từ URL
-      api
-        .get(`/vnpay/callback`, {
-          params: {
-            vnp_ResponseCode: responseCode,
-            vnp_SecureHash: secureHash,
-          },
-        })
-        .then((res) => {
-          console.log("API Response: ", res);
-        })
-        .catch((error) => console.error("API Error: ", error));
-    } else {
-      console.log("Thiếu thông tin trong URL: vnp_ResponseCode hoặc vnp_SecureHash");
-    }
-  }, [location.search]);
-  
+  // //
+  // useEffect(() => {
+  //   const queryParams = new URLSearchParams(window.location.search);
+  //   console.log(queryParams.toString());
+  //   const queryParamss = new URLSearchParams(location.search);
+  //   console.log(queryParamss.toString());
+
+  //   // const responseCode = queryParams.get("vnp_ResponseCode");
+  //   // const secureHash = queryParams.get("vnp_SecureHash");
+
+  //   if (queryParams) {
+  //     // Thực hiện gọi API với các tham số từ URL
+  //     api
+  //       .get(`/vnpay/callback`+queryParams.toString()
+  //          )
+  //       .then((res) => {
+  //         console.log("API Response: ", res);
+  //       })
+  //       .catch((error) => console.error("API Error: ", error));
+  //   } else {
+  //     console.log("Thiếu thông tin trong URL: vnp_ResponseCode hoặc vnp_SecureHash");
+  //   }
+  // }, [location.search]);
+
+  // useEffect(() => {
+  //   const queryParams = new URLSearchParams(location.search);
+  //   const responseCode = queryParams.get("vnp_ResponseCode");
+  //   const secureHash = queryParams.get("vnp_SecureHash");
+  //   const txnRef = queryParams.get("vnp_TxnRef"); // Lấy vnp_TxnRef từ URL
+
+  //   if (responseCode && secureHash && txnRef) {
+  //     // Thực hiện gọi API với các tham số từ URL
+  //     api
+  //       .get(`/vnpay/callback`, {
+  //         params: {
+  //           vnp_ResponseCode: responseCode,
+  //           vnp_SecureHash: secureHash,
+  //           vnp_TxnRef: txnRef, // Thêm tham số vnp_TxnRef
+  //         },
+  //       })
+  //       .then((res) => {
+  //         console.log("API Response: ", res);
+  //       })
+  //       .catch((error) => console.error("API Error: ", error));
+  //   } else {
+  //     console.log("Thiếu thông tin trong URL: vnp_ResponseCode, vnp_SecureHash hoặc vnp_TxnRef");
+  //   }
+  // }, [location.search]);
+
   console.log(info);
   // console.log(food);
   // console.log(paymentMethod);
-  console.log();
-  console.log(coupon)
+  // console.log(coupon);
+  console.log(couponTotal);
+  // console.log(parseFloat(couponTotal.value).toFixed(0));
 
   return (
     <div className="checkout-pay-container">
@@ -456,6 +507,44 @@ const CheckoutPay = () => {
                   {formatCurrency(calculateTotal())}
                 </td>
               </tr>
+              {couponTotal.value && (
+                <>
+                  <tr>
+                    <td className="checkout-pay-header-product checkout-pay-subtotal-title">
+                      Mã giảm giá:
+                    </td>
+                    <td className="checkout-pay-product-price">
+                      {parseFloat(couponTotal.value).toFixed(0)}%
+                      {/* -{formatCurrency(calculateTotal() * (parseFloat(coupon.value) / 100))} */}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="checkout-pay-header-product checkout-pay-subtotal-title">
+                      Tổng Cộng (sau giảm giá):
+                    </td>
+                    <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
+                      {formatCurrency(calculateTotalCoupon())}
+                      {/* {calculateDiscountedTotal()} */}
+                    </td>
+                  </tr>
+                </>
+              )}
+              {/* <tr>
+                <td className="checkout-pay-header-product checkout-pay-subtotal-title">
+                  Mã giảm giá:
+                </td>
+                <td className="checkout-pay-product-price">
+                  {parseFloat(couponTotal.value).toFixed(0)}%
+                </td>
+              </tr>
+              <tr>
+                <td className="checkout-pay-header-product checkout-pay-subtotal-title">
+                  Tổng Cộng (sau giảm giá):
+                </td>
+                <td className="checkout-pay-header-subtotal checkout-pay-subtotal-amount">
+                  {formatCurrency(calculateTotalCoupon())}
+                </td>
+              </tr> */}
               <tr>
                 <td className="checkout-pay-header-product checkout-pay-subtotal-title">
                   Tiền Cọc (20%):

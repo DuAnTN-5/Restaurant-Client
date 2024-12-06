@@ -13,6 +13,7 @@ import ProductComment from "./Product-Comment";
 
 function ProductDetail() {
   const [productDetail, setProductDetail] = useState({});
+  const [image, setImage] = useState([]);
   const [vote, setVote] = useState("");
   const [category, setCategory] = useState("");
   // const navigate = useNavigate();
@@ -82,6 +83,7 @@ function ProductDetail() {
       .then((res) => {
         console.log(res.data.data);
         setVote(res.data.data);
+        setImage(res.data.data.product.image_url)
         setProductDetail(res.data.data.product);
         const data = res.data.data.product;
         if (data.category_id === 1) {
@@ -136,6 +138,11 @@ function ProductDetail() {
       .catch((error) => console.log(error));
   }, [params.slug]);
   console.log(otherDishes);
+  console.log(image)
+  // let img = JSON.parse(image);
+  {/* console.log(image) */}
+  // let img = image[0];
+
 
   return (
     <>
@@ -148,7 +155,7 @@ function ProductDetail() {
                 alt=""
               />
             </div>
-            {/* <div className="list-image-detail">
+            <div className="list-image-detail">
               <img
                 src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
                 alt=""
@@ -165,7 +172,7 @@ function ProductDetail() {
                 src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
                 alt=""
               />
-            </div> */}
+            </div>
           </div>
           <div className="navbar-right">
             <div>
