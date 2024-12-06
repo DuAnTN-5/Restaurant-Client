@@ -1,6 +1,9 @@
 .blog-page{
   color: white; /* Default text color for readability */
-  background-color: #1b1b1b;
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   padding: 20px;
 
 }
@@ -58,7 +61,7 @@
 }
 
 .post-content {
-  padding: 20px;
+  padding: 20px 20px 50px;
 }
 
 .post-title {
@@ -333,11 +336,11 @@
   .blog-main,
   .blog-sidebar-custom {
       width: 100%;
-      margin-left: 0;
+      margin-left: 0 !important;
   }
 
   .post-content {
-      padding: 15px;
+      /* padding: 15px; */
   }
 
   .post-title {
@@ -365,7 +368,7 @@
   }
 
   .post-content {
-      padding: 10px;
+      /* padding: 10px; */
   }
 
   .post-meta {

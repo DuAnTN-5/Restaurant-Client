@@ -223,7 +223,7 @@ const ReservationForm = () => {
   console.log(selectedTable);
 
   return (
-   <div className="cart-component">
+   <div className="checkout-table-wrapper">
       <div className="reservation-container container-vphu text-vphu">
         <h1 className="reservation-title-checkout title-vphu">Đặt Bàn</h1>
         <div className="restaurant-content">
