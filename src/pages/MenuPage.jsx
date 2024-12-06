@@ -3,6 +3,7 @@ import { api, url } from "../api";
 import { toast } from "react-toastify"; // Thêm thông báo toast
 import { FaHeart } from "react-icons/fa";
 import "../style/MenuPage.css";
+import { FaThList } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 // import { set } from "lodash";
 
@@ -40,6 +41,8 @@ function filterFoodItems(categories, searchString) {
 }
 
 const MenuPage = () => {
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(false);
   const [categoriesWithFoods, setCategoriesWithFoods] = useState([]);
   const [filterdCategoriesWithFoods, setFilterdCategoriesWithFoods] = useState(
     []
@@ -47,6 +50,16 @@ const MenuPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeCategory, setActiveCategory] = useState(null);
+
+  const handleSidebarToggle = () => {
+    setSidebarVisible(!sidebarVisible);
+    setOverlayVisible(!overlayVisible);
+  };
+
+  const handleOverlayClick = () => {
+    setSidebarVisible(false);
+    setOverlayVisible(false);
+  };
 
   let favouriteLocal = localStorage.getItem("favourite");
   if (favouriteLocal) {
@@ -270,6 +283,52 @@ const MenuPage = () => {
 
   return (
     <div className="bgr-menu-page">
+      <div className="menu-sidebar-change" onClick={handleSidebarToggle}>
+        <FaThList />
+      </div>
+
+      {overlayVisible && <div className="overlay" onClick={handleOverlayClick}></div>}
+  
+      {sidebarVisible && (
+        <div className="sidebar-content">
+          <h3 className="title-menu-sidebar subtitle-vphu"> Danh Mục</h3>
+          <ul className="menu-sidebar-list">
+          <li>
+                <div className="menu-search-bar-change">
+                  <input
+                    type="text"
+                    placeholder="Tìm kiếm món ăn..."
+                    className="menu-search-input-change"
+                    onChange={handleSearchFood}
+                  />
+                </div>
+              </li>
+              {categoriesWithFoods.map((category) => (
+                <li
+                  key={category.id}
+                  className={`menu-sidebar-item ${
+                    activeCategory === category.id ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setActiveCategory(category.id);
+                    const categoryTitleElement = document.getElementById(
+                      `category-title-${category.id}`
+                    );
+                    if (categoryTitleElement) {
+                      categoryTitleElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                      });
+                    }
+                  }}
+                >
+                  {category.name}
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+  
       <div className="menu-page container-vphu text-vphu">
         <div className="menu-header">
           <div className="menu-title">
@@ -294,6 +353,16 @@ const MenuPage = () => {
           <div className="menu-sidebar">
             <h3 className="title-menu-sidebar subtitle-vphu"> Danh Mục</h3>
             <ul className="menu-sidebar-list">
+              <li>
+                <div className="menu-search-bar-change">
+                  <input
+                    type="text"
+                    placeholder="Tìm kiếm món ăn..."
+                    className="menu-search-input-change"
+                    onChange={handleSearchFood}
+                  />
+                </div>
+              </li>
               {categoriesWithFoods.map((category) => (
                 <li
                   key={category.id}
