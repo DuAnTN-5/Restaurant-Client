@@ -14,6 +14,7 @@ import ProductComment from "./Product-Comment";
 function ProductDetail() {
   const [productDetail, setProductDetail] = useState({});
   const [image, setImage] = useState([]);
+  const [selectedImage, setSelectedImage] = useState("");
   const [vote, setVote] = useState("");
   const [category, setCategory] = useState("");
   // const navigate = useNavigate();
@@ -27,6 +28,7 @@ function ProductDetail() {
     }).format(amount * 1000);
   };
   const [otherDishes, setOtherDishes] = useState([]);
+  const [imgGotherDishes, setImgOtherDishes] = useState([]);
 
   const settings = {
     dots: true,
@@ -75,16 +77,26 @@ function ProductDetail() {
     token = JSON.parse(token);
   }
 
+  const handleImageClick = (img) =>{
+    setSelectedImage(img)
+  }
+
   const params = useParams();
   // console.log(params);
   useEffect(() => {
     api
       .get("products/" + params.slug)
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res.data.data.product);
         setVote(res.data.data);
-        setImage(res.data.data.product.image_url)
-        setProductDetail(res.data.data.product);
+        let productData = res.data.data.product
+		  if(productData.image_url){
+			  productData.image_url =  JSON.parse(res.data.data.product.image_url)
+        setImage(productData.image_url);
+        setSelectedImage(productData.image_url[0]);
+			}
+      setProductDetail(res.data.data.product);
+
         const data = res.data.data.product;
         if (data.category_id === 1) {
           setCategory("Món khai vị ");
@@ -129,7 +141,14 @@ function ProductDetail() {
           api
             .get("product-categories/21")
             .then((res) => {
-              // console.log(res);
+              console.log(res);
+              let productData = res.data.data
+              console.log(productData)
+              if(productData.image_url){
+                productData.image_url =  JSON.parse(res.data.data.image_url)
+                console.log(productData.image_url)
+                setImgOtherDishes(productData.image_url[0]);
+              }
               setOtherDishes(res.data.data);
             })
             .catch((error) => console.log(error));
@@ -139,9 +158,9 @@ function ProductDetail() {
   }, [params.slug]);
   console.log(otherDishes);
   console.log(image)
-  // let img = JSON.parse(image);
-  {/* console.log(image) */}
-  // let img = image[0];
+  console.log(selectedImage)
+  console.log(imgGotherDishes)
+  
 
 
   return (
@@ -151,27 +170,20 @@ function ProductDetail() {
           <div className="image-detail">
             <div className="navbar-left">
               <img
-                src={`${url}/${productDetail.image_url}`}
+                src={`${url}/${selectedImage}`}
                 alt=""
               />
             </div>
             <div className="list-image-detail">
-              <img
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
-                alt=""
-              />
-              <img
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
-                alt=""
-              />
-              <img
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
-                alt=""
-              />
-              <img
-                src="https://wp.validthemes.net/restan/wp-content/uploads/2024/06/Salmon-Fry-1.png"
-                alt=""
-              />
+            {image && image.map((img, index) => (
+                    <img
+                      key={index}
+                      src={`${url}/${img}`}
+                      alt=""
+                      onClick={() => handleImageClick(img)}
+                    />
+                  ))}
+             
             </div>
           </div>
           <div className="navbar-right">
@@ -242,7 +254,7 @@ function ProductDetail() {
                       <Link to={"/product-detail/" + item.slug}>
                         <img
                           className="product-image-detail-page"
-                          src={`${url}/${item.image_url}`}
+                          src={`${url}/${selectedImage}`}
                           alt=""
                         />
                       </Link>
