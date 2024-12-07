@@ -290,14 +290,14 @@ const MenuPage = () => {
       {overlayVisible && <div className="overlay" onClick={handleOverlayClick}></div>}
   
       {sidebarVisible && (
-        <div className="sidebar-content">
+        <div className="sidebar-content sidebar-content-change">
           <h3 className="title-menu-sidebar subtitle-vphu"> Danh Mục</h3>
-          <ul className="menu-sidebar-list">
+          <ul className="menu-sidebar-list menu-sidebar-list-change">
           <li>
                 <div className="menu-search-bar-change">
                   <input
                     type="text"
-                    placeholder="Tìm kiếm món ăn..."
+                    placeholder="Tìm kiếm món"
                     className="menu-search-input-change"
                     onChange={handleSearchFood}
                   />
