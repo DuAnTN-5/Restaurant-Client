@@ -80,6 +80,38 @@ const [inputs, setInputs] = useState({
 
 
 }
+
+
+// Hàm hiển thị alert khi nhấn nút Facebook
+const handleClickFacebook = () => {
+  toast.success("Đã click  vào facebook")
+    api
+      .get("/auth/facebook")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+};
+
+// Hàm hiển thị alert khi nhấn nút Google
+const handleClickGoogle = () => {
+  toast.success("đã click vào gg")
+  api
+      .get("/auth/google")
+      .then((res) => {
+        console.log(res);
+        const googleLogin = res.data.url
+        console.log(googleLogin)
+        window.location.href = googleLogin
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+};
+
+
 console.log(inputs)
 
   return (
@@ -130,6 +162,22 @@ console.log(inputs)
               </Link>
             </p>
             <div className="social-buttons">
+              <button
+                className="facebook icon-social-network"
+                onClick={handleClickFacebook}
+              >
+                <i className="fa-brands fa-facebook-f"></i>
+                <p className="text-social-network">Facebook</p>
+              </button>
+              <button
+                className="google icon-social-network"
+                onClick={handleClickGoogle}
+              >
+                <i className="fa-brands fa-google"></i>
+                <p className="text-social-network">Google</p>
+              </button>
+            </div>
+            {/* <div className="social-buttons">
               <button className="facebook icon-social-network">
                 <i className="fa-brands fa-facebook-f"></i>
                 <p className="text-social-network">Facebook</p>
@@ -138,7 +186,7 @@ console.log(inputs)
                 <i className="fa-brands fa-google"></i>
                 <p className="text-social-network">Google</p>
               </button>
-            </div>
+            </div> */}
             <p className="team-info">HightFive Team © 2024</p>
           </div>
         </div>
