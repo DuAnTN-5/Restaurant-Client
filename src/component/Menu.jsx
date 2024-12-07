@@ -162,9 +162,9 @@ function Menu() {
                   <h3 className="menu-title">{item.name}</h3>
                 </Link>
                 <p className="menu-description">
-                  {JSON.parse(item.ingredients)
+                  {/* {JSON.parse(item.ingredients)
                     .map((ing) => ing.value)
-                    .join(", ")}
+                    .join(", ")} */}
                 </p>
                 <p className="menu-price">${item.price}</p>
                 <button className="order-button" onClick={() => addToCart()}>
