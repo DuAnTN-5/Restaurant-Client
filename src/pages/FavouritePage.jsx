@@ -24,7 +24,7 @@ function FavouritePage() {
     };
     //   setProduct(cart);
     api
-      .post("/product/cart", favouriteLocal, config)
+      .post("/product/cart", JSON.stringify(favouriteLocal), config)
       .then((res) => {
         console.log(res);
         setProduct(res.data.data);
@@ -80,12 +80,14 @@ function FavouritePage() {
               ):
   
               product.map((item) => {
+                let image = JSON.parse(item.image_url);
+          let firstImage = image[0];
                 return (
                   <div className="cart-item" key={item.id}>
                     <button className="remove-btn"></button>
                     <div className="product-info">
                       <img
-                        src={`${url}/${item.image_url}`}
+                        src={`${url}/${firstImage}`}
                         alt="Creamy Latte Coffee"
                         className="productCart-image"
                       />

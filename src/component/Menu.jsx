@@ -148,19 +148,23 @@ function Menu() {
         {menuItem.length === 0 ? (
           <p>Không có món ăn nào trong danh mục này.</p>
         ) : (
-          menuItem.map((item, index) => (
+          menuItem.map((item, index) => {
+            let image = JSON.parse(item.image_url);
+          console.log(image)
+          let firstImage = image[0];
+            return(
             <div className="menu-item-home" key={item.id}>
               <Link className="menu-image" to={"/product-detail/" + item.slug}>
-                <img src={`${url}/${item.image_url}`} alt={item.name} />
+                <img src={`${url}/${firstImage}`} alt={item.name} />
               </Link>
               <div className="menu-details">
                 <Link to={"product-detail/" + item.slug}>
                   <h3 className="menu-title">{item.name}</h3>
                 </Link>
                 <p className="menu-description">
-                  {JSON.parse(item.ingredients)
+                  {/* {JSON.parse(item.ingredients)
                     .map((ing) => ing.value)
-                    .join(", ")}
+                    .join(", ")} */}
                 </p>
                 <p className="menu-price">${item.price}</p>
                 <button className="order-button" onClick={() => addToCart()}>
@@ -209,7 +213,9 @@ function Menu() {
           </div> */}
               </div>
             </div>
-          ))
+          )
+          }
+          )
         )}
       </div>
     </div>

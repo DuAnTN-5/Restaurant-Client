@@ -38,7 +38,7 @@ console.log(bookings)
     <div className="history-container">
     <h2 className="history-title">Lịch Sử Đặt Bàn</h2>
     <div className="history-list">
-    {bookings.map((item) =>{
+    {/* {bookings.map((item) =>{
       return(
 
       <div className="history-item" key={item.id}>
@@ -50,13 +50,39 @@ console.log(bookings)
           <p><span>Ngày: </span>{new Date(item.date).toLocaleDateString()}</p>
           <p><span>Giờ: </span>{item.time}</p>
           <p><span>Số khách: </span>{item.guest_count}</p>
-          {/* <p><span>Món ăn:</span> Cá hồi nướng, Salad trộn, Nước ép cam</p>
-          <p><span>Tổng tiền:</span> 1,200,000 VND</p>
-          <p><span>Tiền cọc:</span> 300,000 VND</p> */}
+         
         </div>
       </div>
       )
-    })}
+    })} */}
+    {bookings.length > 0 ? (
+          bookings.map((item) => (
+            <div className="history-item" key={item.id}>
+              <div className="history-header">
+                <p className="history-table">
+                  Bàn: <strong>{item.table_id}</strong>
+                </p>
+                <p className="history-status history-paid">Đã thanh toán</p>
+              </div>
+              <div className="history-content">
+                <p>
+                  <span>Ngày: </span>
+                  {new Date(item.date).toLocaleDateString()}
+                </p>
+                <p>
+                  <span>Giờ: </span>
+                  {item.time}
+                </p>
+                <p>
+                  <span>Số khách: </span>
+                  {item.guest_count}
+                </p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="history-empty">Lịch sử không có bàn nào.</p>
+        )}
 
       {/* <div className="history-item">
         <div className="history-header">

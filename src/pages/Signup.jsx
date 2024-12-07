@@ -13,9 +13,9 @@ function SignUp() {
     password: "",
     c_password: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   console.log("isSubmitting:", isSubmitting);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,7 +28,7 @@ function SignUp() {
 
   const handleChangeInputs = (event) => {
     const { name, value } = event.target;
-    console.log(name, value)
+    console.log(name, value);
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value })); // dấu tròn là return về luôn
   }; // change để lưu dữ liệu ng dùng đang nhập
   console.log(inputs);
@@ -39,58 +39,74 @@ function SignUp() {
     // let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if(!inputs.name){
+    if (!inputs.name) {
       flag = false;
     }
-    if(!inputs.email){
+    if (!inputs.email) {
       flag = false;
-    }else if(!regex.test(inputs.email)){
-      toast.error("Vui lòng nhập đúng định dạng email")
+    } else if (!regex.test(inputs.email)) {
+      toast.error("Vui lòng nhập đúng định dạng email");
       flag = false;
       setIsSubmitting(false);
     }
-    if(!inputs.password){
+    if (!inputs.password) {
       flag = false;
-    }else if(!inputs.c_password){
+    } else if (!inputs.c_password) {
       flag = false;
-    }else if(inputs.password != inputs.c_password){
-      toast.error("Mật khẩu nhập lại không đúng")
+    } else if (inputs.password != inputs.c_password) {
+      toast.error("Mật khẩu nhập lại không đúng");
       flag = false;
       setIsSubmitting(false);
     }
-    if(!flag){
+    if (!flag) {
       setIsSubmitting(false);
-      toast.error("Vui lòng nhập đầy đủ thông tin")
-    }else{
+      toast.error("Vui lòng nhập đầy đủ thông tin");
+    } else {
       setIsSubmitting(true);
-      toast.info("Vui lòng đợi một lát")
+      toast.info("Vui lòng đợi một lát");
       api
-      .post("/register", inputs)
-      .then((response) =>{
-      
-        console.log(response)
-          if(response.data.data.verification_required === true || response.data.success === true){
-            toast.info("Đăng kí thành công, Vui lòng kiểm tra email của bạn để xác thực tài khoản")
-          }      
-      })
-      .catch(error =>{
-        console.log(error)
-        if(error.response.data.success === false){
-          toast.error("Email này đã được sử dụng ")
-        }
-        // if(error){
-        //   toast.error("Có lỗi xảy ra")
-        // }
-        // if(error.response.data.success === false){
-        //   toast.warning("Mật khẩu nhập lại không khớp")
-        // }
-      })
-      .finally(() => {
-        setIsSubmitting(false); // Đặt isSubmitting thành false khi yêu cầu hoàn tất
-      });
-
+        .post("/register", inputs)
+        .then((response) => {
+          console.log(response);
+          if (
+            response.data.data.verification_required === true ||
+            response.data.success === true
+          ) {
+            toast.info(
+              "Đăng kí thành công, Vui lòng kiểm tra email của bạn để xác thực tài khoản"
+            );
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.data.success === false) {
+            toast.error("Email này đã được sử dụng ");
+          }
+          // if(error){
+          //   toast.error("Có lỗi xảy ra")
+          // }
+          // if(error.response.data.success === false){
+          //   toast.warning("Mật khẩu nhập lại không khớp")
+          // }
+        })
+        .finally(() => {
+          setIsSubmitting(false); // Đặt isSubmitting thành false khi yêu cầu hoàn tất
+        });
     }
-console.log(inputs)
+
+    console.log(inputs);
+  }
+
+  function handleClickFaceBook() {
+    alert("Ok");
+    api
+      .get("/auth/facebook")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
   return (
     <div className="app-signup">
@@ -114,28 +130,28 @@ console.log(inputs)
             {/* <p className="error">{}</p> */}
             <form className="form-signup" onSubmit={handleSubmit}>
               <input
-              className="input-signup"
+                className="input-signup"
                 type="text"
                 placeholder="Tên của bạn"
                 name="name"
                 onChange={handleChangeInputs}
               />
               <input
-              className="input-signup"
+                className="input-signup"
                 type="email"
                 placeholder="Email của bạn"
                 name="email"
                 onChange={handleChangeInputs}
               />
               <input
-              className="input-signup"
+                className="input-signup"
                 type="password"
                 placeholder="Nhập mật khẩu"
                 name="password"
                 onChange={handleChangeInputs}
               />
               <input
-              className="input-signup"
+                className="input-signup"
                 type="password"
                 placeholder="Nhập lại mật khẩu"
                 name="c_password"
@@ -151,7 +167,7 @@ console.log(inputs)
                 <label htmlFor="terms">Agree to the terms and policy</label>
               </div>
               <button type="submit" className="btn" disabled={isSubmitting}>
-              {isSubmitting ? 'Đang thực hiện...' : 'Register'}
+                {isSubmitting ? "Đang thực hiện..." : "Register"}
               </button>
             </form>
             <p className="account">
@@ -161,7 +177,10 @@ console.log(inputs)
               </Link>
             </p>
             <div className="social-buttons">
-              <button className="facebook icon-social-network">
+              <button
+                className="facebook icon-social-network"
+                onClick={() =>handleClickFaceBook()}
+              >
                 <i className="fa-brands fa-facebook-f"></i>
                 <p className="text-social-network">Facebook</p>
               </button>

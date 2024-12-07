@@ -9,21 +9,21 @@ function ProductRate(props) {
   // eslint-disable-next-line react/prop-types
   const product = props.product;
   // eslint-disable-next-line react/prop-types
-  const params = props.params
+  const params = props.params;
   // eslint-disable-next-line react/prop-types
-  const setVote = props.setVote
+  const setVote = props.setVote;
 
   const [rating, setRating] = useState(0);
   // const [ratingCount, setRatingCount] = useState(0); // Theo dõi số lần đánh giá
 
   let token = localStorage.getItem("token");
-  
+
   let auth = localStorage.getItem("auth");
   if (auth) {
     auth = JSON.parse(auth);
   }
   // console.log(auth);
-  
+
   function changeRating(newRating) {
     if (!token) {
       toast.error("Vui lòng đăng nhập");
@@ -37,7 +37,7 @@ function ProductRate(props) {
         Accept: "application/json",
       },
     };
-    console.log(newRating)
+    console.log(newRating);
     setRating(newRating);
     console.log(rating);
 
@@ -52,19 +52,32 @@ function ProductRate(props) {
       .post("/ratings", formData, config)
       .then((res) => {
         console.log(res);
-        if(res.data.data){
-          toast.success(res.data.message)
+        if (res.data.data.rating_count === 1) {
+          toast.success(res.data.message);
           api
-          // eslint-disable-next-line react/prop-types
-          .get("products/" + params.slug)
-          .then((res) =>{
-            console.log(res)
-            setVote(res.data.data)
-          })
+            // eslint-disable-next-line react/prop-types
+            .get("products/" + params.slug)
+            .then((res) => {
+              console.log(res);
+              setVote(res.data.data);
+            });
+        }else if(res.data.data.rating_count === 2){
+          toast.success("Cập nhật đánh giá thành công");
+          api
+            // eslint-disable-next-line react/prop-types
+            .get("products/" + params.slug)
+            .then((res) => {
+              console.log(res);
+              setVote(res.data.data);
+            });
         }
+
+        // if(res.data.data){
       })
       .catch((error) => {
-        console.log(error);
+        if(error.response.data.status === false){
+          toast.error(error.response.data.message)
+        }
       });
   }
 
