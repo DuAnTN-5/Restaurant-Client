@@ -97,17 +97,10 @@ function SignUp() {
     console.log(inputs);
   }
 
-  function handleClickFaceBook() {
-    alert("Ok");
-    api
-      .get("/auth/facebook")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+ 
+
+  
+
   return (
     <div className="app-signup">
       <div className="wrapper-container-signup">
@@ -176,10 +169,10 @@ function SignUp() {
                 Login
               </Link>
             </p>
-            <div className="social-buttons">
+            {/* <div className="social-buttons">
               <button
                 className="facebook icon-social-network"
-                onClick={() =>handleClickFaceBook()}
+                // onClick={() =>handleClickFaceBook()}
               >
                 <i className="fa-brands fa-facebook-f"></i>
                 <p className="text-social-network">Facebook</p>
@@ -188,7 +181,8 @@ function SignUp() {
                 <i className="fa-brands fa-google"></i>
                 <p className="text-social-network">Google</p>
               </button>
-            </div>
+            </div> */}
+           
             <p className="team-info">HightFive Team © 2024</p>
           </div>
         </div>

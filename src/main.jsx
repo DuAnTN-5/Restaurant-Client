@@ -32,6 +32,7 @@ import UpdatePassword from './pages/UpdatePassword.jsx';
 import ScrollToTop from './component/ScrollToTop.jsx';
 import { CartProvider } from '../CartContext.jsx';
 import BookingHistory from './pages/BookingHistory .jsx';
+import LoginGoogle from './pages/LoginGoogle.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -63,6 +64,8 @@ createRoot(document.getElementById('root')).render(
           <Route path="/booking-table" element={<BookingTable/>} /> 
           <Route path="/info-booking-table" element={<InfoBookingTable/>} /> 
           <Route path="/booking-history" element={<BookingHistory/>} /> 
+          <Route path="/auth/google/callback" element={<LoginGoogle />} />
+          {/* <Route path="/booking-history" element={<LoginGoogle/>} />  */}
   
          
         </Route>
