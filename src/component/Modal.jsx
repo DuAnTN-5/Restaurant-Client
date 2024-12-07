@@ -150,7 +150,7 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
         <div>
           <table>
             <thead>
-              <tr>
+              <tr className="row-subtitle-modal">
                 <th className="subtitle-modal">Image</th>
                 <th className="subtitle-modal">Product</th>
                 <th className="subtitle-modal">Price</th>

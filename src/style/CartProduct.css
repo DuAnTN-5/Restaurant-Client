@@ -4,7 +4,9 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-}
+  position: relative;
+
+} 
 
 .cart-container {
   max-width: 1200px;
@@ -27,6 +29,39 @@
   margin-bottom: 20px;
   border-bottom: 2px solid #cccccc;
   padding-bottom: 20px;
+}
+
+.reservation-history {
+  position: absolute;
+  top: 48px;
+  right: 10%;
+  padding: 10px;
+  background-color: #e7272d;
+  border-radius: 8px;
+}
+.reservation-history:hover {
+  background-color: #b12020;
+}
+
+.reservation-history-text-sub {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: -25px;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: #373737;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.reservation-history:hover .reservation-history-text-sub {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Thông tin đặt bàn */
@@ -233,5 +268,14 @@
   }
   .cart-item-cart-product {
     padding: 10px;
+  }
+  .reservation-history {
+    font-size: 14px;
+    padding: 7px;
+    top: 45px;
+  }
+  .reservation-history-text-sub {
+    top: 30px;
+    right: 65px;
   }
 }
