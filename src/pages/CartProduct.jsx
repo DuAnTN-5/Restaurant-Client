@@ -4,7 +4,7 @@ import { FaHistory } from "react-icons/fa";
 import Modal from "../component/Modal";
 import { api } from "../api";
 import { toast } from "react-toastify";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../CartContext";
 // import { toast } from "react-toastify";
 
@@ -100,8 +100,6 @@ const Cart = () => {
           if(res.data.status){
             setCartProduct(res.data.data);
           setCartCount(res.data.data.length); // Cập nhật số lượng bàn
-
-  
           }
         })
         .catch((error) => console.log(error));
@@ -143,10 +141,12 @@ const Cart = () => {
   return (
    <div className="cart-component">
         <h1 className="title-cart-page title-vphu">Giỏ Hàng</h1> 
-        <div className="reservation-history">
-          <FaHistory />
-        <span className="reservation-history-text-sub">Lịch sử đặt bàn</span>
-        </div>
+       <Link to="/booking-history">
+          <div className="reservation-history">
+            <FaHistory />
+          <span className="reservation-history-text-sub">Lịch sử đặt bàn</span>
+          </div>
+       </Link>
       <div className="cart-container container-vphu">
   
         {

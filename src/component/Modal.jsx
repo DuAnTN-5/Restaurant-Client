@@ -161,11 +161,16 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
             </thead>
             <tbody>
                {/* eslint-disable-next-line react/prop-types */}
-              {content?.map((item, index) => (
-                <tr className="modal-items-wrapper" key={index}>
-                  <td className="modal-items modal-items-image-product">
+              {content?.map((item, index) =>{
+                let image = JSON.parse(item.product_image);
+          {/* console.log(image) */}
+          let firstImage = image[0];
+                console.log(item)
+                return(
+                <tr key={index}>
+                  <td className="modal-items">
                     <img
-                      src={`${url}/${item.product_image}`}
+                      src={`${url}/${firstImage}`}
                       alt={item.product_name}
                       className="product-image modal-image"
                     />
@@ -201,7 +206,9 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
                       </button>
                     </td>
                 </tr>
-              ))}
+              )
+              }
+              )}
             </tbody>
           </table>
         </div>

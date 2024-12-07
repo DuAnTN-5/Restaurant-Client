@@ -33,6 +33,7 @@
 }
 
 .list-image-detail {
+  width: 100px;
   padding-top: 10px;
   display: flex;
   gap: 25px;
@@ -40,8 +41,9 @@
 }
 .list-image-detail img {
   border: 1px solid rgb(172, 172, 172);
-  padding: 10px;
+  /* padding: 10px; */
   width: 135px;
+  cursor: pointer;
   border-radius: 5px;
 }
 .navbar-right {

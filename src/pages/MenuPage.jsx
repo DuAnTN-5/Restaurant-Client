@@ -240,7 +240,8 @@ const MenuPage = () => {
           // Xử lý danh sách nguyên liệu nếu có
           const updatedFoods = foods.map((food) => {
             const parsedIngredients = food.ingredients
-              ? JSON.parse(food.ingredients)
+              ?
+               JSON.parse(food.ingredients)
               : [];
             return {
               ...food,
@@ -391,82 +392,91 @@ const MenuPage = () => {
           <div className="menu-categories-foods">
             {filterdCategoriesWithFoods?.length ? (
               <div>
-                {filterdCategoriesWithFoods?.map((category) => (
-                  <div key={category.id} className="menu-category-section">
-                    <h2
-                      id={`category-title-${category.id}`}
-                      className="menu-category-title subtitle-vphu"
-                    >
-                      {category.name}
-                    </h2>
-                    {category.foods?.length ? (
-                      <div className="menu-items">
-                        {category.foods.map((food) => (
-                          <div key={food.id} className="menu-item-page">
-                            <Link to={"/product-detail/" + food.slug}>
-                              <img
-                                className="menu-item-page-img"
-                                src={`${url}/${food.image_url}`}
-                                alt={food.name}
-                              />
-                            </Link>
-                            <Link to={"/product-detail/" + food.slug}>
-                              <h3 className="menu-item-page-title">
-                                {food.name}
-                              </h3>
-                            </Link>
-                            <p className="menu-item-page-ingredients">
-                              {food.ingredientsList.length > 0
-                                ? food.ingredientsList.join(", ")
-                                : "Không có thông tin nguyên liệu"}
-                            </p>
-                            <span className="menu-item-page-price">
-                              {formatCurrency(food.price)}
-                              {/* {formatCurrency(food.total)} */}
-                            </span>
-                            <div className="order-controls">
-                              <input
-                                type="number"
-                                className="menu-item-page-quantity"
-                                defaultValue="1"
-                                min="1"
-                                onChange={handleInputChange}
-                                max="10"
-                              />
-                              <button
-                                className="menu-item-page-order-btn"
-                                onClick={() => addToCart(food.id, food.name)}
-                              >
-                                Đặt Món
-                              </button>
-                            </div>
-                            {/* <button
+                {filterdCategoriesWithFoods?.map((category) => {
+                  return (
+                    <div key={category.id} className="menu-category-section">
+                      <h2
+                        id={`category-title-${category.id}`}
+                        className="menu-category-title subtitle-vphu"
+                      >
+                        {category.name}
+                      </h2>
+                      {category.foods?.length ? (
+                        <div className="menu-items">
+                          {category.foods.map((food) => {
+                            let image = JSON.parse(food.image_url);
+                            console.log(image);
+                            let firstImage = image[0];
+                            return (
+                              <div key={food.id} className="menu-item-page">
+                                <Link to={"/product-detail/" + food.slug}>
+                                  <img
+                                    className="menu-item-page-img"
+                                    src={`${url}/${firstImage}`}
+                                    alt={food.name}
+                                  />
+                                </Link>
+                                <Link to={"/product-detail/" + food.slug}>
+                                  <h3 className="menu-item-page-title">
+                                    {food.name}
+                                  </h3>
+                                </Link>
+                                <p className="menu-item-page-ingredients">
+                                  {food.ingredientsList.length > 0
+                                    ? food.ingredientsList.join(", ")
+                                    : "Không có thông tin nguyên liệu"}
+                                </p>
+                                <span className="menu-item-page-price">
+                                  {formatCurrency(food.price)}
+                                  {/* {formatCurrency(food.total)} */}
+                                </span>
+                                <div className="order-controls">
+                                  <input
+                                    type="number"
+                                    className="menu-item-page-quantity"
+                                    defaultValue="1"
+                                    min="1"
+                                    onChange={handleInputChange}
+                                    max="10"
+                                  />
+                                  <button
+                                    className="menu-item-page-order-btn"
+                                    onClick={() =>
+                                      addToCart(food.id, food.name)
+                                    }
+                                  >
+                                    Đặt Món
+                                  </button>
+                                </div>
+                                {/* <button
                             className="menu-item-page-order-btn"
                             onClick={() => addToCart(food.id)}
                           >
                             Đặt Món
                           </button> */}
-                            <div
-                              className="heart-icon-menu-page"
-                              onClick={() => addToFavourite(food.id)}
-                              style={{
-                                position: "absolute",
-                                top: "10px",
-                                left: "10px",
-                              }}
-                            >
-                              <FaHeart color="red" size={20} />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div>
-                        <p>Không tìm thấy món ăn phù hợp</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                                <div
+                                  className="heart-icon-menu-page"
+                                  onClick={() => addToFavourite(food.id)}
+                                  style={{
+                                    position: "absolute",
+                                    top: "10px",
+                                    left: "10px",
+                                  }}
+                                >
+                                  <FaHeart color="red" size={20} />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div>
+                          <p>Không tìm thấy món ăn phù hợp</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div>
