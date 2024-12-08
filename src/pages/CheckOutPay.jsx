@@ -164,7 +164,7 @@ const CheckoutPay = () => {
           console.log(res);
           if (res.data.status) {
             const checkoutVnPay = res.data.payment_url;
-            toast.success("nhảy trang");
+            // toast.success("nhảy trang");
             window.location.href = checkoutVnPay;
             console.log(checkoutVnPay);
 
