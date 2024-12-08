@@ -45,19 +45,19 @@
 
 .post-date {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: #d9a404; /* Yellow background for date */
+  bottom: 0px;
+  right: 0px;
+  background-color: #000000;
   color: #fff;
-  padding: 10px;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: bold;
+  padding: 5px;
+  /* text-align: center; */
+  /* font-size: 1rem; */
+  /* font-weight: bold; */
 }
 
 .post-date span:first-child {
   display: block;
-  font-size: 1.5rem;
+  font-size:15px;
 }
 
 .post-content {
@@ -71,9 +71,10 @@
 }
 
 .post-excerpt {
-  font-size: 1rem;
+  font-size: 17px;
   color: #ddd; /* Light grey text for excerpts */
   margin: 10px 0 20px;
+  line-height: 25px;
 }
 .post-excerpt p {
   padding-bottom: 10px;
@@ -148,6 +149,7 @@
 
 .categories-list-custom li {
   margin-bottom: 10px;
+  font-size: 15px;
 }
 
 /* Latest Posts */
@@ -173,8 +175,8 @@
 }
 
 .latest-posts-custom img {
-  width: 84px;
-  height: 84px;
+  max-width: 75px;
+  height: 75px;
   object-fit: cover;
   border-radius: 5px;
   margin-right: 10px;
@@ -183,6 +185,14 @@
 .title-lastestpost {
   margin-bottom: 20px;
   color: #ffffff; /* Light color for latest posts title */
+}
+.post-new-span{
+  font-size: 15px;
+}
+.post-new-p{
+  color: gray;
+  font-size: 13px;
+  margin-top: 7px;
 }
 
 .latest-posts-custom h4 {

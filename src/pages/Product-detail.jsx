@@ -141,14 +141,6 @@ function ProductDetail() {
           api
             .get("product-categories/21")
             .then((res) => {
-              console.log(res);
-              let productData = res.data.data;
-              console.log(productData);
-              if (productData.image_url) {
-                productData.image_url = JSON.parse(res.data.data.image_url);
-                console.log(productData.image_url);
-                setImgOtherDishes(productData.image_url[0]);
-              }
               setOtherDishes(res.data.data);
             })
             .catch((error) => console.log(error));
@@ -234,13 +226,15 @@ function ProductDetail() {
             <h2 className="other-dishes">Các món ăn khác</h2>
             <Slider {...settings}>
               {otherDishes.map((item) => {
+                let image = JSON.parse(item.image_url);
+                let firstImage = image[0];
                 return (
                   <div className="padding" key={item.id}>
                     <div className="product-content">
                       <Link to={"/product-detail/" + item.slug}>
                         <img
                           className="product-image-detail-page"
-                          src={`${url}/${selectedImage}`}
+                          src={`${url}/${firstImage}`}
                           alt=""
                         />
                       </Link>

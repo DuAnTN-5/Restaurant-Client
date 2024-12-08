@@ -15,6 +15,7 @@ useEffect(() =>{
   if (token) {
     token = JSON.parse(token);
   }
+  
   let config = {
     headers: {
       Authorization: "Bearer " + token,

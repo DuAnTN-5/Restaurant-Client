@@ -5,6 +5,7 @@ import { api, url } from "../api";
 
 const Blog = () => {
   const [blog, setBlog] = useState([]);
+  const [category, setCategory] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
   const postsPerPage = 2; // Số bài viết trên mỗi trang
@@ -18,6 +19,11 @@ const Blog = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    api.get("/product-categories").then((res) => {
+      console.log(res);
+      setCategory(res.data.data);
+    });
   }, []);
 
   // Tính toán chỉ số của các bài viết hiển thị trong trang hiện tại
@@ -31,7 +37,7 @@ const Blog = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   console.log(blog);
-
+  console.log(currentPosts);
   return (
     <div className="blog-page text-vphu">
       <h1 className="title-cart-page title-vphu">Tin tức của chúng tôi</h1>
@@ -39,64 +45,27 @@ const Blog = () => {
       <div className="blog-container">
         {/* Nội dung chính */}
         <main className="blog-main">
-          {/* {blog.map(item =>{
-          return(
-          <div className="blog-post" key={item.id}>
-            <div className="post-image-wrapper">
-              <img
-                src={`${url}/${item.image_url}`}
-                alt="Bài viết blog 1"
-                className="post-image"
-              />
-              <div className="post-date">
-                <span>{item.created_at}</span>
-              </div>
-            </div>
-            <div className="post-content">
-              <h2 className="post-title">{item.title}</h2>
-              <p className="post-excerpt">
-               {item.summary}
-              </p>
-              <div className="post-meta">
-                <img
-                  src="https://freebw.com/templates/royate/images/widget-person.png"
-                  alt="Tác giả"
-                  className="author-image"
-                />
-                <span>Được viết bởi Andrea Silva</span>
-                <span>Tráng miệng / Nấu ăn / Thực phẩm</span>
-              </div>
-              <Link to={"/blog-detail/" + item.slug}><button className="read-more">XEM THÊM</button></Link>
-            </div>
-          </div>
-          )
-        })} */}
+          {console.log(`${url}/postfiles/1733638992.png`)}
           {currentPosts.map((item) => (
             <div className="blog-post" key={item.id}>
               <div className="post-image-wrapper">
-              <Link to={"/blog-detail/" + item.slug}>
-                <img
-                  src={`${url}/${item.image_url}`}
-                  alt="Bài viết blog"
-                  className="post-image"
-                />
+                <Link to={"/blog-detail/" + item.slug}>
+                  <img
+                    src={`${url}/${item.image_url}`}
+                    alt="Bài viết blog"
+                    className="post-image"
+                  />
                 </Link>
                 <div className="post-date">
-                  {/* <span>{item.created_at}</span> */}
+                  <span>
+                    {item.created_at.time},{item.created_at.date}
+                  </span>
+                  {/* <span>{item.created_at.time}</span> */}
                 </div>
               </div>
               <div className="post-content">
                 <h2 className="post-title">{item.title}</h2>
                 <p className="post-excerpt">{item.summary}</p>
-                {/* <div className="post-meta">
-                  <img
-                    src="https://freebw.com/templates/royate/images/widget-person.png"
-                    alt="Tác giả"
-                    className="author-image"
-                  />
-                  <span>Được viết bởi Andrea Silva</span>
-                  <span>Tráng miệng / Nấu ăn / Thực phẩm</span>
-                </div> */}
                 <Link to={"/blog-detail/" + item.slug}>
                   <button className="read-more">XEM THÊM</button>
                 </Link>
@@ -115,18 +84,16 @@ const Blog = () => {
             />
             <h3>Trần Minh Quân</h3>
             <p>Đầu bếp trưởng</p>
-            <div className="signature-custom">Chữ ký</div>
+            {/* <div className="signature-custom">Chữ ký</div> */}
           </div>
 
           {/* Danh mục */}
           <div className="sidebar-section-custom">
             <h3 className="title-categories">Danh Mục</h3>
             <ul className="categories-list-custom">
-              <li>Hải sản (2)</li>
-              <li>Cà phê (5)</li>
-              <li>Nhà hàng (18)</li>
-              <li>Bánh cupcake (22)</li>
-              <li>Bữa trưa (19)</li>
+              {category.map((item) => (
+                <li key={item.id}>{item.name}</li>
+              ))}
             </ul>
           </div>
 
@@ -134,46 +101,22 @@ const Blog = () => {
           <div className="sidebar-section-custom latest-posts-custom">
             <h3 className="title-lastestpost">Bài Viết Mới Nhất</h3>
             <ul>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/latest-post-thumb-1.png"
-                  alt="Hình thu nhỏ bài viết"
-                />
-                <div>
-                  <span>Có nhiều biến thể</span>
-                  <p>Ngày 23 tháng 7, 2018</p>
-                </div>
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/latest-post-thumb-2.png"
-                  alt="Hình thu nhỏ bài viết"
-                />
-                <div>
-                  <span>Tất cả Lorem Ipsum</span>
-                  <p>Ngày 23 tháng 7, 2018</p>
-                </div>
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/latest-post-thumb-3.png"
-                  alt="Hình thu nhỏ bài viết"
-                />
-                <div>
-                  <span>Dòng đầu tiên của Lorem</span>
-                  <p>Ngày 23 tháng 7, 2018</p>
-                </div>
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/latest-post-thumb-4.png"
-                  alt="Hình thu nhỏ bài viết"
-                />
-                <div>
-                  <span>Khối chuẩn</span>
-                  <p>Ngày 23 tháng 7, 2018</p>
-                </div>
-              </li>
+              {blog.map((item) => (
+                <li key={item.id}>
+                  <Link to={"/blog-detail/" + item.slug}>
+                    <img
+                      className="post-new-img"
+                      src={`${url}/${item.image_url}`}
+                      alt="Hình thu nhỏ bài viết"
+                    />
+                  </Link>
+
+                  <div>
+                    <span className="post-new-span">{item.title}</span>
+                    <p className="post-new-p">{item.created_at.date}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
 
