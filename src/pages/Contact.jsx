@@ -9,18 +9,33 @@ import { AiFillTikTok } from "react-icons/ai";
 import { FaTelegram } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { api } from "../api";
 
 function Contact() {
+  let auth = localStorage.getItem("auth");
+  if (auth) {
+    auth = JSON.parse(auth);
+  }
   const [inputs, setInputs] = useState({
-    name: "",
-    email: "",
+    name: auth.name,
+    email: auth.email,
     content: "",
   });
+  
 
   let token = localStorage.getItem("token");
   if (token) {
     token = JSON.parse(token);
   }
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+    },
+  };
+
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,20 +53,31 @@ function Contact() {
       toast.error("Vui lòng nhập tên của bạn");
       flag = false;
     }
-    if(!inputs.email){
-      toast.error("Vui lòng nhập email của bạn");
-      flag = false;
-    }
+   
     if(!inputs.content){
       toast.error("Vui lòng nhập nội dung của bạn");
       flag = false;
     }
 
     if(flag){
-      toast.success("thành công")
+
+      const formData = new FormData();
+      formData.append("name", inputs.name);
+      formData.append("email", inputs.email);
+      formData.append("content",inputs.content);
+
+      api
+      .post("/contact", formData, config)
+      .then(res =>{
+        console.log(res)
+        if(res.status){
+          toast.success("Góp ý của bạn đã được gửi")
+        }
+
+      })
+      .catch(error => console.log(error))
+
     }
-
-
 
     }
   };
@@ -82,6 +108,7 @@ function Contact() {
                     name="name"
                     type="text"
                     id="name"
+                    value={auth.name}
                     className="contact-input-color"
                     onChange={handleInputChange}
                     placeholder="Nhập tên của bạn"
@@ -91,8 +118,9 @@ function Contact() {
                   <label htmlFor="email">Email</label>
                   <input
                     type="text"
-                    onChange={handleInputChange}
                     name="email"
+                    readOnly
+                    value={auth.email}
                     id="email"
                     className="contact-input-color"
                     placeholder="Nhập email của bạn"

@@ -92,7 +92,7 @@ const Cart = () => {
     .then(res =>{
       console.log(res)
       if(res.data.status){
-        toast.success(res.data.message)
+        toast.success("Đã xóa bàn thành công")
         api
         .get("/cart/list/" + auth.id, config)
         .then((res) => {
@@ -164,7 +164,7 @@ const Cart = () => {
                 <strong>Khách:</strong> {reservation.guest_count} người
               </p>
               <p className="reservation-date">
-                <strong>Ngày:</strong> 
+                <strong>Ngày: </strong> 
                 {new Date(reservation.date).toLocaleDateString()}
                 {/* {reservation.date} */}
                 {/* {reservation.date} */}
