@@ -85,18 +85,19 @@ function ProfileUser() {
       toast.error("Vui lòng nhập tên của bạn");
       flag = false;
     }
-    if (!userInfo.phone) {
-      toast.error("Vui lòng nhập số điện thoại");
-      flag = false;
-    }
+    // if (!userInfo.phone) {
+    //   toast.error("Vui lòng nhập số điện thoại");
+    //   flag = false;
+    // }
     // if (!userInfo.address) {
     //   toast.error("Vui lòng nhập địa chỉ");
     //   flag = false;
     // }
-    if (!userInfo.avatar) {
-      toast.error("Vui lòng chọn hình ảnh");
-      flag = false;
-    } else {
+    // if (!userInfo.avatar) {
+    //   toast.error("Vui lòng chọn hình ảnh");
+    //   flag = false;
+    // } 
+    // else {
       if (avatar) {
         const type = avatar.type;
         const size = avatar.size;
@@ -110,7 +111,7 @@ function ProfileUser() {
           }
         }
       }
-    }
+    // }
 
     if (flag) {
       

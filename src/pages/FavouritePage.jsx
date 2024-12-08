@@ -93,9 +93,10 @@ function FavouritePage() {
                       />
                       <div className="product-details">
                         <h3 className="product-name">{item.name}</h3>
-                        <p className="product-description">
+                        {/* <p className="product-description">
+                         {item.ingredients}
                          {item.ingredients.slice(0, 4).join(", ")}
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                     <p className="product-price">{formatCurrency(item.price)}</p>

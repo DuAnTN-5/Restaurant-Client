@@ -68,7 +68,8 @@ console.log(bookings)
               <div className="history-content">
                 <p>
                   <span>Ngày: </span>
-                  {new Date(item.date).toLocaleDateString()}
+                  {/* {new Date(item.date).toLocaleDateString()} */}
+                  {new Date(item.date).toLocaleDateString('vi-VN')}
                 </p>
                 <p>
                   <span>Giờ: </span>
