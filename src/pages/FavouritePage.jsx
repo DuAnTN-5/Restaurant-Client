@@ -94,10 +94,7 @@ function FavouritePage() {
                       <div className="product-details">
                         <h3 className="product-name">{item.name}</h3>
                         <p className="product-description">
-                         {/* {item.summary} */}
-                         {/* {item?.summary
-                ? item.summary.replace(/<\/?p>/g, "")
-                : "Không có thông tin"} */}
+                         {item.ingredients.slice(0, 4).join(", ")}
                         </p>
                       </div>
                     </div>

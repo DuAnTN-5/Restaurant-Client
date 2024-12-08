@@ -245,11 +245,21 @@ function ProductDetail() {
                           </h3>
                         </Link>
                         <span className="product-tags">
-                          {/* {item.summary} */}{" "}
                           {item?.summary
-                            ? item?.summary.replace(/<\/?p>/g, "")
+                            ? (() => {
+                                const text = item.summary.replace(
+                                  /<\/?p>/g,
+                                  ""
+                                );
+                                const words = text.split(/\s+/);
+                                if (words.length > 20) {
+                                  return words.slice(0, 20).join(" ") + " ...";
+                                }
+                                return text; 
+                              })()
                             : "Không có thông tin"}
                         </span>
+
                         <h4 className="product-price-detail">
                           {formatCurrency(item?.price)}
                           {/* {item.price} VND */}
