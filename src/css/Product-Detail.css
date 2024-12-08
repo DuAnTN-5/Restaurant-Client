@@ -21,7 +21,7 @@
   border-radius: 10px;
 }
 .navbar-left {
-  width: 456px;
+  max-width: 456px;
   /* background-color: rgb(235 235 235); */
   display: flex;
   justify-content: center;
@@ -411,6 +411,7 @@
   max-width: 1140px;
   margin: 0 auto;
   margin-top: 30px;
+  padding: 0 30px;
 }
 .other-dishes {
   font-size: 22px;
@@ -502,6 +503,12 @@
   color: rgb(255, 0, 0);
 }
 
+@media (max-width: 1200px) {
+  .product-content {
+    margin: 10px auto;
+  }
+}
+
 @media (max-width: 1024px) {
   .navbar-detail {
     flex-direction: column;
@@ -537,7 +544,6 @@
 
   .product-content {
     flex: 1 1 calc(50% - 10px);
-    margin: 10px;
   }
 
   .media {
@@ -625,14 +631,13 @@
   .vt-product {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Tạo 2 món ăn trên mỗi hàng */
-    gap: 10px; /* Khoảng cách giữa các món ăn */
+    gap: 20px; /* Khoảng cách giữa các món ăn */
     width: 100%;
     margin: 0 auto; /* Căn giữa */
   }
 
   .product-content {
-    width: 100%; /* Đảm bảo các món ăn có độ rộng phù hợp */
-    margin: 0; /* Loại bỏ khoảng cách thừa */
+    width: 80%;
   }
 }
 

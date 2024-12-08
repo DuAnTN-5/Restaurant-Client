@@ -19,8 +19,7 @@ function ProductDetail() {
   const [category, setCategory] = useState("");
   // const navigate = useNavigate();
 
-
-   // chuyển đổi đơn vị tiền 
+  // chuyển đổi đơn vị tiền
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("vi-VN", {
       style: "currency",
@@ -77,9 +76,9 @@ function ProductDetail() {
     token = JSON.parse(token);
   }
 
-  const handleImageClick = (img) =>{
-    setSelectedImage(img)
-  }
+  const handleImageClick = (img) => {
+    setSelectedImage(img);
+  };
 
   const params = useParams();
   // console.log(params);
@@ -87,16 +86,16 @@ function ProductDetail() {
     api
       .get("products/" + params.slug)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         console.log(res.data.data.product);
         setVote(res.data.data);
-        let productData = res.data.data.product
-		  if(productData.image_url){
-			  productData.image_url =  JSON.parse(res.data.data.product.image_url)
-        setImage(productData.image_url);
-        setSelectedImage(productData.image_url[0]);
-			}
-      setProductDetail(res.data.data.product);
+        let productData = res.data.data.product;
+        if (productData.image_url) {
+          productData.image_url = JSON.parse(res.data.data.product.image_url);
+          setImage(productData.image_url);
+          setSelectedImage(productData.image_url[0]);
+        }
+        setProductDetail(res.data.data.product);
 
         const data = res.data.data.product;
         if (data.category_id === 1) {
@@ -143,11 +142,11 @@ function ProductDetail() {
             .get("product-categories/21")
             .then((res) => {
               console.log(res);
-              let productData = res.data.data
-              console.log(productData)
-              if(productData.image_url){
-                productData.image_url =  JSON.parse(res.data.data.image_url)
-                console.log(productData.image_url)
+              let productData = res.data.data;
+              console.log(productData);
+              if (productData.image_url) {
+                productData.image_url = JSON.parse(res.data.data.image_url);
+                console.log(productData.image_url);
                 setImgOtherDishes(productData.image_url[0]);
               }
               setOtherDishes(res.data.data);
@@ -158,11 +157,9 @@ function ProductDetail() {
       .catch((error) => console.log(error));
   }, [params.slug]);
   console.log(otherDishes);
-  console.log(image)
-  console.log(selectedImage)
-  console.log(imgGotherDishes)
-  
-
+  console.log(image);
+  console.log(selectedImage);
+  console.log(imgGotherDishes);
 
   return (
     <>
@@ -170,21 +167,18 @@ function ProductDetail() {
         <div className="navbar-detail">
           <div className="image-detail">
             <div className="navbar-left">
-              <img
-                src={`${url}/${selectedImage}`}
-                alt=""
-              />
+              <img src={`${url}/${selectedImage}`} alt="" />
             </div>
             <div className="list-image-detail">
-            {image && image.map((img, index) => (
-                    <img
-                      key={index}
-                      src={`${url}/${img}`}
-                      alt=""
-                      onClick={() => handleImageClick(img)}
-                    />
-                  ))}
-             
+              {image &&
+                image.map((img, index) => (
+                  <img
+                    key={index}
+                    src={`${url}/${img}`}
+                    alt=""
+                    onClick={() => handleImageClick(img)}
+                  />
+                ))}
             </div>
           </div>
           <div className="navbar-right">
@@ -200,20 +194,11 @@ function ProductDetail() {
               </span>
             </div>
             <p className="product-children">
-              Giá tiền:  {formatCurrency(productDetail?.price)}
-               {/* {productDetail?.price} VND */}
+              Giá tiền: {formatCurrency(productDetail?.price)}
+              {/* {productDetail?.price} VND */}
             </p>
             <p className="product-children">
-              Nguyên liệu chính:{" "}
-              {(() => {
-                try {
-                  return JSON.parse(productDetail?.ingredients || "[]")
-                    .map((ing) => ing.value)
-                    .join(", ");
-                } catch {
-                  return "Không có thông tin nguyên liệu";
-                }
-              })()}
+              Nguyên liệu chính: {(productDetail?.ingredients || []).join(", ")}
             </p>
           </div>
         </div>
@@ -261,17 +246,18 @@ function ProductDetail() {
                       </Link>
                       <div className="product-caption">
                         <Link to={"/product-detail/" + item.slug}>
-                          <h3 className="product-detail-item-title">{item.name}</h3>
+                          <h3 className="product-detail-item-title">
+                            {item.name}
+                          </h3>
                         </Link>
                         <span className="product-tags">
-                        {/* {item.summary} */}
-                          {" "}
+                          {/* {item.summary} */}{" "}
                           {item?.summary
                             ? item?.summary.replace(/<\/?p>/g, "")
                             : "Không có thông tin"}
                         </span>
                         <h4 className="product-price-detail">
-                        {formatCurrency(item?.price)}
+                          {formatCurrency(item?.price)}
                           {/* {item.price} VND */}
                         </h4>
                         {/* <button className="add-to-cart">
@@ -286,7 +272,6 @@ function ProductDetail() {
                   </div>
                 );
               })}
-             
             </Slider>
           </div>
         </div>

@@ -122,10 +122,7 @@ const FoodCategory = () => {
                 <h3 className="food-name">{item.name}</h3>
               </Link>
               <p className="favorite-food-description">
-                {/* {item.ingredients} */}
-                {/* {JSON.parse(item.ingredients)
-                  .map((ing) => ing.value)
-                  .join(", ")} */}
+                {item.ingredients.slice(0, 4).join(",")}
               </p>
               <div className="btn-oder">
                 <a href={item.orderLink} className="order-link">
