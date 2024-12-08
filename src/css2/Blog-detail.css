@@ -238,30 +238,35 @@
   }
   
   /* Latest Posts */
-  .latest-posts-custom {
+  .latest-posts-custom-blog-detail {
     background: #333; /* Dark background for latest posts section */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     margin-bottom: 30px;
   }
+
+  .latest-posts-custom-blog-detail a {
+    /* width: 75px; */
+    /* height: 75px; */
+  }
   
-  .latest-posts-custom ul {
+  .latest-posts-custom-blog-detail ul {
     list-style: none;
     padding: 0;
     display: flex;
     flex-direction: column;
   }
   
-  .latest-posts-custom li {
+  .latest-posts-custom-blog-detail li {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  .latest-posts-custom img {
-    width: 84px;
-    height: 84px;
+  .latest-posts-custom-blog-detail img {
+    max-width: 75px;
+    height: 75px;
     object-fit: cover;
     border-radius: 5px;
     margin-right: 10px;
@@ -272,7 +277,7 @@
     color: #ffffff; /* Light color for latest posts title */
   }
   
-  .latest-posts-custom h4 {
+  .latest-posts-custom-blog-detail h4 {
     font-size: 1rem;
     color: #ffffff; /* Light text for latest posts */
   }

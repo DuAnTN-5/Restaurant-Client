@@ -226,48 +226,9 @@ const CheckoutPay = () => {
     }
   };
 
+
   const location = useLocation();
-  // console.log(location);
-  // useEffect(() => {
-  //   const queryParams = new URLSearchParams(location.search);
-  //   const responseCode = queryParams.get("vnp_ResponseCode");
-  //     if (responseCode) {
-  //     api
-  //     .get("/vnpay/callback")
-  //     .then(res =>{
-  //       console.log(res)
-  //     })
-  //     .catch(error => console.log(error))
-  //   }
-  // }, [location.search]);
-  // setIsModalOpen(true); // Hiển thị modal thành công
-
-  // setIsModalFailureOpen(true); // Hiển thị modal thất bại
-  // //
-  // useEffect(() => {
-  //   // setPaymentMethod("");
-  //   const queryParams = new URLSearchParams(window.location.search);
-  //   console.log(queryParams.toString());
-  //   const queryParamss = new URLSearchParams(location.search);
-  //   console.log(queryParamss.toString());
-
-  //   // const responseCode = queryParams.get("vnp_ResponseCode");
-  //   // const secureHash = queryParams.get("vnp_SecureHash");
-
-  //   if (queryParams) {
-  //     // Thực hiện gọi API với các tham số từ URL
-  //     api
-  //       .get(`/vnpay/callback`+queryParams.toString()
-  //          )
-  //       .then((res) => {
-  //         console.log("API Response: ", res);
-  //       })
-  //       .catch((error) => console.error("API Error: ", error));
-  //   } else {
-  //     console.log("Thiếu thông tin trong URL: vnp_ResponseCode hoặc vnp_SecureHash");
-  //   }
-  // }, [location.search]);
-
+ 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const responseCode = queryParams.get("vnp_ResponseCode");
@@ -290,13 +251,6 @@ const CheckoutPay = () => {
       // Thực hiện gọi API với các tham số từ URL
       api
         .get(`/vnpay/callback?` + queryParams.toString(), config)
-        // .get(`/vnpay/callback`, {params: {
-        //     // vnp_ResponseCode: responseCode,
-        //     vnp_SecureHash: secureHash,
-        //     vnp_TxnRef: txnRef, // Thêm tham số vnp_TxnRef
-        //   },
-        //   config,
-        // })
         .then((res) => {
           console.log("API Response: ", res);
           if (!res.data.status) {
@@ -319,7 +273,7 @@ const CheckoutPay = () => {
   // console.log(food);
   // console.log(paymentMethod);
   // console.log(coupon);
-  console.log(couponTotal);
+  // console.log(couponTotal);
   // console.log(parseFloat(couponTotal.value).toFixed(0));
 
   return (
@@ -528,7 +482,6 @@ const CheckoutPay = () => {
             <tbody>
               {food.map((item) => {
                 let image = JSON.parse(item.product_image);
-          console.log(image)
           let firstImage = image[0];
                 return (
                   <tr key={item.id}>

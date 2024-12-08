@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../css2/Blog-detail.css";
 import { useEffect, useRef, useState } from "react";
 import { api, url } from "../api";
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 // import parse from 'html-react-parser';
 import { MdAccountCircle } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
@@ -15,6 +15,10 @@ export default function BlogDetail() {
   const [blogDetail, setBlogDetail] = useState({});
   const [comment, setComment] = useState(""); // comment gửi lên
   const [comments, setComments] = useState([]); //comment get về
+
+  const [blog, setBlog] = useState([]);
+  const [category, setCategory] = useState([]);
+
   const params = useParams();
 
   const inputRef = useRef();
@@ -29,7 +33,20 @@ export default function BlogDetail() {
         setBlogDetail(res.data.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+    api
+      .get("/posts")
+      .then((res) => {
+        setBlog(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    api.get("/product-categories").then((res) => {
+      console.log(res);
+      setCategory(res.data.data);
+    });
+  }, [params.slug]);
 
   useEffect(() => {
     if (blogDetail && blogDetail.id) {
@@ -153,9 +170,7 @@ export default function BlogDetail() {
         });
     }
   }
-  const cleanHTML = blogDetail.body
-    ? DOMPurify.sanitize(blogDetail.body.replace(/<hr\s*\/?>/gi, ""))
-    : "";
+
   // console.log(params)
 
   console.log({ comment });
@@ -169,7 +184,7 @@ export default function BlogDetail() {
                 <span className="date-badge">20 JUN</span>
                 <h1>Various Versions Have</h1>
               </div> */}
-              <div className="post-meta">
+              {/* <div className="post-meta">
                 <img
                   src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=50&q=80"
                   alt="Andrea Silva"
@@ -182,7 +197,7 @@ export default function BlogDetail() {
                 <a href="#">Cooking</a>
                 <span className="divider">/</span>
                 <a href="#">Food</a>
-              </div>
+              </div> */}
             </header>
 
             <img
@@ -193,19 +208,7 @@ export default function BlogDetail() {
 
             <div className="content">
               <h2 className="post-title">{blogDetail.title}</h2>
-              {/* <div className="post-excerpt" dangerouslySetInnerHTML={{ __html: cleanHTML }}>
-            
-              </div> */}
-              <div
-                className="post-excerpt"
-                dangerouslySetInnerHTML={{
-                  __html: cleanHTML || "Không có nội dung",
-                }}
-              ></div>
-              {/* <p className="post-excerpt">{blogDetail?.summary
-                            ? blogDetail.summary.replace(/<\/?p>/g, "")
-                            : "Không có thông tin"}</p> */}
-              {/* <p className="post-excerpt">{parse(cleanHTML)}</p> */}
+              <div className="post-excerpt">{blogDetail.body}</div>
             </div>
             <div className="comment-section">
               <h3>Tất cả bình luận</h3>
@@ -357,12 +360,6 @@ export default function BlogDetail() {
         </main>
 
         <aside className="blog-sidebar-custom">
-          {/* Tìm kiếm */}
-          {/* <div className="sidebar-section-custom search-custom">
-            <input type="text" placeholder="Tìm kiếm" />
-            <button type="submit">Tìm kiếm</button>
-          </div> */}
-          {/* Thẻ cá nhân */}
           <div className="profile-card-custom">
             <img
               src="https://freebw.com/templates/royate/images/widget-person.png"
@@ -371,65 +368,38 @@ export default function BlogDetail() {
             />
             <h3>Trần Minh Quân</h3>
             <p>Đầu bếp trưởng</p>
-            <div className="signature-custom">Chữ ký</div>
           </div>
 
           {/* Danh mục */}
           <div className="sidebar-section-custom">
             <h3 className="title-categories">Danh Mục</h3>
             <ul className="categories-list-custom">
-              <li>Hải sản (2)</li>
-              <li>Cà phê (5)</li>
-              <li>Nhà hàng (18)</li>
-              <li>Bánh cupcake (22)</li>
-              <li>Bữa trưa (19)</li>
+              {category.map((item) => (
+                <li key={item.id}>{item.name}</li>
+              ))}
             </ul>
           </div>
 
           {/* Bài viết mới nhất */}
-          <div className="sidebar-section-custom latest-posts-custom">
+          <div className="sidebar-section-custom latest-posts-custom-blog-detail">
             <h3 className="title-lastestpost">Bài Viết Mới Nhất</h3>
             <ul>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/latest-post-thumb-1.png"
-                  alt="Hình thu nhỏ bài viết"
-                />
-                <div>
-                  <span>Có nhiều biến thể</span>
-                  <p>Ngày 23 tháng 7, 2018</p>
-                </div>
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/latest-post-thumb-2.png"
-                  alt="Hình thu nhỏ bài viết"
-                />
-                <div>
-                  <span>Tất cả Lorem Ipsum</span>
-                  <p>Ngày 23 tháng 7, 2018</p>
-                </div>
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/latest-post-thumb-3.png"
-                  alt="Hình thu nhỏ bài viết"
-                />
-                <div>
-                  <span>Dòng đầu tiên của Lorem</span>
-                  <p>Ngày 23 tháng 7, 2018</p>
-                </div>
-              </li>
-              <li>
-                <img
-                  src="https://freebw.com/templates/royate/images/latest-post-thumb-4.png"
-                  alt="Hình thu nhỏ bài viết"
-                />
-                <div>
-                  <span>Khối chuẩn</span>
-                  <p>Ngày 23 tháng 7, 2018</p>
-                </div>
-              </li>
+              {blog.map((item) => (
+                <li key={item.id}>
+                  <Link to={"/blog-detail/" + item.slug}>
+                    <img
+                      className="post-new-img"
+                      src={`${url}/${item.image_url}`}
+                      alt="Hình thu nhỏ bài viết"
+                    />
+                  </Link>
+
+                  <div>
+                    <span className="post-new-span">{item.title}</span>
+                    <p className="post-new-p">{item.created_at.date}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
 
