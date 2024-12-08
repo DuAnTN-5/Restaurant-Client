@@ -235,14 +235,15 @@ const MenuPage = () => {
           const foodResponse = await api.get(
             `/product-categories/${category.id}`
           );
+          console.log(foodResponse);
           const foods = foodResponse.data.data;
 
           // Xử lý danh sách nguyên liệu nếu có
           const updatedFoods = foods.map((food) => {
             const parsedIngredients = food.ingredients
-              ?
-               JSON.parse(food.ingredients)
-              : [];
+              // ?
+              //  JSON.parse(food.ingredients)
+              // : [];
             return {
               ...food,
               ingredientsList: parsedIngredients
@@ -422,9 +423,7 @@ const MenuPage = () => {
                                   </h3>
                                 </Link>
                                 <p className="menu-item-page-ingredients">
-                                  {food.ingredientsList.length > 0
-                                    ? food.ingredientsList.join(", ")
-                                    : "Không có thông tin nguyên liệu"}
+                                  {food.ingredients.slice(0, 4).join(", ")}
                                 </p>
                                 <span className="menu-item-page-price">
                                   {formatCurrency(food.price)}

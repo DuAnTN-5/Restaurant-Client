@@ -25,12 +25,11 @@ function Menu() {
   const [favourite, setFavourite] = useState(favouriteLocal); // lấy local ra để thêm tiếp tục sản phẩm
   const location = useLocation();
 
-
   useEffect(() => {
     api
       .get("/product-categories/6")
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setMenuItem(res.data.data);
       })
       .catch((error) => {
@@ -58,11 +57,11 @@ function Menu() {
   };
   const addToFavourite = (id) => {
     let token = localStorage.getItem("token");
-   
-    if(!token){
-      toast.error("Vui lòng đăng nhập")
-    }else{
-    token = JSON.parse(token);
+
+    if (!token) {
+      toast.error("Vui lòng đăng nhập");
+    } else {
+      token = JSON.parse(token);
       const newFavourite = { ...favourite }; // giữ lại dữ liệu trước đó
 
       if (newFavourite[id]) {
@@ -149,58 +148,58 @@ function Menu() {
           <p>Không có món ăn nào trong danh mục này.</p>
         ) : (
           menuItem.map((item, index) => {
-            let image = JSON.parse(item.image_url);
-          console.log(image)
-          let firstImage = image[0];
-            return(
-            <div className="menu-item-home" key={item.id}>
-              <Link className="menu-image" to={"/product-detail/" + item.slug}>
-                <img src={`${url}/${firstImage}`} alt={item.name} />
-              </Link>
-              <div className="menu-details">
-                <Link to={"product-detail/" + item.slug}>
-                  <h3 className="menu-title">{item.name}</h3>
-                </Link>
-                <p className="menu-description">
-                  {/* {JSON.parse(item.ingredients)
-                    .map((ing) => ing.value)
-                    .join(", ")} */}
-                </p>
-                <p className="menu-price">${item.price}</p>
-                <button className="order-button" onClick={() => addToCart()}>
-                  Order now
-                </button>
-
-                <div
-                  className={`heart-icon ${
-                    index === 2 ||
-                    index === 3 ||
-                    index === 6 ||
-                    index === 7 ||
-                    index === 10 ||
-                    index === 11
-                      ? "right"
-                      : "left"
-                  }`}
-                  onClick={() => addToFavourite(item.id)}
-                  style={{
-                    position: "absolute",
-                    top: "10px",
-                    [index === 2 ||
-                    index === 3 ||
-                    index === 6 ||
-                    index === 7 ||
-                    index === 10 ||
-                    index === 11
-                      ? "right"
-                      : "left"]: "10px",
-                  }}
+            const image = JSON.parse(item.image_url);
+            const firstImage = image[0];
+            return (
+              <div className="menu-item-home" key={item.id}>
+                <Link
+                  className="menu-image"
+                  to={"/product-detail/" + item.slug}
                 >
-                  {/* <FaRegHeart color="white" size={25} /> */}
+                  <img src={`${url}/${firstImage}`} alt={item.name} />
+                </Link>
+                <div className="menu-details">
+                  <Link to={"product-detail/" + item.slug}>
+                    <h3 className="menu-title">{item.name}</h3>
+                  </Link>
+                  <p className="menu-description">
+                    {item.ingredients.slice(0, 4).join(", ")}
+                  </p>
+                  <p className="menu-price">${item.price}</p>
+                  <button className="order-button" onClick={() => addToCart()}>
+                    Order now
+                  </button>
 
-                  <FaHeart color="red" size={25} />
-                </div>
-                {/* <div
+                  <div
+                    className={`heart-icon ${
+                      index === 2 ||
+                      index === 3 ||
+                      index === 6 ||
+                      index === 7 ||
+                      index === 10 ||
+                      index === 11
+                        ? "right"
+                        : "left"
+                    }`}
+                    onClick={() => addToFavourite(item.id)}
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      [index === 2 ||
+                      index === 3 ||
+                      index === 6 ||
+                      index === 7 ||
+                      index === 10 ||
+                      index === 11
+                        ? "right"
+                        : "left"]: "10px",
+                    }}
+                  >
+                    {/* <FaRegHeart color="white" size={25} /> */}
+
+                    <FaHeart color="red" size={25} />
+                  </div>
+                  {/* <div
             className={`heart-icon ${index === 2 || index === 3 || index === 6 || index === 7 || index === 10 || index === 11 ? "right" : "left"}`}
             // onClick={() => toggleFavourite(item)}
             style={{ position: "absolute", top: "10px", [index === 2 || index === 3 || index === 6 || index === 7 || index === 10 || index === 11 ? "right" : "left"]: "10px" }}
@@ -211,11 +210,10 @@ function Menu() {
               <FaRegHeart color="white" size={25} />
             )}
           </div> */}
+                </div>
               </div>
-            </div>
-          )
-          }
-          )
+            );
+          })
         )}
       </div>
     </div>
