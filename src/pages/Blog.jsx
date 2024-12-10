@@ -34,8 +34,10 @@ const Blog = () => {
   // Tạo danh sách các số trang
   const totalPages = Math.ceil(blog.length / postsPerPage);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0); // Cuộn lên đầu trang
+  }
   console.log(blog);
   console.log(currentPosts);
   return (

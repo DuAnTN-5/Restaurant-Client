@@ -4,7 +4,7 @@ import { IoTimeSharp } from "react-icons/io5";
 import { Avatar } from "../assets";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { api } from "../api";
+import { api, url } from "../api";
 import { sortBy } from "lodash";
 // import { FaArrowTurnDown } from "react-icons/fa6";
 
@@ -188,7 +188,7 @@ function ProductComment(props) {
                   className="avatar"
                   src={
                     item.image !== null
-                      ? `http://127.0.0.1:8000/${item.image}`
+                      ? `${url}/${item.image}`
                       : Avatar
                   }
                   alt="User Avatar"
