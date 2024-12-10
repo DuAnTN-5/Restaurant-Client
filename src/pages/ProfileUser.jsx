@@ -30,24 +30,46 @@ function ProfileUser() {
       auth = JSON.parse(auth);
       console.log(auth);
       setUserInfo({
-        name: auth.name,
-        email: auth.email,
-        // avatar: auth.image,
-        phone: auth.phone_number,
+        name: auth.name || "", // Dùng chuỗi rỗng nếu không có giá trị
+        email: auth.email || "",
+        phone: auth.phone_number || "",
+        address: auth.address || "",
       });
-      setAvatarUser(auth.image);
+      // setAvatarUser(auth.image || "");
     }
+  }, []);
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (token) {
+      token = JSON.parse(token);
+    }
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    };
+    api
+      .get("/user", config)
+      .then((res) => {
+        console.log(res);
+        setAvatarUser(res.data.image);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
-  console.log(avatarUser)
 
   // Hàm xử lý đăng xuất
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("auth");
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("auth");
+    localStorage.clear()
     toast.success("Đăng xuất thành công");
     navigate("/");
   };
@@ -85,19 +107,18 @@ function ProfileUser() {
       toast.error("Vui lòng nhập tên của bạn");
       flag = false;
     }
-    // if (!userInfo.phone) {
-    //   toast.error("Vui lòng nhập số điện thoại");
-    //   flag = false;
-    // }
-    // if (!userInfo.address) {
-    //   toast.error("Vui lòng nhập địa chỉ");
-    //   flag = false;
-    // }
-    // if (!userInfo.avatar) {
-    //   toast.error("Vui lòng chọn hình ảnh");
-    //   flag = false;
-    // } 
-    // else {
+    if (!userInfo.phone) {
+      toast.error("Vui lòng nhập số điện thoại");
+      flag = false;
+    }
+    if (!userInfo.address) {
+      toast.error("Vui lòng nhập địa chỉ");
+      flag = false;
+    }
+    if (!userInfo.avatar) {
+      toast.error("Vui lòng chọn hình ảnh");
+      flag = false;
+    } else {
       if (avatar) {
         const type = avatar.type;
         const size = avatar.size;
@@ -111,10 +132,9 @@ function ProfileUser() {
           }
         }
       }
-    // }
+    }
 
     if (flag) {
-      
       let token = localStorage.getItem("token");
       if (token) {
         token = JSON.parse(token);
@@ -129,7 +149,6 @@ function ProfileUser() {
       const formData = new FormData();
       formData.append("name", userInfo.name);
       formData.append("phone_number", userInfo.phone);
-      // formData.append("price", userInfo.email);
       formData.append("address", userInfo.address);
       formData.append("image", file);
 
@@ -138,10 +157,8 @@ function ProfileUser() {
         .then((res) => {
           console.log(res);
           if (res.data.success === true) {
-            
-          toast.success("Cập nhật thông tin thành công");
-          navigate("/")
-
+            toast.success("Cập nhật thông tin thành công");
+            navigate("/");
           }
         })
         .catch((error) => console.log(error));
@@ -180,45 +197,34 @@ function ProfileUser() {
       // toast.success("Đặt lại mật khẩu thành công");
       const formData = new FormData();
       formData.append("current_password", passwordInfo.old);
-      formData.append("new_password",passwordInfo.new);
+      formData.append("new_password", passwordInfo.new);
       formData.append("new_password_confirmation", passwordInfo.confirm);
       api
-      .post("/change-password", formData, config) 
-      .then((res) =>{
-        console.log(res)
-        if(res.data.success){
-          toast.success("Mật khẩu đã được cập nhật thành công.")
-          navigate("/")
-        }
-
-      })
-      .catch((error) =>{
-        console.log(error)
-        // if(error.response.data.data.new_password){
-        //   toast.warning("Mật khẩu mới phải có ít nhất 6 ký tự")
-        // }
-        // if(error.response.data.message){
-        //   toast.warning("Mật khẩu hiện tại không đúng")
-        // }
-        if(error.status === 404){
-          toast.warning("Mật khẩu mới phải có ít nhất 6 ký tự")
-
-        }
-        if(error.status === 400){
-          toast.warning("Mật khẩu hiện tại không đúng")
-
-        }
-      })
+        .post("/change-password", formData, config)
+        .then((res) => {
+          console.log(res);
+          if (res.data.success) {
+            toast.success("Mật khẩu đã được cập nhật thành công.");
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.status === 404) {
+            toast.warning("Mật khẩu mới phải có ít nhất 6 ký tự");
+          }
+          if (error.status === 400) {
+            toast.warning("Mật khẩu hiện tại không đúng");
+          }
+        });
     }
   }
 
-  // console.log(userInfo.avatar);
   // console.log(`${url}/${avatarUser}`);
-  // console.log(userInfo);
-  //  console.log(userInfo.avatar)
-  // console.log(avatarUser);
-  console.log(passwordInfo);
-  // console.log(file)
+  // console.log("1",userInfo);
+  // console.log("3", avatarUser)
+  // console.log("2", userInfo.avatar);
+  // console.log("",`${url}/${avatarUser}`);
   return (
     <div className="profile-container">
       <div className="profile-card">
@@ -226,7 +232,6 @@ function ProfileUser() {
         <div className="sidebar">
           <div className="avatar-container">
             <img
-              //  src={userInfo.avatar ? `${url}${userInfo.avatar}` : Avatar}
               src={
                 userInfo.avatar // Ưu tiên ảnh mới chọn
                   ? userInfo.avatar
@@ -234,11 +239,6 @@ function ProfileUser() {
                   ? `${url}/${avatarUser}`
                   : Avatar // Nếu không có cả hai, hiển thị ảnh mặc định
               }
-              // src={ avatarUser ? (`${url}/${avatarUser}`):
-              //   (userInfo.avatar ? `${url}${userInfo.avatar}` : Avatar)
-              //  }
-              // src={`${url}/${avatarUser}`}
-              // src={userInfo.avatar || Avatar}
               alt="UserAvatar"
               className="avatar-user"
             />
@@ -317,7 +317,7 @@ function ProfileUser() {
                 <input
                   type="text"
                   name="address"
-                  // value={userInfo.address}
+                  value={userInfo.address}
                   onChange={handleInputChange}
                   className="form-input"
                 />

@@ -88,17 +88,50 @@ const MenuPage = () => {
   useEffect(() => {
     // Lấy query param từ URL
     const params = new URLSearchParams(location.search);
-    // console.log(params)
+    const idFromUrl = params.get("tableId");
+    const idFromLocalStorage = localStorage.getItem("tableID");
 
-    const id = params.get("tableId");
-    // console.log(id);
-    if (id) {
-      setTableId(id);
-      // const idTable = { idTable: id };
-      // localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
-      toast.info(`Bạn đang đặt món cho bàn số: ${id}`);
+    if (idFromUrl) {
+      // Nếu có id từ URL
+      setTableId(idFromUrl);
+      const idTable = { idTable: idFromUrl };
+      localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
+      // toast.info(`Đang ở trong cart`);
+      toast.info(`Bạn đang đặt món cho bàn số: ${idFromUrl}`);
+    } else if (idFromLocalStorage) {
+      // Nếu không có id từ URL, lấy từ localStorage
+      setTableId(idFromLocalStorage);
+      const idTable = { idTable: idFromLocalStorage };
+      localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
+      // toast.info(`Đang ở ngoài cart`);
+      toast.info(`Bạn đang đặt món cho bàn số: ${idFromLocalStorage}`);
     }
   }, [location]);
+
+  // useEffect(() => {
+  //   // Lấy query param từ URL
+  //   const params = new URLSearchParams(location.search);
+  //   // console.log(params)
+
+  //   const id = params.get("tableId");
+  //   // console.log(id);
+  //   if (id) {
+  //     setTableId(id);
+  //     // const idTable = { idTable: id };
+  //     // localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
+  //     toast.info(`Bạn đang đặt món cho bàn số: ${id}`);
+  //   }
+  // }, [location]);
+  // useEffect(() => {
+  //   let tableID = localStorage.getItem("tableID")
+  //   console.log(tableID);
+  //   if (tableID) {
+  //     setTableId(tableID);
+  //     const idTable = { idTable: tableID };
+  //     localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
+  //     toast.info(`Bạn đang đặt món cho bàn số: ${tableID}`);
+  //   }
+  // }, [location]);
 
   // bấm đặt món là chuyển qua trang menu cùng id bàn
   const handleInputChange = (e) => {
@@ -406,7 +439,7 @@ const MenuPage = () => {
                         <div className="menu-items">
                           {category.foods.map((food) => {
                             let image = JSON.parse(food.image_url);
-                            console.log(image);
+                            {/* console.log(image); */}
                             let firstImage = image[0];
                             return (
                               <div key={food.id} className="menu-item-page">

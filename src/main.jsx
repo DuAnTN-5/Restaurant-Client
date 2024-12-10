@@ -22,7 +22,6 @@ import CheckOut from './pages/CheckOut.jsx';
 import CheckOutPay from './pages/CheckOutPay.jsx';
 
 import EmailVerification from './pages/EmailVerification.jsx';
-// import { AuthProvider } from './component/AuthContext.jsx';
 import ForgotPassword from './pages/ForgotPassword.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
 import BookingTable from './pages/BookingTable.jsx';
@@ -38,7 +37,6 @@ import LoginGoogle from './pages/LoginGoogle.jsx';
 createRoot(document.getElementById('root')).render(
   <Router>
   
-     {/* <AuthProvider> */}
      <ScrollToTop />
      <CartProvider>
         <Routes>
@@ -71,7 +69,6 @@ createRoot(document.getElementById('root')).render(
         </Route>
         </Routes>
         </CartProvider>
-     {/* </AuthProvider> */}
     <ToastContainer autoClose="2000"/>
   </Router>
 );

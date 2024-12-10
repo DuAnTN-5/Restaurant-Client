@@ -27,7 +27,6 @@ function ProductDetail() {
     }).format(amount * 1000);
   };
   const [otherDishes, setOtherDishes] = useState([]);
-  const [imgGotherDishes, setImgOtherDishes] = useState([]);
 
   const settings = {
     dots: true,
@@ -151,7 +150,7 @@ function ProductDetail() {
   console.log(otherDishes);
   console.log(image);
   console.log(selectedImage);
-  console.log(imgGotherDishes);
+  // console.log(imgGotherDishes);
 
   return (
     <>
@@ -213,7 +212,6 @@ function ProductDetail() {
           <h3 className="product-title">
             Hãy để lại đánh giá của bạn về món ăn
           </h3>
-          {/* <ProductRate product={Object.keys(productDetail).length ? productDetail : null} params={params}/> */}
           <ProductRate
             product={productDetail}
             params={params}

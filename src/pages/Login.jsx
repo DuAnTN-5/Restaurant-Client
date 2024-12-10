@@ -84,31 +84,33 @@ const [inputs, setInputs] = useState({
 
 // Hàm hiển thị alert khi nhấn nút Facebook
 const handleClickFacebook = () => {
-  toast.success("Đã click  vào facebook")
-    api
-      .get("/auth/facebook")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  toast.error("Tính năng chưa được ra mắt")
+    // api
+    //   .get("/auth/facebook")
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
 };
 
 // Hàm hiển thị alert khi nhấn nút Google
 const handleClickGoogle = () => {
-  toast.success("đã click vào gg")
-  api
-      .get("/auth/google")
-      .then((res) => {
-        console.log(res);
-        const googleLogin = res.data.url
-        console.log(googleLogin)
-        window.location.href = googleLogin
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  toast.error("Tính năng chưa được ra mắt")
+
+  // toast.success("đã click vào gg")
+  // api
+  //     .get("/auth/google")
+  //     .then((res) => {
+  //       console.log(res);
+  //       const googleLogin = res.data.url
+  //       console.log(googleLogin)
+  //       window.location.href = googleLogin
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
 };
 
 

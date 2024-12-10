@@ -102,7 +102,7 @@ export default function BlogDetail() {
   };
 
   const handleClickReplay = (idComment) => {
-    toast.success(idComment);
+    // toast.success(idComment);
     console.log("idComment after click:", idComment);
     setIdComment(idComment); //lấy id cha làm idcomment của thg con, còn idcomment cha là 0
     inputRef.current.focus(); // hàm này để khi kick thẻ đag gắn sự kiện onClick thì nó sẽ đc chuyển tới thẻ đag đc chọn để chọt
@@ -227,7 +227,7 @@ export default function BlogDetail() {
                             <img
                               src={
                                 parentComment.user.image !== null
-                                  ? `http://127.0.0.1:8000/${parentComment.user.image}`
+                                  ? `${url}/${parentComment.user.image}`
                                   : Avatar
                               }
                               alt="User Avatar"
@@ -290,7 +290,7 @@ export default function BlogDetail() {
                                       <img
                                         src={
                                           childComment.user.image !== null
-                                            ? `http://127.0.0.1:8000/${childComment.user.image}`
+                                            ? `${url}/${childComment.user.image}`
                                             : Avatar
                                         }
                                         alt="User Avatar"

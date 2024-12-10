@@ -36,6 +36,14 @@ function Menu() {
         console.log(error);
       });
   }, []);
+
+  // chuyển đổi đơn vị tiền
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amount * 1000);
+  };
   useEffect(() => {
     // Lấy query param từ URL
     const params = new URLSearchParams(location.search);
@@ -165,7 +173,7 @@ function Menu() {
                   <p className="menu-description">
                     {item.ingredients.slice(0, 4).join(", ")}
                   </p>
-                  <p className="menu-price">${item.price}</p>
+                  <p className="menu-price">{formatCurrency(item.price)}</p>
                   <button className="order-button" onClick={() => addToCart()}>
                     Order now
                   </button>
