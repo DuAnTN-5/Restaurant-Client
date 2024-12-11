@@ -93,7 +93,7 @@ function ResetPassword() {
                 It has survived not only five centuries, but also the leap into
                 electronic typesetting, remaining essentially unchanged.
               </p>
-              <p className="copyright">Copyright Hight Five Group</p>
+              <p className="copyright">Hight Five</p>
             </div>
             <div className="form-section">
               {/* <p className="error">{}</p> */}
