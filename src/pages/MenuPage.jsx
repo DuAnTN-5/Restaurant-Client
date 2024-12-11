@@ -122,16 +122,7 @@ const MenuPage = () => {
   //     toast.info(`Bạn đang đặt món cho bàn số: ${id}`);
   //   }
   // }, [location]);
-  // useEffect(() => {
-  //   let tableID = localStorage.getItem("tableID")
-  //   console.log(tableID);
-  //   if (tableID) {
-  //     setTableId(tableID);
-  //     const idTable = { idTable: tableID };
-  //     localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
-  //     toast.info(`Bạn đang đặt món cho bàn số: ${tableID}`);
-  //   }
-  // }, [location]);
+
 
   // bấm đặt món là chuyển qua trang menu cùng id bàn
   const handleInputChange = (e) => {

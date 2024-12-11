@@ -17,6 +17,7 @@ function Menu() {
 
   const [menuItem, setMenuItem] = useState([]);
   const [tableId, setTableId] = useState(null);
+  const [foodQty, setFoodQty] = useState("1");
 
   let favouriteLocal = localStorage.getItem("favourite");
   if (favouriteLocal) {
@@ -36,6 +37,7 @@ function Menu() {
         console.log(error);
       });
   }, []);
+  
 
   // chuyển đổi đơn vị tiền
   const formatCurrency = (amount) => {
@@ -45,22 +47,57 @@ function Menu() {
     }).format(amount * 1000);
   };
   useEffect(() => {
-    // Lấy query param từ URL
-    const params = new URLSearchParams(location.search);
-    // console.log(params)
+    const idFromLocalStorage = localStorage.getItem("tableID");
 
-    const id = params.get("tableId");
-    // console.log(id);
-    if (id) {
-      setTableId(id);
-      toast.info(`Bạn đang đặt món cho bàn số: ${id}`);
-    }
+    setTableId(idFromLocalStorage);
+      const idTable = { idTable: idFromLocalStorage };
+      localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
   }, [location]);
-
-  const addToCart = () => {
+  
+  const addToCart = (foodID, foodName) => {
     if (!tableId) {
       toast.error("Vui lòng đặt bàn");
       return;
+    }else{
+        // toast.info(`Bạn đang đặt món cho bàn số: ${tableId}`);
+        let cartID = localStorage.getItem("cartID") ?? null;
+        // toast.info(`${cartID}`);
+        // toast.info(`${foodQty}`);
+        // toast.info(`${foodID}`);
+        // toast.info(`Đang ở ngoài home`);
+
+        const formData = new FormData();
+        formData.append("cart_id", cartID);
+        formData.append("product_id", foodID);
+        formData.append("quantity", foodQty);
+
+        let token = localStorage.getItem("token");
+    if (token) {
+      token = JSON.parse(token);
+    }
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    };
+
+
+    api
+      .post("/cart/add-product", formData, config)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status) {
+          toast.success(
+            `Món ${foodName} đã được thêm vào bàn ${tableId}, số lượng: ${foodQty}`
+          );
+        } else {
+          toast.error(`Thêm món ăn ${foodName} thất bại  `);
+        }
+      })
+      .catch((error) => console.log(error));
+
     }
   };
   const addToFavourite = (id) => {
@@ -174,7 +211,7 @@ function Menu() {
                     {item.ingredients.slice(0, 4).join(", ")}
                   </p>
                   <p className="menu-price">{formatCurrency(item.price)}</p>
-                  <button className="order-button" onClick={() => addToCart()}>
+                  <button className="order-button" onClick={() => addToCart(item.id, item.name)}>
                     Order now
                   </button>
 

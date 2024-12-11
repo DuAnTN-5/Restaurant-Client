@@ -226,9 +226,8 @@ const CheckoutPay = () => {
     }
   };
 
-
   const location = useLocation();
- 
+
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const responseCode = queryParams.get("vnp_ResponseCode");
@@ -255,11 +254,13 @@ const CheckoutPay = () => {
           console.log("API Response: ", res);
           if (!res.data.status) {
             setIsModalFailureOpen(true); // Hiển thị modal thất bại
+            
             // toast.error(res.data.message);
           } else {
             setIsModalOpen(true); // Hiển thị modal thành công
+            localStorage.removeItem("cartID");
+            localStorage.removeItem("tableID");
           }
-
         })
         .catch((error) => console.error("API Error: ", error));
     } else {
@@ -482,7 +483,7 @@ const CheckoutPay = () => {
             <tbody>
               {food.map((item) => {
                 let image = JSON.parse(item.product_image);
-          let firstImage = image[0];
+                let firstImage = image[0];
                 return (
                   <tr key={item.id}>
                     <td className="checkout-pay-product-info">
