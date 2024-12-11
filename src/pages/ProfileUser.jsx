@@ -31,7 +31,7 @@ function ProfileUser() {
     let auth = localStorage.getItem("auth");
     if (auth) {
       auth = JSON.parse(auth);
-      console.log(auth);
+      // console.log(auth);
       setUserInfo({
         name: auth.name || "", // Dùng chuỗi rỗng nếu không có giá trị
         email: auth.email || "",
@@ -56,7 +56,7 @@ function ProfileUser() {
     api
       .get("/user", config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setAvatarUser(res.data.image);
       })
       .catch((error) => {
@@ -159,7 +159,7 @@ function ProfileUser() {
       api
         .post("/update-user-info", formData, config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.success === true) {
             toast.success("Cập nhật thông tin thành công");
             navigate("/");
@@ -206,7 +206,7 @@ function ProfileUser() {
       api
         .post("/change-password", formData, config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.success) {
             toast.success("Mật khẩu đã được cập nhật thành công.");
             navigate("/");

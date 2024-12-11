@@ -10,7 +10,7 @@ function EmailVerification() {
     
     const { token } = useParams();
     
-    console.log(token)
+    // console.log(token)
 
     useEffect(() => {
         if (token) {

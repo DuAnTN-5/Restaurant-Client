@@ -26,14 +26,14 @@ useEffect(() =>{
 api
 .get("/paid-carts/" + auth.id, config)
 .then(res =>{
-  console.log(res)
+  // console.log(res)
   setBookings(res.data.data)
 })
 .catch(error =>{
   console.log(error)
 })
 }, [])
-console.log(bookings)
+// console.log(bookings)
 
   return (
     <div className="history-container">

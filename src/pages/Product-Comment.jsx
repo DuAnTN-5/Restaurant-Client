@@ -46,9 +46,7 @@ function ProductComment(props) {
       .split(" ") // Tách câu thành mảng từ
       .map((word) => {
         const isBadWord = badWords.some((badWord) => word.toLowerCase().includes(badWord));
-        if (isBadWord) {
-          console.log(`Bad word detected: ${word}`); // Kiểm tra xem từ nào bị thay thế
-        }
+      
         return isBadWord ? "***" : word;
       })
       .join(" "); // Ghép các từ lại thành câu
@@ -108,7 +106,7 @@ function ProductComment(props) {
       api
         .post("/product-comments", formData, config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.data) {
             toast.success(res.data.message);
             api
@@ -128,52 +126,8 @@ function ProductComment(props) {
         });
     }
   }
-  // const badWords = [
-  //   "cặc",
-  //   "cẹc",
-  //   "qq",
-  //   "cục",
-  //   "cức",
-  //   "buồi",
-  //   "cẹc",
-  //   "loz",
-  //   "lồn",
-  //   "lòn",
-  //   "cc",
-  //   "què",
-  //   "tật",
-  // ];
-
-  // Hàm kiểm tra và thay thế từ bậy bạ bằng '***'
-  // const filterBadWords = (text) => {
-  //   // Lọc và thay thế các từ không phù hợp
-  //   return text
-  //     .split(" ") // Tách câu thành mảng từ
-  //     .map((word) => {
-  //       // Nếu từ là từ không phù hợp, thay thế bằng '***'
-  //       return badWords.some((badWord) => word.toLowerCase().includes(badWord))
-  //       // return badWords.includes(word.toLowerCase())
-  //        ? "***" : word;
-  //     })
-  //     .join(" "); // Ghép các từ lại thành câu
-  // };
-  // const handleCommentSubmit = () => {
-  //   // if (comment.trim()) {
-  //   //   //sẽ trả về một bản sao của chuỗi gốc nhưng đã loại bỏ tất cả các khoảng trắng ở đầu và cuối chuỗi.
-  //   //   // Lọc bình luận để thay thế từ bậy bạ
-  //   //   // const filteredComment = filterBadWords(comment);
-  //   //   // console.log(filteredComment);
-
-  //   //   // setComment(filteredComment);
-  //   //   // setComment("");
-
-  //   //   // // // Reset lại textarea sau khi gửi bình luận
-  //   //   // console.log("comment:", filteredComment);
-  //   // }
-
-  // };
-  // console.log(comment);
-  console.log(comments);
+ 
+  // console.log(comments);
   return (
     <>
       <div className="comment-section">
@@ -181,7 +135,7 @@ function ProductComment(props) {
         <ul className="media-list">
           {sortBy(comments, "id").map((item) => {
             const filteredComment = filterBadWords(item.comment);
-            console.log(filteredComment)
+            {/* console.log(filteredComment) */}
             return (
               <li key={item.id} className="media">
                 <img

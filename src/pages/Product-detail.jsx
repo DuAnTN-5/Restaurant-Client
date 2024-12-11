@@ -85,8 +85,6 @@ function ProductDetail() {
     api
       .get("products/" + params.slug)
       .then((res) => {
-        console.log(res);
-        console.log(res.data.data.product);
         setVote(res.data.data);
         let productData = res.data.data.product;
         if (productData.image_url) {
@@ -147,9 +145,9 @@ function ProductDetail() {
       })
       .catch((error) => console.log(error));
   }, [params.slug]);
-  console.log(otherDishes);
-  console.log(image);
-  console.log(selectedImage);
+  // console.log(otherDishes);
+  // console.log(image);
+  // console.log(selectedImage);
   // console.log(imgGotherDishes);
 
   return (

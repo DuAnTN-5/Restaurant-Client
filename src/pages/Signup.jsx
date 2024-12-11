@@ -14,7 +14,7 @@ function SignUp() {
     c_password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  console.log("isSubmitting:", isSubmitting);
+  // console.log("isSubmitting:", isSubmitting);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,10 +28,10 @@ function SignUp() {
 
   const handleChangeInputs = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
+    // console.log(name, value);
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value })); // dấu tròn là return về luôn
   }; // change để lưu dữ liệu ng dùng đang nhập
-  console.log(inputs);
+  // console.log(inputs);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -67,7 +67,7 @@ function SignUp() {
       api
         .post("/register", inputs)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (
             response.data.data.verification_required === true ||
             response.data.success === true
@@ -94,7 +94,7 @@ function SignUp() {
         });
     }
 
-    console.log(inputs);
+    // console.log(inputs);
   }
 
  

@@ -10,7 +10,7 @@ function FavouritePage() {
     if (favouriteLocal) {
       favouriteLocal = JSON.parse(favouriteLocal);
     }
-    console.log(favouriteLocal);
+    // console.log(favouriteLocal);
     let token = localStorage.getItem("token");
     if (token) {
       token = JSON.parse(token);
@@ -26,7 +26,7 @@ function FavouritePage() {
     api
       .post("/product/cart", JSON.stringify(favouriteLocal), config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setProduct(res.data.data);
       })
       .catch((error) => console.log(error));
@@ -44,7 +44,7 @@ function FavouritePage() {
     
     if (itemDelete && itemDelete[id]) {
       delete itemDelete[id];
-      console.log(itemDelete);
+      // console.log(itemDelete);
 
       localStorage.setItem("favourite", JSON.stringify(itemDelete));
     }
@@ -58,7 +58,7 @@ function FavouritePage() {
       currency: "VND",
     }).format(amount * 1000);
   };
-  console.log(product)
+  // console.log(product)
 
 
   return (

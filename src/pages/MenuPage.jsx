@@ -67,18 +67,9 @@ const MenuPage = () => {
   }
   const [favourite, setFavourite] = useState(favouriteLocal); // lấy local ra để thêm tiếp tục sản phẩm
 
-  // let bookingFoodLocal = localStorage.getItem("bookingFoodLocal");
-  // if (bookingFoodLocal) {
-  //   bookingFoodLocal = JSON.parse(bookingFoodLocal);
-  // }
-  // console.log(bookingFoodLocal);
 
   const location = useLocation();
-  // const [bookingFood, setBookingFood] = useState({bookingFoodLocal});
-  // const [bookingFood, setBookingFood] = useState({
-  //   id: "",
-  //   qty: "",
-  // });
+  
   const [foodId, setFoodId] = useState("");
   const [foodQty, setFoodQty] = useState("1");
   const [tableId, setTableId] = useState(null);
@@ -94,35 +85,13 @@ const MenuPage = () => {
     if (idFromUrl) {
       // Nếu có id từ URL
       setTableId(idFromUrl);
-      const idTable = { idTable: idFromUrl };
-      localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
-      // toast.info(`Đang ở trong cart`);
       toast.info(`Bạn đang đặt món cho bàn số: ${idFromUrl}`);
     } else if (idFromLocalStorage) {
       // Nếu không có id từ URL, lấy từ localStorage
       setTableId(idFromLocalStorage);
-      const idTable = { idTable: idFromLocalStorage };
-      localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
-      // toast.info(`Đang ở ngoài cart`);
       toast.info(`Bạn đang đặt món cho bàn số: ${idFromLocalStorage}`);
     }
   }, [location]);
-
-  // useEffect(() => {
-  //   // Lấy query param từ URL
-  //   const params = new URLSearchParams(location.search);
-  //   // console.log(params)
-
-  //   const id = params.get("tableId");
-  //   // console.log(id);
-  //   if (id) {
-  //     setTableId(id);
-  //     // const idTable = { idTable: id };
-  //     // localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
-  //     toast.info(`Bạn đang đặt món cho bàn số: ${id}`);
-  //   }
-  // }, [location]);
-
 
   // bấm đặt món là chuyển qua trang menu cùng id bàn
   const handleInputChange = (e) => {
@@ -159,7 +128,7 @@ const MenuPage = () => {
     api
       .post("/cart/add-product", formData, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status) {
           toast.success(
             `Món ${foodName} đã được thêm vào bàn ${tableId}, số lượng: ${foodQty}`
@@ -199,42 +168,14 @@ const MenuPage = () => {
         toast.success("Thêm vào yêu thích thành công");
       }
 
-      // console.log(newCart);
       setFavourite(newFavourite);
-      // abc(newCart)
       setFavourite(newFavourite);
       // lưu vào local
       localStorage.setItem("favourite", JSON.stringify(newFavourite));
     }
-    // if (token) {
-
-    //   token = JSON.parse(token);
-    //   const newFavourite = { ...favourite }; // giữ lại dữ liệu trước đó
-
-    //   if (newFavourite[id]) {
-    //     // nếu id có rồi, tức là qty > 1 thì +1
-    //     // lấy id làm key của newCart
-    //     newFavourite[id] += 1;
-    //     toast.success("Thêm vào giỏ hàng thành công");
-    //   } else {
-    //     // nếu id chưa có thì là lấy id đó làm key rồi cho bằng qty là bằng 1
-    //     newFavourite[id] = 1;
-    //     toast.success("Thêm vào giỏ hàng thành công");
-    //   }
-
-    //   // console.log(newCart);
-    //   setFavourite(newFavourite);
-    //   // abc(newCart)
-    //   setFavourite(newFavourite);
-    //   // lưu vào local
-    //   localStorage.setItem("favourite", JSON.stringify(newFavourite));
-    // }
+ 
   };
 
-  // console.log(bookingFood);
-  // console.log({tableId});
-  // console.log({foodQty})
-  // console.log({foodId})
 
   const handleSearchFood = (e) => {
     if (!e.target.value) {
@@ -259,7 +200,7 @@ const MenuPage = () => {
           const foodResponse = await api.get(
             `/product-categories/${category.id}`
           );
-          console.log(foodResponse);
+          // console.log(foodResponse);
           const foods = foodResponse.data.data;
 
           // Xử lý danh sách nguyên liệu nếu có
@@ -430,7 +371,6 @@ const MenuPage = () => {
                         <div className="menu-items">
                           {category.foods.map((food) => {
                             let image = JSON.parse(food.image_url);
-                            {/* console.log(image); */}
                             let firstImage = image[0];
                             return (
                               <div key={food.id} className="menu-item-page">

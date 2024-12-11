@@ -23,7 +23,7 @@ const [inputs, setInputs] = useState({
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token)
+    // console.log(token)
 
     if (token) {
       navigate("/");
@@ -58,7 +58,7 @@ const [inputs, setInputs] = useState({
           if(res.data.success === true){
               const tokenUser = res.data.data.token
               toast.success("Đăng nhập thành công")
-              console.log(tokenUser)
+              // console.log(tokenUser)
               localStorage.setItem("token", JSON.stringify(tokenUser)) // lưu vào local
               const auth = res.data.data.user
               localStorage.setItem("auth", JSON.stringify(auth)) // lưu vào local
@@ -114,7 +114,7 @@ const handleClickGoogle = () => {
 };
 
 
-console.log(inputs)
+// console.log(inputs)
 
   return (
     <div className="app-login">

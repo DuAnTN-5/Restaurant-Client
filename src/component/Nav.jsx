@@ -40,7 +40,7 @@ function Nav() {
       api
         .get("/user", config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setAvatarUser(res.data.image);
           let Auth = res.data;
           let auth = JSON.stringify(Auth);
@@ -50,31 +50,6 @@ function Nav() {
           console.log(error);
         });
   
-      //   if (isNavbarVisible) {
-      //     document.body.classList.add("no-scroll");
-      //   } else {
-      //     document.body.classList.remove("no-scroll");
-      //   }
-  
-      //   return () => {
-      //     document.body.classList.remove("no-scroll");
-      //   };
-      // }, [location.pathname]);
-    //   // // console.log(avatarUser)
-  
-    //   // useEffect(() => {
-    //   //   const handleScroll = () => {
-    //   //     if (window.scrollY > 50) {
-    //   //       setIsHeaderInfoVisible(false);
-    //   //     } else {
-    //   //       setIsHeaderInfoVisible(true);
-    //   //     }
-    //   //   };
-  
-    //   //   window.addEventListener("scroll", handleScroll);
-    //   //   return () => {
-    //   //     window.removeEventListener("scroll", handleScroll);
-    //   //   };
     }, []);
   
     const handleOverlayClick = () => {
@@ -215,21 +190,14 @@ function Nav() {
                       </div>
                     </Link>
                   )}
-                  {/* (<img className="avatarUser" src={`${url}+${avatarUser}`}alt="" /> */}
-                  {/* <Link to="/login">
-                    <div className="cart-interaction-item">
-                      <i className="fa-regular fa-user navbar-icon"></i>
-                    </div>
-                  </Link> */}
-                  {/* <Link to="/favourite-page" onClick={clickFavouritePage}> */}
+                
                   <div
                     className="cart-interaction-item"
                     onClick={clickFavouritePage}
                   >
                     <i className=" fa-regular fa-heart navbar-icon"></i>
                   </div>
-                  {/* </Link> */}
-                  {/* <Link to="/cart" onClick={clickCart}>  */}
+              
                   <div
                     className="cart-interaction-item icon-end"
                     onClick={clickCart}
@@ -238,7 +206,6 @@ function Nav() {
                     <i className="fa-solid fa-cart-shopping navbar-icon"></i>
                     {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
                   </div>
-                  {/* </Link> */}
                 </div>
                     </li>
                     <li className="navbar-item">
@@ -278,7 +245,6 @@ function Nav() {
                 <div className="cart-interaction">
                   {token ? (
                     <Link to="/profile-user">
-                      {/* <div className="cart-interaction-item-avatar" setAvatarUser={setAvatarUser}> */}
                       <div className="cart-interaction-item-avatar">
                         {avatarUser ? (
                           <img
@@ -298,21 +264,14 @@ function Nav() {
                       </div>
                     </Link>
                   )}
-                  {/* (<img className="avatarUser" src={`${url}+${avatarUser}`}alt="" /> */}
-                  {/* <Link to="/login">
-                    <div className="cart-interaction-item">
-                      <i className="fa-regular fa-user navbar-icon"></i>
-                    </div>
-                  </Link> */}
-                  {/* <Link to="/favourite-page" onClick={clickFavouritePage}> */}
+                 
                   <div
                     className="cart-interaction-item"
                     onClick={clickFavouritePage}
                   >
                     <i className=" fa-regular fa-heart navbar-icon"></i>
                   </div>
-                  {/* </Link> */}
-                  {/* <Link to="/cart" onClick={clickCart}>  */}
+                
                   <div
                     className="cart-interaction-item icon-end"
                     onClick={clickCart}

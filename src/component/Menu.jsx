@@ -30,7 +30,7 @@ function Menu() {
     api
       .get("/product-categories/6")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setMenuItem(res.data.data);
       })
       .catch((error) => {
@@ -50,8 +50,7 @@ function Menu() {
     const idFromLocalStorage = localStorage.getItem("tableID");
 
     setTableId(idFromLocalStorage);
-      const idTable = { idTable: idFromLocalStorage };
-      localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
+     
   }, [location]);
   
   const addToCart = (foodID, foodName) => {
@@ -87,7 +86,7 @@ function Menu() {
     api
       .post("/cart/add-product", formData, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status) {
           toast.success(
             `Món ${foodName} đã được thêm vào bàn ${tableId}, số lượng: ${foodQty}`
@@ -120,70 +119,13 @@ function Menu() {
         toast.success("Thêm vào yêu thích thành công");
       }
 
-      // console.log(newCart);
       setFavourite(newFavourite);
-      // abc(newCart)
       setFavourite(newFavourite);
       // lưu vào local
       localStorage.setItem("favourite", JSON.stringify(newFavourite));
     }
-    // if (token) {
-
-    //   token = JSON.parse(token);
-    //   const newFavourite = { ...favourite }; // giữ lại dữ liệu trước đó
-
-    //   if (newFavourite[id]) {
-    //     // nếu id có rồi, tức là qty > 1 thì +1
-    //     // lấy id làm key của newCart
-    //     newFavourite[id] += 1;
-    //     toast.success("Thêm vào giỏ hàng thành công");
-    //   } else {
-    //     // nếu id chưa có thì là lấy id đó làm key rồi cho bằng qty là bằng 1
-    //     newFavourite[id] = 1;
-    //     toast.success("Thêm vào giỏ hàng thành công");
-    //   }
-
-    //   // console.log(newCart);
-    //   setFavourite(newFavourite);
-    //   // abc(newCart)
-    //   setFavourite(newFavourite);
-    //   // lưu vào local
-    //   localStorage.setItem("favourite", JSON.stringify(newFavourite));
-    // }
+   
   };
-
-  // const addToCart = (id) => {
-  //   if (!token) {
-  //     toast.error("Vui lòng đăng nhập");
-  //     return;
-  //   }
-
-  //   const newCart = { ...cart };
-
-  //   if (newCart[id]) {
-  //     newCart[id] += quantity;
-  //     toast.success("Thêm vào giỏ hàng thành công");
-  //   } else {
-  //     newCart[id] = quantity;
-  //     toast.success("Thêm vào giỏ hàng thành công");
-  //   }
-
-  //   setCart(newCart);
-  //   localStorage.setItem("cart", JSON.stringify(newCart));
-  // };
-
-  // const toggleFavourite = (item) => {
-  //   if (!token) {
-  //     toast.error("Vui lòng đăng nhập");
-  //     return;
-  //   }
-  //   const updatedFavourites = favourites.some(fav => fav.id === item.id)
-  //     ? favourites.filter(fav => fav.id !== item.id)
-  //     : [...favourites, item];
-
-  //   setFavourites(updatedFavourites);
-  //   localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
-  // };
 
   return (
     <div className="our-menu-content container-vphu text-vphu">

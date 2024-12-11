@@ -37,9 +37,9 @@ function ProductRate(props) {
         Accept: "application/json",
       },
     };
-    console.log(newRating);
+    // console.log(newRating);
     setRating(newRating);
-    console.log(rating);
+    // console.log(rating);
 
     const formData = new FormData();
     formData.append("user_id", auth.id);
@@ -51,14 +51,14 @@ function ProductRate(props) {
     api
       .post("/ratings", formData, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.data.rating_count === 1) {
           toast.success(res.data.message);
           api
             // eslint-disable-next-line react/prop-types
             .get("products/" + params.slug)
             .then((res) => {
-              console.log(res);
+              // console.log(res);
               setVote(res.data.data);
             });
         }else if(res.data.data.rating_count === 2){
@@ -67,7 +67,7 @@ function ProductRate(props) {
             // eslint-disable-next-line react/prop-types
             .get("products/" + params.slug)
             .then((res) => {
-              console.log(res);
+              // console.log(res);
               setVote(res.data.data);
             });
         }

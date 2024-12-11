@@ -29,7 +29,7 @@ export default function BlogDetail() {
     api
       .get("/posts/" + params.slug)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setBlogDetail(res.data.data);
       })
       .catch((error) => console.log(error));
@@ -43,7 +43,7 @@ export default function BlogDetail() {
       });
 
     api.get("/product-categories").then((res) => {
-      console.log(res);
+      // console.log(res);
       setCategory(res.data.data);
     });
   }, [params.slug]);
@@ -53,7 +53,7 @@ export default function BlogDetail() {
       api
         .get(`/posts/${blogDetail.id}/comments`)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setComments(res.data.data);
         })
         .catch((error) => console.log(error));
@@ -87,9 +87,7 @@ export default function BlogDetail() {
         const isBadWord = badWords.some((badWord) =>
           word.toLowerCase().includes(badWord)
         );
-        if (isBadWord) {
-          console.log(`Bad word detected: ${word}`); // Kiểm tra xem từ nào bị thay thế
-        }
+       
         return isBadWord ? "***" : word;
       })
       .join(" "); // Ghép các từ lại thành câu
@@ -103,12 +101,12 @@ export default function BlogDetail() {
 
   const handleClickReplay = (idComment) => {
     // toast.success(idComment);
-    console.log("idComment after click:", idComment);
+    // console.log("idComment after click:", idComment);
     setIdComment(idComment); //lấy id cha làm idcomment của thg con, còn idcomment cha là 0
     inputRef.current.focus(); // hàm này để khi kick thẻ đag gắn sự kiện onClick thì nó sẽ đc chuyển tới thẻ đag đc chọn để chọt
     //hay còn gọi là focus vào textarea
   };
-  console.log("Current idComment:", idComment);
+  // console.log("Current idComment:", idComment);
   const handleCancelReply = () => {
     setIdComment(null); // Xóa bình luận cha khi hủy trả lời
     setComment(""); // Xóa nội dung bình luận
@@ -129,7 +127,7 @@ export default function BlogDetail() {
       if (auth) {
         auth = JSON.parse(auth);
       }
-      console.log(idComment);
+      // console.log(idComment);
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -143,22 +141,19 @@ export default function BlogDetail() {
       formData.append("post_id", blogDetail.id);
       formData.append("content", comment);
       idComment !== null ? formData.append("parent_id", idComment) : "";
-      // formData.append("parent_id", null)
-      console.log(idComment);
-      // console.log("parent_id", idComment !== "null" ? idComment : "");
-      // console.log(formData)
+    
 
       api
         .post("/post-comments", formData, config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.data) {
             toast.success(res.data.message);
 
             api
               .get(`/posts/${blogDetail.id}/comments`)
               .then((res) => {
-                console.log(res);
+                // console.log(res);
                 setComments(res.data.data);
               })
               .catch((error) => console.log(error));
@@ -173,7 +168,13 @@ export default function BlogDetail() {
 
   // console.log(params)
 
-  console.log({ comment });
+  // console.log({ comment });
+
+  const stripHTML = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    return doc.body.textContent || ""; // Chỉ lấy nội dung văn bản
+  };
   return (
     <div className="blog-detail-page">
       <div className="container">
@@ -208,7 +209,8 @@ export default function BlogDetail() {
 
             <div className="content">
               <h2 className="post-title">{blogDetail.title}</h2>
-              <div className="post-excerpt">{blogDetail.body}</div>
+              <div className="post-excerpt">{stripHTML(blogDetail.body)}</div>
+              {/* <div className="post-excerpt">{blogDetail.body}</div> */}
             </div>
             <div className="comment-section">
               <h3>Tất cả bình luận</h3>
@@ -272,7 +274,7 @@ export default function BlogDetail() {
                           </div>
                         </li>
                         {/* Lặp qua danh sách comment con */}
-                        {console.log(parentComment)}
+                        {/* {console.log(parentComment)} */}
 
                         {parentComment.children &&
                           parentComment.children.length > 0 && (

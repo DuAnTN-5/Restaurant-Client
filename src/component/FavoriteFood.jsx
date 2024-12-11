@@ -22,7 +22,7 @@ const FoodCategory = () => {
     api
       .get("/latestProducts")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setFoodItems(res.data.data);
       })
       .catch((error) => {
@@ -34,8 +34,7 @@ const FoodCategory = () => {
     const idFromLocalStorage = localStorage.getItem("tableID");
 
     setTableId(idFromLocalStorage);
-    const idTable = { idTable: idFromLocalStorage };
-    localStorage.setItem("bookingFoodLocal", JSON.stringify(idTable));
+   
   }, [location]);
 
   const addToCart = (foodID, foodName) => {
@@ -43,13 +42,8 @@ const FoodCategory = () => {
       toast.error("Vui lòng đặt bàn");
       return;
     }else{
-        // toast.info(`Bạn đang đặt món cho bàn số: ${tableId}`);
         let cartID = localStorage.getItem("cartID") ?? null;
-        // toast.info(`${cartID}`);
-        // toast.info(`${foodQty}`);
-        // toast.info(`${foodID}`);
-        // toast.info(`Đang ở ngoài home`);
-
+       
         const formData = new FormData();
         formData.append("cart_id", cartID);
         formData.append("product_id", foodID);
@@ -71,7 +65,7 @@ const FoodCategory = () => {
     api
       .post("/cart/add-product", formData, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status) {
           toast.success(
             `Món ${foodName} đã được thêm vào bàn ${tableId}, số lượng: ${foodQty}`
@@ -103,15 +97,13 @@ const FoodCategory = () => {
         toast.success("Thêm vào yêu thích thành công");
       }
 
-      // console.log(newCart);
       setFavourite(newFavourite);
-      // abc(newCart)
       setFavourite(newFavourite);
       // lưu vào local
       localStorage.setItem("favourite", JSON.stringify(newFavourite));
     }
   };
-  console.log(foodItems);
+  // console.log(foodItems);
 
   return (
     <div className="food-category container-vphu text-vphu">
@@ -119,12 +111,8 @@ const FoodCategory = () => {
       <h2 className="category-title title-vphu">Top Thực Phẩm Nổi Bật</h2>
       <div className="food-items">
         {foodItems.map((item) => {
-          console.log(item);
           let image = JSON.parse(item.image_url);
-          console.log(image);
           let firstImage = image[0];
-          console.log(firstImage);
-          console.log(`${url}/${firstImage}`);
           return (
             <div className="food-card" key={item.id}>
               <Link className="menu-image" to={"product-detail/" + item.slug}>

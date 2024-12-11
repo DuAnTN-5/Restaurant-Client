@@ -56,11 +56,11 @@ function ResetPassword() {
     } else {
       const password = input.password;
       // console.log(password);
-      console.log({email, password, token})
+      // console.log({email, password, token})
       api
         .post("/reset-password", { password, token, email })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if(response.data.password_reset === true){
             toast.success("Cập nhật mật khẩu thành công")
             setTimeout(() => {

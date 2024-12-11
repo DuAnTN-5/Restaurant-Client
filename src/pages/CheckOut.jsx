@@ -83,7 +83,7 @@ const ReservationForm = () => {
     let auth = localStorage.getItem("auth");
     if (auth) {
       auth = JSON.parse(auth);
-      console.log(auth);
+      // console.log(auth);
       setBookingData((prevData) => ({
         ...prevData,
         name: auth.name,
@@ -110,9 +110,6 @@ const ReservationForm = () => {
   };
 
   const handleTableSelection = (table_id, table_name, table_status) => {
-    console.log(table_id);
-    console.log(table_name);
-    console.log(table_status);
     if (table_status === "available") {
       setSelectedTable(table_id);
       setSelectedTableName(table_name); // Lưu tên bàn vào state
@@ -160,7 +157,7 @@ const ReservationForm = () => {
       api
         .post("/cart/add-cart", formData, config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.status) {
             const updatedBookingInfo = {
               ...JSON.parse(localStorage.getItem("bookingInfo")), // Lấy bookingInfo từ localStorage
@@ -179,7 +176,7 @@ const ReservationForm = () => {
             api
               .get("/cart/list/" + auth.id, config)
               .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.data.status) {
                   setCartCount(res.data.data.length); // Cập nhật số lượng bàn
                 }
@@ -192,7 +189,7 @@ const ReservationForm = () => {
               .then((res) => {
                 // console.log(res);
                 const data = res.data.data;
-                console.log(res.data.data);
+                // console.log(res.data.data);
 
                 if (data && bookingData.date) {
                   const normalizedBookingDate = normalizeDate(bookingData.date); // Chuẩn hóa ngày từ localStorage
@@ -208,19 +205,10 @@ const ReservationForm = () => {
                 console.error("Error fetching tables:", error);
               });
 
-            // api
-            // .get("/cart/list/" + auth.id, config)
-            // .then((res) => {
-            //   console.log(res);
-            //   const tableAddMenu = res.data.data;
-            //   tableAddMenu.map((index, item) => {
-            //     localStorage.setItem("tableID");
-            //   });
-            // });
             api
               .get("/cart/list/" + auth.id, config)
               .then((res) => {
-                console.log(res);
+                // console.log(res);
                 const tableAddMenu = res.data.data;
 
                 if (tableAddMenu.length > 0) {
@@ -239,7 +227,7 @@ const ReservationForm = () => {
                   // Lưu table_id vào localStorage
                   localStorage.setItem("tableID", maxTableId);
 
-                  console.log(`Lưu table_id: ${maxTableId} vào localStorage`);
+                  // console.log(`Lưu table_id: ${maxTableId} vào localStorage`);
                 } 
               
               })
@@ -261,7 +249,7 @@ const ReservationForm = () => {
     }
   };
 
-  console.log({ bookingData });
+  // console.log({ bookingData });
   // console.log({ tables });
   // console.log(selectedTable);
 

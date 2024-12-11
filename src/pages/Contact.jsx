@@ -7,22 +7,36 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillTikTok } from "react-icons/ai";
 import { FaTelegram } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../api";
+import { useNavigate } from "react-router-dom";
 
 function Contact() {
-  let auth = localStorage.getItem("auth");
-  if (auth) {
-    auth = JSON.parse(auth);
-  }
   const [inputs, setInputs] = useState({
-    name: auth.name,
-    email: auth.email,
+    name: "",
+    email: "",
     content: "",
   });
-  
+  const navigate= useNavigate()
 
+  useEffect(() => {
+    let auth = localStorage.getItem("auth");
+    if (auth) {
+      auth = JSON.parse(auth);
+      setInputs({
+        name: auth.name || "",
+        email: auth.email || "",
+        content: "",
+      });
+    } else {
+      setInputs({
+        name: "",
+        email: "",
+        content: "",
+      });
+    }
+  }, []);
   let token = localStorage.getItem("token");
   if (token) {
     token = JSON.parse(token);
@@ -60,6 +74,7 @@ function Contact() {
     }
 
     if(flag){
+      toast.info("Góp ý của bạn đang được gửi đi")
 
       const formData = new FormData();
       formData.append("name", inputs.name);
@@ -69,9 +84,10 @@ function Contact() {
       api
       .post("/contact", formData, config)
       .then(res =>{
-        console.log(res)
+        // console.log(res)
         if(res.status){
           toast.success("Góp ý của bạn đã được gửi")
+          navigate("/")
         }
 
       })
@@ -81,7 +97,7 @@ function Contact() {
 
     }
   };
-  console.log(inputs)
+  // console.log(inputs)
   return (
     <>
       <div className="contact-page text-vphu">
@@ -108,7 +124,7 @@ function Contact() {
                     name="name"
                     type="text"
                     id="name"
-                    value={auth.name}
+                    value={inputs.name}
                     className="contact-input-color"
                     onChange={handleInputChange}
                     placeholder="Nhập tên của bạn"
@@ -120,7 +136,7 @@ function Contact() {
                     type="text"
                     name="email"
                     readOnly
-                    value={auth.email}
+                    value={inputs.email}
                     id="email"
                     className="contact-input-color"
                     placeholder="Nhập email của bạn"
