@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../css2/ProfileUser.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Avatar } from "../assets";
 import { api, url } from "../api";
+import { CartContext } from "../../CartContext";
 function ProfileUser() {
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -17,6 +18,8 @@ function ProfileUser() {
   const [file, setFile] = useState(); // để lưu hình ảnh mã hóa và gửi qua api
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("info"); // Mặc định là 'info'
+
+  const { setCartCount } = useContext(CartContext); // useContext
 
   const [passwordInfo, setPasswordInfo] = useState({
     old: "",
@@ -69,7 +72,8 @@ function ProfileUser() {
   const handleLogout = () => {
     // localStorage.removeItem("token");
     // localStorage.removeItem("auth");
-    localStorage.clear()
+    localStorage.clear();
+    setCartCount(0); // Cập nhật số lượng bàn
     toast.success("Đăng xuất thành công");
     navigate("/");
   };
