@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../css2/ProfileUser.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Avatar } from "../assets";
 import { api, url } from "../api";
+import { CartContext } from "../../CartContext";
 function ProfileUser() {
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -18,6 +19,8 @@ function ProfileUser() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("info"); // Mặc định là 'info'
 
+  const { setCartCount } = useContext(CartContext); // useContext
+
   const [passwordInfo, setPasswordInfo] = useState({
     old: "",
     new: "",
@@ -28,7 +31,7 @@ function ProfileUser() {
     let auth = localStorage.getItem("auth");
     if (auth) {
       auth = JSON.parse(auth);
-      console.log(auth);
+      // console.log(auth);
       setUserInfo({
         name: auth.name || "", // Dùng chuỗi rỗng nếu không có giá trị
         email: auth.email || "",
@@ -53,7 +56,7 @@ function ProfileUser() {
     api
       .get("/user", config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setAvatarUser(res.data.image);
       })
       .catch((error) => {
@@ -69,7 +72,8 @@ function ProfileUser() {
   const handleLogout = () => {
     // localStorage.removeItem("token");
     // localStorage.removeItem("auth");
-    localStorage.clear()
+    localStorage.clear();
+    setCartCount(0); // Cập nhật số lượng bàn
     toast.success("Đăng xuất thành công");
     navigate("/");
   };
@@ -155,7 +159,7 @@ function ProfileUser() {
       api
         .post("/update-user-info", formData, config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.success === true) {
             toast.success("Cập nhật thông tin thành công");
             navigate("/");
@@ -202,7 +206,7 @@ function ProfileUser() {
       api
         .post("/change-password", formData, config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.success) {
             toast.success("Mật khẩu đã được cập nhật thành công.");
             navigate("/");

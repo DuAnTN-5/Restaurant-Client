@@ -136,12 +136,7 @@ const CheckoutPay = () => {
       };
       const depositAmount = calculateDeposit();
       const depositAmountTotal = calculateTotal();
-      // console.log("table_id", tableID);
-      // console.log("cart_id", cartID);
-      // console.log("amount", depositAmount.toFixed(0));
-      // console.log("total_amount", depositAmountTotal.toFixed(0));
-      // console.log("user_id", info.id);
-      // console.log("coupon_id", couponTotal.id);
+     
 
       const formData = new FormData();
       formData.append("table_id", tableID);
@@ -161,12 +156,12 @@ const CheckoutPay = () => {
         .post("/vnpay/payment", formData, config)
         .then((res) => {
           setPaymentMethod("");
-          console.log(res);
+          // console.log(res);
           if (res.data.status) {
             const checkoutVnPay = res.data.payment_url;
             // toast.success("nhảy trang");
             window.location.href = checkoutVnPay;
-            console.log(checkoutVnPay);
+            // console.log(checkoutVnPay);
 
             // setIsModalOpen(true);
           }
@@ -212,7 +207,7 @@ const CheckoutPay = () => {
       api
         .post("/check-coupon", formData, config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.status === 200) {
             setCouponTotal(res.data.coupon);
             toast.success("Sử dụng mã giảm giá thành công");
@@ -226,9 +221,8 @@ const CheckoutPay = () => {
     }
   };
 
-
   const location = useLocation();
- 
+
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const responseCode = queryParams.get("vnp_ResponseCode");
@@ -252,29 +246,20 @@ const CheckoutPay = () => {
       api
         .get(`/vnpay/callback?` + queryParams.toString(), config)
         .then((res) => {
-          console.log("API Response: ", res);
+          // console.log("API Response: ", res);
           if (!res.data.status) {
             setIsModalFailureOpen(true); // Hiển thị modal thất bại
+            
             // toast.error(res.data.message);
           } else {
             setIsModalOpen(true); // Hiển thị modal thành công
+            localStorage.removeItem("cartID");
+            localStorage.removeItem("tableID");
           }
-
         })
         .catch((error) => console.error("API Error: ", error));
-    } else {
-      console.log(
-        "Thiếu thông tin trong URL: vnp_ResponseCode, vnp_SecureHash hoặc vnp_TxnRef"
-      );
-    }
+    } 
   }, [location.search]);
-
-  // console.log(info);
-  // console.log(food);
-  // console.log(paymentMethod);
-  // console.log(coupon);
-  // console.log(couponTotal);
-  // console.log(parseFloat(couponTotal.value).toFixed(0));
 
   return (
     <div className="checkout-pay-container">
@@ -482,7 +467,7 @@ const CheckoutPay = () => {
             <tbody>
               {food.map((item) => {
                 let image = JSON.parse(item.product_image);
-          let firstImage = image[0];
+                let firstImage = image[0];
                 return (
                   <tr key={item.id}>
                     <td className="checkout-pay-product-info">

@@ -30,13 +30,13 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
     let cartID = localStorage.getItem("cartID");
     if (cartID) {
       cartID = JSON.parse(cartID);
-      console.log(cartID)
+      // console.log(cartID)
     }
     let token = localStorage.getItem("token");
     if (token) {
       token = JSON.parse(token);
     }
-    console.log(token)
+    // console.log(token)
     let config = {
       headers: {
         Authorization: "Bearer " + token,
@@ -51,14 +51,14 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
       api
       .post(`/cart/quantity-down/${id}/${cartID}`,{}, config)
       .then(res=>{
-        console.log(res)
+        // console.log(res)
         if(res.data.status){
           toast.success(res.data.message)
 
           api
           .get("/cart/list-product/" + cartID, config)
           .then(res =>{
-            console.log(res)
+            // console.log(res)
             setConTent(res.data.data)
           })
           .catch(error => console.log(error))
@@ -72,14 +72,14 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
       api
       .post(`/cart/quantity-up/${id}/${cartID}`, {}, config)
       .then(res=>{
-        console.log(res)
+        // console.log(res)
         if(res.data.status){
           toast.success(res.data.message)
 
           api
           .get("/cart/list-product/" + cartID, config)
           .then(res =>{
-            console.log(res)
+            // console.log(res)
             setConTent(res.data.data)
           })
           .catch(error => console.log(error))
@@ -89,18 +89,18 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
       .catch(error => console.log(error))
     }
     const handleDelete =(id) =>{
-      console.log(id)
+      // console.log(id)
       api
       .post(`/cart/delete/${id}/${cartID}`, {}, config)
       .then(res =>{
-        console.log(res)
+        // console.log(res)
         if(res.data.status){
           toast.success(res.data.message)
 
           api
           .get("/cart/list-product/" + cartID, config)
           .then(res =>{
-            console.log(res)
+            // console.log(res)
             setConTent(res.data.data)
           })
           .catch(error => console.log(error))
@@ -163,9 +163,7 @@ const Modal = ({ isOpen, onClose, content, error, setConTent }) => {
                {/* eslint-disable-next-line react/prop-types */}
               {content?.map((item, index) =>{
                 let image = JSON.parse(item.product_image);
-          {/* console.log(image) */}
           let firstImage = image[0];
-                console.log(item)
                 return(
                 <tr key={index}>
                   <td className="modal-items">

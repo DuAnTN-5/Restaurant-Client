@@ -34,7 +34,6 @@ function BookingTable() {
   }, []);
 
   const handleDateClick = (date) => {
-    // console.log(date);
     setSelectedDate(date);
   };
 
@@ -61,22 +60,11 @@ function BookingTable() {
     } else {
       // Kiểm tra thời gian nhập lớn hơn hiện tại ít nhất 1 giờ
       const [inputHours, inputMinutes] = customTime.split(":").map(Number);
-      // customTime chứa định dạng "hh:mm" (ví dụ: "10:30").
-      // .split(":") tách thành mảng chứa giờ và phút: ["10", "30"].
-      // .map(Number) chuyển đổi chuỗi thành số: [10, 30].
+      
 
       const currentDate = new Date(); // thời gian của hiện tại
       const bookingDate = new Date(); // ngày tháng năm hiện tại
-      //   currentDate.getFullYear(),
-      //   currentDate.getMonth(),
-      // //   year,
-      // //  month,
-      //   currentDate.getDate(),
-      //   // inputHours,
-      //   // inputMinutes,
-      //   // 0,
-      //   // 0
-      // console.log(bookingDate)
+      
 
       if (selectedDate) {
         bookingDate.setFullYear(currentDate.getFullYear()); // Giữ nguyên năm hiện tại
@@ -85,17 +73,11 @@ function BookingTable() {
         bookingDate.setHours(inputHours, inputMinutes, 0, 0); // giờ hiện tại
         // console.log(bookingDate)
       }
-      console.log(bookingDate.setMonth(currentDate.getMonth()));
+      // console.log(bookingDate.setMonth(currentDate.getMonth()));
 
       const currentTime = new Date(); // giờ hiện tại
       const oneHourLater = new Date(currentTime.getTime() + 60 * 60 * 1000);
-      // oneHourLater: Tạo thời gian tương ứng 1 giờ sau thời điểm hiện tại
-
-      // if (inputHours <= 9) {
-      //   toast.error("Quán mở cửa từ lúc 9h sáng");
-      //   flag = false;
-      //   return;
-      // }
+     
       if (inputHours >= 22) {
         toast.error("Không thể đặt bàn sau 10 giờ tối!");
         flag = false;
@@ -139,8 +121,8 @@ function BookingTable() {
     }
   }
   // console.log({ dates });
-  console.log({ customTime });
-  console.log({ selectedDate });
+  // console.log({ customTime });
+  // console.log({ selectedDate });
   // console.log(bookingTable);
 
   // console.log({selectedDate.day} - {selectedDate.date}</strong> và khung giờ <strong>{customTime})

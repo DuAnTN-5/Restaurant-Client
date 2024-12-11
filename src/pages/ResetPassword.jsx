@@ -56,11 +56,11 @@ function ResetPassword() {
     } else {
       const password = input.password;
       // console.log(password);
-      console.log({email, password, token})
+      // console.log({email, password, token})
       api
         .post("/reset-password", { password, token, email })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if(response.data.password_reset === true){
             toast.success("Cập nhật mật khẩu thành công")
             setTimeout(() => {
@@ -93,7 +93,7 @@ function ResetPassword() {
                 It has survived not only five centuries, but also the leap into
                 electronic typesetting, remaining essentially unchanged.
               </p>
-              <p className="copyright">Copyright Hight Five Group</p>
+              <p className="copyright">Hight Five</p>
             </div>
             <div className="form-section">
               {/* <p className="error">{}</p> */}

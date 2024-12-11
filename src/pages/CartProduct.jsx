@@ -23,7 +23,7 @@ const Cart = () => {
   let auth = localStorage.getItem("auth");
   if (auth) {
     auth = JSON.parse(auth);
-    console.log(auth);
+    // console.log(auth);
   }
 
   let token = localStorage.getItem("token");
@@ -41,7 +41,7 @@ const Cart = () => {
     api
       .get("/cart/list/" + auth.id, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status) {
           setCartProduct(res.data.data);
           setCartCount(res.data.data.length); // Cập nhật số lượng bàn
@@ -60,14 +60,14 @@ const Cart = () => {
 
   // Hiển thị modal khi bấm vào "Xem"
   const handleShowDetails = (id, tableID) => {
-    console.log(id);
+    // console.log(id);
     // toast.info(id)
     localStorage.setItem("cartID", id);
     localStorage.setItem("tableID", tableID);
     api
       .get("/cart/list-product/" + id, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status) {
           // toast.error("")
           setModalContent(res.data.data);
@@ -85,8 +85,8 @@ const Cart = () => {
   };
 
   const handleRemoveTable = (id, tableId) => {
-    console.log(id);
-    console.log(tableId);
+    // console.log(id);
+    // console.log(tableId);
     // Lấy tableID từ localStorage
     const storedTableId = localStorage.getItem("tableID");
 
@@ -95,31 +95,25 @@ const Cart = () => {
     if (storedTableId && Number(storedTableId) === tableId) {
       // Xóa "tableID" khỏi localStorage
       localStorage.removeItem("tableID");
-      console.log("Đã xóa tableID khỏi localStorage");
+      // console.log("Đã xóa tableID khỏi localStorage");
     }
     api
       .post(`/cart/${id}/delete`, {}, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status) {
           toast.success("Đã xóa bàn thành công");
           api
             .get("/cart/list/" + auth.id, config)
             .then((res) => {
-              console.log(res);
+              // console.log(res);
               if (res.data.status) {
                 setCartProduct(res.data.data);
                 setCartCount(res.data.data.length); // Cập nhật số lượng bàn
               }
             })
             .catch((error) => console.log(error));
-          //   api
-          //   .get("/cart/list-product/" + cartID, config)
-          //   .then(res =>{
-          //     console.log(res)
-          //     // setConTent(res.data.data)
-          //   })
-          //   .catch(error => console.log(error))
+        
         }
       })
       .catch((error) => {
@@ -132,7 +126,7 @@ const Cart = () => {
     api
       .get("/cart/list-product/" + id, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data && res.data.data && res.data.data.length > 0) {
           // Điều hướng sang trang thanh toán
           navigate("/checkout-pay");
@@ -144,7 +138,7 @@ const Cart = () => {
       .catch((error) => console.log(error));
   };
 
-  console.log(cartProduct);
+  // console.log(cartProduct);
 
   return (
     <div className="cart-component">

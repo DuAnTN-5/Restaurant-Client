@@ -21,7 +21,7 @@ const Blog = () => {
       });
 
     api.get("/product-categories").then((res) => {
-      console.log(res);
+      // console.log(res);
       setCategory(res.data.data);
     });
   }, []);
@@ -38,8 +38,16 @@ const Blog = () => {
     setCurrentPage(pageNumber);
     window.scrollTo(0, 0); // Cuộn lên đầu trang
   }
-  console.log(blog);
-  console.log(currentPosts);
+  // console.log(blog);
+  // console.log(currentPosts);
+
+  // const stripHTML = (html) => html.replace(/<\/?[^>]+(>|$)/g, "");
+  const stripHTML = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  };
+
   return (
     <div className="blog-page text-vphu">
       <h1 className="title-cart-page title-vphu">Tin tức của chúng tôi</h1>
@@ -47,7 +55,6 @@ const Blog = () => {
       <div className="blog-container">
         {/* Nội dung chính */}
         <main className="blog-main">
-          {console.log(`${url}/postfiles/1733638992.png`)}
           {currentPosts.map((item) => (
             <div className="blog-post" key={item.id}>
               <div className="post-image-wrapper">
@@ -67,7 +74,8 @@ const Blog = () => {
               </div>
               <div className="post-content">
                 <h2 className="post-title">{item.title}</h2>
-                <p className="post-excerpt">{item.summary}</p>
+                <p className="post-excerpt">{stripHTML(item.summary)}</p>
+                {/* <p className="post-excerpt">{item.summary}</p> */}
                 <Link to={"/blog-detail/" + item.slug}>
                   <button className="read-more">XEM THÊM</button>
                 </Link>

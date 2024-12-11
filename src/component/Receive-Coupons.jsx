@@ -55,7 +55,7 @@ const ReceiveCoupons = () => {
     api
     .get("/coupons")
     .then(res=>{
-      console.log(res)
+      // console.log(res)
       setCoupons(res.data)
     })
     .catch(error => console.log(error))

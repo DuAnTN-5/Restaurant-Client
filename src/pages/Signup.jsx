@@ -14,7 +14,7 @@ function SignUp() {
     c_password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  console.log("isSubmitting:", isSubmitting);
+  // console.log("isSubmitting:", isSubmitting);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,10 +28,10 @@ function SignUp() {
 
   const handleChangeInputs = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
+    // console.log(name, value);
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value })); // dấu tròn là return về luôn
   }; // change để lưu dữ liệu ng dùng đang nhập
-  console.log(inputs);
+  // console.log(inputs);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -67,7 +67,7 @@ function SignUp() {
       api
         .post("/register", inputs)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (
             response.data.data.verification_required === true ||
             response.data.success === true
@@ -94,7 +94,7 @@ function SignUp() {
         });
     }
 
-    console.log(inputs);
+    // console.log(inputs);
   }
 
  
@@ -117,7 +117,7 @@ function SignUp() {
               It has survived not only five centuries, but also the leap into
               electronic typesetting, remaining essentially unchanged.
             </p>
-            <p className="copyright">Copyright Hight Five Group</p>
+            <p className="copyright">Hight Five</p>
           </div>
           <div className="form-section">
             {/* <p className="error">{}</p> */}
@@ -157,16 +157,16 @@ function SignUp() {
                   id="terms"
                   required
                 />
-                <label htmlFor="terms">Agree to the terms and policy</label>
+                <label htmlFor="terms">Đồng ý với các điều khoản và chính sách</label>
               </div>
               <button type="submit" className="btn" disabled={isSubmitting}>
-                {isSubmitting ? "Đang thực hiện..." : "Register"}
+                {isSubmitting ? "Đang thực hiện..." : "Đăng ký"}
               </button>
             </form>
             <p className="account">
-              Already have an account?{" "}
+              Bạn đã có tài khoản?{" "}
               <Link className="redirect-link" to="/login">
-                Login
+                Đăng nhập
               </Link>
             </p>
             {/* <div className="social-buttons">
