@@ -228,6 +228,7 @@ const Cart = () => {
           content={modalContent}
           error={error}
           setConTent={setModalContent}
+          setCartProduct={setCartProduct}
         />
       </div>
     </div>
