@@ -44,7 +44,7 @@ createRoot(document.getElementById('root')).render(
           <Route index element={<HomePage />} /> 
           <Route path="/contact" element={<Contact/>} /> 
           <Route path="/login" element={<Login/>} /> 
-          <Route path="/signup" element={<SignUp/>} /> 
+          <Route path="/register" element={<SignUp/>} /> 
           <Route path="/forgot-password" element={<ForgotPassword/>} /> 
           <Route path="/reset-password/:token" element={<ResetPassword/>} /> 
           <Route path="/verify-email/:token" element={<EmailVerification/>} /> 

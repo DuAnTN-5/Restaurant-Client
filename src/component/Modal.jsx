@@ -186,18 +186,18 @@ const Modal = ({
         <button className="modal-close-button" onClick={onClose}>
           X
         </button>
-        <h2>Order Details</h2>
+        <h2>Tất cả món ăn</h2>
 
         {error ? (
           <div>
             <table>
               <thead>
                 <tr className="row-subtitle-modal">
-                  <th className="subtitle-modal">Image</th>
-                  <th className="subtitle-modal">Product</th>
-                  <th className="subtitle-modal">Price</th>
-                  <th className="subtitle-modal">Quantity</th>
-                  <th className="subtitle-modal">Total</th>
+                  <th className="subtitle-modal">Hình ảnh</th>
+                  <th className="subtitle-modal">Món ăn</th>
+                  <th className="subtitle-modal">Giá</th>
+                  <th className="subtitle-modal">Số lượng</th>
+                  <th className="subtitle-modal">Tổng tiền</th>
                 </tr>
               </thead>
               <tbody>

@@ -50,7 +50,7 @@ function ForgotPassword() {
           console.log(error);
           if(error.response.data.errors){
 
-            toast.error("Email đã nhập không hợp lệ")
+            toast.error("Email đã nhập chưa được đăng ký")
           }
         })
         .finally(()=>{
