@@ -54,10 +54,10 @@ const [inputs, setInputs] = useState({
       api
       .post("/login", inputs)
       .then(res =>{
-          // console.log(res)
+          console.log(res)
           if(res.data.success === true){
               const tokenUser = res.data.data.token
-              toast.success("Đăng nhập thành công")
+              toast.success(res.data.message)
               // console.log(tokenUser)
               localStorage.setItem("token", JSON.stringify(tokenUser)) // lưu vào local
               const auth = res.data.data.user
@@ -69,7 +69,8 @@ const [inputs, setInputs] = useState({
       .catch(error=>{
           console.log(error)
           if(error.response.data.success === false){
-              toast.error("Tên đăng nhập hoặc mật khẩu không chính xác")
+            toast.error(error.response.data.message)
+              // toast.error("Tên đăng nhập hoặc mật khẩu không chính xác")
   
           }
       })
@@ -152,7 +153,7 @@ const handleClickGoogle = () => {
             </form>
             <p className="account">
               Bạn có tài khoản chưa?{" "}
-              <Link className="redirect-link" to="/signup">
+              <Link className="redirect-link" to="/register">
                 Đăng ký tài khoản
               </Link>
             </p>

@@ -93,14 +93,13 @@ const MenuPage = () => {
     }
   }, [location]);
 
-  // bấm đặt món là chuyển qua trang menu cùng id bàn
   const handleInputChange = (e) => {
     setFoodQty(e.target.value);
   };
-
+  
   let cartID = localStorage.getItem("cartID") ?? null;
   // console.log(cartID)
-
+  
   const addToCart = (foodId, foodName) => {
     // console.log(foodId);
     if (!tableId) {
@@ -133,6 +132,7 @@ const MenuPage = () => {
           toast.success(
             `Món ${foodName} đã được thêm vào bàn ${tableId}, số lượng: ${foodQty}`
           );
+          setFoodQty("1")
         } else {
           toast.error(`Thêm món ăn ${foodName} thất bại  `);
         }
@@ -175,7 +175,7 @@ const MenuPage = () => {
     }
  
   };
-
+// console.log(foodQty)
 
   const handleSearchFood = (e) => {
     if (!e.target.value) {
