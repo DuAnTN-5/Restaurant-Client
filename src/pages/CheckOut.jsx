@@ -24,6 +24,7 @@ const ReservationForm = () => {
   });
 
   const { setCartCount } = useContext(CartContext); // useContext
+  const { cartCount } = useContext(CartContext); // useContext
   // Hàm chuẩn hóa ngày (thêm số 0 cho ngày và tháng nếu cần)
   const normalizeDate = (date) => {
     const parts = date.split("-");
@@ -132,6 +133,13 @@ const ReservationForm = () => {
       flag = false;
     }
     if (flag) {
+      // toast.success(cartCount)
+
+      if(cartCount >= 3){
+        toast.warning("Bạn chỉ được phép đặt tối đa 3 bàn")
+        return;
+      }
+
       let auth = localStorage.getItem("auth");
       if (auth) {
         auth = JSON.parse(auth);
@@ -163,6 +171,9 @@ const ReservationForm = () => {
         .then((res) => {
           // console.log(res);
           if (res.data.status) {
+            console.log(res)
+            console.log(res.data.status)
+
             const updatedBookingInfo = {
               ...JSON.parse(localStorage.getItem("bookingInfo")), // Lấy bookingInfo từ localStorage
               selectedTable, // Thêm thông tin số bàn
@@ -240,11 +251,12 @@ const ReservationForm = () => {
               });
 
             setSelectedTable(null);
+            // setBookingData()
 
             toast.success("Đặt bàn thành công!", { autoClose: 3000 });
 
             localStorage.setItem("cartID", res.data.data.id);
-            localStorage.setItem("cartID", res.data.data.id);
+            // localStorage.setItem("cartID", res.data.data.id);
           } else {
             toast.error(res.data.message);
           }
