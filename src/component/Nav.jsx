@@ -233,10 +233,15 @@ function Nav() {
                         Liên Hệ
                       </Link>
                     </li>
-                    <li className="navbar-item">
+                    {/* <li className="navbar-item">
                       <Link className="navbar-link" to="/checkout">
                         Đặt Bàn
                       </Link>
+                    </li> */}
+                    <li className="navbar-item">
+                      <p className="navbar-link" onClick={handleBooking}>
+                        Đặt Bàn
+                      </p>
                     </li>
                     
                   </ul>

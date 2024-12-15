@@ -4,17 +4,13 @@ import "../css/Modal.css";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 
-// eslint-disable-next-line react/prop-types
-const Modal = ({
-  isOpen,
-  onClose,
-  content,
-  error,
-  setConTent,
-  setCartProduct,
-}) => {
+function Modal({
+  // eslint-disable-next-line react/prop-types
+  isOpen, onClose, content, error, setConTent, setCartProduct,
+}) {
   // console.log({error})
   if (!isOpen) return null; // Nếu isOpen là false, modal không hiển thị gì
+
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -142,9 +138,9 @@ const Modal = ({
               setConTent(res.data.data);
             })
             .catch((error) => console.log(error));
-            
-            // gọi api ra để cập nhật lại món ăn hiện tại
-            api
+
+          // gọi api ra để cập nhật lại món ăn hiện tại
+          api
             .get("/cart/list/" + auth.id, config)
             .then((res) => {
               // console.log(res);
@@ -179,7 +175,6 @@ const Modal = ({
   //     currency: "VND",
   //   }).format(amount * 1000);
   // };
-
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content">
@@ -211,8 +206,7 @@ const Modal = ({
                         <img
                           src={`${url}/${firstImage}`}
                           alt={item.product_name}
-                          className="product-image modal-image"
-                        />
+                          className="product-image modal-image" />
                       </td>
                       <td className="modal-items">{item.product_name}</td>
                       <td className="modal-items">
@@ -223,7 +217,7 @@ const Modal = ({
                           <button
                             onClick={() => {
                               handleDecrease(item.id, item.quantity);
-                            }}
+                            } }
                           >
                             -
                           </button>
@@ -231,9 +225,8 @@ const Modal = ({
                           <button
                             onClick={() => {
                               handleIncrease(item.id);
-                            }}
+                            } }
 
-                            // onClick={() => handleIncrease(index)}
                           >
                             +
                           </button>
@@ -249,8 +242,7 @@ const Modal = ({
                           className="remove-product-button"
                           onClick={() => {
                             handleDelete(item.id);
-                          }}
-                          // onClick={() => handleRemoveProduct(index)}
+                          } }
                         >
                           X
                         </button>
@@ -275,7 +267,7 @@ const Modal = ({
               } else {
                 toast.error("Không tìm thấy bàn đã chọn!");
               }
-            }}
+            } }
           >
             Tiếp tục chọn món
           </button>
@@ -283,6 +275,6 @@ const Modal = ({
       </div>
     </div>
   );
-};
+}
 
 export default Modal;

@@ -79,6 +79,7 @@ export default function BlogDetail() {
     "mẹ",
     "chim",
     "chó",
+    "ngu"
   ];
   const filterBadWords = (text) => {
     return text

@@ -64,7 +64,7 @@ const ReservationForm = () => {
         // console.log(res);
         const data = res.data.data;
 
-        if (data && bookingData.date) {
+        if (data && bookingData.date) { // tồn tại
           const normalizedBookingDate = normalizeDate(bookingData.date); // Chuẩn hóa ngày từ localStorage
           Object.keys(data).forEach((key) => {
             const normalizedKey = normalizeDate(key); // Chuẩn hóa ngày từ API
@@ -73,6 +73,10 @@ const ReservationForm = () => {
             }
           });
         }
+        // dữ liệu danh sách bàn từ api
+        //so sánh từng ngày trong dữ liệu trả về của api(key) với ngày đặt bàn
+        
+        
       })
       .catch((error) => {
         console.error("Error fetching tables:", error);

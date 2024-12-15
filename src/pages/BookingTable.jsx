@@ -18,17 +18,19 @@ function BookingTable() {
 
   // Cấu hình ngày tháng động từ hôm nay đến 14 ngày
   useEffect(() => {
-    const currentDate = new Date();
+    const currentDate = new Date(); // ngày và giờ hiện tại
     const upcomingDates = [];
 
     for (let i = 0; i < 14; i++) {
       // Giới hạn chỉ tạo 14 ngày
       const date = {
-        day: currentDate.toLocaleString("vi-VN", { weekday: "long" }),
-        date: currentDate.getDate(),
+        day: currentDate.toLocaleString("vi-VN", { weekday: "long" }), //lấy tên thứ là tiếng việt
+        date: currentDate.getDate(), // (1-31)
       };
-      upcomingDates.push(date);
+      upcomingDates.push(date); // thêm vào mảng
       currentDate.setDate(currentDate.getDate() + 1);
+      //       currentDate.getDate() lấy ngày hiện tại (ví dụ 13).
+      // currentDate.setDate(...) đặt lại ngày mới (tăng thêm 1 ngày).
     }
     setDates(upcomingDates);
   }, []);
@@ -44,6 +46,8 @@ function BookingTable() {
     } else if (type === "minute") {
       setCustomTime(`${hour}:${value}`); // Cập nhật phút
     }
+    //     Nếu bạn thay đổi giờ: Kết quả sẽ là "giờ mới:phút cũ".
+    // Nếu bạn thay đổi phút: Kết quả sẽ là "giờ cũ:phút mới".
   };
 
   function handleContinue(event) {
@@ -58,13 +62,12 @@ function BookingTable() {
       toast.error("Vui lòng chọn ngày");
       flag = false;
     } else {
+
       // Kiểm tra thời gian nhập lớn hơn hiện tại ít nhất 1 giờ
       const [inputHours, inputMinutes] = customTime.split(":").map(Number);
-      
 
       const currentDate = new Date(); // thời gian của hiện tại
       const bookingDate = new Date(); // ngày tháng năm hiện tại
-      
 
       if (selectedDate) {
         bookingDate.setFullYear(currentDate.getFullYear()); // Giữ nguyên năm hiện tại
@@ -76,8 +79,8 @@ function BookingTable() {
       // console.log(bookingDate.setMonth(currentDate.getMonth()));
 
       const currentTime = new Date(); // giờ hiện tại
-      const oneHourLater = new Date(currentTime.getTime() + 60 * 60 * 1000);
-     
+      const oneHourLater = new Date(currentTime.getTime() + 60 * 60 * 1000);// + thêm 1 giờ
+
       if (inputHours >= 22) {
         toast.error("Không thể đặt bàn sau 10 giờ tối!");
         flag = false;
@@ -98,22 +101,11 @@ function BookingTable() {
       const month = currentDate.getMonth() + 1; // Lấy tháng (0 - 11, cộng thêm 1 để thành tháng thực)
       const year = currentDate.getFullYear();
 
-      // setBookingTable({
-      //   time: customTime,
-      //   // date: `/${selectedDate.date}/${month}/${year}`, // Cập nhật đúng định dạng ngày
-      //   date: `${year}/${month}/${selectedDate.date}`, // Cập nhật đúng định dạng ngày
-      //   // date: `${selectedDate.day}/${selectedDate.date}/${month}/${year}`, // Cập nhật đúng định dạng ngày
-      // });
       const bookingData = {
         time: customTime,
-        // date: `/${selectedDate.date}/${month}/${year}`, // Cập nhật đúng định dạng ngày
         date: `${year}-${month}-${selectedDate.date}`, // Cập nhật đúng định dạng ngày
-        // date: `${selectedDate.day}/${selectedDate.date}/${month}/${year}`, // Cập nhật đúng định dạng ngày
       };
-      // const bookingData = {
-      //   customTime,
-      //   selectedDate,
-      // };
+     
 
       localStorage.setItem("bookingInfo", JSON.stringify(bookingData));
 
@@ -160,14 +152,6 @@ function BookingTable() {
               <div className="movie-details">
                 <div className="time-list">
                   <div>
-                    {/* <input
-                      type="text"
-                      placeholder="Nhập giờ (ví dụ: 09:30)"
-                      // value={customTime}
-                      // name="customTime"
-                      onChange={handleCustomTimeChange}
-                      className="time-input"
-                    /> */}
                     <div className="time-selector">
                       <select
                         id="hour-select"
@@ -176,15 +160,15 @@ function BookingTable() {
                         }
                         className="time-select"
                       >
-                        {/* {Array.from({ length: 24 }, (_, i) => (
-                          <option key={i} value={i.toString().padStart(2, "0")}>
-                            {i.toString().padStart(2, "0")}
-                          </option>
-                        ))} */}
+                        {/* {Array.from(
+                        { length: 24 - 0 + 1 },  // Độ dài là 25 (từ 0 đến 24)
+                          (_, i) => i // Chỉ số mảng bắt đầu từ 0
+                          ).map((hour) */}
+
                         {/* Tạo danh sách giờ từ 9 đến 22 */}
                         {Array.from(
-                          { length: 22 - 9 + 1 },
-                          (_, i) => i + 9
+                          { length: 22 - 9 + 1 }, // độ dài là 14
+                          (_, i) => i + 9 // i là chỉ số mảng, bđ là 0
                         ).map((hour) => (
                           <option
                             key={hour}
@@ -209,6 +193,7 @@ function BookingTable() {
                         ))}
                       </select>
                     </div>
+                    {/* Nếu số giờ là 1 chữ số (ví dụ 9), nó sẽ thêm 0 vào đầu để thành "09" */}
 
                     <p className="time-hint">
                       * Giờ đặt bàn hợp lệ: từ 09:00 đến 22:00 (định dạng 24
