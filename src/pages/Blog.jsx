@@ -7,8 +7,8 @@ const Blog = () => {
   const [blog, setBlog] = useState([]);
   const [category, setCategory] = useState([]);
 
-  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-  const postsPerPage = 2; // Số bài viết trên mỗi trang
+  const [currentPage, setCurrentPage] = useState(1); // mặc định là trang 1
+  const postsPerPage = 2; // 2 bài viết trên mỗi trang
 
   useEffect(() => {
     api
@@ -27,9 +27,10 @@ const Blog = () => {
   }, []);
 
   // Tính toán chỉ số của các bài viết hiển thị trong trang hiện tại
-  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfLastPost = currentPage * postsPerPage; 
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = blog.slice(indexOfFirstPost, indexOfLastPost);
+  // slice(start, end)
 
   // Tạo danh sách các số trang
   const totalPages = Math.ceil(blog.length / postsPerPage);

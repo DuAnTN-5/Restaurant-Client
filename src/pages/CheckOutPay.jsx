@@ -96,6 +96,7 @@ const CheckoutPay = () => {
   // Hàm tính tổng tiền
   const calculateTotal = () => {
     return food.reduce((total, item) => total + item.price * item.quantity, 0);
+    // 
   };
 
   // Hàm tính tổng tiền sau khi áp mã giảm giá
@@ -226,6 +227,8 @@ const CheckoutPay = () => {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const responseCode = queryParams.get("vnp_ResponseCode");
+    // lấy phần truy vấn (query string) của URL
+    //Lấy giá trị của tham số vnp_ResponseCode từ query string
     // const secureHash = queryParams.get("vnp_SecureHash");
     // const txnRef = queryParams.get("vnp_TxnRef"); // Lấy vnp_TxnRef từ URL
 

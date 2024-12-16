@@ -53,7 +53,7 @@ export default function BlogDetail() {
       api
         .get(`/posts/${blogDetail.id}/comments`)
         .then((res) => {
-          // console.log(res);
+          console.log(res);
           setComments(res.data.data);
         })
         .catch((error) => console.log(error));
@@ -79,16 +79,18 @@ export default function BlogDetail() {
     "mẹ",
     "chim",
     "chó",
-    "ngu"
+    "ngu",
   ];
+
+  //lọc và thay thế các từ ngữ k phù hợp
   const filterBadWords = (text) => {
     return text
-      .split(" ") // Tách câu thành mảng từ
+      .split(" ")// chia chuỗi thành 1 mảng các từ, cách nhau bởi dấu cách
       .map((word) => {
-        const isBadWord = badWords.some((badWord) =>
-          word.toLowerCase().includes(badWord)
+        const isBadWord = badWords.some((badWord) => // kiểm tra có bất kì từ xấu nào trong danh sách
+          word.toLowerCase().includes(badWord)  // xác định có chứa k, nếu có isBadword là true
         );
-       
+
         return isBadWord ? "***" : word;
       })
       .join(" "); // Ghép các từ lại thành câu
@@ -101,18 +103,15 @@ export default function BlogDetail() {
   };
 
   const handleClickReplay = (idComment) => {
-    // toast.success(idComment);
-    // console.log("idComment after click:", idComment);
-    setIdComment(idComment); //lấy id cha làm idcomment của thg con, còn idcomment cha là 0
+    // toast.success(idComment)
+    setIdComment(idComment); 
     inputRef.current.focus(); // hàm này để khi kick thẻ đag gắn sự kiện onClick thì nó sẽ đc chuyển tới thẻ đag đc chọn để chọt
     //hay còn gọi là focus vào textarea
   };
-  // console.log("Current idComment:", idComment);
   const handleCancelReply = () => {
-    setIdComment(null); // Xóa bình luận cha khi hủy trả lời
-    setComment(""); // Xóa nội dung bình luận
+    setIdComment(null); 
+    setComment(""); 
   };
-  // toast.error(idComment)
 
   function handleCommentSubmit(event) {
     event.preventDefault();
@@ -128,7 +127,6 @@ export default function BlogDetail() {
       if (auth) {
         auth = JSON.parse(auth);
       }
-      // console.log(idComment);
       let config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -142,15 +140,15 @@ export default function BlogDetail() {
       formData.append("post_id", blogDetail.id);
       formData.append("content", comment);
       idComment !== null ? formData.append("parent_id", idComment) : "";
-    
 
+      // gửi lên
       api
         .post("/post-comments", formData, config)
         .then((res) => {
           // console.log(res);
           if (res.data.data) {
             toast.success(res.data.message);
-
+            // cập nhật danh sách bình luận
             api
               .get(`/posts/${blogDetail.id}/comments`)
               .then((res) => {
@@ -181,26 +179,7 @@ export default function BlogDetail() {
       <div className="container">
         <main className="main-content">
           <article>
-            <header>
-              {/* <div className="post-header">
-                <span className="date-badge">20 JUN</span>
-                <h1>Various Versions Have</h1>
-              </div> */}
-              {/* <div className="post-meta">
-                <img
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=50&q=80"
-                  alt="Andrea Silva"
-                  className="avatar-blog-detail"
-                />
-                By <a href="#">Andrea Silva</a>
-                <span className="divider">/</span>
-                <a href="#">Desserts</a>
-                <span className="divider">/</span>
-                <a href="#">Cooking</a>
-                <span className="divider">/</span>
-                <a href="#">Food</a>
-              </div> */}
-            </header>
+            <header></header>
 
             <img
               src={`${url}/${blogDetail.image_url}`}
@@ -218,7 +197,7 @@ export default function BlogDetail() {
               <ul className="">
                 <ul className="comment-list">
                   {comments.map((parentComment) => {
-                    const filteredComment = filterBadWords(
+                    const filteredComment = filterBadWords( // lọc nội dung bình luận qua hàm 
                       parentComment.content
                     );
 
@@ -274,7 +253,7 @@ export default function BlogDetail() {
                             </div>
                           </div>
                         </li>
-                        {/* Lặp qua danh sách comment con */}
+                        {/* Kiểm tra xem bình luận cha có bình luận con k nếu có */}
                         {/* {console.log(parentComment)} */}
 
                         {parentComment.children &&
